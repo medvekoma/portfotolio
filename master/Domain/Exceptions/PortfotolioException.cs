@@ -16,5 +16,11 @@ namespace Portfotolio.Domain.Exceptions
         {
             get { return 200; }
         }
+
+        public virtual bool IsWarning
+        {
+            get { return false; }
+        }
+
     }
 }

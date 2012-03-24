@@ -1,0 +1,7 @@
+bin
+obj
+*.ncrunchproject
+*.crunchsolution.cache
+*.ncrunchsolution
+_ReSharper.*
+logs

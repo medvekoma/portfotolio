@@ -29,5 +29,13 @@ namespace Portfotolio.Domain.Exceptions
         {
             get { return 401; }
         }
+
+        public override bool IsWarning
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }

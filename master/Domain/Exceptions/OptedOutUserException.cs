@@ -26,5 +26,13 @@ namespace Portfotolio.Domain.Exceptions
                 return string.Format(MessageFormat, UserAlias);
             }
         }
+
+        public override bool IsWarning
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }

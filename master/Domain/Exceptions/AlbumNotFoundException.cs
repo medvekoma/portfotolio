@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace Portfotolio.Domain.Exceptions
 {
@@ -28,6 +27,14 @@ namespace Portfotolio.Domain.Exceptions
         public override int HttpStatusCode
         {
             get { return 404; }
+        }
+
+        public override bool IsWarning
+        {
+            get
+            {
+                return true;
+            }
         }
     }
 }

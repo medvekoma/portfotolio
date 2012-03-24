@@ -8,19 +8,12 @@ namespace Portfotolio.Site.Helpers
     {
         public static void LogException(this Logger logger, Exception ex)
         {
-            if (ex is OptedOutUserException)
-            {
-                logger.DebugException(ex.Message, ex);
-                return;
-            }
+            var portfotolioException = ex as PortfotolioException;
+            var logLevel = portfotolioException != null && portfotolioException.IsWarning
+                               ? LogLevel.Debug
+                               : LogLevel.Error;
 
-            if (ex is PortfotolioException)
-            {
-                logger.InfoException(ex.Message, ex);
-                return;
-            }
-            
-            logger.ErrorException(ex.Message, ex);
+            logger.LogException(logLevel, ex.Message, ex);
         }
     }
 }
