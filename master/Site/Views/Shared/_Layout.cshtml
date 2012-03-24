@@ -1,0 +1,70 @@
+﻿@using Portfotolio.Domain.Persistency;
+@using Portfotolio.Site.Helpers
+@using System.Web.Mvc.Html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@Html.Display(DataKeys.BreadCrumb) ● portfotolio</title>
+    @if (ViewData.ContainsKey(DataKeys.HideFromSearchEngines))
+    {
+        <meta name="robots" content="noindex, follow, noarchive" />
+    }
+
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <!--[if lte IE 7]>
+        <link href="@Url.Content("~/Content/Site-ie7.css")" rel="stylesheet" type="text/css" />
+    <![endif]--> 
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/portfotolio.google.analytics.js")"></script>
+</head>
+<body>
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                <h1>
+                    <a href="/">● port<span class="highlight">foto</span>lio ●</a>
+                    @Html.Display(DataKeys.BreadCrumb)
+                </h1>
+            </div>
+            <div id="menucontainer">
+                <ul id="menu">
+                    <li>@Html.ActionLinkUserId("Photos", "photos", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+                    <li>@Html.ActionLinkUserId("Albums", "albums", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+                    <li>|</li>
+                    <li>@Html.ActionLinkUserId("Favorites", "favorites", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+                    <li>@Html.ActionLinkUserId("Subscriptions", "subscriptions", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+                    <li>@Html.ActionLinkUserId("Recommendations", "recommendations", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+                    <li>|</li>
+                    <li>@Html.ActionLinkUserId("Groups", "groups", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+                    <li>@Html.ActionLinkUserId("Contacts", "contacts", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+                    <li>|</li>
+                    <li><a  class="highlight" href="@Url.Action("about", "home", new { id = UrlParameter.Optional })">
+                        About</a></li>
+                </ul>
+            </div>
+            <hr />
+            <div id="authenticationLink">
+                @Html.Display(DataKeys.AuthenticationInfo)
+            </div>
+        </div>
+        <p>
+        </p>
+        <span id="main">
+            @RenderBody()
+        </span>
+        <div id="footer" class="footer">
+            <div id="hostingMessage">
+                This site lives happily on an application-friendly server.
+            </div>
+            <hr />
+            <div id="creditsMessage">
+                This product uses the <a href='http://flickr.com/services/api/'>Flickr API</a> but
+                is not endorsed or certified by <a href='http://flickr.com'>Flickr</a>. It also
+                uses a modified <a href='http://www.codeplex.com/FlickrNet'>Flickr.NET</a> library.
+            </div>
+            <p />
+        </div>
+    </div>
+</body>
+</html>

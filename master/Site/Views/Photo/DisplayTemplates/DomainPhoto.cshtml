@@ -1,0 +1,22 @@
+﻿@model Portfotolio.Domain.DomainPhoto
+@using Portfotolio.Site.Helpers;
+
+    <div class="photoFrame">
+        <div class="middleFrame">
+            <div class="innerFrame">
+                <a href="@Model.PageUrl">
+                    <img class="photo" src="@Model.SmallUrl" title="@Model.Title" alt="@Model.Title" />
+                </a>
+                <div class="title">
+                    @if (!string.IsNullOrEmpty(Model.AuthorName)){
+                        <text>@Html.ActionLinkUserId(Model.AuthorName, "photos", new {id = Model.AuthorAlias}):</text>
+                    }
+                    @Model.Title
+                    @*
+                    &nbsp;
+                    @Html.ActionLink("+", "similarto", new { id = Model.Id })
+                    *@
+                </div>
+            </div>
+        </div>
+    </div>

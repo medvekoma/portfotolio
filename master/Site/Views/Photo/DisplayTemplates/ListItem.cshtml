@@ -1,0 +1,10 @@
+﻿@model Portfotolio.Domain.ListItem
+@using Portfotolio.Site.Helpers           
+
+<div class="listItem">
+    <a href="@Url.ActionUserId("photos", new { id = Model.Id })" title="@Model.Name">
+        <img src="@Model.ImageUrl" alt="@Model.Name" />
+        <br />
+        @Model.Name
+    </a>
+</div>

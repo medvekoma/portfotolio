@@ -1,0 +1,19 @@
+.photoFrame,
+.nextPage
+{
+	position: relative; 
+}
+
+.middleFrame
+{
+	position: absolute;  
+	top: 50%;
+	left: 50%;
+}
+
+.innerFrame
+{
+	position: relative;  
+	top: -50%;
+	left: -50%;
+}

@@ -1,0 +1,12 @@
+﻿@model ListItems
+@using Portfotolio.Domain
+@using Portfotolio.Site.Helpers           
+
+<ul id="groups">
+@foreach (var item in Model.Items)
+{
+    <li>
+        <a href='@Url.ActionUserId("group", new {id = item.Id})' title='@item.Name'>@item.Name</a>
+    </li>
+}
+</ul>

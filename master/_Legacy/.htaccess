@@ -1,0 +1,15 @@
+Options +FollowSymLinks 
+RewriteEngine on
+
+RewriteRule ^(/)?$ http://portfotolio.net/medvekoma [R=301,NC]
+RewriteRule ^photos/(.*)$ http://portfotolio.net/$1 [R=301,NC]
+RewriteRule ^sets/(.*)$ http://portfotolio.net/$1/albums [R=301,NC]
+RewriteRule ^set/(.*)$ http://portfotolio.net/-legacy/set/$1? [R=301,NC]
+RewriteRule ^favorites/(.*)$ http://portfotolio.net/$1/favorites [R=301,NC]
+RewriteRule ^recommendations/(.*)$ http://portfotolio.net/$1/recommendations [R=301,NC]
+RewriteRule ^contacts/(.*)$ http://portfotolio.net/$1/subscriptions [R=301,NC]
+RewriteRule ^groups/(.*)$ http://portfotolio.net/$1/groups [R=301,NC]
+RewriteRule ^contactlist/(.*)$ http://portfotolio.net/$1/contacts [R=301,NC]
+RewriteRule ^group/(.*)$ http://portfotolio.net/group/$1? [R=301,NC]
+RewriteRule ^contacts(/)?$ http://portfotolio.net/medvekoma/subscriptions [R=301,NC]
+RewriteRule ^.*$ http://portfotolio.net [R=301,NC]

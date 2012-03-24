@@ -1,0 +1,47 @@
+﻿using System.Web.Mvc;
+using System.Linq;
+using Portfotolio.Domain;
+using Portfotolio.Domain.Exceptions;
+using Portfotolio.Domain.Persistency;
+
+namespace Portfotolio.Site.Helpers
+{
+    public class UserIdentificationAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            base.OnActionExecuting(filterContext);
+
+            var configurationProvider = DependencyResolver.Current.GetService<IConfigurationProvider>();
+            var userIdentifier = (string) filterContext.ActionParameters["id"] ?? configurationProvider.GetDefaultUserAlias();
+
+            var userEngine = DependencyResolver.Current.GetService<IUserEngine>();
+            var user = userEngine.GetUser(userIdentifier);
+
+            if (!filterContext.HttpContext.Request.IsAjaxRequest())
+            {
+                if (!user.IsAcceptedUserName)
+                {
+                    throw new OptedOutUserException(userIdentifier);
+                }
+
+                var optedOutUserIds = configurationProvider.GetOptedOutUserIds();
+                if (optedOutUserIds.Contains(user.UserId))
+                    throw new OptedOutUserException(userIdentifier);
+
+                if (userIdentifier != user.UserAlias)
+                {
+                    filterContext.RouteData.Values["id"] = user.UserAlias;
+                    filterContext.Result = new RedirectToRouteResult(null, filterContext.RouteData.Values, true);
+                    return;
+                }
+
+                var session = filterContext.Controller.ControllerContext.HttpContext.Session;
+                session[DataKeys.UserIdentifier] = userIdentifier;
+            }
+
+            filterContext.Controller.ViewData[DataKeys.UserId] = user.UserId;
+            filterContext.Controller.ViewData[DataKeys.UserName] = user.UserName;
+        }
+    }
+}

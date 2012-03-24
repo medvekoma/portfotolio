@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteRule ^(.*)/eurl.axd/[a-f0-9]{32}(.*)$ $1$2
+
+RewriteCond %{HTTP_HOST} ^www.portfotolio.net [NC]
+RewriteRule ^(.*)$ http://portfotolio.net/$1 [L,R=301]

@@ -1,0 +1,21 @@
+﻿@using Portfotolio.Domain.Persistency
+@{
+    ViewBag.Title = "Error";
+}
+
+<div class="errorMessage">
+    @if (ViewData[DataKeys.ErrorMessage] != null)
+    {
+        @ViewData[DataKeys.ErrorMessage];
+        <br/>
+    }
+    else
+    {
+        <text>
+            Hopps. An error has occured. It could be our fault. Or yours. Or there is a twist in the clouds.
+            <br/>
+            Whatever the reason - we'll find it, and have it corrected. Or not.
+        </text>
+    }
+    <br/>
+</div>
