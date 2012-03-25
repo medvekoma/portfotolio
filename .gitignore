@@ -8,3 +8,5 @@ logs
 *.user
 *.suo
 Thumbs.db
+flickr.api.release.config
+flickr.api.debug.config

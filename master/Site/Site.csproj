@@ -201,7 +201,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="appSettings.config" />
-    <Content Include="flickr.config" />
+    <Content Include="flickr.api.config" />
+    <Content Include="flickr.api.debug.config">
+      <DependentUpon>flickr.api.config</DependentUpon>
+    </Content>
+    <Content Include="flickr.api.release.config" >
+      <DependentUpon>flickr.api.config</DependentUpon>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
