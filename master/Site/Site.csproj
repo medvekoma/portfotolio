@@ -201,6 +201,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="appSettings.config" />
+    <Content Include="flickr.config" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
