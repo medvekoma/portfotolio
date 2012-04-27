@@ -69,9 +69,14 @@ namespace Portfotolio.FlickrEngine
         {
             var pageSize = _configurationProvider.GetPhotoPageSize();
 
-            var photoCollection = _flickrPhotoProvider.IsAuthenticatedUser(userId)
+            var isAuthenticatedUser = _flickrPhotoProvider.IsAuthenticatedUser(userId);
+            var photoCollection = isAuthenticatedUser
                 ? _flickrPhotoProvider.GetPrivateSubscriptionsOf(userId, page, pageSize)
                 : _flickrPhotoProvider.GetSubscriptionsOf(userId, page, pageSize);
+            if (!isAuthenticatedUser)
+            {
+                photoCollection.Pages = 1;
+            }
 
             var domainPhotos = _flickrConverter.Convert(photoCollection);
             return RemoveOptedOutUserPhotos(domainPhotos);
