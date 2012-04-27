@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Portfotolio.Domain
 {
@@ -9,14 +10,16 @@ namespace Portfotolio.Domain
         public string UserAlias;
         public string UserName;
         public string Token;
+        public string TokenSecret;
 
-        public AuthenticationInfo(string userId, string userAlias, string userName, string token)
+        public AuthenticationInfo(string userId, string userAlias, string userName, string token, string tokenSecret)
         {
             IsAuthenticated = true;
             UserId = userId;
             UserAlias = userAlias;
             UserName = userName;
             Token = token;
+            TokenSecret = tokenSecret;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -26,6 +29,7 @@ namespace Portfotolio.Domain
             info.AddValue("UserAlias", UserAlias);
             info.AddValue("UserName", UserName);
             info.AddValue("Token", Token);
+            info.AddValue("TokenSecret", TokenSecret);
         }
     }
 }

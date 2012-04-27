@@ -4,7 +4,7 @@
     {
         string GetLoginUrl();
         void Logout();
-        AuthenticationInfo Authenticate(object authenticationObject);
+        AuthenticationInfo Authenticate(object parameter);
         AuthenticationInfo GetAuthenticationInfo();
     }
 }

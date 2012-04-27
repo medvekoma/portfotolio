@@ -48,7 +48,8 @@ namespace Portfotolio.FlickrEngine
             var authenticationInfo = userSession.GetAuthenticationInfo();
             if (authenticationInfo.IsAuthenticated)
             {
-                _flickr.AuthToken = authenticationInfo.Token;
+                _flickr.OAuthAccessToken = authenticationInfo.Token;
+                _flickr.OAuthAccessTokenSecret = authenticationInfo.TokenSecret;
                 _authenticatedUserId = authenticationInfo.UserId;
             }
         }

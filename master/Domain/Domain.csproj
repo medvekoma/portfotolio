@@ -58,11 +58,13 @@
     <Compile Include="Exceptions\PortfotolioException.cs" />
     <Compile Include="IAuthenticationProvider.cs" />
     <Compile Include="IConfigurationProvider.cs" />
+    <Compile Include="IOAuthProvider.cs" />
     <Compile Include="IPhotoEngine.cs" />
     <Compile Include="IApplicationUtility.cs" />
     <Compile Include="IUserEngine.cs" />
     <Compile Include="ListItem.cs" />
     <Compile Include="ListItems.cs" />
+    <Compile Include="OAuthAuthorizationObject.cs" />
     <Compile Include="Persistency\ICache.cs" />
     <Compile Include="Persistency\IUserSession.cs" />
     <Compile Include="Persistency\UserSessionExtensions.cs" />
