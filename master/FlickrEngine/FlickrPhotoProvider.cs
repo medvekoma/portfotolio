@@ -1,5 +1,6 @@
 using System;
 using FlickrNet;
+using Portfotolio.Domain;
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
 
@@ -42,14 +43,22 @@ namespace Portfotolio.FlickrEngine
         private const PhotoSearchExtras PhotoSearchExtrasWithPathAlias = PhotoSearchExtras.OwnerName | PhotoSearchExtras.PathAlias | PhotoSearchExtras.AllUrls;
         private readonly string _authenticatedUserId;
 
-        public FlickrPhotoProvider(IUserSession userSession)
+        public FlickrPhotoProvider(IUserSession userSession, IConfigurationProvider configurationProvider)
         {
             _flickr = new Flickr();
             var authenticationInfo = userSession.GetAuthenticationInfo();
+            var isOAuthEnabled = configurationProvider.GetIsOAuthEnabled();
             if (authenticationInfo.IsAuthenticated)
             {
-                _flickr.OAuthAccessToken = authenticationInfo.Token;
-                _flickr.OAuthAccessTokenSecret = authenticationInfo.TokenSecret;
+                if (isOAuthEnabled)
+                {
+                    _flickr.OAuthAccessToken = authenticationInfo.Token;
+                    _flickr.OAuthAccessTokenSecret = authenticationInfo.TokenSecret;
+                }
+                else
+                {
+                    _flickr.AuthToken = authenticationInfo.Token;
+                }
                 _authenticatedUserId = authenticationInfo.UserId;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Globalization;
+using System.Linq;
 using Portfotolio.Domain;
 
 namespace Portfotolio.Site
@@ -39,12 +40,25 @@ namespace Portfotolio.Site
             return _optedOutUserIds;
         }
 
+        public bool GetIsOAuthEnabled()
+        {
+            var value = ConfigurationManager.AppSettings["IsOAuthEnabled"];
+            return ConvertToBool(value);
+        }
+
         private static int ConvertToInt(string stringValue, int defaultValue)
         {
             int intValue;
             if (!Int32.TryParse(stringValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out intValue))
                 return defaultValue;
             return intValue;
+        }
+
+        private static bool ConvertToBool(string stringValue)
+        {
+            var trueValues = new[] {"true", "1"};
+            bool isTrue = trueValues.Any(item => item.Equals(stringValue, StringComparison.InvariantCultureIgnoreCase));
+            return isTrue;
         }
     }
 }
