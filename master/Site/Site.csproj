@@ -135,6 +135,7 @@
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Mvc\MvcConfigurator.cs" />
     <Compile Include="Mvc\CSharpRazorViewEngine.cs" />
+    <Compile Include="OptoutUserStorePathProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\DelegateHttpHandler.cs" />
     <Compile Include="Routing\DelegateRouteHandler.cs" />
@@ -200,7 +201,9 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="appSettings.config" />
+    <Content Include="appSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="flickr.api.config" />
     <Content Include="flickr.api.debug.config">
       <DependentUpon>flickr.api.config</DependentUpon>
