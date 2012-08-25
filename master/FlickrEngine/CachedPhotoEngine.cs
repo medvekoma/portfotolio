@@ -1,6 +1,7 @@
 ﻿using System;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Persistency;
+using Services;
 
 namespace Portfotolio.FlickrEngine
 {
@@ -27,7 +28,7 @@ namespace Portfotolio.FlickrEngine
 
         private static string GetCacheKey(string userIdentifier)
         {
-            return "DomainUser." + userIdentifier;
+            return CacheNames.DomainUser + userIdentifier;
         }
 
         private TValue CacheHelper<TValue>(string key, Func<TValue, string> keyGetter, Func<TValue> valueGetter, double minutesToCacheFor)

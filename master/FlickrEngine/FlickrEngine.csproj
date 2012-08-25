@@ -60,6 +60,10 @@
       <Project>{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{BFCAA2BF-2CB2-4F41-A335-166B8E8573C8}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{16EDDB18-1FFA-46D4-9FE8-366F07F5A7FD}</Project>
       <Name>Utility</Name>

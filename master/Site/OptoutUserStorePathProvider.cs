@@ -1,13 +1,8 @@
-﻿using System;
-using System.Web;
+﻿using System.Web;
+using Services;
 
 namespace Portfotolio.Site
 {
-    public interface IOptoutUserStorePathProvider
-    {
-        string GetStorageFileName();
-    }
-
     public class OptoutUserStorePathProvider : IOptoutUserStorePathProvider
     {
         public string GetStorageFileName()

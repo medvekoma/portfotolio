@@ -22,8 +22,11 @@ namespace Services
 
         public SortedSet<string> ReadUsers()
         {
-            var jsonSerializer = new JavaScriptSerializer();
             var fileName = _optoutUserStorePathProvider.GetStorageFileName();
+            if (!File.Exists(fileName))
+                return null;
+
+            var jsonSerializer = new JavaScriptSerializer();
             using(var streamReader = new StreamReader(fileName))
             {
                 var content = streamReader.ReadToEnd();

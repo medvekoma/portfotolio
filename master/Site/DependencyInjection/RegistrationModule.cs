@@ -5,6 +5,7 @@ using Portfotolio.Domain.Persistency;
 using Portfotolio.FlickrEngine;
 using Portfotolio.Site.Controllers;
 using Portfotolio.Utility.DependencyInjection;
+using Services;
 
 namespace Portfotolio.Site.DependencyInjection
 {
@@ -19,6 +20,7 @@ namespace Portfotolio.Site.DependencyInjection
             dependencyEngine.Register<IConfigurationProvider, AppSettingConfigurationProvider>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<IUserSession, AspNetUserSession>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<ICache, AspNetCache>(DependencyLifeStyle.Singleton);
+            dependencyEngine.Register<ICacheProvider, CacheProvider>(DependencyLifeStyle.Singleton);
 
             // Home
             dependencyEngine.Register<HomeController>(DependencyLifeStyle.PerWebRequest);
@@ -37,6 +39,13 @@ namespace Portfotolio.Site.DependencyInjection
 
             // Legacy
             dependencyEngine.Register<LegacyController>(DependencyLifeStyle.PerWebRequest);
+
+            // Opt-out
+            dependencyEngine.Register<IOptoutUserStorePathProvider, OptoutUserStorePathProvider>(DependencyLifeStyle.Singleton);
+            dependencyEngine.Register<IOptoutUserStore, OptoutUserStore>(DependencyLifeStyle.Singleton);
+            dependencyEngine.RegisterAndDecorate<IOptoutUserService, OptoutUserService, CachedOptoutUserService>(DependencyLifeStyle.Singleton);
+            dependencyEngine.Register<IOptoutUserConfiguratorService, OptoutUserConfiguratorService>(DependencyLifeStyle.Singleton);
+            dependencyEngine.Register< ConfigurationController>(DependencyLifeStyle.Transient);
         }
     }
 }
