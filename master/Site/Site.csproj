@@ -104,8 +104,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSettingConfigurationProvider.cs" />
-    <Compile Include="AspNetCache.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -120,7 +118,6 @@
     <Compile Include="Helpers\UserIdentificationAttribute.cs" />
     <Compile Include="Helpers\UserSessionHelper.cs" />
     <Compile Include="Helpers\ViewResultWithStatusCode.cs" />
-    <Compile Include="AspNetUserSession.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\PhotoController.Helpers.cs">
@@ -136,7 +133,6 @@
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Mvc\MvcConfigurator.cs" />
     <Compile Include="Mvc\CSharpRazorViewEngine.cs" />
-    <Compile Include="OptoutUserStorePathProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\DelegateHttpHandler.cs" />
     <Compile Include="Routing\DelegateRouteHandler.cs" />
@@ -232,6 +228,10 @@
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{BFCAA2BF-2CB2-4F41-A335-166B8E8573C8}</Project>
       <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Site.Services\Site.Services.csproj">
+      <Project>{5E695CEC-8A79-47B6-A7AD-C719E48CB25E}</Project>
+      <Name>Site.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{16EDDB18-1FFA-46D4-9FE8-366F07F5A7FD}</Project>

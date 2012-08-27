@@ -1,19 +1,18 @@
 ﻿using System;
 using Portfotolio.Domain;
-using Portfotolio.Domain.Persistency;
-using Services;
+using Portfotolio.Services.Caching;
 
 namespace Portfotolio.FlickrEngine
 {
     public class CachedUserEngine : IUserEngine
     {
         private readonly IUserEngine _decoratedUserEngine;
-        private readonly ICache _cache;
+        private readonly ICacheProvider _cacheProvider;
 
-        public CachedUserEngine(IUserEngine decoratedUserEngine, ICache cache)
+        public CachedUserEngine(IUserEngine decoratedUserEngine, ICacheProvider cacheProvider)
         {
             _decoratedUserEngine = decoratedUserEngine;
-            _cache = cache;
+            _cacheProvider = cacheProvider;
         }
 
         public DomainUser GetUser(string userIdentifier)
@@ -34,13 +33,13 @@ namespace Portfotolio.FlickrEngine
         private TValue CacheHelper<TValue>(string key, Func<TValue, string> keyGetter, Func<TValue> valueGetter, double minutesToCacheFor)
             where TValue : class
         {
-            var cachedValue = _cache.Get<TValue>(key);
+            var cachedValue = _cacheProvider.Get<TValue>(key);
             if (cachedValue != null)
                 return cachedValue;
 
             var value = valueGetter.Invoke();
             key = keyGetter.Invoke(value);
-            _cache.Add(key, value, DateTime.Now.AddMinutes(minutesToCacheFor));
+            _cacheProvider.Set(key, value, DateTime.Now.AddMinutes(minutesToCacheFor));
             return value;
         }
 

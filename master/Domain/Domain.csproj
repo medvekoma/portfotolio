@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +45,12 @@
     <Compile Include="AlbumPhotos.cs" />
     <Compile Include="Albums.cs" />
     <Compile Include="AuthenticationInfo.cs" />
+    <Compile Include="Configuration\CachedOptoutUserService.cs" />
+    <Compile Include="Configuration\IOptoutUserService.cs" />
+    <Compile Include="Configuration\IOptoutUserStorePathProvider.cs" />
+    <Compile Include="Configuration\OptoutUserConfiguratorService.cs" />
+    <Compile Include="Configuration\OptoutUserService.cs" />
+    <Compile Include="Configuration\OptoutUserStore.cs" />
     <Compile Include="DomainGroup.cs" />
     <Compile Include="DomainPhoto.cs" />
     <Compile Include="DomainPhotos.cs" />
@@ -65,13 +72,17 @@
     <Compile Include="ListItem.cs" />
     <Compile Include="ListItems.cs" />
     <Compile Include="OAuthAuthorizationObject.cs" />
-    <Compile Include="Persistency\ICache.cs" />
     <Compile Include="Persistency\IUserSession.cs" />
     <Compile Include="Persistency\UserSessionExtensions.cs" />
     <Compile Include="Persistency\DataKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{BFCAA2BF-2CB2-4F41-A335-166B8E8573C8}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Services;
+using Portfotolio.Domain.Configuration;
 
 namespace Portfotolio.Site.Controllers
 {
