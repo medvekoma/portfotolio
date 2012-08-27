@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Web.Mvc;
-using NLog;
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
+using Portfotolio.Services.Logging;
 using Portfotolio.Site.Helpers;
 
 namespace Portfotolio.Site.Controllers
 {
     public class ErrorController : Controller
     {
-        private static readonly Logger Logger = LogManager.GetLogger("ErrorController");
+        private readonly ILogger _logger;
+
+        public ErrorController(ILoggerFactory loggerFactory)
+        {
+            _logger = loggerFactory.GetLogger("ErrorController");
+        }
 
         public ActionResult Error(Exception exception)
         {
-            Logger.LogException(exception);
+            _logger.LogException(exception);
             var portfotolioException = exception as PortfotolioException;
             string errorMessage = null;
             int statusCode = 500;

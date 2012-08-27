@@ -1,24 +1,25 @@
 ﻿using System.Web.Mvc;
-using NLog;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Persistency;
+using Portfotolio.Services.Logging;
 
 namespace Portfotolio.Site.Controllers
 {
     public class AccountController : Controller
     {
-        private static readonly Logger Logger = LogManager.GetLogger("Authentication");
         private const string UserHasLoggedOutMessage = "User '{0}' has logged out.";
         private const string UserHasLoggedInMessage = "User '{0}' has logged in.";
 
         private readonly IAuthenticationProvider _authenticationProvider;
         private readonly IOAuthProvider _oAuthProvider;
+        private readonly ILogger _logger;
         private readonly bool _isOAuthEnabled;
 
-        public AccountController(IAuthenticationProvider authenticationProvider, IOAuthProvider oAuthProvider, IConfigurationProvider configurationProvider)
+        public AccountController(IAuthenticationProvider authenticationProvider, IOAuthProvider oAuthProvider, IConfigurationProvider configurationProvider, ILoggerFactory loggerFactory)
         {
             _authenticationProvider = authenticationProvider;
             _oAuthProvider = oAuthProvider;
+            _logger = loggerFactory.GetLogger("Authentication");
             _isOAuthEnabled = configurationProvider.GetIsOAuthEnabled();
         }
 
@@ -48,7 +49,7 @@ namespace Portfotolio.Site.Controllers
                 _oAuthProvider.Logout();
             else
                 _authenticationProvider.Logout();
-            Logger.Info(UserHasLoggedOutMessage, authenticationInfo.UserName);
+            _logger.Info(string.Format(UserHasLoggedOutMessage, authenticationInfo.UserName));
             return RedirectToLastPage();
         }
 
@@ -57,7 +58,7 @@ namespace Portfotolio.Site.Controllers
             var authenticationInfo = _authenticationProvider.Authenticate(frob);
             if (authenticationInfo.IsAuthenticated)
             {
-                Logger.Info(UserHasLoggedInMessage, authenticationInfo.UserName);
+                _logger.Info(string.Format(UserHasLoggedInMessage, authenticationInfo.UserName));
             }
             return RedirectToLastPage();
         }
@@ -70,7 +71,7 @@ namespace Portfotolio.Site.Controllers
             var authenticationInfo = _oAuthProvider.Authenticate(oauth_token, oAuthTokenSecret, oauth_verifier);
             if (authenticationInfo.IsAuthenticated)
             {
-                Logger.Info(UserHasLoggedInMessage, authenticationInfo.UserName);
+                _logger.Info(string.Format(UserHasLoggedInMessage, authenticationInfo.UserName));
             }
             return RedirectToLastPage();
         }

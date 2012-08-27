@@ -5,6 +5,7 @@ using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.FlickrEngine;
 using Portfotolio.Services.Caching;
+using Portfotolio.Services.Logging;
 using Portfotolio.Site.Controllers;
 using Portfotolio.Site.Services;
 using Portfotolio.Utility.DependencyInjection;
@@ -22,6 +23,7 @@ namespace Portfotolio.Site.DependencyInjection
             dependencyEngine.Register<IConfigurationProvider, AppSettingConfigurationProvider>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<IUserSession, AspNetUserSession>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<ICacheProvider, CacheProvider>(DependencyLifeStyle.Singleton);
+            dependencyEngine.Register<ILoggerFactory, NLogLoggerFactory>(DependencyLifeStyle.Singleton);
 
             // Home
             dependencyEngine.Register<HomeController>(DependencyLifeStyle.PerWebRequest);

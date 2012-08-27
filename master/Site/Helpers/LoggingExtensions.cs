@@ -1,19 +1,18 @@
 ﻿using System;
-using NLog;
 using Portfotolio.Domain.Exceptions;
+using Portfotolio.Services.Logging;
 
 namespace Portfotolio.Site.Helpers
 {
     public static class LoggingExtensions
     {
-        public static void LogException(this Logger logger, Exception ex)
+        public static void LogException(this ILogger logger, Exception exception)
         {
-            var portfotolioException = ex as PortfotolioException;
-            var logLevel = portfotolioException != null && portfotolioException.IsWarning
-                               ? LogLevel.Debug
-                               : LogLevel.Error;
+            var portfotolioException = exception as PortfotolioException;
+            if (portfotolioException != null && portfotolioException.IsWarning)
+                logger.Warning(exception.Message, exception);
 
-            logger.LogException(logLevel, ex.Message, ex);
+            logger.Error(exception.Message, exception);
         }
     }
 }

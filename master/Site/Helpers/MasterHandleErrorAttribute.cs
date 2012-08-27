@@ -1,17 +1,23 @@
 ﻿using System.Web.Mvc;
-using NLog;
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
+using Portfotolio.Services.Logging;
 
 namespace Portfotolio.Site.Helpers
 {
     public class MasterHandleErrorAttribute : FilterAttribute, IExceptionFilter
     {
-        private static readonly Logger Logger = LogManager.GetLogger("MasterHandleError");
+        private ILogger _logger;
+
+        public MasterHandleErrorAttribute()
+        {
+            var loggerFactory = DependencyResolver.Current.GetService<ILoggerFactory>();
+            _logger = loggerFactory.GetLogger("MasterHandleError");
+        }
 
         public void OnException(ExceptionContext filterContext)
         {
-            Logger.LogException(filterContext.Exception);
+            _logger.LogException(filterContext.Exception);
 
             var viewDataDictionary = new ViewDataDictionary();
             var userSession = DependencyResolver.Current.GetService<IUserSession>();

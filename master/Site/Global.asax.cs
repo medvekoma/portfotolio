@@ -1,9 +1,8 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using NLog;
+using Portfotolio.Services.Logging;
 using Portfotolio.Site.Controllers;
-using Portfotolio.Site.DependencyInjection;
 using Portfotolio.Site.Mvc;
 using Portfotolio.Utility.DependencyInjection;
 
@@ -14,9 +13,14 @@ namespace Portfotolio.Site
 
     public class MvcApplication : HttpApplication
     {
-        private readonly Logger _logger = LogManager.GetLogger("Global");
-
+        private readonly ILoggerFactory _loggerFactory = new NLogLoggerFactory();
+        private readonly ILogger _logger;
         private IDependencyEngine _dependencyEngine;
+
+        public MvcApplication()
+        {
+            _logger = _loggerFactory.GetLogger("global");
+        }
 
         protected void Application_Start()
         {
@@ -46,7 +50,7 @@ namespace Portfotolio.Site
             routeData.Values["action"] = "Error";
             routeData.Values["exception"] = exception;
 
-            IController errorController = new ErrorController();
+            IController errorController = new ErrorController(_loggerFactory);
             var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
             errorController.Execute(rc);
         }
