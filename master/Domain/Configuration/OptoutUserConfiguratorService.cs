@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Globalization;
+using NLog;
 
 namespace Portfotolio.Domain.Configuration
 {
@@ -13,6 +15,8 @@ namespace Portfotolio.Domain.Configuration
         private readonly IOptoutUserStore _optoutUserStore;
         private readonly object _syncRoot = new object();
 
+        private static readonly Logger Logger = LogManager.GetLogger("optout");
+
         public OptoutUserConfiguratorService(IOptoutUserStore optoutUserStore)
         {
             _optoutUserStore = optoutUserStore;
@@ -24,7 +28,10 @@ namespace Portfotolio.Domain.Configuration
             {
                 var userIds = _optoutUserStore.ReadUsers() ?? new SortedSet<string>();
                 if (userIds.Add(userId))
+                {
                     _optoutUserStore.WriteUsers(userIds);
+                    Logger.Log(LogLevel.Info, CultureInfo.InvariantCulture, "+ " + userId);
+                }
             }
         }
 
@@ -34,7 +41,10 @@ namespace Portfotolio.Domain.Configuration
             {
                 var userIds = _optoutUserStore.ReadUsers() ?? new SortedSet<string>();
                 if (userIds.Remove(userId))
+                {
                     _optoutUserStore.WriteUsers(userIds);
+                    Logger.Log(LogLevel.Info, CultureInfo.InvariantCulture, "- " + userId);
+                }
             }
         }
     }
