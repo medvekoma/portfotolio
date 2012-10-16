@@ -25,21 +25,6 @@ namespace Portfotolio.Site.Services
             return ConfigurationManager.AppSettings["DefaultUserAlias"];
         }
 
-        private string[] _optedOutUserIds = null;
-
-        public string[] GetOptedOutUserIds()
-        {
-            if (_optedOutUserIds == null)
-            {
-                var value = ConfigurationManager.AppSettings["OptedOutUserIds"];
-                if (value == null)
-                    return new string[0];
-
-                _optedOutUserIds = value.Split(',');
-            }
-            return _optedOutUserIds;
-        }
-
         public bool GetIsOAuthEnabled()
         {
             var value = ConfigurationManager.AppSettings["IsOAuthEnabled"];

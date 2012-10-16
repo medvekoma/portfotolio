@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Linq;
 using Portfotolio.Domain;
+using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
 
@@ -25,7 +26,9 @@ namespace Portfotolio.Site.Helpers
                     throw new OptedOutUserException(userIdentifier);
                 }
 
-                var optedOutUserIds = configurationProvider.GetOptedOutUserIds();
+                var optoutUserService = DependencyResolver.Current.GetService<IOptoutUserService>();
+
+                var optedOutUserIds = optoutUserService.GetOptedOutUserIds();
                 if (optedOutUserIds.Contains(user.UserId))
                     throw new OptedOutUserException(userIdentifier);
 

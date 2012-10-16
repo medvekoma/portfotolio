@@ -2,6 +2,7 @@
 using System.Linq;
 using FlickrNet;
 using Portfotolio.Domain;
+using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Utility;
 
@@ -13,23 +14,23 @@ namespace Portfotolio.FlickrEngine
         private readonly IFlickrConverter _flickrConverter;
         private readonly IConfigurationProvider _configurationProvider;
         private readonly IUserSession _userSession;
-        private readonly string[] _optedOutUserIds;
+        private readonly IOptoutUserService _optoutUserService;
 
         public FlickrPhotoEngine(IFlickrPhotoProvider flickrPhotoProvider, IFlickrConverter flickrConverter,
-                                 IConfigurationProvider configurationProvider, IUserSession userSession)
+                                 IConfigurationProvider configurationProvider, IUserSession userSession, IOptoutUserService optoutUserService)
         {
             _flickrPhotoProvider = flickrPhotoProvider;
             _flickrConverter = flickrConverter;
             _configurationProvider = configurationProvider;
             _userSession = userSession;
-
-            _optedOutUserIds = _configurationProvider.GetOptedOutUserIds();
+            _optoutUserService = optoutUserService;
         }
 
         private DomainPhotos RemoveOptedOutUserPhotos(DomainPhotos domainPhotos)
         {
+            var optedOutUserIds = _optoutUserService.GetOptedOutUserIds();
             var filteredPhotos = domainPhotos.Photos
-                .Where(photo => !_optedOutUserIds.Contains(photo.AuthorId))
+                .Where(photo => !optedOutUserIds.Contains(photo.AuthorId))
                 .ToList();
 
             return new DomainPhotos(filteredPhotos, domainPhotos.Page, domainPhotos.Pages);

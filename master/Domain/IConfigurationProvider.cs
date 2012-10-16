@@ -5,7 +5,6 @@
         int GetPhotoPageSize();
         int GetContactsPageSize();
         string GetDefaultUserAlias();
-        string[] GetOptedOutUserIds();
         bool GetIsOAuthEnabled();
     }
 }
