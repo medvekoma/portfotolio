@@ -35,12 +35,17 @@ namespace Portfotolio.Site.Controllers
         public ActionResult Photos(string id, int page=1)
         {
             var userId = (string) ViewData[DataKeys.UserId];
+            if (page > 1)
+            {
+                ViewData[DataKeys.HideFromSearchEngines] = true;
+            }
             var domainPhotos = _photoEngine.GetPhotosOf(userId, page);
             
             return PagingView(domainPhotos);
         }
 
         [UserIdentification]
+        [HideFromSearchEngines]
         [BreadCrumb("favourites of {userName}")]
         public ActionResult Favorites(string id, int page = 0)
         {
@@ -51,6 +56,7 @@ namespace Portfotolio.Site.Controllers
         }
 
         [UserIdentification]
+        [HideFromSearchEngines]
         [BreadCrumb("subscription feed of {userName}")]
         public ActionResult Subscriptions(string id, int page = 0)
         {
