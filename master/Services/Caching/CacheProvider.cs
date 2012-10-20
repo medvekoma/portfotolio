@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Runtime.Caching;
 
 namespace Portfotolio.Services.Caching
@@ -19,7 +20,7 @@ namespace Portfotolio.Services.Caching
 
         public void Set(string name, object value, string dependentFilePath)
         {
-            var fileChangeMonitor = new HostFileChangeMonitor(new[] { dependentFilePath});
+            var fileChangeMonitor = CreateFileChangeMonitor(dependentFilePath);
 
             var cacheItemPolicy = new CacheItemPolicy();
             cacheItemPolicy.ChangeMonitors.Add(fileChangeMonitor);
@@ -31,6 +32,11 @@ namespace Portfotolio.Services.Caching
         {
             object value = MemoryCache.Default.Get(name) ?? default(T);
             return (T) value;
+        }
+
+        private ChangeMonitor CreateFileChangeMonitor(string path)
+        {
+            return new HostFileChangeMonitor(new[] {path});
         }
     }
 }

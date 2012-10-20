@@ -197,6 +197,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="appSettings.config">
       <SubType>Designer</SubType>
