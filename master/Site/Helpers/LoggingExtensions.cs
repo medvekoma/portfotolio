@@ -10,9 +10,13 @@ namespace Portfotolio.Site.Helpers
         {
             var portfotolioException = exception as PortfotolioException;
             if (portfotolioException != null && portfotolioException.IsWarning)
+            {
                 logger.Warning(exception.Message, exception);
-
-            logger.Error(exception.Message, exception);
+            }
+            else
+            {
+                logger.Error(exception.Message, exception);    
+            }
         }
     }
 }
