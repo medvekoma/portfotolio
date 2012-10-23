@@ -193,5 +193,13 @@ namespace Portfotolio.FlickrEngine
                 : GetRecommendations(userId, page + 1);
             return RemoveOptedOutUserPhotos(recommendations);
         }
+
+        public DomainPhotos GetInterestingPhotos(int page)
+        {
+            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var photos = _flickrPhotoProvider.GetInterestingPhotos(page, pageSize);
+            var domainPhotos = _flickrConverter.Convert(photos);
+            return RemoveOptedOutUserPhotos(domainPhotos);
+        }
     }
 }

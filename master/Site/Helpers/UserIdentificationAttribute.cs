@@ -13,8 +13,7 @@ namespace Portfotolio.Site.Helpers
         {
             base.OnActionExecuting(filterContext);
 
-            var configurationProvider = DependencyResolver.Current.GetService<IConfigurationProvider>();
-            var userIdentifier = (string) filterContext.ActionParameters["id"] ?? configurationProvider.GetDefaultUserAlias();
+            var userIdentifier = (string) filterContext.ActionParameters["id"];
 
             var userEngine = DependencyResolver.Current.GetService<IUserEngine>();
             var user = userEngine.GetUser(userIdentifier);

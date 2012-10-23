@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Portfotolio.Domain
 {
     public interface IPhotoEngine
@@ -15,5 +12,6 @@ namespace Portfotolio.Domain
         DomainGroup GetGroup(string groupId, int page);
         ListItems GetContacts(string userId, int page);
         DomainPhotos GetRecommendations(string userId, int page);
+        DomainPhotos GetInterestingPhotos(int page);
     }
 }

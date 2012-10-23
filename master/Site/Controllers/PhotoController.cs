@@ -129,6 +129,15 @@ namespace Portfotolio.Site.Controllers
             return PagingView(photos);
         }
 
+        [BreadCrumb("explored on flickr")]
+        [HideFromSearchEngines]
+        public ActionResult Interestingness(int page = 1)
+        {
+            var photos = _photoEngine.GetInterestingPhotos(page);
+
+            return PagingView(photos);
+        }
+
         #region helpers
 
         private ActionResult PagingView(object model)

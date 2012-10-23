@@ -20,11 +20,6 @@ namespace Portfotolio.Site.Services
             return ConvertToInt(contactsPageSizeString, 100);
         }
 
-        public string GetDefaultUserAlias()
-        {
-            return ConfigurationManager.AppSettings["DefaultUserAlias"];
-        }
-
         public bool GetIsOAuthEnabled()
         {
             var value = ConfigurationManager.AppSettings["IsOAuthEnabled"];

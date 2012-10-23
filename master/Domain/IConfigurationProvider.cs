@@ -4,7 +4,6 @@
     {
         int GetPhotoPageSize();
         int GetContactsPageSize();
-        string GetDefaultUserAlias();
         bool GetIsOAuthEnabled();
     }
 }

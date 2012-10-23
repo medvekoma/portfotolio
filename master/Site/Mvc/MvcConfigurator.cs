@@ -30,10 +30,12 @@ namespace Portfotolio.Site.Mvc
         {
             var routes = RouteTable.Routes;
 
-            var configurationProvider = DependencyResolver.Current.GetService<IConfigurationProvider>();
-            string defaultUser = configurationProvider.GetDefaultUserAlias();
-
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                "Home",
+                "",
+                new { controller = "photo", action = "interestingness" });
 
             routes.MapRoute(
                 "Group", // Route name
@@ -44,7 +46,7 @@ namespace Portfotolio.Site.Mvc
             routes.MapRoute(
                 "Photo", // Route name
                 "{id}/{action}/{secondaryId}", // URL with parameters
-                new { controller = "photo", action = "photos", id = defaultUser, secondaryId = UrlParameter.Optional }, // Parameter defaults
+                new { controller = "photo", action = "photos", secondaryId = UrlParameter.Optional }, // Parameter defaults
                 new { id = "^[^-].*" }
                 );
 
