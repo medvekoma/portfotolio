@@ -108,10 +108,11 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegacyController.cs" />
+    <Compile Include="Helpers\HideFromSearchEnginesAttribute.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Helpers\LoggingExtensions.cs" />
     <Compile Include="Helpers\MasterHandleErrorAttribute.cs" />
-    <Compile Include="Helpers\HideFromSearchEnginesAttribute.cs" />
+    <Compile Include="Helpers\HidePagesFromSearchEnginesAttribute.cs" />
     <Compile Include="Helpers\PagingHelpers.cs" />
     <Compile Include="Helpers\SetMasterViewDataAttribute.cs" />
     <Compile Include="Helpers\BreadCrumbAttribute.cs" />

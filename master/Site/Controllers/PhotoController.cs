@@ -32,7 +32,8 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         [BreadCrumb("{userName}")]
-        public ActionResult Photos(string id, int page=1)
+        [HidePagesFromSearchEngines]
+        public ActionResult Photos(string id, int page = 0)
         {
             var userId = (string) ViewData[DataKeys.UserId];
             if (page > 1)
@@ -68,6 +69,7 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         [BreadCrumb("albums of {userName}")]
+        [HideFromSearchEngines]
         public ActionResult Albums(string id)
         {
             var userId = (string)ViewData[DataKeys.UserId];
@@ -78,6 +80,7 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         [BreadCrumb("{albumTitle} by {userName}")]
+        [HideFromSearchEngines]
         public ActionResult Album(string id, string secondaryId, int page = 0)
         {
             string albumId = secondaryId;
@@ -99,6 +102,7 @@ namespace Portfotolio.Site.Controllers
         }
 
         [BreadCrumb("{groupName} group")]
+        [HideFromSearchEngines]
         public ActionResult Group(string id, int page = 0)
         {
             var domainGroup = _photoEngine.GetGroup(id, page);
@@ -131,7 +135,7 @@ namespace Portfotolio.Site.Controllers
 
         [BreadCrumb("explored on flickr")]
         [HideFromSearchEngines]
-        public ActionResult Interestingness(int page = 1)
+        public ActionResult Interestingness(int page = 0)
         {
             var photos = _photoEngine.GetInterestingPhotos(page);
 
