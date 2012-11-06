@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Concurrent;
 using System.Runtime.Caching;
 
 namespace Portfotolio.Services.Caching
@@ -9,6 +8,7 @@ namespace Portfotolio.Services.Caching
         void Set(string name, object value, DateTimeOffset dateTimeOffset);
         void Set(string name, object value, string dependentFilePath);
         T Get<T>(string name);
+        long GetCacheSize();
     }
 
     public class CacheProvider : ICacheProvider
@@ -34,9 +34,15 @@ namespace Portfotolio.Services.Caching
             return (T) value;
         }
 
+        public long GetCacheSize()
+        {
+            return  MemoryCache.Default.GetCount();
+        }
+
         private ChangeMonitor CreateFileChangeMonitor(string path)
         {
-            return new HostFileChangeMonitor(new[] {path});
+            var hostFileChangeMonitor = new HostFileChangeMonitor(new[] {path});
+            return hostFileChangeMonitor;
         }
     }
 }

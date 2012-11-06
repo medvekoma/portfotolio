@@ -20,7 +20,7 @@ namespace Portfotolio.FlickrEngine
             return CacheHelper(
                 GetCacheKey(userIdentifier), 
                 domainUser => GetCacheKey(domainUser.UserAlias), 
-                () => _decoratedUserEngine.GetUser(userIdentifier), 60);
+                () => _decoratedUserEngine.GetUser(userIdentifier), 15);
         }
 
         #region helpers
