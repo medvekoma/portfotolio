@@ -30,8 +30,8 @@ namespace Portfotolio.Site.DependencyInjection
 
             // Authentication
             dependencyEngine.Register<AccountController>(DependencyLifeStyle.Transient);
-            dependencyEngine.Register<IAuthenticationProvider, FlickrAuthenticationProvider>(DependencyLifeStyle.Singleton);
-            dependencyEngine.Register<IOAuthProvider, FlickrOAuthProvider>(DependencyLifeStyle.Singleton);
+            dependencyEngine.Register<IAuthenticationProvider, FlickrAuthenticationProvider>(DependencyLifeStyle.PerWebRequest);
+            dependencyEngine.Register<IOAuthProvider, FlickrOAuthProvider>(DependencyLifeStyle.PerWebRequest);
 
             // Photos
             dependencyEngine.Register<PhotoController>(DependencyLifeStyle.Transient);
