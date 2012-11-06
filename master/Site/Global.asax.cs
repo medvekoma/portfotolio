@@ -1,6 +1,8 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Portfotolio.Domain.Persistency;
 using Portfotolio.Services.Logging;
 using Portfotolio.Site.Controllers;
 using Portfotolio.Site.Mvc;
@@ -25,6 +27,7 @@ namespace Portfotolio.Site
         protected void Application_Start()
         {
             _logger.Info("Application Started.");
+            HttpContext.Current.Application[DataKeys.ApplicationStarted] = DateTime.Now;
             AreaRegistration.RegisterAllAreas();
 
             _dependencyEngine = MvcConfigurator.RegisterDependencyInjectionFramework();

@@ -12,5 +12,6 @@ namespace Portfotolio.Domain.Persistency
         public static string RecommendedUserIds = "RecommendedUserIds";
         public static string HideFromSearchEngines = "HideFromSearchEngines";
         public static string OAuthTokenSecret = "TokenSecret";
+        public static string ApplicationStarted = "ApplicationStarted";
     }
 }

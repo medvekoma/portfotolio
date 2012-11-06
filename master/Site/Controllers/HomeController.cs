@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Portfotolio.Domain.Persistency;
 using Portfotolio.Services.Caching;
 using Portfotolio.Site.Helpers;
 
@@ -19,10 +21,12 @@ namespace Portfotolio.Site.Controllers
             return View();
         }
 
-        public ActionResult CacheSize()
+        public ActionResult Test()
         {
+            var appStarted = (DateTime) ControllerContext.HttpContext.Application[DataKeys.ApplicationStarted];
             var cacheSize = _cacheProvider.GetCacheSize();
-            return Content("Number of elements in cache: " + cacheSize);
+            string message = string.Format("App started on: {0}<br>Number of elements in cache: {1}", appStarted, cacheSize);
+            return Content(message);
         }
     }
 }
