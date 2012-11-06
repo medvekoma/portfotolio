@@ -34,7 +34,7 @@ namespace Portfotolio.FlickrEngine
             return new DomainPhotos(domainPhotos, photosetPhotos.Page, photosetPhotos.Pages);
         }
 
-        public ListItems Convert(PublicGroupInfoCollection groups)
+        public ListItems Convert(GroupInfoCollection groups)
         {
             var items = groups
                 .Select(group => new ListItem(group.GroupId, group.GroupName))

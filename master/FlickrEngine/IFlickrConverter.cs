@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FlickrNet;
+﻿using FlickrNet;
 using Portfotolio.Domain;
 
 namespace Portfotolio.FlickrEngine
@@ -8,7 +7,7 @@ namespace Portfotolio.FlickrEngine
     {
         DomainPhotos Convert(PhotoCollection photoCollection);
         DomainPhotos Convert(PhotosetPhotoCollection photosetPhotos);
-        ListItems Convert(PublicGroupInfoCollection groups);
+        ListItems Convert(GroupInfoCollection groups);
         ListItems Convert(ContactCollection contacts);
         Album Convert(Photoset photoCollection);
         Albums Convert(PhotosetCollection photosets);

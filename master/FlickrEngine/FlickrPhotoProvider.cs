@@ -27,7 +27,7 @@ namespace Portfotolio.FlickrEngine
         PhotosetCollection GetAlbumsOf(string userId);
         PhotosetPhotoCollection GetPhotosInAlbum(string albumId, int page, int pageSize);
 
-        PublicGroupInfoCollection GetGroups(string userId);
+        GroupInfoCollection GetGroups(string userId);
         PhotoCollection GetPhotosInGroup(string groupId, int page, int pageSize);
         GroupFullInfo GetGroupInfo(string groupId);
         
@@ -328,7 +328,7 @@ namespace Portfotolio.FlickrEngine
             }
         }
 
-        public PublicGroupInfoCollection GetGroups(string userId)
+        public GroupInfoCollection GetGroups(string userId)
         {
             try
             {
