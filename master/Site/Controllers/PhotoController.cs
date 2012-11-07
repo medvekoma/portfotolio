@@ -7,7 +7,6 @@ using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Controllers
 {
-    [OutputCache(Duration = 30)]
     public class PhotoController : Controller
     {
         private readonly IPhotoEngine _photoEngine;

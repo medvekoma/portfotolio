@@ -6,13 +6,12 @@ var scrollMargin = 350; // bottom pixels before automatic paging
 
 $(document).ready(function () {
     Medvekoma.Portfotolio.InitializeLoading();
-    Medvekoma.Portfotolio.SubscribeToScrollEvent();
 });
 
 Medvekoma.Portfotolio.InitializeLoading = function () {
     $('#nextPageLink').hide();
     $('#nextPageLoading').show();
-    Medvekoma.Portfotolio.ShowNextPageIfNeeded();
+    Medvekoma.Portfotolio.SubscribeToScrollEvent();
 };
 
 Medvekoma.Portfotolio.SubscribeToScrollEvent = function () {
@@ -21,10 +20,12 @@ Medvekoma.Portfotolio.SubscribeToScrollEvent = function () {
     });
 };
 
-Medvekoma.Portfotolio.ShowNextPageIfNeeded = function() {
+Medvekoma.Portfotolio.ShowNextPageIfNeeded = function () {
     var invisiblePixels = $(document).height() - $(window).scrollTop() - $(window).height();
-    if (invisiblePixels < scrollMargin)
+    if (invisiblePixels < scrollMargin) {
+        $(window).unbind('scroll');
         window.setTimeout(Medvekoma.Portfotolio.ShowNextPage, delay);
+    }
 };
 
 Medvekoma.Portfotolio.ShowNextPage = function () {
