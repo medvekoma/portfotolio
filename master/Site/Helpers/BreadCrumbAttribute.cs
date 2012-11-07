@@ -27,20 +27,28 @@ namespace Portfotolio.Site.Helpers
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            if (!filterContext.HttpContext.Request.IsAjaxRequest())
+            if (!filterContext.HttpContext.Request.IsAjaxRequest() && filterContext.Result is ViewResult)
             {
-                _placeholderDictionary = _placeholderDictionary ?? new Dictionary<string, object>();
+                var placeholderDictionary = _placeholderDictionary ?? new Dictionary<string, object>();
                 foreach (var element in filterContext.Controller.ViewData)
                 {
-                    _placeholderDictionary[element.Key] = element.Value;
+                    placeholderDictionary[element.Key] = element.Value;
                 }
-                var placeholderDictionary = _placeholderDictionary
-                    .Where(item => item.Value != null)
-                    .ToDictionary(item => item.Key, item => item.Value);
-                string breadCrumb = placeholderDictionary.Aggregate(_pattern, (current, element) => current.Replace('{' + element.Key + '}', element.Value.ToString()));
+
+                string breadCrumb = 
+                    StringFormat.TokenStringFormat.Format(_pattern, placeholderDictionary);
+                    // placeholderDictionary.Aggregate(_pattern, (current, element) => current.Replace('{' + element.Key + '}', ToSafeString(element.Value)));
+                
                 filterContext.Controller.ViewData[DataKeys.BreadCrumb] = breadCrumb;
-                _placeholderDictionary.Clear();
             }
+        }
+
+        private static string ToSafeString(object value)
+        {
+            if (value == null)
+                return string.Empty;
+
+            return value.ToString();
         }
     }
 }

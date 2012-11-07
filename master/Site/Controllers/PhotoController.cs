@@ -34,7 +34,7 @@ namespace Portfotolio.Site.Controllers
         [HidePagesFromSearchEngines]
         public ActionResult Photos(string id, int page = 0)
         {
-            var userId = (string) ViewData[DataKeys.UserId];
+            var userId = (string)ViewData[DataKeys.UserId];
             if (page > 1)
             {
                 ViewData[DataKeys.HideFromSearchEngines] = true;

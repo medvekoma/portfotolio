@@ -51,6 +51,9 @@
     <Reference Include="NLog.Extended">
       <HintPath>..\packages\NLog.Extended.2.0.0.2000\lib\net40-full\NLog.Extended.dll</HintPath>
     </Reference>
+    <Reference Include="StringFormat">
+      <HintPath>..\packages\StringFormat.1.0.0\lib\StringFormat.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\Assemblies\System.Web.Helpers.dll</HintPath>
