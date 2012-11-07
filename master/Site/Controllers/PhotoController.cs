@@ -1,20 +1,20 @@
-﻿using System;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Web.Mvc;
 using Portfotolio.Domain;
-using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Site.Helpers;
 using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Controllers
 {
-    public partial class PhotoController : Controller
+    [OutputCache(Duration = 30)]
+    public class PhotoController : Controller
     {
         private readonly IPhotoEngine _photoEngine;
 
         public PhotoController(IPhotoEngine photoEngine)
         {
+            Debug.WriteLine("<<< Constructing PhotoController");
             _photoEngine = photoEngine;
         }
 

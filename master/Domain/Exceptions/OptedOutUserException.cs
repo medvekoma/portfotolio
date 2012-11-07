@@ -4,6 +4,9 @@ namespace Portfotolio.Domain.Exceptions
 {
     public class OptedOutUserException : PortfotolioException
     {
+        public override int HttpStatusCode { get { return 401; } }
+        public override bool IsWarning { get { return true; } }
+
         public string UserAlias { get; private set; }
 
         public OptedOutUserException(string userAlias)
@@ -24,14 +27,6 @@ namespace Portfotolio.Domain.Exceptions
             get
             {
                 return string.Format(MessageFormat, UserAlias);
-            }
-        }
-
-        public override bool IsWarning
-        {
-            get
-            {
-                return true;
             }
         }
     }

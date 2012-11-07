@@ -4,6 +4,9 @@ namespace Portfotolio.Domain.Exceptions
 {
     public class GroupNotFoundException : PortfotolioException
     {
+        public override int HttpStatusCode { get { return 404; } }
+        public override bool IsWarning { get { return true; } }
+
         public string GroupId { get; private set; }
 
         public GroupNotFoundException(string groupId)
@@ -21,19 +24,6 @@ namespace Portfotolio.Domain.Exceptions
             get
             {
                 return string.Format("Sorry, we cannot find group '{0}'...", GroupId);
-            }
-        }
-
-        public override int HttpStatusCode
-        {
-            get { return 404; }
-        }
-
-        public override bool IsWarning
-        {
-            get
-            {
-                return true;
             }
         }
     }

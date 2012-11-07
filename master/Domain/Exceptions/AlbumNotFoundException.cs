@@ -4,6 +4,9 @@ namespace Portfotolio.Domain.Exceptions
 {
     public class AlbumNotFoundException : PortfotolioException
     {
+        public override int HttpStatusCode { get { return 404; } }
+        public override bool IsWarning { get { return true; } }
+
         public string AlbumId { get; private set; }
         
         public AlbumNotFoundException(string albumId)
@@ -21,19 +24,6 @@ namespace Portfotolio.Domain.Exceptions
             get
             {
                 return string.Format("Album '{0}' is not found... Maybe its owner deleted it recently.", AlbumId);
-            }
-        }
-
-        public override int HttpStatusCode
-        {
-            get { return 404; }
-        }
-
-        public override bool IsWarning
-        {
-            get
-            {
-                return true;
             }
         }
     }

@@ -53,9 +53,11 @@ namespace Portfotolio.Site
             routeData.Values["action"] = "Error";
             routeData.Values["exception"] = exception;
 
-            IController errorController = new ErrorController(_loggerFactory);
-            var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
-            errorController.Execute(rc);
+            using (var errorController = new ErrorController(_loggerFactory))
+            {
+                var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
+                ((IController) errorController).Execute(rc);
+            }
         }
     }
 }

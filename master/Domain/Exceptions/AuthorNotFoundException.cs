@@ -1,10 +1,12 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Portfotolio.Domain.Exceptions
 {
     public class AuthorNotFoundException : PortfotolioException
     {
+        public override int HttpStatusCode { get { return 404; } }
+        public override bool IsWarning { get { return true; } }
+
         public string AuthorName { get; private set; }
 
         public AuthorNotFoundException(string authorName)
@@ -22,19 +24,6 @@ namespace Portfotolio.Domain.Exceptions
         public override string Message
         {
             get { return string.Format(MessageFormat, AuthorName); }
-        }
-
-        public override int HttpStatusCode
-        {
-            get { return 404; }
-        }
-
-        public override bool IsWarning
-        {
-            get
-            {
-                return true;
-            }
         }
     }
 }

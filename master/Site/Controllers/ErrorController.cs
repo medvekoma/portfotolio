@@ -16,6 +16,7 @@ namespace Portfotolio.Site.Controllers
             _logger = loggerFactory.GetLogger("ErrorController");
         }
 
+        [HideFromSearchEngines]
         public ActionResult Error(Exception exception)
         {
             _logger.LogException(exception);

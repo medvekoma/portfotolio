@@ -7,7 +7,7 @@ namespace Portfotolio.Site.Helpers
 {
     public class MasterHandleErrorAttribute : FilterAttribute, IExceptionFilter
     {
-        private ILogger _logger;
+        private readonly ILogger _logger;
 
         public MasterHandleErrorAttribute()
         {

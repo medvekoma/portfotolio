@@ -1,7 +1,7 @@
 ﻿if (typeof Medvekoma == "undefined") Medvekoma = {};
 if (typeof Medvekoma.Portfotolio == "undefined") Medvekoma.Portfotolio = {};
 
-var delay = 10;        // page load delay in milliseconds
+var delay = 100;        // page load delay in milliseconds
 var scrollMargin = 350; // bottom pixels before automatic paging
 
 $(document).ready(function () {

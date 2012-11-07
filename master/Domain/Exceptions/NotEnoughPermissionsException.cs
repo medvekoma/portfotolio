@@ -4,6 +4,9 @@ namespace Portfotolio.Domain.Exceptions
 {
     public class NotEnoughPermissionsException : PortfotolioException
     {
+        public override int HttpStatusCode { get { return 401; } }
+        public override bool IsWarning { get { return true; } }
+
         public string ResourceId { get; private set; }
 
         public NotEnoughPermissionsException(string resourceId)
@@ -22,19 +25,6 @@ namespace Portfotolio.Domain.Exceptions
             {
                 const string format = "You don't have enough permissions to view this set ({0}). Logged in users have more privileges.";
                 return string.Format(format, ResourceId);
-            }
-        }
-
-        public override int HttpStatusCode
-        {
-            get { return 401; }
-        }
-
-        public override bool IsWarning
-        {
-            get
-            {
-                return true;
             }
         }
     }

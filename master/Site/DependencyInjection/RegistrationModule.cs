@@ -26,25 +26,25 @@ namespace Portfotolio.Site.DependencyInjection
             dependencyEngine.Register<ILoggerFactory, NLogLoggerFactory>(DependencyLifeStyle.Singleton);
 
             // Home
-            dependencyEngine.Register<HomeController>(DependencyLifeStyle.Transient);
+            dependencyEngine.Register<HomeController>(DependencyLifeStyle.PerWebRequest);
 
             // Authentication
-            dependencyEngine.Register<AccountController>(DependencyLifeStyle.Transient);
+            dependencyEngine.Register<AccountController>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.Register<IAuthenticationProvider, FlickrAuthenticationProvider>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.Register<IOAuthProvider, FlickrOAuthProvider>(DependencyLifeStyle.PerWebRequest);
 
             // Photos
-            dependencyEngine.Register<PhotoController>(DependencyLifeStyle.Transient);
+            dependencyEngine.Register<PhotoController>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.Register<IPhotoEngine, FlickrPhotoEngine>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.RegisterAndDecorate<IUserEngine, FlickrUserEngine, CachedUserEngine>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.Register<IFlickrPhotoProvider, FlickrPhotoProvider>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.Register<IFlickrConverter, FlickrConverter>(DependencyLifeStyle.Singleton);
 
             // Legacy
-            dependencyEngine.Register<LegacyController>(DependencyLifeStyle.Transient);
+            dependencyEngine.Register<LegacyController>(DependencyLifeStyle.PerWebRequest);
 
             // Opt-out
-            dependencyEngine.Register<ConfigurationController>(DependencyLifeStyle.Transient);
+            dependencyEngine.Register<ConfigurationController>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.Register<IOptoutUserStorePathProvider, OptoutUserStorePathProvider>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<IOptoutUserStore, OptoutUserStore>(DependencyLifeStyle.Singleton);
             dependencyEngine.RegisterAndDecorate<IOptoutUserService, OptoutUserService, CachedOptoutUserService>(DependencyLifeStyle.Singleton);

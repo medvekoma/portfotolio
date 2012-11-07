@@ -121,9 +121,6 @@
     <Compile Include="Helpers\ViewResultWithStatusCode.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
-    <Compile Include="Controllers\PhotoController.Helpers.cs">
-      <DependentUpon>PhotoController.cs</DependentUpon>
-    </Compile>
     <Compile Include="DependencyInjection\ControllerActivator.cs" />
     <Compile Include="DependencyInjection\DepencencyEngineWrapper.cs" />
     <Compile Include="DependencyInjection\RegistrationModule.cs" />
