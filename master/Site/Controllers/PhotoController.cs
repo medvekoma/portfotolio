@@ -30,10 +30,11 @@ namespace Portfotolio.Site.Controllers
         }
 
         [UserIdentification]
-        [BreadCrumb("{userName}")]
+        // [BreadCrumb("{userName}")]
         [HidePagesFromSearchEngines]
         public ActionResult Photos(string id, int page = 0)
         {
+            ViewData[DataKeys.BreadCrumb] = ViewData[DataKeys.UserName];
             var userId = (string)ViewData[DataKeys.UserId];
             if (page > 1)
             {
@@ -46,9 +47,11 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         [HideFromSearchEngines]
-        [BreadCrumb("favourites of {userName}")]
+        // [BreadCrumb("favourites of {userName}")]
         public ActionResult Favorites(string id, int page = 0)
         {
+            ViewData[DataKeys.BreadCrumb] = "favourites of " + ViewData[DataKeys.UserName];
+
             var userId = (string)ViewData[DataKeys.UserId];
             var domainPhotos = _photoEngine.GetFavoritesOf(userId, page);
 
@@ -57,9 +60,11 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         [HideFromSearchEngines]
-        [BreadCrumb("subscription feed of {userName}")]
+        // [BreadCrumb("subscription feed of {userName}")]
         public ActionResult Subscriptions(string id, int page = 0)
         {
+            ViewData[DataKeys.BreadCrumb] = "subscription feed of " + ViewData[DataKeys.UserName];
+
             var userId = (string)ViewData[DataKeys.UserId];
             var domainPhotos = _photoEngine.GetSubscriptionsOf(userId, page);
 
@@ -67,10 +72,12 @@ namespace Portfotolio.Site.Controllers
         }
 
         [UserIdentification]
-        [BreadCrumb("albums of {userName}")]
+        // [BreadCrumb("albums of {userName}")]
         [HideFromSearchEngines]
         public ActionResult Albums(string id)
         {
+            ViewData[DataKeys.BreadCrumb] = "albums of " + ViewData[DataKeys.UserName];
+
             var userId = (string)ViewData[DataKeys.UserId];
             var albums = _photoEngine.GetAlbumsOf(userId);
 
@@ -78,7 +85,7 @@ namespace Portfotolio.Site.Controllers
         }
 
         [UserIdentification]
-        [BreadCrumb("{albumTitle} by {userName}")]
+        // [BreadCrumb("{albumTitle} by {userName}")]
         [HideFromSearchEngines]
         public ActionResult Album(string id, string secondaryId, int page = 0)
         {
@@ -86,35 +93,43 @@ namespace Portfotolio.Site.Controllers
 
             var albumPhotos = _photoEngine.GetPhotosInAlbum(albumId, page);
             ViewData["albumTitle"] = albumPhotos.Title;
+
+            ViewData[DataKeys.BreadCrumb] = ViewData["albumTitle"] + " by " + ViewData[DataKeys.UserName];
+
             return PagingView(albumPhotos.Photos);
         }
 
         [UserIdentification]
-        [BreadCrumb("groups of {userName}")]
+        // [BreadCrumb("groups of {userName}")]
         [HideFromSearchEngines]
         public ActionResult Groups(string id)
         {
+            ViewData[DataKeys.BreadCrumb] = "groups of " + ViewData[DataKeys.UserName];
+
             var userId = (string)ViewData[DataKeys.UserId];
             var domainGroups = _photoEngine.GetGroups(userId);
 
             return View(domainGroups);
         }
 
-        [BreadCrumb("{groupName} group")]
+        // [BreadCrumb("{groupName} group")]
         [HideFromSearchEngines]
         public ActionResult Group(string id, int page = 0)
         {
             var domainGroup = _photoEngine.GetGroup(id, page);
             ViewData["groupName"] = domainGroup.GroupName;
+            ViewData[DataKeys.BreadCrumb] = ViewData["groupName"] + " group";
 
             return PagingView(domainGroup);
         }
 
         [UserIdentification]
-        [BreadCrumb("contacts of {userName}")]
+        // [BreadCrumb("contacts of {userName}")]
         [HideFromSearchEngines]
         public ActionResult Contacts(string id, int page = 0)
         {
+            ViewData[DataKeys.BreadCrumb] = "contacts of " + ViewData[DataKeys.UserName];
+
             var userId = (string)ViewData[DataKeys.UserId];
             var contactList = _photoEngine.GetContacts(userId, page);
 
@@ -122,20 +137,24 @@ namespace Portfotolio.Site.Controllers
         }
 
         [UserIdentification]
-        [BreadCrumb("recommendations for {userName}")]
+        // [BreadCrumb("recommendations for {userName}")]
         [HideFromSearchEngines]
         public ActionResult Recommendations(string id, int page = 0)
         {
+            ViewData[DataKeys.BreadCrumb] = "recommendations for " + ViewData[DataKeys.UserName];
+
             var userId = (string)ViewData[DataKeys.UserId];
             var photos = _photoEngine.GetRecommendations(userId, page);
 
             return PagingView(photos);
         }
 
-        [BreadCrumb("explored on flickr")]
+        // [BreadCrumb("explored on flickr")]
         [HideFromSearchEngines]
         public ActionResult Interestingness(int page = 0)
         {
+            ViewData[DataKeys.BreadCrumb] = "explored on flickr";
+
             var photos = _photoEngine.GetInterestingPhotos(page);
 
             return PagingView(photos);

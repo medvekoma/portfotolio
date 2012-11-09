@@ -15,9 +15,11 @@ namespace Portfotolio.Site.Controllers
             _cacheProvider = cacheProvider;
         }
 
-        [BreadCrumb("about")]
+        // [BreadCrumb("about")]
         public ActionResult About()
         {
+            ViewData[DataKeys.BreadCrumb] = "about";
+
             return View();
         }
 

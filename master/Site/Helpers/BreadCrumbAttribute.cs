@@ -5,12 +5,12 @@ using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.Site.Helpers
 {
-    public class BreadCrumbAttribute : ActionFilterAttribute
+    public class BreadCrumb2Attribute : ActionFilterAttribute
     {
         private readonly string _pattern;
         private Dictionary<string, object> _placeholderDictionary;
 
-        public BreadCrumbAttribute(string pattern)
+        public BreadCrumb2Attribute(string pattern)
         {
             _pattern = pattern;
         }
