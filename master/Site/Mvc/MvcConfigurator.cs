@@ -23,6 +23,7 @@ namespace Portfotolio.Site.Mvc
             var filters = GlobalFilters.Filters;
             
             filters.Add(new MasterHandleErrorAttribute());
+            // filters.Add(new HandleErrorAttribute(){View = "Error"});
             filters.Add(new SetMasterViewDataAttribute());
         }
 
@@ -31,6 +32,7 @@ namespace Portfotolio.Site.Mvc
             var routes = RouteTable.Routes;
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{file}.htm");
 
             routes.MapRoute(
                 "Home",

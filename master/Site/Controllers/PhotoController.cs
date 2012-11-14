@@ -13,7 +13,6 @@ namespace Portfotolio.Site.Controllers
 
         public PhotoController(IPhotoEngine photoEngine)
         {
-            Debug.WriteLine("<<< Constructing PhotoController");
             _photoEngine = photoEngine;
         }
 

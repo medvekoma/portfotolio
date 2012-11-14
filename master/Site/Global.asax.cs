@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
+using NLog;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Services.Logging;
-using Portfotolio.Site.Controllers;
 using Portfotolio.Site.Mvc;
 using Portfotolio.Utility.DependencyInjection;
+using Portfotolio.Site.Helpers;
 
 namespace Portfotolio.Site
 {
@@ -46,18 +46,10 @@ namespace Portfotolio.Site
         protected void Application_Error()
         {
             var exception = Server.GetLastError();
-            Response.Clear();
-            Server.ClearError();
-            var routeData = new RouteData();
-            routeData.Values["controller"] = "Error";
-            routeData.Values["action"] = "Error";
-            routeData.Values["exception"] = exception;
+            var logger = LogManager.GetLogger("Application");
+            logger.LogException(exception);
 
-            using (var errorController = new ErrorController(_loggerFactory))
-            {
-                var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
-                ((IController) errorController).Execute(rc);
-            }
+            Server.Transfer("/Content/error.htm");
         }
     }
 }

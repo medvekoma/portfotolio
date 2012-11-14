@@ -1,12 +1,12 @@
-﻿@using Portfotolio.Domain.Persistency
+﻿@model ModelError
 @{
     ViewBag.Title = "Error";
 }
 
 <div class="errorMessage">
-    @if (ViewData[DataKeys.ErrorMessage] != null)
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
     {
-        @ViewData[DataKeys.ErrorMessage]
+        @Model.ErrorMessage
         <br/>
     }
     else

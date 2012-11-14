@@ -108,14 +108,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ConfigurationController.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegacyController.cs" />
+    <None Include="Controllers\_OAuthControllerPoc.cs" />
     <Compile Include="Helpers\HideFromSearchEnginesAttribute.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Helpers\LoggingExtensions.cs" />
-    <Compile Include="Helpers\MasterHandleErrorAttribute.cs" />
     <Compile Include="Helpers\HidePagesFromSearchEnginesAttribute.cs" />
+    <Compile Include="Helpers\MasterHandleErrorAttribute.cs" />
     <Compile Include="Helpers\PagingHelpers.cs" />
     <Compile Include="Helpers\SetMasterViewDataAttribute.cs" />
     <Compile Include="Helpers\BreadCrumbAttribute.cs" />
@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".htaccess" />
+    <Content Include="Content\error.htm" />
     <Content Include="Content\Site-ie7.css" />
     <Content Include="Content\loading.gif" />
     <Content Include="Content\Original.css" />
@@ -218,6 +219,7 @@
     <Content Include="Views\Configuration\Display.cshtml" />
     <Content Include="Views\Configuration\OutOutLoginView.cshtml" />
     <Content Include="Views\Configuration\OptOutChangeView.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Photo\DisplayTemplates\BreadCrumb.cshtml" />

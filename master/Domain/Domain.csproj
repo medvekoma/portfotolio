@@ -63,6 +63,7 @@
     <Compile Include="Exceptions\AuthorNotFoundException.cs" />
     <Compile Include="Exceptions\FlickrServiceUnavailableException.cs" />
     <Compile Include="Exceptions\GroupNotFoundException.cs" />
+    <Compile Include="Exceptions\IncorrectUrlException.cs" />
     <Compile Include="Exceptions\NotEnoughPermissionsException.cs" />
     <Compile Include="Exceptions\OptedOutUserException.cs" />
     <Compile Include="Exceptions\PortfotolioException.cs" />

@@ -7,17 +7,11 @@ namespace Portfotolio.Site.Helpers
 {
     public class MasterHandleErrorAttribute : FilterAttribute, IExceptionFilter
     {
-        private readonly ILogger _logger;
-
-        public MasterHandleErrorAttribute()
-        {
-            var loggerFactory = DependencyResolver.Current.GetService<ILoggerFactory>();
-            _logger = loggerFactory.GetLogger("MasterHandleError");
-        }
-
         public void OnException(ExceptionContext filterContext)
         {
-            _logger.LogException(filterContext.Exception);
+            var loggerFactory = DependencyResolver.Current.GetService<ILoggerFactory>();
+            var logger = loggerFactory.GetLogger("MasterHandleError");
+            logger.LogException(filterContext.Exception);
 
             var viewDataDictionary = new ViewDataDictionary();
             var userSession = DependencyResolver.Current.GetService<IUserSession>();
@@ -32,7 +26,7 @@ namespace Portfotolio.Site.Helpers
                 statusCode = portfotolioException.HttpStatusCode;
             }
 
-            viewDataDictionary[DataKeys.ErrorMessage] = errorMessage;
+            viewDataDictionary.Model = new ModelError(errorMessage);
 
             var viewResult = new ViewResultWithStatusCode(statusCode, errorMessage)
                                  {
