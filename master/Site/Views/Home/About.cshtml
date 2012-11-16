@@ -6,17 +6,24 @@
         What is this site?</h2>
     <ul>
         <li>This site is an alternative <a href="http://flickr.com" title="flickr">flickr</a>
-            viewer, developed by @Html.ActionLink("medvekoma", "photos", "photo", new {id = "medvekoma"}, null),
-            aiming to help photographers showcase their portfolio and find inspiration
-            in the works of other photographers.</li>
+            viewer, developed by @Html.ActionLink("medvekoma", "photos", "photo", new { id = "medvekoma" }, null),
+            aiming to help photographers showcase their portfolio and find inspiration in the
+            works of other photographers.</li>
         <li>It also features a recommendation engine, which - based on what one marks as favorite
             - suggests other photos of interest. </li>
     </ul>
     <h2>
         Copyright information</h2>
     <ul>
-        <li>The photos shown here are taken by many different photographers, all of whom are
-            flickr members. All photographs are copyrighted by their respective owners.</li>
+        <li>All images are copyrighted by their respective owners. The photos shown here are
+            taken by many different photographers, all of whom are flickr members.</li>
+        <li>This site is a viewer application: it does not store images and personal data, and
+            it does not reference any user or photo specifically.</li>
+        <li>The site uses a technology called <a href="http://en.wikipedia.org/wiki/Inline_linking"
+            title="inline linking">inline linking</a> to show the images stored on flickr's
+            servers. According to international law, <a href="http://en.wikipedia.org/wiki/Inline_linking#Copyright_law_issues_that_inline_linking_raises"
+                title="copyright issues">this is not a copyright infringement</a>. However,
+            as you will see below, you can remove your photos from this site quickly.</li>
         <li>The application is designed to increase the visibility of the original flickr site.
             Photos are only shown in their small size, and they all link back to the original
             flickr page of the photo, where you can contact the photographer, add them as a
@@ -28,7 +35,7 @@
         <li>If you publish public photos on flickr, they can appear on this site. As an alternative
             flickr viewer, this site uses the official flickr API - just like hundreds of other
             third party applications do.</li>
-        <li>It doesn't copy, store or host any photos and doesn't reference any photos specifically
+        <li>It doesn't copy, store or host any photos and doesn't reference any user specifically
             - it is merely a viewer that reflects whatever flickr provides it when you ask it
             to. </li>
         <li>The site is fully compliant with the terms of use of flickr API: all images link
@@ -36,25 +43,12 @@
             image origin, author or copyright. You can also read the official Flickr FAQ about
             this <a href="http://www.flickr.com/help/website/#180" title="FAQ">here</a> and
             <a href="http://www.flickr.com/help/website/#181" title="FAQ2">here</a>. </li>
-        <li>The site uses a technology called <a href="http://en.wikipedia.org/wiki/Inline_linking"
-            title="inline linking">inline linking</a> to show the images stored on flickr's
-            servers. According to international law, <a href="http://en.wikipedia.org/wiki/Inline_linking#Copyright_law_issues_that_inline_linking_raises"
-                title="copyright issues">this is not a copyright infringement</a>. However,
-            as you will see below, we are ready to quickly remove the links to your images on
-            your request.</li>
     </ul>
     <h2>
         Still, I don't want my photos here!</h2>
     <ul>
-        <li>No problem. You can opt out from third party services having access to your photos.
-            For this, go to your <a href="http://www.flickr.com/account/prefs/optout/?from=privacy"
-                title="privacy">hiding from search page</a>, and check both the second and third
-            check boxes. This will hide you from flickr API calls, and subsequently from this
-            site. Please allow up to an hour for this setting to be processed. </li>
-        <li>Please note, that even after you hide your photos from searches, they can still
-            appear on a few places (e.g. groups, people's favourites and subscriptions, etc.).
-            If you want to completely remove your photos from this site, please send a <a href="http://www.flickr.com/mail/write/?to=27725019@N00">
-                flickr mail</a> to the owner of the site. We will process your request in a reasonable time. </li>
+        <li>No problem. Go to the @Html.ActionLink("settings page", "show", "settings"), and
+            hide your data from this application. </li>
         <li>Please <a href="http://www.flickr.com/mail/write/?to=27725019@N00">let us know</a>
             if you have any more questions, comments or concerns. </li>
     </ul>

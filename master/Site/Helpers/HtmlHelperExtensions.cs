@@ -65,5 +65,13 @@ namespace Portfotolio.Site.Helpers
             var changedLink = originalLink.Replace("%40", "@");
             return new MvcHtmlString(changedLink);
         }
+
+        public static MvcHtmlString LabeledRadioButtonFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression, TProperty value, string label)
+        {
+            string encodedLabel = htmlHelper.Encode(label);
+            MvcHtmlString radioButtonFor = htmlHelper.RadioButtonFor(expression, value);
+            var html = string.Format("<label>{0}{1}</label>", radioButtonFor, encodedLabel);
+            return new MvcHtmlString(html);
+        }
     }
 }

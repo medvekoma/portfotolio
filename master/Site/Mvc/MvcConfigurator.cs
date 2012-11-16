@@ -55,7 +55,7 @@ namespace Portfotolio.Site.Mvc
             routes.MapRoute(
                 "Non-Photo", // Route name
                 "-{controller}/{action}/{id}", // URL with parameters
-                new { action = "photos", id = UrlParameter.Optional } // Parameter defaults
+                new { action = "show", id = UrlParameter.Optional } // Parameter defaults
                 );
         }
 

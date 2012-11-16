@@ -7,6 +7,7 @@ using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Controllers
 {
+    [RememberActionUrl]
     public class PhotoController : Controller
     {
         private readonly IPhotoEngine _photoEngine;
@@ -167,16 +168,6 @@ namespace Portfotolio.Site.Controllers
                 return PartialView("Page", model);
 
             return View("PagingView", model);
-        }
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            base.OnActionExecuting(filterContext);
-
-            if (!Request.IsAjaxRequest())
-            {
-                TempData[DataKeys.ActionUrl] = filterContext.HttpContext.Request.RawUrl;
-            }
         }
 
         #endregion

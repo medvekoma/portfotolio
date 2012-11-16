@@ -1,16 +1,17 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.Site.Helpers
 {
-    public class BreadCrumb2Attribute : ActionFilterAttribute
+    [Obsolete("Temporarily disabled", true)]
+    public class BreadCrumbAttribute : ActionFilterAttribute
     {
         private readonly string _pattern;
         private Dictionary<string, object> _placeholderDictionary;
 
-        public BreadCrumb2Attribute(string pattern)
+        public BreadCrumbAttribute(string pattern)
         {
             _pattern = pattern;
         }

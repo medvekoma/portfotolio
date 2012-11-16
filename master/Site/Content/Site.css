@@ -89,13 +89,14 @@ ul#menu li
     height: 150px;
 }
 
+.highlight { color: #ff8c00; }
 a:link.highlight { color: #ff8c00; }
 a:visited.highlight { color: #ff8c00; }
-a:hover.highlight { color: #ffaa00; }
+a:hover.highlight { color: #ff0000; }
 
 a:link .highlight { color: #ff8c00; }
 a:visited .highlight { color: #ff8c00; }
-a:hover .highlight { color: #ffaa00; }
+a:hover .highlight { color: #ff0000; }
 
 .errorMessage
 {
@@ -118,4 +119,12 @@ div#homeDiv
 input#SearchText
 {
 	width: 50%;
+}
+
+.yes {
+    color: green;
+}
+
+.no {
+    color: red;
 }

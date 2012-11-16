@@ -44,11 +44,14 @@ namespace Portfotolio.Site.DependencyInjection
             dependencyEngine.Register<LegacyController>(DependencyLifeStyle.PerWebRequest);
 
             // Opt-out
-            dependencyEngine.Register<ConfigurationController>(DependencyLifeStyle.PerWebRequest);
+            dependencyEngine.Register<SettingsController>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.Register<IOptoutUserStorePathProvider, OptoutUserStorePathProvider>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<IOptoutUserStore, OptoutUserStore>(DependencyLifeStyle.Singleton);
             dependencyEngine.RegisterAndDecorate<IOptoutUserService, OptoutUserService, CachedOptoutUserService>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<IOptoutUserConfiguratorService, OptoutUserConfiguratorService>(DependencyLifeStyle.Singleton);
+
+            // Test
+            dependencyEngine.Register<TestController>(DependencyLifeStyle.PerWebRequest);
         }
     }
 }

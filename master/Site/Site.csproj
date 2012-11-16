@@ -107,10 +107,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegacyController.cs" />
     <None Include="Controllers\_OAuthControllerPoc.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Helpers\RememberActionUrlAttribute.cs" />
+    <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\TestModel.cs" />
     <Compile Include="Helpers\HideFromSearchEnginesAttribute.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Helpers\LoggingExtensions.cs" />
@@ -130,7 +134,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BreadCrumb.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\OptOutModel.cs" />
     <Compile Include="Mvc\MvcConfigurator.cs" />
@@ -140,6 +143,9 @@
     <Compile Include="Routing\DelegateRouteHandler.cs" />
     <Compile Include="Routing\RedirectRouteExtensions.cs" />
     <Compile Include="Routing\RequestOnlyRoute.cs" />
+    <Content Include="Views\Test\Show.cshtml" />
+    <Content Include="Views\Settings\_ViewStart.cshtml" />
+    <Content Include="Views\Settings\ShowUnauthenticated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".htaccess" />
@@ -216,13 +222,9 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Configuration\Display.cshtml" />
-    <Content Include="Views\Configuration\OutOutLoginView.cshtml" />
-    <Content Include="Views\Configuration\OptOutChangeView.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Photo\DisplayTemplates\BreadCrumb.cshtml" />
+    <Content Include="Views\Settings\Show.cshtml" />
+    <Content Include="Views\Settings\OutOutLoginView.cshtml" />
+    <Content Include="Views\Settings\OptOutChangeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">

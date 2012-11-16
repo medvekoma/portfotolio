@@ -1,6 +1,6 @@
 ﻿@model Portfotolio.Site.Models.OptOutModel
 
-@using(@Html.BeginForm("OptOut", "Configuration"))
+@using(@Html.BeginForm("OptOut", "Settings"))
 {
     @Html.DisplayFor(model => model.UserName)
     @Html.HiddenFor(model => model.IsOptedOut)

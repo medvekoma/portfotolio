@@ -43,10 +43,13 @@ namespace Portfotolio.Site.Controllers
             return RedirectToLastPage();
         }
 
-        private RedirectResult RedirectToLastPage()
+        private ActionResult RedirectToLastPage()
         {
             var actionUrl = TempData[DataKeys.ActionUrl] as string;
-            return Redirect(actionUrl);
+            if (!string.IsNullOrEmpty(actionUrl))
+                return Redirect(actionUrl);
+
+            return RedirectToAction("Home", "Photo");
         }
     }
 }
