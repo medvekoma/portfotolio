@@ -25,7 +25,7 @@ namespace Portfotolio.Domain.Configuration
         {
             lock (_syncRoot)
             {
-                var userIds = _optoutUserStore.ReadUsers() ?? new SortedSet<string>();
+                var userIds = _optoutUserStore.ReadUsers() ?? new HashSet<string>();
                 if (userIds.Add(userId))
                 {
                     _optoutUserStore.WriteUsers(userIds);
@@ -38,7 +38,7 @@ namespace Portfotolio.Domain.Configuration
         {
             lock (_syncRoot)
             {
-                var userIds = _optoutUserStore.ReadUsers() ?? new SortedSet<string>();
+                var userIds = _optoutUserStore.ReadUsers() ?? new HashSet<string>();
                 if (userIds.Remove(userId))
                 {
                     _optoutUserStore.WriteUsers(userIds);

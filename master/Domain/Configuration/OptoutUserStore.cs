@@ -7,7 +7,7 @@ namespace Portfotolio.Domain.Configuration
 {
     public interface IOptoutUserStore
     {
-        SortedSet<string> ReadUsers();
+        HashSet<string> ReadUsers();
         void WriteUsers(IEnumerable<string> userIds);
     }
 
@@ -20,7 +20,7 @@ namespace Portfotolio.Domain.Configuration
             _optoutUserStorePathProvider = optoutUserStorePathProvider;
         }
 
-        public SortedSet<string> ReadUsers()
+        public HashSet<string> ReadUsers()
         {
             var fileName = _optoutUserStorePathProvider.GetStorageFileName();
             if (!File.Exists(fileName))
@@ -31,7 +31,7 @@ namespace Portfotolio.Domain.Configuration
             {
                 var content = streamReader.ReadToEnd();
                 var userIdArray = jsonSerializer.Deserialize<string[]>(content);
-                return new SortedSet<string>(userIdArray);
+                return new HashSet<string>(userIdArray);
             }
         }
 

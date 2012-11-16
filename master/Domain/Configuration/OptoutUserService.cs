@@ -11,7 +11,7 @@ namespace Portfotolio.Domain.Configuration
             _optoutUserStore = optoutUserStore;
         }
 
-        public SortedSet<string> GetOptedOutUserIds()
+        public HashSet<string> GetOptedOutUserIds()
         {
             return _optoutUserStore.ReadUsers();
         }

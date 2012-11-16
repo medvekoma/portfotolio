@@ -16,9 +16,9 @@ namespace Portfotolio.Domain.Configuration
             _cacheFileName = optoutUserStorePathProvider.GetStorageFileName();
         }
 
-        public SortedSet<string> GetOptedOutUserIds()
+        public HashSet<string> GetOptedOutUserIds()
         {
-            var cachedOptedOutUsers = _cacheProvider.Get<SortedSet<string>>(CacheNames.OptedOutUsers);
+            var cachedOptedOutUsers = _cacheProvider.Get<HashSet<string>>(CacheNames.OptedOutUsers);
             if (cachedOptedOutUsers != null)
                 return cachedOptedOutUsers;
 

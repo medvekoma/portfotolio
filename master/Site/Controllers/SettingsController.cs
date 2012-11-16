@@ -93,7 +93,7 @@ namespace Portfotolio.Site.Controllers
 
         private string GetOptedoutUsersFlat()
         {
-            var optedOutUserIds = _optoutUserService.GetOptedOutUserIds() ?? new SortedSet<string>();
+            var optedOutUserIds = _optoutUserService.GetOptedOutUserIds() ?? new HashSet<string>();
             return string.Join(",", optedOutUserIds);
         }
 
