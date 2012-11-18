@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Site.Helpers;
+using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Controllers
 {
@@ -13,5 +14,18 @@ namespace Portfotolio.Site.Controllers
 
             return View();
         }
+
+        public ActionResult Home()
+        {
+            var homeModel = new HomeModel("", SearchSource.People);
+            return View(homeModel);
+        }
+
+        [HttpPost]
+        public ActionResult Home(HomeModel homeModel)
+        {
+            return Content(homeModel.SearchText + " > " + homeModel.SearchSource);
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Services.Logging;
+using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Helpers
 {
@@ -16,19 +17,18 @@ namespace Portfotolio.Site.Helpers
             var viewDataDictionary = new ViewDataDictionary();
             var userSession = DependencyResolver.Current.GetService<IUserSession>();
             viewDataDictionary[DataKeys.AuthenticationInfo] = userSession.GetAuthenticationInfo();
+            viewDataDictionary[DataKeys.AllowRobots] = AllowRobots.None;
 
             string errorMessage = null;
-            int statusCode = 500;
             var portfotolioException = filterContext.Exception as PortfotolioException;
             if (portfotolioException != null)
             {
                 errorMessage = portfotolioException.Message;
-                statusCode = portfotolioException.HttpStatusCode;
             }
 
             viewDataDictionary.Model = new ModelError(errorMessage);
 
-            var viewResult = new ViewResultWithStatusCode(statusCode, errorMessage)
+            var viewResult = new ViewResult
                                  {
                                      ViewData = viewDataDictionary, 
                                      ViewName = "Error",

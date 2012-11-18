@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Portfotolio.Domain.Persistency;
+using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Helpers
 {
@@ -72,6 +73,26 @@ namespace Portfotolio.Site.Helpers
             MvcHtmlString radioButtonFor = htmlHelper.RadioButtonFor(expression, value);
             var html = string.Format("<label>{0}{1}</label>", radioButtonFor, encodedLabel);
             return new MvcHtmlString(html);
+        }
+
+        public static MvcHtmlString MetaRobots(this HtmlHelper htmlHelper)
+        {
+            object allowRobotsObject = htmlHelper.ViewData[DataKeys.AllowRobots];
+            if (allowRobotsObject == null || !(allowRobotsObject is AllowRobots))
+                return new MvcHtmlString(string.Empty);
+
+            var allowRobots = (AllowRobots) allowRobotsObject;
+            var elements = new[] { "noindex", "nofollow", "noarchive" };
+            if ((allowRobots & AllowRobots.Index) == AllowRobots.Index)
+                elements[0] = "index";
+            if ((allowRobots & AllowRobots.Follow) == AllowRobots.Follow)
+                elements[1] = "follow";
+            if ((allowRobots & AllowRobots.Archive) == AllowRobots.Archive)
+                elements[1] = "archive";
+
+            string content = string.Join(", ", elements);
+            string metaTag = string.Format("<meta name='robots' content='{0}' />", content);
+            return new MvcHtmlString(metaTag);
         }
     }
 }

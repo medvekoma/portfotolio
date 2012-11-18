@@ -17,36 +17,19 @@ namespace Portfotolio.Site.Controllers
             _photoEngine = photoEngine;
         }
 
-        public ActionResult Home()
-        {
-            var homeModel = new HomeModel("", SearchSource.People);
-            return View(homeModel);
-        }
-
-        [HttpPost]
-        public ActionResult Home(HomeModel homeModel)
-        {
-            return Content(homeModel.SearchText + " > " + homeModel.SearchSource);
-        }
-
         [UserIdentification]
         // [BreadCrumb("{userName}")]
-        [HidePagesFromSearchEngines]
         public ActionResult Photos(string id, int page = 0)
         {
             ViewData[DataKeys.BreadCrumb] = ViewData[DataKeys.UserName];
             var userId = (string)ViewData[DataKeys.UserId];
-            if (page > 1)
-            {
-                ViewData[DataKeys.HideFromSearchEngines] = true;
-            }
             var domainPhotos = _photoEngine.GetPhotosOf(userId, page);
             
             return PagingView(domainPhotos);
         }
 
         [UserIdentification]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.Follow)]
         // [BreadCrumb("favourites of {userName}")]
         public ActionResult Favorites(string id, int page = 0)
         {
@@ -59,7 +42,7 @@ namespace Portfotolio.Site.Controllers
         }
 
         [UserIdentification]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.Follow)]
         // [BreadCrumb("subscription feed of {userName}")]
         public ActionResult Subscriptions(string id, int page = 0)
         {
@@ -73,7 +56,7 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         // [BreadCrumb("albums of {userName}")]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Albums(string id)
         {
             ViewData[DataKeys.BreadCrumb] = "albums of " + ViewData[DataKeys.UserName];
@@ -86,7 +69,7 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         // [BreadCrumb("{albumTitle} by {userName}")]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Album(string id, string secondaryId, int page = 0)
         {
             string albumId = secondaryId;
@@ -101,7 +84,7 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         // [BreadCrumb("groups of {userName}")]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Groups(string id)
         {
             ViewData[DataKeys.BreadCrumb] = "groups of " + ViewData[DataKeys.UserName];
@@ -113,7 +96,7 @@ namespace Portfotolio.Site.Controllers
         }
 
         // [BreadCrumb("{groupName} group")]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Group(string id, int page = 0)
         {
             var domainGroup = _photoEngine.GetGroup(id, page);
@@ -125,7 +108,7 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         // [BreadCrumb("contacts of {userName}")]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Contacts(string id, int page = 0)
         {
             ViewData[DataKeys.BreadCrumb] = "contacts of " + ViewData[DataKeys.UserName];
@@ -138,7 +121,7 @@ namespace Portfotolio.Site.Controllers
 
         [UserIdentification]
         // [BreadCrumb("recommendations for {userName}")]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Recommendations(string id, int page = 0)
         {
             ViewData[DataKeys.BreadCrumb] = "recommendations for " + ViewData[DataKeys.UserName];
@@ -150,7 +133,7 @@ namespace Portfotolio.Site.Controllers
         }
 
         // [BreadCrumb("explored on flickr")]
-        [HideFromSearchEngines]
+        [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Interestingness(int page = 0)
         {
             ViewData[DataKeys.BreadCrumb] = "explored on flickr";

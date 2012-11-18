@@ -10,7 +10,7 @@ namespace Portfotolio.Domain.Persistency
         public static string UserId = "UserId";
         public static string UserName = "userName";
         public static string RecommendedUserIds = "RecommendedUserIds";
-        public static string HideFromSearchEngines = "HideFromSearchEngines";
+        public static string AllowRobots = "AllowRobots";
         public static string OAuthTokenSecret = "TokenSecret";
         public static string ApplicationStarted = "ApplicationStarted";
     }

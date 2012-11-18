@@ -5,10 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>@Html.Display(DataKeys.BreadCrumb) ● portfotolio</title>
-    @if (ViewData.ContainsKey(DataKeys.HideFromSearchEngines))
-    {
-    <meta name="robots" content="noindex, follow, noarchive" />
-    }
+    @Html.MetaRobots()
 
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     <!--[if lte IE 7]>

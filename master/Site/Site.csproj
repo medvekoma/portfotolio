@@ -114,6 +114,7 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\RememberActionUrlAttribute.cs" />
     <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\AllowRobots.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Helpers\HideFromSearchEnginesAttribute.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
@@ -299,7 +300,7 @@
     <Content Include="Views\Home\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Photo\Home.cshtml" />
+    <Content Include="Views\Home\Home.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

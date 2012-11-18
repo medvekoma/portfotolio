@@ -4,8 +4,7 @@ namespace Portfotolio.Domain.Exceptions
 {
     public class FlickrServiceUnavailableException : PortfotolioException
     {
-        public override int HttpStatusCode { get { return 503; } }
-
+        public override bool IsWarning { get { return true; } }
         public FlickrServiceUnavailableException(Exception innerException)
             : base(innerException)
         {

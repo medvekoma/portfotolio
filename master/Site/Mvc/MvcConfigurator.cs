@@ -1,9 +1,9 @@
-﻿using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Portfotolio.Domain;
 using Portfotolio.Site.DependencyInjection;
 using Portfotolio.Site.Helpers;
+using Portfotolio.Site.Models;
 using Portfotolio.Utility.DependencyInjection;
 
 namespace Portfotolio.Site.Mvc
@@ -23,8 +23,8 @@ namespace Portfotolio.Site.Mvc
             var filters = GlobalFilters.Filters;
             
             filters.Add(new MasterHandleErrorAttribute());
-            // filters.Add(new HandleErrorAttribute(){View = "Error"});
             filters.Add(new SetMasterViewDataAttribute());
+            filters.Add(new HidePagesFromSearchEnginesAttribute(AllowRobots.None));
         }
 
         public static void RegisterRoutes()

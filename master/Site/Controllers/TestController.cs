@@ -8,7 +8,7 @@ using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Controllers
 {
-    [HideFromSearchEngines]
+    [HideFromSearchEngines(AllowRobots.None)]
     public class TestController : Controller
     {
         private readonly ICacheProvider _cacheProvider;
