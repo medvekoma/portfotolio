@@ -14,6 +14,9 @@ namespace Portfotolio.Site.Helpers
 
             var userIdentifier = (string) filterContext.ActionParameters["id"];
 
+            if(string.IsNullOrEmpty(userIdentifier))
+                throw new IncorrectUrlException();
+
             var userEngine = DependencyResolver.Current.GetService<IUserEngine>();
             var user = userEngine.GetUser(userIdentifier);
 

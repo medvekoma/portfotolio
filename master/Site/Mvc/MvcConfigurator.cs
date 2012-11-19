@@ -24,7 +24,7 @@ namespace Portfotolio.Site.Mvc
             
             filters.Add(new MasterHandleErrorAttribute());
             filters.Add(new SetMasterViewDataAttribute());
-            filters.Add(new HidePagesFromSearchEnginesAttribute(AllowRobots.None));
+            filters.Add(new HideFromSearchEnginesAttribute(AllowRobots.None, HideFromSearchEngineCondition.HasPageAttribute));
         }
 
         public static void RegisterRoutes()

@@ -38,7 +38,7 @@ namespace Portfotolio.Site.Controllers
             var authenticationInfo = _authenticationProvider.Authenticate(frob);
             if (authenticationInfo.IsAuthenticated)
             {
-                _logger.Info(string.Format(UserHasLoggedInMessage, authenticationInfo.UserName));
+                _logger.Info(string.Format(UserHasLoggedInMessage, authenticationInfo.UserAlias));
             }
             return RedirectToLastPage();
         }
@@ -49,7 +49,7 @@ namespace Portfotolio.Site.Controllers
             if (!string.IsNullOrEmpty(actionUrl))
                 return Redirect(actionUrl);
 
-            return RedirectToAction("Home", "Photo");
+            return RedirectToAction("Interestingness", "Photo");
         }
     }
 }
