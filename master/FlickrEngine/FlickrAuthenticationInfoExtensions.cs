@@ -1,5 +1,6 @@
 ﻿using FlickrNet;
 using Portfotolio.Domain;
+using Portfotolio.Utility.Extensions;
 
 namespace Portfotolio.FlickrEngine
 {
@@ -12,7 +13,8 @@ namespace Portfotolio.FlickrEngine
             {
                 var userId = auth.User.UserId;
                 Person person = new Flickr().PeopleGetInfo(userId);
-                authenticationInfo = new AuthenticationInfo(userId, person.PathAlias, auth.User.UserName, auth.Token, null);
+                var userAlias = person.PathAlias.IfNullOrEmpty(userId);
+                authenticationInfo = new AuthenticationInfo(userId, userAlias, auth.User.UserName, auth.Token, null);
             }
             return authenticationInfo;
         }

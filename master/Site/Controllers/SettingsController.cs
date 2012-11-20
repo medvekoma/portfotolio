@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Security.Authentication;
 using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
@@ -9,6 +8,7 @@ using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Controllers
 {
+    [HideFromSearchEngines(AllowRobots.None)]
     public class SettingsController : Controller
     {
         private readonly IOptoutUserService _optoutUserService;

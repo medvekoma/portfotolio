@@ -3,11 +3,11 @@
 @if (Model.IsAuthenticated)
 {
     var userLink = Html.ActionLink(Model.UserName, "photos", "photo", new { id = Model.UserAlias }, null);
-    var signOutLink = Html.ActionLink("Sign out?", "logout", "account");
+    var signOutLink = Html.ActionLink("Sign out?", "logout", "account", null, new { rel = "nofollow" });
     <div>@userLink, you are signed in. @signOutLink</div>
 }
 else
 {
-    var signInLink = Html.ActionLink("Sign in!", "login", "account");
+    var signInLink = Html.ActionLink("Sign in!", "login", "account", null, new { rel = "nofollow" });
     <div>Do you have a flickr account? @signInLink</div>
 }
