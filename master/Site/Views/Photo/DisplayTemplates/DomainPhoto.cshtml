@@ -1,22 +1,24 @@
 ﻿@model Portfotolio.Domain.DomainPhoto
 @using Portfotolio.Site.Helpers;
-
-    <div class="photoFrame">
-        <div class="middleFrame">
-            <div class="innerFrame">
-                <a href="@Model.PageUrl">
-                    <img class="photo" src="@Model.SmallUrl" title="@Model.Title" alt="@Model.Title" />
-                </a>
-                <div class="title">
-                    @if (!string.IsNullOrEmpty(Model.AuthorName)){
-                        <text>@Html.ActionLinkUserId(Model.AuthorName, "photos", new {id = Model.AuthorAlias}):</text>
-                    }
-                    @Model.Title
-                    @*
-                    &nbsp;
-                    @Html.ActionLink("+", "similarto", new { id = Model.Id })
-                    *@
-                </div>
-            </div>
-        </div>
+@{
+    const int slideWidth = 330;  // if you change these values, change them in CSS .slide as well
+    const int slideHeight = 330; // if you change these values, change them in CSS .slide as well
+    const int borderWidth = 5;   // if you change these values, change them in CSS .photo-link as well
+    int frameWidth = Model.SmallWidth + 2 * borderWidth;
+    int frameHeight = Model.SmallHeight + 2 * borderWidth;
+    int frameLeft = (slideWidth - frameWidth) / 2;
+    int frameTop = (slideHeight - frameHeight) / 2;
+    int titleTop = frameTop + frameHeight + 10;
+}
+<div class="slide">
+    <div class="photo-frame" style="left: @(frameLeft)px; top: @(frameTop)px">
+        <a class="photo-link" 
+           href="@Model.PageUrl" 
+           style="background-image: url('@Model.SmallUrl'); width: @(Model.SmallWidth)px; height: @(Model.SmallHeight)px;" 
+           title="@Model.Title" ></a>
     </div>
+    <div class="title-frame" style="top: @(titleTop)px;">
+        @(Html.ActionLinkUserId(Model.AuthorName ?? Model.AuthorAlias, "photos", new { id = Model.AuthorAlias })):
+        @Model.Title
+    </div>
+</div>

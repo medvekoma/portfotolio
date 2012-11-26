@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
 namespace Portfotolio.Domain
 {
@@ -16,8 +13,10 @@ namespace Portfotolio.Domain
         public string SmallUrl { get; private set; }
         public string MediumUrl { get; private set; }
         public string LargeUrl { get; private set; }
+        public int SmallWidth { get; private set; }
+        public int SmallHeight { get; private set; }
 
-        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string smallUrl, string mediumUrl, string largeUrl)
+        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string smallUrl, string mediumUrl, string largeUrl, int smallWidth, int smallHeight)
         {
             Id = id;
             AuthorId = authorId;
@@ -28,6 +27,8 @@ namespace Portfotolio.Domain
             SmallUrl = smallUrl;
             MediumUrl = mediumUrl;
             LargeUrl = largeUrl;
+            SmallWidth = smallWidth;
+            SmallHeight = smallHeight;
         }
     }
 }

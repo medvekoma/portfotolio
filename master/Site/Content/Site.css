@@ -128,3 +128,27 @@ input#SearchText
 .no {
     color: red;
 }
+
+.slide {
+    position: relative;
+    float: left;
+    width: 330px;
+    height: 330px;
+}
+
+.photo-frame {
+    position: absolute; 
+    display: block; 
+}
+
+.photo-link {
+    background: url('') no-repeat scroll center center transparent;
+    display: block;
+    border: 5px solid white; 
+}
+
+.title-frame {
+    position: absolute; 
+    text-align: center; 
+    width: 100%
+}

@@ -15,7 +15,7 @@ namespace Portfotolio.FlickrEngine
                 .Select(photo => new DomainPhoto(
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
                                      photo.Title, photo.WebUrl,
-                                     photo.SmallUrl, photo.MediumUrl, photo.LargeUrl))
+                                     photo.SmallUrl, photo.MediumUrl, photo.LargeUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240))
                 .ToList();
             return new DomainPhotos(domainPhotos, photoCollection.Page, photoCollection.Pages);
         }
@@ -29,7 +29,7 @@ namespace Portfotolio.FlickrEngine
                 .Select(photo => new DomainPhoto(
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias,
                                      photo.Title, photo.WebUrl,
-                                     photo.SmallUrl, photo.MediumUrl, photo.LargeUrl))
+                                     photo.SmallUrl, photo.MediumUrl, photo.LargeUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240))
                 .ToList();
             return new DomainPhotos(domainPhotos, photosetPhotos.Page, photosetPhotos.Pages);
         }
