@@ -56,6 +56,7 @@
     <Compile Include="Configuration\OptoutUserService.cs" />
     <Compile Include="Configuration\OptoutUserStore.cs" />
     <Compile Include="DomainGroup.cs" />
+    <Compile Include="DomainLicense.cs" />
     <Compile Include="DomainPhoto.cs" />
     <Compile Include="DomainPhotos.cs" />
     <Compile Include="DomainUser.cs" />

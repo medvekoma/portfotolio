@@ -40,7 +40,7 @@ namespace Portfotolio.FlickrEngine
     public class FlickrPhotoProvider : IFlickrPhotoProvider
     {
         private readonly Flickr _flickr;
-        private const PhotoSearchExtras PhotoSearchExtrasWithPathAlias = PhotoSearchExtras.OwnerName | PhotoSearchExtras.PathAlias | PhotoSearchExtras.AllUrls;
+        private const PhotoSearchExtras PhotoSearchExtrasWithPathAlias = PhotoSearchExtras.OwnerName | PhotoSearchExtras.PathAlias | PhotoSearchExtras.AllUrls | PhotoSearchExtras.License;
         private readonly string _authenticatedUserId;
 
         public FlickrPhotoProvider(IUserSession userSession, IConfigurationProvider configurationProvider)

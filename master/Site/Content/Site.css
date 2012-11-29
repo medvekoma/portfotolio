@@ -149,6 +149,10 @@ input#SearchText
 
 .title-frame {
     position: absolute; 
-    text-align: center; 
-    width: 100%
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.title-text {
 }

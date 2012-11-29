@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Portfotolio.Domain
+﻿namespace Portfotolio.Domain
 {
     public class DomainPhoto
     {
@@ -8,6 +6,7 @@ namespace Portfotolio.Domain
         public string AuthorId { get; private set; }
         public string AuthorName { get; private set; }
         public string AuthorAlias { get; private set; }
+        public DomainLicense DomainLicense { get; private set; }
         public string Title { get; private set; }
         public string PageUrl { get; private set; }
         public string SmallUrl { get; private set; }
@@ -16,12 +15,13 @@ namespace Portfotolio.Domain
         public int SmallWidth { get; private set; }
         public int SmallHeight { get; private set; }
 
-        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string smallUrl, string mediumUrl, string largeUrl, int smallWidth, int smallHeight)
+        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, DomainLicense domainLicense, string title, string pageUrl, string smallUrl, string mediumUrl, string largeUrl, int smallWidth, int smallHeight)
         {
             Id = id;
             AuthorId = authorId;
             AuthorName = authorName;
             AuthorAlias = authorAlias;
+            DomainLicense = domainLicense;
             Title = title;
             PageUrl = pageUrl;
             SmallUrl = smallUrl;

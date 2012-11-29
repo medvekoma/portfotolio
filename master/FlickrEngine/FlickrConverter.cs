@@ -14,7 +14,7 @@ namespace Portfotolio.FlickrEngine
             var domainPhotos = photoCollection
                 .Select(photo => new DomainPhoto(
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
-                                     photo.Title, photo.WebUrl,
+                                     Convert(photo.License), photo.Title, photo.WebUrl,
                                      photo.SmallUrl, photo.MediumUrl, photo.LargeUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240))
                 .ToList();
             return new DomainPhotos(domainPhotos, photoCollection.Page, photoCollection.Pages);
@@ -27,8 +27,8 @@ namespace Portfotolio.FlickrEngine
 
             var domainPhotos = photosetPhotos
                 .Select(photo => new DomainPhoto(
-                                     photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias,
-                                     photo.Title, photo.WebUrl,
+                                     photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
+                                     Convert(photo.License), photo.Title, photo.WebUrl,
                                      photo.SmallUrl, photo.MediumUrl, photo.LargeUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240))
                 .ToList();
             return new DomainPhotos(domainPhotos, photosetPhotos.Page, photosetPhotos.Pages);
@@ -66,6 +66,23 @@ namespace Portfotolio.FlickrEngine
                 .ToArray();
 
             return new Albums(items);
+        }
+
+        public DomainLicense Convert(LicenseType licenseType)
+        {
+            switch (licenseType)
+            {
+                case LicenseType.AllRightsReserved:
+                    return DomainLicense.AllRightsReserved;
+                case LicenseType.AttributionCC:
+                case LicenseType.AttributionNoDerivativesCC:
+                case LicenseType.AttributionNoncommercialCC:
+                case LicenseType.AttributionNoncommercialNoDerivativesCC:
+                case LicenseType.AttributionNoncommercialShareAlikeCC:
+                case LicenseType.AttributionShareAlikeCC:
+                    return DomainLicense.CreativeCommons;
+            }
+            return DomainLicense.Other;
         }
     }
 }
