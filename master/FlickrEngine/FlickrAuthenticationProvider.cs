@@ -6,18 +6,16 @@ namespace Portfotolio.FlickrEngine
 {
     public class FlickrAuthenticationProvider : IAuthenticationProvider
     {
-        private readonly Flickr _flickr;
         private readonly IUserSession _userSession;
 
         public FlickrAuthenticationProvider(IUserSession userSession)
         {
-            _flickr = new Flickr();
             _userSession = userSession;
         }
 
         public string GetLoginUrl()
         {
-            string loginUrl = _flickr.AuthCalcWebUrl(AuthLevel.Read);
+            string loginUrl = FlickrFactory.UnauthenticatedFlickr.AuthCalcWebUrl(AuthLevel.Read);
             return loginUrl;
         }
 
@@ -29,7 +27,7 @@ namespace Portfotolio.FlickrEngine
         public AuthenticationInfo Authenticate(object parameter)
         {
             var frob = (string) parameter;
-            Auth auth = _flickr.AuthGetToken(frob);
+            Auth auth = FlickrFactory.UnauthenticatedFlickr.AuthGetToken(frob);
             var authenticationInfo = auth.AsAuthenticationInfo();
             _userSession.SetAuthenticationInfo(authenticationInfo);
             

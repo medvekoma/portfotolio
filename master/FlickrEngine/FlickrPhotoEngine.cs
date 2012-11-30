@@ -36,11 +36,21 @@ namespace Portfotolio.FlickrEngine
             return new DomainPhotos(filteredPhotos, domainPhotos.Page, domainPhotos.Pages);
         }
 
+        private bool IsAuthenticatedUser()
+        {
+            return _userSession.GetAuthenticationInfo().IsAuthenticated;
+        }
+
+        private bool IsAuthenticatedUser(string userId)
+        {
+            return IsAuthenticatedUser() && (_userSession.GetAuthenticationInfo().UserId == userId);
+        }
+
         public DomainPhotos GetPhotosOf(string userId, int page)
         {
             var pageSize = _configurationProvider.GetPhotoPageSize();
 
-            var photoCollection = _flickrPhotoProvider.IsAuthenticatedUser()
+            var photoCollection = IsAuthenticatedUser()
                 ? _flickrPhotoProvider.GetPhotosOf(userId, page, pageSize)
                 : _flickrPhotoProvider.GetPublicPhotosOf(userId, page, pageSize);
 
@@ -60,7 +70,7 @@ namespace Portfotolio.FlickrEngine
 
         private PhotoCollection GetAuthenticationAwareFavoritesOf(string userId, int page, int pageSize)
         {
-            var photoCollection = _flickrPhotoProvider.IsAuthenticatedUser()
+            var photoCollection = IsAuthenticatedUser()
                                       ? _flickrPhotoProvider.GetFavoritesOf(userId, page, pageSize)
                                       : _flickrPhotoProvider.GetPublicFavoritesOf(userId, page, pageSize);
             return photoCollection;
@@ -70,11 +80,11 @@ namespace Portfotolio.FlickrEngine
         {
             var pageSize = _configurationProvider.GetPhotoPageSize();
 
-            var isAuthenticatedUser = _flickrPhotoProvider.IsAuthenticatedUser(userId);
-            var photoCollection = isAuthenticatedUser
+            var isUserAuthenticated = IsAuthenticatedUser(userId);
+            var photoCollection = isUserAuthenticated
                 ? _flickrPhotoProvider.GetPrivateSubscriptionsOf(userId, page, pageSize)
                 : _flickrPhotoProvider.GetSubscriptionsOf(userId, page, pageSize);
-            if (!isAuthenticatedUser)
+            if (!isUserAuthenticated)
             {
                 photoCollection.Pages = 1;
             }

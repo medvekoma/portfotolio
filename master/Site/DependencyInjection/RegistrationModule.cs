@@ -25,13 +25,14 @@ namespace Portfotolio.Site.DependencyInjection
 
             // Authentication
             dependencyEngine.Register<AccountController>(DependencyLifeStyle.PerWebRequest);
-            dependencyEngine.Register<IAuthenticationProvider, FlickrAuthenticationProvider>(DependencyLifeStyle.PerWebRequest);
+            dependencyEngine.Register<IAuthenticationProvider, FlickrAuthenticationProvider>(DependencyLifeStyle.Singleton);
 
             // Photos
             dependencyEngine.Register<PhotoController>(DependencyLifeStyle.PerWebRequest);
-            dependencyEngine.Register<IPhotoEngine, FlickrPhotoEngine>(DependencyLifeStyle.PerWebRequest);
-            dependencyEngine.RegisterAndDecorate<IUserEngine, FlickrUserEngine, CachedUserEngine>(DependencyLifeStyle.PerWebRequest);
-            dependencyEngine.Register<IFlickrPhotoProvider, FlickrPhotoProvider>(DependencyLifeStyle.PerWebRequest);
+            dependencyEngine.Register<IFlickrFactory, FlickrFactory>(DependencyLifeStyle.Singleton);
+            dependencyEngine.Register<IPhotoEngine, FlickrPhotoEngine>(DependencyLifeStyle.Singleton);
+            dependencyEngine.RegisterAndDecorate<IUserEngine, FlickrUserEngine, CachedUserEngine>(DependencyLifeStyle.Singleton);
+            dependencyEngine.Register<IFlickrPhotoProvider, FlickrPhotoProvider>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<IFlickrConverter, FlickrConverter>(DependencyLifeStyle.Singleton);
 
             // Legacy

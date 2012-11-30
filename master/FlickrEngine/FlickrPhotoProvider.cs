@@ -33,34 +33,16 @@ namespace Portfotolio.FlickrEngine
         
         PhotoCollection GetInterestingPhotos(int page, int pageSize);
         bool IsAcceptedUserName(string userName);
-        bool IsAuthenticatedUser();
-        bool IsAuthenticatedUser(string userId);
     }
 
     public class FlickrPhotoProvider : IFlickrPhotoProvider
     {
-        private readonly Flickr _flickr;
+        private readonly IFlickrFactory _flickrFactory;
         private const PhotoSearchExtras PhotoSearchExtrasWithPathAlias = PhotoSearchExtras.OwnerName | PhotoSearchExtras.PathAlias | PhotoSearchExtras.AllUrls | PhotoSearchExtras.License;
-        private readonly string _authenticatedUserId;
 
-        public FlickrPhotoProvider(IUserSession userSession, IConfigurationProvider configurationProvider)
+        public FlickrPhotoProvider(IFlickrFactory flickrFactory)
         {
-            _flickr = new Flickr();
-            var authenticationInfo = userSession.GetAuthenticationInfo();
-            var isOAuthEnabled = configurationProvider.GetIsOAuthEnabled();
-            if (authenticationInfo.IsAuthenticated)
-            {
-                if (isOAuthEnabled)
-                {
-                    _flickr.OAuthAccessToken = authenticationInfo.Token;
-                    _flickr.OAuthAccessTokenSecret = authenticationInfo.TokenSecret;
-                }
-                else
-                {
-                    _flickr.AuthToken = authenticationInfo.Token;
-                }
-                _authenticatedUserId = authenticationInfo.UserId;
-            }
+            _flickrFactory = flickrFactory;
         }
 
         public FoundUser GetUserByPathAlias(string userAlias)
@@ -69,7 +51,7 @@ namespace Portfotolio.FlickrEngine
 
             try
             {
-                return _flickr.UrlsLookupUser(url);
+                return _flickrFactory.GetFlickr().UrlsLookupUser(url);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -90,7 +72,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.PeopleGetInfo(userId);
+                return _flickrFactory.GetFlickr().PeopleGetInfo(userId);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -110,7 +92,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                _flickr.PeopleFindByUserName(userName);
+                _flickrFactory.GetFlickr().PeopleFindByUserName(userName);
                 return true;
             }
             catch (FlickrApiException flickrApiException)
@@ -127,21 +109,11 @@ namespace Portfotolio.FlickrEngine
             }
         }
 
-        public bool IsAuthenticatedUser()
-        {
-            return _flickr.IsAuthenticated;
-        }
-
-        public bool IsAuthenticatedUser(string userId)
-        {
-            return IsAuthenticatedUser() && (_authenticatedUserId == userId);
-        }
-
         public PhotoCollection GetPhotosOf(string userId, int page, int pageSize)
         {
             try
             {
-                return _flickr.PeopleGetPhotos(userId, SafetyLevel.None, 
+                return _flickrFactory.GetFlickr().PeopleGetPhotos(userId, SafetyLevel.None, 
                     DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, 
                     ContentTypeSearch.All, PrivacyFilter.None, PhotoSearchExtrasWithPathAlias, page, pageSize);
             }
@@ -163,7 +135,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.PeopleGetPublicPhotos(userId, page, pageSize, SafetyLevel.None, PhotoSearchExtrasWithPathAlias);
+                return _flickrFactory.GetFlickr().PeopleGetPublicPhotos(userId, page, pageSize, SafetyLevel.None, PhotoSearchExtrasWithPathAlias);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -183,7 +155,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.FavoritesGetList(userId, DateTime.MinValue, DateTime.MinValue, PhotoSearchExtrasWithPathAlias, page, pageSize);
+                return _flickrFactory.GetFlickr().FavoritesGetList(userId, DateTime.MinValue, DateTime.MinValue, PhotoSearchExtrasWithPathAlias, page, pageSize);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -203,7 +175,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.FavoritesGetPublicList(userId, DateTime.MinValue, DateTime.MinValue, PhotoSearchExtrasWithPathAlias, page, pageSize);
+                return _flickrFactory.GetFlickr().FavoritesGetPublicList(userId, DateTime.MinValue, DateTime.MinValue, PhotoSearchExtrasWithPathAlias, page, pageSize);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -232,7 +204,7 @@ namespace Portfotolio.FlickrEngine
             };
             try
             {
-                return _flickr.PhotosSearch(photoSearchOptions);
+                return _flickrFactory.GetFlickr().PhotosSearch(photoSearchOptions);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -252,7 +224,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.PhotosGetContactsPublicPhotos(userId, 50, PhotoSearchExtrasWithPathAlias);
+                return _flickrFactory.GetFlickr().PhotosGetContactsPublicPhotos(userId, 50, PhotoSearchExtrasWithPathAlias);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -272,7 +244,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.PhotosetsGetList(userId);
+                return _flickrFactory.GetFlickr().PhotosetsGetList(userId);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -292,7 +264,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.PhotosetsGetPhotos(albumId, PhotoSearchExtrasWithPathAlias, page, pageSize);
+                return _flickrFactory.GetFlickr().PhotosetsGetPhotos(albumId, PhotoSearchExtrasWithPathAlias, page, pageSize);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -312,7 +284,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.PhotosetsGetInfo(albumId);
+                return _flickrFactory.GetFlickr().PhotosetsGetInfo(albumId);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -332,7 +304,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.PeopleGetPublicGroups(userId);
+                return _flickrFactory.GetFlickr().PeopleGetPublicGroups(userId);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -352,7 +324,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.GroupsPoolsGetPhotos(groupId, null, null, PhotoSearchExtrasWithPathAlias, page, pageSize);
+                return _flickrFactory.GetFlickr().GroupsPoolsGetPhotos(groupId, null, null, PhotoSearchExtrasWithPathAlias, page, pageSize);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -372,7 +344,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.GroupsGetInfo(groupId);
+                return _flickrFactory.GetFlickr().GroupsGetInfo(groupId);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -390,7 +362,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.ContactsGetList(page, pageSize);
+                return _flickrFactory.GetFlickr().ContactsGetList(page, pageSize);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -410,7 +382,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.ContactsGetPublicList(userId, page, pageSize);
+                return _flickrFactory.GetFlickr().ContactsGetPublicList(userId, page, pageSize);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -430,7 +402,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickr.InterestingnessGetList(PhotoSearchExtrasWithPathAlias, page, pageSize);
+                return _flickrFactory.GetFlickr().InterestingnessGetList(PhotoSearchExtrasWithPathAlias, page, pageSize);
             }
             catch (FlickrApiException flickrApiException)
             {

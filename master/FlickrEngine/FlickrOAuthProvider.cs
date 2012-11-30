@@ -9,18 +9,16 @@ namespace Portfotolio.FlickrEngine
     public class FlickrOAuthProvider : IOAuthProvider
     {
         private readonly IUserSession _userSession;
-        private readonly Flickr _flickr;
 
         public FlickrOAuthProvider(IUserSession userSession)
         {
             _userSession = userSession;
-            _flickr = new Flickr();
         }
 
         public OAuthAuthorizationObject GetAuthorizationObject(string callbackUrl)
         {
-            var requestToken = _flickr.OAuthGetRequestToken(callbackUrl);
-            string authorizationUrl  = _flickr.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Read);
+            var requestToken = FlickrFactory.UnauthenticatedFlickr.OAuthGetRequestToken(callbackUrl);
+            string authorizationUrl = FlickrFactory.UnauthenticatedFlickr.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Read);
 
             return new OAuthAuthorizationObject(requestToken.TokenSecret, authorizationUrl);
         }
@@ -32,7 +30,7 @@ namespace Portfotolio.FlickrEngine
 
         public AuthenticationInfo Authenticate(string oauthToken, string oauthTokenSecret, string verifier)
         {
-            var accessToken = _flickr.OAuthGetAccessToken(oauthToken, oauthTokenSecret, verifier);
+            var accessToken = FlickrFactory.UnauthenticatedFlickr.OAuthGetAccessToken(oauthToken, oauthTokenSecret, verifier);
             AuthenticationInfo authenticationInfo = accessToken.AsAuthenticationInfo();
             _userSession.SetAuthenticationInfo(authenticationInfo);
 
