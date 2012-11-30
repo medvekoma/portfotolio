@@ -1,11 +1,11 @@
 using System;
 using FlickrNet;
-using FlickrNet.Exceptions;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.FlickrEngine
 {
+    [Obsolete("Don't use it yet, because it doesn't maintain permissions", true)]
     public class FlickrOAuthProvider : IOAuthProvider
     {
         private readonly IUserSession _userSession;

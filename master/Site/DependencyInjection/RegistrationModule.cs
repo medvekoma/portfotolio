@@ -1,5 +1,3 @@
-using System.Web;
-using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
@@ -16,9 +14,6 @@ namespace Portfotolio.Site.DependencyInjection
     {
         public static void RegisterComponents(this IDependencyEngine dependencyEngine)
         {
-            // MVC
-            dependencyEngine.Register<IControllerActivator, ControllerActivator>(DependencyLifeStyle.Singleton);
-
             // Application
             dependencyEngine.Register<IConfigurationProvider, AppSettingConfigurationProvider>(DependencyLifeStyle.Singleton);
             dependencyEngine.Register<IUserSession, AspNetUserSession>(DependencyLifeStyle.Singleton);
@@ -31,7 +26,6 @@ namespace Portfotolio.Site.DependencyInjection
             // Authentication
             dependencyEngine.Register<AccountController>(DependencyLifeStyle.PerWebRequest);
             dependencyEngine.Register<IAuthenticationProvider, FlickrAuthenticationProvider>(DependencyLifeStyle.PerWebRequest);
-            dependencyEngine.Register<IOAuthProvider, FlickrOAuthProvider>(DependencyLifeStyle.PerWebRequest);
 
             // Photos
             dependencyEngine.Register<PhotoController>(DependencyLifeStyle.PerWebRequest);

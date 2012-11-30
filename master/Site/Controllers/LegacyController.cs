@@ -1,8 +1,11 @@
 ﻿using System.Web.Mvc;
 using Portfotolio.Domain;
+using Portfotolio.Site.Helpers;
+using Portfotolio.Site.Models;
 
 namespace Portfotolio.Site.Controllers
 {
+    [HideFromSearchEngines(AllowRobots.None)]
     public class LegacyController : Controller
     {
         private readonly IPhotoEngine _photoEngine;
