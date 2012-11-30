@@ -1,6 +1,2 @@
-RewriteEngine On
-
-RewriteCond %{HTTPS} (on)? 
-RewriteCond %{HTTP:Host} ^www\.(.+)$ [NC] 
-RewriteCond %{REQUEST_URI} (.+)? 
-RewriteRule ^(.*)(eurl.axd/.*)$ http(?%1s)://%2/$1 [R,L] 
+RewriteEngine Off
+# RewriteRule ^(.*)/eurl.axd/[a-f0-9]{32}(.*)$ $1$2 [NC]

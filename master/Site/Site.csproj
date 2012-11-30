@@ -110,6 +110,7 @@
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegacyController.cs" />
+    <Content Include=".htaccess" />
     <None Include="Controllers\_OAuthControllerPoc.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\HideFromSearchEngineCondition.cs" />
@@ -150,7 +151,6 @@
     <Content Include="Views\Settings\ShowUnauthenticated.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".htaccess" />
     <Content Include="Content\error.htm" />
     <Content Include="Content\Site-ie7.css" />
     <Content Include="Content\loading.gif" />
