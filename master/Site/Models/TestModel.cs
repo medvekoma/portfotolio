@@ -9,5 +9,7 @@ namespace Portfotolio.Site.Models
         public long GcTotalMemory { get; set; }
 
         public long WorkingSet { get; set; }
+
+        public long PrivateMemory { get; set; }
     }
 }

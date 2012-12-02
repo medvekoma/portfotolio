@@ -23,13 +23,16 @@ namespace Portfotolio.Site.Controllers
             var startedOn = ControllerContext.HttpContext.Application[DataKeys.ApplicationStarted];
             var elementsInCache = _cacheProvider.GetCacheSize();
             var gcTotalMemory = GC.GetTotalMemory(false) / 1024;
-            long workingSet64 = Process.GetCurrentProcess().WorkingSet64 / 1024;
+            var currentProcess = Process.GetCurrentProcess();
+            long workingSet = currentProcess.WorkingSet64 / 1024;
+            long privateMemory = currentProcess.PrivateMemorySize64 / 1024;
             var model = new TestModel
             {
                 StartedOn = startedOn,
                 ElementsInCache = elementsInCache,
                 GcTotalMemory = gcTotalMemory,
-                WorkingSet = workingSet64,
+                WorkingSet = workingSet,
+                PrivateMemory = privateMemory,
             };
             return PartialView(model);
         }
