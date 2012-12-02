@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Site.Helpers;
 using Portfotolio.Site.Models;
@@ -27,5 +28,9 @@ namespace Portfotolio.Site.Controllers
             return Content(homeModel.SearchText + " > " + homeModel.SearchSource);
         }
 
+        public ActionResult IncorrectUrl()
+        {
+            throw new IncorrectUrlException();
+        }
     }
 }

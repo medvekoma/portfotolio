@@ -15,7 +15,7 @@ namespace Portfotolio.FlickrEngine
 
         public string GetLoginUrl()
         {
-            string loginUrl = FlickrFactory.UnauthenticatedFlickr.AuthCalcWebUrl(AuthLevel.Read);
+            string loginUrl = new Flickr().AuthCalcWebUrl(AuthLevel.Read);
             return loginUrl;
         }
 
@@ -27,7 +27,7 @@ namespace Portfotolio.FlickrEngine
         public AuthenticationInfo Authenticate(object parameter)
         {
             var frob = (string) parameter;
-            Auth auth = FlickrFactory.UnauthenticatedFlickr.AuthGetToken(frob);
+            Auth auth = new Flickr().AuthGetToken(frob);
             var authenticationInfo = auth.AsAuthenticationInfo();
             _userSession.SetAuthenticationInfo(authenticationInfo);
             

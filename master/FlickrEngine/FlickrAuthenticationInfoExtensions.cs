@@ -12,7 +12,7 @@ namespace Portfotolio.FlickrEngine
             if (auth != null)
             {
                 var userId = auth.User.UserId;
-                Person person = FlickrFactory.UnauthenticatedFlickr.PeopleGetInfo(userId);
+                Person person = new Flickr().PeopleGetInfo(userId);
                 var userAlias = person.PathAlias.IfNullOrEmpty(userId);
                 authenticationInfo = new AuthenticationInfo(userId, userAlias, auth.User.UserName, auth.Token, null);
             }
@@ -25,7 +25,7 @@ namespace Portfotolio.FlickrEngine
             if (accessToken != null)
             {
                 var userId = accessToken.UserId;
-                Person person = FlickrFactory.UnauthenticatedFlickr.PeopleGetInfo(userId);
+                Person person = new Flickr().PeopleGetInfo(userId);
                 authenticationInfo = new AuthenticationInfo(userId, person.PathAlias, accessToken.Username, accessToken.Token, accessToken.TokenSecret);
             }
             return authenticationInfo;

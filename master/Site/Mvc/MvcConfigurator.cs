@@ -37,7 +37,8 @@ namespace Portfotolio.Site.Mvc
             routes.MapRoute(
                 "Home",
                 "",
-                new { controller = "photo", action = "interestingness" });
+                new { controller = "photo", action = "interestingness" }
+                );
 
             routes.MapRoute(
                 "Group", // Route name
@@ -56,6 +57,12 @@ namespace Portfotolio.Site.Mvc
                 "Non-Photo", // Route name
                 "-{controller}/{action}/{id}", // URL with parameters
                 new { action = "show", id = UrlParameter.Optional } // Parameter defaults
+                );
+
+            routes.MapRoute(
+                "IncorrectRoute", // Route name
+                "{*url}", // URL with parameters
+                new { controller = "home", action = "incorrecturl" } // Parameter defaults
                 );
         }
 

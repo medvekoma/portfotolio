@@ -17,8 +17,9 @@ namespace Portfotolio.FlickrEngine
 
         public OAuthAuthorizationObject GetAuthorizationObject(string callbackUrl)
         {
-            var requestToken = FlickrFactory.UnauthenticatedFlickr.OAuthGetRequestToken(callbackUrl);
-            string authorizationUrl = FlickrFactory.UnauthenticatedFlickr.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Read);
+            var flickr = new Flickr();
+            var requestToken = flickr.OAuthGetRequestToken(callbackUrl);
+            string authorizationUrl = flickr.OAuthCalculateAuthorizationUrl(requestToken.Token, AuthLevel.Read);
 
             return new OAuthAuthorizationObject(requestToken.TokenSecret, authorizationUrl);
         }
@@ -30,7 +31,7 @@ namespace Portfotolio.FlickrEngine
 
         public AuthenticationInfo Authenticate(string oauthToken, string oauthTokenSecret, string verifier)
         {
-            var accessToken = FlickrFactory.UnauthenticatedFlickr.OAuthGetAccessToken(oauthToken, oauthTokenSecret, verifier);
+            var accessToken = new Flickr().OAuthGetAccessToken(oauthToken, oauthTokenSecret, verifier);
             AuthenticationInfo authenticationInfo = accessToken.AsAuthenticationInfo();
             _userSession.SetAuthenticationInfo(authenticationInfo);
 

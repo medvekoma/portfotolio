@@ -39,7 +39,7 @@ namespace Portfotolio.Services.Caching
             return  MemoryCache.Default.GetCount();
         }
 
-        private ChangeMonitor CreateFileChangeMonitor(string path)
+        private static ChangeMonitor CreateFileChangeMonitor(string path)
         {
             var hostFileChangeMonitor = new HostFileChangeMonitor(new[] {path});
             return hostFileChangeMonitor;

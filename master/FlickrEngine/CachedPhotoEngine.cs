@@ -6,12 +6,12 @@ namespace Portfotolio.FlickrEngine
 {
     public class CachedUserEngine : IUserEngine
     {
-        private readonly IUserEngine _decoratedUserEngine;
+        private readonly IUserEngine _userEngine;
         private readonly ICacheProvider _cacheProvider;
 
-        public CachedUserEngine(IUserEngine decoratedUserEngine, ICacheProvider cacheProvider)
+        public CachedUserEngine(IUserEngine userEngine, ICacheProvider cacheProvider)
         {
-            _decoratedUserEngine = decoratedUserEngine;
+            _userEngine = userEngine;
             _cacheProvider = cacheProvider;
         }
 
@@ -20,7 +20,8 @@ namespace Portfotolio.FlickrEngine
             return CacheHelper(
                 GetCacheKey(userIdentifier), 
                 domainUser => GetCacheKey(domainUser.UserAlias), 
-                () => _decoratedUserEngine.GetUser(userIdentifier), 15);
+                () => _userEngine.GetUser(userIdentifier), 
+                10);
         }
 
         #region helpers

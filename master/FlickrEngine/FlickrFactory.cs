@@ -17,18 +17,14 @@ namespace Portfotolio.FlickrEngine
             _userSession = userSession;
         }
 
-        public static Flickr UnauthenticatedFlickr = new Flickr();
-
         public Flickr GetFlickr()
         {
             var authenticationInfo = _userSession.GetAuthenticationInfo();
-            if (!authenticationInfo.IsAuthenticated)
-                return UnauthenticatedFlickr;
+            var flickr = new Flickr();
+            if (authenticationInfo.IsAuthenticated)
+                flickr.AuthToken = authenticationInfo.Token;
 
-            return new Flickr
-                       {
-                           AuthToken = authenticationInfo.Token,
-                       };
+            return flickr;
         }
     }
 }
