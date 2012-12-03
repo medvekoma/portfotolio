@@ -2,9 +2,9 @@
 using System.Web;
 using System.Web.Mvc;
 using NLog;
+using Portfotolio.DependencyInjection;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Site.Mvc;
-using Portfotolio.Utility.DependencyInjection;
 using Portfotolio.Site.Helpers;
 
 namespace Portfotolio.Site

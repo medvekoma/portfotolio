@@ -5,7 +5,7 @@ using Castle.Core;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 
-namespace Portfotolio.Utility.DependencyInjection
+namespace Portfotolio.DependencyInjection.WindsorCastle
 {
     public class WindsorDependencyEngine : IDependencyEngine
     {
@@ -28,6 +28,7 @@ namespace Portfotolio.Utility.DependencyInjection
         }
 
         public void Register<TInterface, TImplementation>(DependencyLifeStyle dependencyLifeStyle)
+            where TInterface : class 
             where TImplementation : TInterface
         {
             var lifestyleType = LifestyleMap[dependencyLifeStyle];
@@ -35,18 +36,23 @@ namespace Portfotolio.Utility.DependencyInjection
         }
 
         public void Register<TImplementation>(DependencyLifeStyle dependencyLifeStyle)
+            where TImplementation: class 
         {
             var lifestyleType = LifestyleMap[dependencyLifeStyle];
             _windsorContainter.Register(Component.For<TImplementation>().LifeStyle.Is(lifestyleType));
         }
 
         public void Register<TImplementation>(TImplementation instance, DependencyLifeStyle dependencyLifeStyle)
+            where TImplementation : class
         {
             var lifestyleType = LifestyleMap[dependencyLifeStyle];
             _windsorContainter.Register(Component.For<TImplementation>().Instance(instance).LifeStyle.Is(lifestyleType));
         }
 
-        public void RegisterAndDecorate<TInterface, TDecorated, TDecorator>(DependencyLifeStyle dependencyLifeStyle) where TDecorated : TInterface where TDecorator : TInterface
+        public void RegisterAndDecorate<TInterface, TDecorated, TDecorator>(DependencyLifeStyle dependencyLifeStyle)
+            where TInterface : class
+            where TDecorated : TInterface 
+            where TDecorator : TInterface
         {
             Register<TInterface, TDecorator>(dependencyLifeStyle);
             Register<TInterface, TDecorated>(dependencyLifeStyle);

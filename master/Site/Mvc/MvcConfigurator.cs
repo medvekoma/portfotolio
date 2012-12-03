@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Portfotolio.DependencyInjection.Unity;
+using Portfotolio.DependencyInjection;
 using Portfotolio.Site.DependencyInjection;
 using Portfotolio.Site.Helpers;
 using Portfotolio.Site.Models;
-using Portfotolio.Utility.DependencyInjection;
 
 namespace Portfotolio.Site.Mvc
 {
@@ -68,7 +68,7 @@ namespace Portfotolio.Site.Mvc
 
         public static IDependencyEngine RegisterDependencyInjectionFramework()
         {
-            var dependencyEngine = new WindsorDependencyEngine();
+            var dependencyEngine = new UnityDependencyEngine();
             dependencyEngine.RegisterComponents();
             DependencyResolver.SetResolver(new DependencyEngineWrapper(dependencyEngine));
             return dependencyEngine;

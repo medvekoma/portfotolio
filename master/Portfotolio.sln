@@ -15,6 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Site.Services", "Site.Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Site4", "Site4\Site4.csproj", "{3D9108BD-1337-4F2E-B7F2-F08972AB1C04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "DependencyInjection\DependencyInjection.csproj", "{DFF945D5-4524-4041-BC5D-CF37BABE73FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.WindsorCastle", "DependencyInjection.WindsorCastle\DependencyInjection.WindsorCastle.csproj", "{1689DAAE-E629-4A8D-B3BB-87C30F550F33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.Unity", "DependencyInjection.Unity\DependencyInjection.Unity.csproj", "{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,8 +55,23 @@ Global
 		{3D9108BD-1337-4F2E-B7F2-F08972AB1C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D9108BD-1337-4F2E-B7F2-F08972AB1C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D9108BD-1337-4F2E-B7F2-F08972AB1C04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFF945D5-4524-4041-BC5D-CF37BABE73FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFF945D5-4524-4041-BC5D-CF37BABE73FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFF945D5-4524-4041-BC5D-CF37BABE73FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFF945D5-4524-4041-BC5D-CF37BABE73FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1689DAAE-E629-4A8D-B3BB-87C30F550F33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1689DAAE-E629-4A8D-B3BB-87C30F550F33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1689DAAE-E629-4A8D-B3BB-87C30F550F33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1689DAAE-E629-4A8D-B3BB-87C30F550F33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal

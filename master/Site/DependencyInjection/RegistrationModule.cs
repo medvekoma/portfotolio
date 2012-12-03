@@ -1,3 +1,4 @@
+using Portfotolio.DependencyInjection;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
@@ -6,7 +7,6 @@ using Portfotolio.Services.Caching;
 using Portfotolio.Services.Logging;
 using Portfotolio.Site.Controllers;
 using Portfotolio.Site.Services;
-using Portfotolio.Utility.DependencyInjection;
 
 namespace Portfotolio.Site.DependencyInjection
 {

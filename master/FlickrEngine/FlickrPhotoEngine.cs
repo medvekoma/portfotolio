@@ -5,6 +5,7 @@ using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Utility;
+using Portfotolio.Utility.Extensions;
 
 namespace Portfotolio.FlickrEngine
 {

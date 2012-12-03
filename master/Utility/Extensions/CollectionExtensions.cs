@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Portfotolio.Utility
+namespace Portfotolio.Utility.Extensions
 {
     public static class CollectionExtensions
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Portfotolio.Utility.DependencyInjection;
+using Portfotolio.DependencyInjection;
 
 namespace Portfotolio.Site.DependencyInjection
 {
