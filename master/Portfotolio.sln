@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.Windsor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.Unity", "DependencyInjection.Unity\DependencyInjection.Unity.csproj", "{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc4Demo", "Mvc4Demo\Mvc4Demo.csproj", "{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
