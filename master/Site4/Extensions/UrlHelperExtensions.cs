@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Portfotolio.Site4.Helpers
+namespace Portfotolio.Site4.Extensions
 {
     public static class UrlHelperExtensions
     {

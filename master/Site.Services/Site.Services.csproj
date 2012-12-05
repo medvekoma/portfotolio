@@ -45,6 +45,7 @@
     <Compile Include="AppSettingConfigurationProvider.cs" />
     <Compile Include="AspNetUserSession.cs" />
     <Compile Include="Models\AllowRobots.cs" />
+    <Compile Include="Models\HideFromSearchEngineCondition.cs" />
     <Compile Include="OptoutUserStorePathProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

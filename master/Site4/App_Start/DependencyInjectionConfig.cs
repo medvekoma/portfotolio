@@ -19,16 +19,22 @@ namespace Portfotolio.Site4
          {
              IDependencyEngine dependencyEngine = new UnityDependencyEngine();
 
+             // application
              dependencyEngine.Register<IConfigurationProvider, AppSettingConfigurationProvider>(DependencyLifeStyle.Singleton);
              dependencyEngine.Register<IUserSession, AspNetUserSession>(DependencyLifeStyle.Singleton);
              dependencyEngine.Register<ICacheProvider, CacheProvider>(DependencyLifeStyle.Singleton);
 
-             dependencyEngine.Register<PhotoController>(DependencyLifeStyle.PerWebRequest);
+             // photo
+             dependencyEngine.Register<PhotoController>(DependencyLifeStyle.Transient);
              dependencyEngine.Register<IPhotoEngine, FlickrPhotoEngine>(DependencyLifeStyle.Singleton);
              dependencyEngine.Register<IFlickrPhotoProvider, FlickrPhotoProvider>(DependencyLifeStyle.Singleton);
              dependencyEngine.Register<IFlickrConverter, FlickrConverter>(DependencyLifeStyle.Singleton);
              dependencyEngine.Register<IFlickrFactory, FlickrFactory>(DependencyLifeStyle.Singleton);
 
+             // user
+             dependencyEngine.Register<IUserEngine, FlickrUserEngine>(DependencyLifeStyle.Singleton);
+
+             // opt-out
              dependencyEngine.RegisterAndDecorate<IOptoutUserService, OptoutUserService, CachedOptoutUserService>(DependencyLifeStyle.Singleton);
              dependencyEngine.Register<IOptoutUserStorePathProvider, OptoutUserStorePathProvider>(DependencyLifeStyle.Singleton);
              dependencyEngine.Register<IOptoutUserStore, OptoutUserStore>(DependencyLifeStyle.Singleton);

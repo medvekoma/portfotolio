@@ -1,4 +1,4 @@
-﻿namespace Portfotolio.Site.Helpers
+﻿namespace Portfotolio.Site.Services.Models
 {
     public enum HideFromSearchEngineCondition
     {

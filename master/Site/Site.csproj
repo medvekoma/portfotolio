@@ -102,7 +102,6 @@
     <Content Include=".htaccess" />
     <None Include="Controllers\_OAuthControllerPoc.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Helpers\HideFromSearchEngineCondition.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Helpers\RememberActionUrlAttribute.cs" />
     <Compile Include="Models\ConfigurationModel.cs" />

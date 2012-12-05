@@ -1,13 +1,16 @@
-﻿@using Portfotolio.Domain.Persistency
+﻿@using Portfotolio.Site4.Extensions
+@using Portfotolio.Domain.Persistency
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        @Html.MetaRobots()
         <title>@Html.Display(DataKeys.BreadCrumb) ● portfotolio</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/jquery")
     </head>
     <body>
         <header>
@@ -50,7 +53,7 @@
             </div>
         </footer>
 
-        @Scripts.Render("~/bundles/jquery", "~/bundles/analytics")
+        @Scripts.Render("~/bundles/analytics")
         @RenderSection("scripts", required: false)
     </body>
 </html>

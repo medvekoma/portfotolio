@@ -14,7 +14,7 @@
     <RootNamespace>Portfotolio.Site4</RootNamespace>
     <AssemblyName>Portfotolio.Site4</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -115,13 +115,15 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DependencyInjectionConfig.cs" />
+    <Compile Include="Attributes\UserIdentificationAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
-    <Compile Include="Helpers\UrlHelperExtensions.cs" />
+    <Compile Include="Attributes\HideFromSearchEnginesAttribute.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Mvc\EnginedControllerFactory.cs" />
     <Compile Include="Mvc\EnginedDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
