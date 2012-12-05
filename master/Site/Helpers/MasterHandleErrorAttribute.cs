@@ -3,6 +3,7 @@ using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Services.Logging;
 using Portfotolio.Site.Models;
+using Portfotolio.Site.Services.Models;
 
 namespace Portfotolio.Site.Helpers
 {

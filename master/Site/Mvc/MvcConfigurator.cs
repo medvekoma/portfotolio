@@ -5,6 +5,7 @@ using Portfotolio.DependencyInjection;
 using Portfotolio.Site.DependencyInjection;
 using Portfotolio.Site.Helpers;
 using Portfotolio.Site.Models;
+using Portfotolio.Site.Services.Models;
 
 namespace Portfotolio.Site.Mvc
 {

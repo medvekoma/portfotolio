@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace Site4
+namespace Portfotolio.Site4
 {
     public class FilterConfig
     {

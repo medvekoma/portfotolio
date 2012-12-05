@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Portfotolio.Domain.Persistency;
-using Portfotolio.Site.Models;
+using Portfotolio.Site.Services.Models;
 
-namespace Portfotolio.Site.Helpers
+namespace Portfotolio.Site.Services.Helpers
 {
     public static class HtmlHelperExtensions
     {

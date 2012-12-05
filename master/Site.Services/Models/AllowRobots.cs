@@ -1,6 +1,6 @@
 using System;
 
-namespace Portfotolio.Site.Models
+namespace Portfotolio.Site.Services.Models
 {
     [Flags]
     public enum AllowRobots

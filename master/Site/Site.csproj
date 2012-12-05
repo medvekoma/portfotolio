@@ -103,12 +103,11 @@
     <None Include="Controllers\_OAuthControllerPoc.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\HideFromSearchEngineCondition.cs" />
+    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Helpers\RememberActionUrlAttribute.cs" />
     <Compile Include="Models\ConfigurationModel.cs" />
-    <Compile Include="Models\AllowRobots.cs" />
     <Compile Include="Models\TestModel.cs" />
     <Compile Include="Helpers\HideFromSearchEnginesAttribute.cs" />
-    <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Helpers\LoggingExtensions.cs" />
     <Compile Include="Helpers\MasterHandleErrorAttribute.cs" />
     <Compile Include="Helpers\PagingHelpers.cs" />

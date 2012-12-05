@@ -1,0 +1,14 @@
+﻿@using Portfotolio.Site4.Helpers
+@if (Html.UserIdentifier() != null)
+{
+    <li>@Html.ActionLink("Photos", "photos", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+    <li>@Html.ActionLink("Albums", "albums", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+    <li>|</li>
+    <li>@Html.ActionLink("Favorites", "favorites", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+    <li>@Html.ActionLink("Subscriptions", "subscriptions", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+    <li>@Html.ActionLink("Recommendations", "recommendations", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+    <li>|</li>
+    <li>@Html.ActionLink("Groups", "groups", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+    <li>@Html.ActionLink("Contacts", "contacts", "photo", new { id = Html.UserIdentifier() }, new object())</li>
+    <li>|</li>
+}
