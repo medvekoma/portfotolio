@@ -13,6 +13,7 @@ namespace Portfotolio.Site4
         {
             AreaRegistration.RegisterAllAreas();
 
+            DependencyInjectionConfig.Register(GlobalConfiguration.Configuration);
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

@@ -2,9 +2,38 @@ body
 {
 	background-color: #222222;
 	color: #696969;
-    font-family: Verdana, Helvetica, Sans-Serif;
+    font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
     font-size: small;
     font-weight: bold;
+    margin: 30px;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+h2 {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 5px;
+    letter-spacing: 0.2em;
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: square;
+    margin-left: 30px;
+}
+
+li {
+    display: list-item;
+    margin: 10px 0;
+}
+
+footer {
+    clear: both;
 }
 
 .footer
@@ -26,6 +55,10 @@ a:link img    { border: 2px solid #C4C4C4; }
 a:visited img { border: 2px solid #C4C4C4; }
 a:hover img   { border: 2px solid #FFFFFF; }
 
+#menucontainer {
+        margin-top: 20px;
+}
+
 ul#menu
 {
 	display: inline;
@@ -37,6 +70,7 @@ ul#menu li
 {
 	display: inline;
     padding: 1px 20px 1px 0px;
+    margin: 0;
 }
 
 .photoFrame,

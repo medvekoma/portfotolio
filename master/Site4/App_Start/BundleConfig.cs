@@ -22,7 +22,16 @@ namespace Portfotolio.Site4
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/analytics").Include(
+                "~/Scripts/portfotolio.google.analytics.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/paging").Include(
+                "~/Scripts/portfotolio.PagingView.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/reset.css", 
+                "~/Content/site.css"
+                ));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

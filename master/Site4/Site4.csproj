@@ -114,17 +114,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\DependencyInjectionConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
+    <Compile Include="Helpers\UrlHelperExtensions.cs" />
+    <Compile Include="Mvc\EnginedControllerFactory.cs" />
+    <Compile Include="Mvc\EnginedDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\loading.gif" />
+    <Content Include="Content\reset.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\SiteOriginal.css" />
     <Content Include="favicon.ico" />
@@ -160,9 +167,25 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DependencyInjection.Unity\DependencyInjection.Unity.csproj">
+      <Project>{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}</Project>
+      <Name>DependencyInjection.Unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj">
+      <Project>{DFF945D5-4524-4041-BC5D-CF37BABE73FB}</Project>
+      <Name>DependencyInjection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FlickrEngine\FlickrEngine.csproj">
+      <Project>{F040632C-50F9-4120-B521-4890AB0756F8}</Project>
+      <Name>FlickrEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{BFCAA2BF-2CB2-4F41-A335-166B8E8573C8}</Project>
+      <Name>Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Site.Services\Site.Services.csproj">
       <Project>{5E695CEC-8A79-47B6-A7AD-C719E48CB25E}</Project>
@@ -171,6 +194,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\UserMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Photo\Page.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Photo\PagingView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Photo\DisplayTemplates\DomainPhotos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Photo\DisplayTemplates\DomainPhoto.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="flickr.api.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="flickr.api.debug.config">
+      <DependentUpon>flickr.api.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="flickr.api.release.config">
+      <DependentUpon>flickr.api.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
