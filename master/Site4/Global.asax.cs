@@ -13,7 +13,7 @@ namespace Portfotolio.Site4
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         private IDependencyEngine _dependencyEngine;
         private readonly Logger _logger;
@@ -26,7 +26,7 @@ namespace Portfotolio.Site4
         protected void Application_Start()
         {
             _logger.Info("Application Started.");
-            HttpContext.Current.Application[DataKeys.ApplicationStarted] = DateTime.Now;
+            HttpContext.Current.Application[DataKeys.ApplicationStarted] = DateTime.UtcNow;
 
             AreaRegistration.RegisterAllAreas();
 
