@@ -188,6 +188,10 @@
       <Project>{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}</Project>
       <Name>DependencyInjection.Unity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DependencyInjection.WindsorCastle\DependencyInjection.WindsorCastle.csproj">
+      <Project>{1689DAAE-E629-4A8D-B3BB-87C30F550F33}</Project>
+      <Name>DependencyInjection.WindsorCastle</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj">
       <Project>{DFF945D5-4524-4041-BC5D-CF37BABE73FB}</Project>
       <Name>DependencyInjection</Name>

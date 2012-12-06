@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Portfotolio.DependencyInjection;
 using Portfotolio.DependencyInjection.Unity;
+using Portfotolio.DependencyInjection.WindsorCastle;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
@@ -17,7 +18,7 @@ namespace Portfotolio.Site4
     {
         public static IDependencyEngine Create()
         {
-            IDependencyEngine dependencyEngine = new UnityDependencyEngine();
+            IDependencyEngine dependencyEngine = new WindsorDependencyEngine();
 
             const DependencyLifeStyle controllerLifeStyle = DependencyLifeStyle.PerWebRequest;
 

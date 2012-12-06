@@ -7,8 +7,9 @@ namespace Portfotolio.Site4
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.RouteExistingFiles = true;
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.IgnoreRoute("{file}.htm");
+            routes.IgnoreRoute("{*url}", new { url = @"^.+\.(css|js|ico|gif|htm)$" });
 
             routes.MapRoute(
                 name: "home",
@@ -19,14 +20,15 @@ namespace Portfotolio.Site4
             routes.MapRoute(
                 name: "group",
                 url: "group/{id}",
-                defaults: new { controller = "photo", action = "group", id = UrlParameter.Optional }
+                defaults: new { controller = "photo", action = "group", id = UrlParameter.Optional },
+                constraints: new { id = "^[0-9].*$"}
                 );
 
             routes.MapRoute(
                 name: "photo",
                 url: "{id}/{action}/{secondaryId}", 
                 defaults: new { controller = "photo", action = "photos", secondaryId = UrlParameter.Optional },
-                constraints: new { id = "^[^-].*" }
+                constraints: new { id = "^[^-].+$" }
                 );
 
             routes.MapRoute(
