@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using System.Web.Mvc.Html;
+using Portfotolio.Domain;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Site.Services.Models;
 
@@ -12,6 +14,18 @@ namespace Portfotolio.Site4.Extensions
             if (session == null)
                 return null;
             return session[DataKeys.UserIdentifier] as string;
+        }
+
+        public static AuthenticationInfo AuthenticationInfo(this HtmlHelper htmlHelper)
+        {
+            var session = htmlHelper.ViewContext.HttpContext.Session;
+            if (session == null)
+                return new AuthenticationInfo();
+            var value = session[DataKeys.AuthenticationInfo];
+            if (value == null)
+                return new AuthenticationInfo();
+
+            return (AuthenticationInfo) value;
         }
 
         public static MvcHtmlString MetaRobots(this HtmlHelper htmlHelper)
@@ -32,6 +46,20 @@ namespace Portfotolio.Site4.Extensions
             string content = string.Join(", ", elements);
             string metaTag = string.Format("<meta name='robots' content='{0}' />", content);
             return new MvcHtmlString(metaTag);
+        }
+
+        public static MvcHtmlString ActionLinkUserId(this HtmlHelper htmlHelper, string linkText, string actionName, object values)
+        {
+            var originalLink = htmlHelper.ActionLink(linkText, actionName, values).ToString();
+            var changedLink = originalLink.Replace("%40", "@");
+            return new MvcHtmlString(changedLink);
+        }
+
+        public static MvcHtmlString ActionLinkUserId(this HtmlHelper htmlHelper, string linkText, string actionName, string controllerName, object values, object htmlAttributes)
+        {
+            var originalLink = htmlHelper.ActionLink(linkText, actionName, controllerName, values, htmlAttributes).ToString();
+            var changedLink = originalLink.Replace("%40", "@");
+            return new MvcHtmlString(changedLink);
         }
     }
 }

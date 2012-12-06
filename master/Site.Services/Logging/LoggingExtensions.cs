@@ -2,7 +2,7 @@
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Services.Logging;
 
-namespace Portfotolio.Site.Helpers
+namespace Portfotolio.Site.Services.Logging
 {
     public static class LoggingExtensions
     {

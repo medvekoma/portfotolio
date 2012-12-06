@@ -5,7 +5,7 @@ using Portfotolio.Services.Logging;
 using Portfotolio.Site.Services.Logging;
 using Portfotolio.Site.Services.Models;
 
-namespace Portfotolio.Site.Helpers
+namespace Portfotolio.Site4.Attributes
 {
     public class MasterHandleErrorAttribute : FilterAttribute, IExceptionFilter
     {

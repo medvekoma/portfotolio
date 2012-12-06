@@ -6,14 +6,14 @@
 
 @if (userIdentifier != null)
 {
-    <li>@Html.ActionLink("Photos", "photos", "photo", new { id = userIdentifier }, new object())</li>
-    <li>@Html.ActionLink("Albums", "albums", "photo", new { id = userIdentifier }, new object())</li>
+    <li>@Html.ActionLinkUserId("Photos", "photos", "photo", new { id = userIdentifier }, new object())</li>
+    <li>@Html.ActionLinkUserId("Albums", "albums", "photo", new { id = userIdentifier }, new object())</li>
     <li>|</li>
-    <li>@Html.ActionLink("Favorites", "favorites", "photo", new { id = userIdentifier }, new object())</li>
-    <li>@Html.ActionLink("Subscriptions", "subscriptions", "photo", new { id = userIdentifier }, new object())</li>
-    <li>@Html.ActionLink("Recommendations", "recommendations", "photo", new { id = userIdentifier }, new object())</li>
+    <li>@Html.ActionLinkUserId("Favorites", "favorites", "photo", new { id = userIdentifier }, new object())</li>
+    <li>@Html.ActionLinkUserId("Subscriptions", "subscriptions", "photo", new { id = userIdentifier }, new object())</li>
+    <li>@Html.ActionLinkUserId("Recommendations", "recommendations", "photo", new { id = userIdentifier }, new object())</li>
     <li>|</li>
-    <li>@Html.ActionLink("Groups", "groups", "photo", new { id = userIdentifier }, new object())</li>
-    <li>@Html.ActionLink("Contacts", "contacts", "photo", new { id = userIdentifier }, new object())</li>
+    <li>@Html.ActionLinkUserId("Groups", "groups", "photo", new { id = userIdentifier }, new object())</li>
+    <li>@Html.ActionLinkUserId("Contacts", "contacts", "photo", new { id = userIdentifier }, new object())</li>
     <li>|</li>
 }

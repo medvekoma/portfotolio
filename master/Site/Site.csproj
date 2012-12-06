@@ -104,10 +104,7 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Helpers\RememberActionUrlAttribute.cs" />
-    <Compile Include="Models\ConfigurationModel.cs" />
-    <Compile Include="Models\TestModel.cs" />
     <Compile Include="Helpers\HideFromSearchEnginesAttribute.cs" />
-    <Compile Include="Helpers\LoggingExtensions.cs" />
     <Compile Include="Helpers\MasterHandleErrorAttribute.cs" />
     <Compile Include="Helpers\PagingHelpers.cs" />
     <Compile Include="Helpers\SetMasterViewDataAttribute.cs" />
@@ -123,7 +120,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\HomeModel.cs" />
-    <Compile Include="Models\OptOutModel.cs" />
     <Compile Include="Mvc\MvcConfigurator.cs" />
     <Compile Include="Mvc\CSharpRazorViewEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -315,7 +311,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>4020</DevelopmentServerPort>
+          <DevelopmentServerPort>4010</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

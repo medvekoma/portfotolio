@@ -1,4 +1,5 @@
 ﻿@using Portfotolio.Domain
+@using Portfotolio.Site4.Extensions
 
 @model DomainPhoto
 @{
@@ -21,7 +22,7 @@
            style="background-image: url('@pictureUrl'); width: @(Model.SmallWidth)px; height: @(Model.SmallHeight)px;" ></a>
     </div>
     <div class="title-frame" style="top: @(titleTop)px; max-height: @(titleHeight)px">
-        @(Html.ActionLink(Model.AuthorName ?? Model.AuthorAlias, "photos", new { id = Model.AuthorAlias })):
+        @(Html.ActionLinkUserId(Model.AuthorName ?? Model.AuthorAlias, "photos", new { id = Model.AuthorAlias })):
         <span class="title-text" title="@Model.Title">
             @Model.Title
         </span>

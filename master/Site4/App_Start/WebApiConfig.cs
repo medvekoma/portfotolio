@@ -1,7 +1,4 @@
 ﻿using System.Web.Http;
-using Portfotolio.DependencyInjection;
-using Portfotolio.DependencyInjection.Unity;
-using Portfotolio.Site4.Mvc;
 
 namespace Portfotolio.Site4
 {

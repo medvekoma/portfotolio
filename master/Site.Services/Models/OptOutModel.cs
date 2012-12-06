@@ -1,4 +1,4 @@
-﻿namespace Portfotolio.Site.Models
+﻿namespace Portfotolio.Site.Services.Models
 {
     public class OptOutModel
     {

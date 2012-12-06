@@ -8,7 +8,7 @@ namespace Portfotolio.Site4
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new MasterHandleErrorAttribute());
             filters.Add(new HideFromSearchEnginesAttribute(AllowRobots.None, HideFromSearchEngineCondition.HasPageAttribute));
         }
     }

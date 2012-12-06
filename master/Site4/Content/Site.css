@@ -132,11 +132,11 @@ a:link .highlight { color: #ff8c00; }
 a:visited .highlight { color: #ff8c00; }
 a:hover .highlight { color: #ff0000; }
 
-.errorMessage
-{
-    color: #ff8c00;
+.errorMessage {
+    color: #a9a9a9;
     font-size: larger;
     font-weight: bold;
+    margin: 50px 0;
 }
 
 #main

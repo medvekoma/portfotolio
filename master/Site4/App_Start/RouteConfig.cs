@@ -8,6 +8,7 @@ namespace Portfotolio.Site4
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{file}.htm");
 
             routes.MapRoute(
                 name: "home",
@@ -37,7 +38,7 @@ namespace Portfotolio.Site4
             routes.MapRoute(
                 name: "catch-all",
                 url: "{*url}",
-                defaults: new { controller = "home", action = "incorrecturl" }
+                defaults: new { controller = "error", action = "incorrecturl" }
                 );
         }
     }

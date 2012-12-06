@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Http.Dependencies;
+using System.Web.Mvc;
 using Portfotolio.DependencyInjection;
 
 namespace Portfotolio.Site4.Mvc
@@ -12,11 +12,6 @@ namespace Portfotolio.Site4.Mvc
         public EnginedDependencyResolver(IDependencyEngine dependencyEngine)
         {
             _dependencyEngine = dependencyEngine;
-        }
-
-        public void Dispose()
-        {
-            // dispose should be empty if BeginScope returns this
         }
 
         public object GetService(Type serviceType)
@@ -31,11 +26,6 @@ namespace Portfotolio.Site4.Mvc
             return _dependencyEngine.HasService(serviceType)
                        ? _dependencyEngine.GetServices(serviceType)
                        : new object[0];
-        }
-
-        public IDependencyScope BeginScope()
-        {
-            return this;
         }
     }
 }

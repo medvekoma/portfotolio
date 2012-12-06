@@ -5,7 +5,7 @@ using NLog;
 using Portfotolio.DependencyInjection;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Site.Mvc;
-using Portfotolio.Site.Helpers;
+using Portfotolio.Site.Services.Logging;
 
 namespace Portfotolio.Site
 {

@@ -18,5 +18,14 @@ namespace Portfotolio.Site4.Extensions
 
             return urlHelper.Action(actionName, routeValues);
         }
+
+        public static string ActionUserId(this UrlHelper urlHelper, string actionName, object values)
+        {
+            string result = urlHelper.Action(actionName, values);
+            if (result == null)
+                return null;
+               
+            return result.Replace("%40", "@");
+        }
     }
 }

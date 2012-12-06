@@ -1,0 +1,17 @@
+﻿@using Portfotolio.Site4.Extensions
+
+@{
+    var authenticationInfo = Html.AuthenticationInfo();
+}
+
+@if (authenticationInfo.IsAuthenticated)
+{
+    var userLink = Html.ActionLinkUserId(authenticationInfo.UserName, "photos", "photo", new { id = authenticationInfo.UserAlias }, null);
+    var signOutLink = Html.ActionLink("Sign out?", "logout", "account", null, new { rel = "nofollow" });
+    <div>@userLink, you are signed in. @signOutLink</div>
+}
+else
+{
+    var signInLink = Html.ActionLinkUserId("Sign in!", "login", "account", null, new { rel = "nofollow" });
+    <div>Do you have a flickr account? @signInLink</div>
+}
