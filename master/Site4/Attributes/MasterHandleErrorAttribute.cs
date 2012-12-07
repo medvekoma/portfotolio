@@ -16,8 +16,6 @@ namespace Portfotolio.Site4.Attributes
             logger.LogException(filterContext.Exception);
 
             var viewDataDictionary = new ViewDataDictionary();
-            var userSession = DependencyResolver.Current.GetService<IUserSession>();
-            viewDataDictionary[DataKeys.AuthenticationInfo] = userSession.GetAuthenticationInfo();
             viewDataDictionary[DataKeys.AllowRobots] = AllowRobots.None;
 
             string errorMessage = null;

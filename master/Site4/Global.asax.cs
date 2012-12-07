@@ -56,5 +56,30 @@ namespace Portfotolio.Site4
 
             Server.Transfer("~/Content/error.htm");
         }
+
+        protected void Session_Start()
+        {
+            var sessionCount = GetSessionCount();
+            Application[DataKeys.SessionCount] = sessionCount + 1;
+        }
+
+        protected void Session_End()
+        {
+            var sessionCount = GetSessionCount();
+            Application[DataKeys.SessionCount] = sessionCount - 1;
+        }
+
+        private int GetSessionCount()
+        {
+            var sessionValue = Application[DataKeys.SessionCount];
+            if (sessionValue == null)
+                return 0;
+            var sessionCountString = sessionValue.ToString();
+            int sessionCount;
+            if (!Int32.TryParse(sessionCountString, out sessionCount))
+                sessionCount = 0;
+
+            return sessionCount;
+        }
     }
 }

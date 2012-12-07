@@ -21,12 +21,25 @@ namespace Portfotolio.Site4.Controllers
 
         public ActionResult Login()
         {
+            RememberReferrerUrl();
+
             var loginUrl = _authenticationProvider.GetLoginUrl();
             return Redirect(loginUrl);
         }
 
+        private void RememberReferrerUrl()
+        {
+            var urlReferrer = Request.UrlReferrer;
+            var url = urlReferrer != null
+                          ? urlReferrer.AbsoluteUri
+                          : null;
+            TempData[DataKeys.ActionUrl] = url;
+        }
+
         public ActionResult Logout()
         {
+            RememberReferrerUrl();
+
             var authenticationInfo = _authenticationProvider.GetAuthenticationInfo();
             _authenticationProvider.Logout();
             _logger.Info(string.Format(UserHasLoggedOutMessage, authenticationInfo.UserName));

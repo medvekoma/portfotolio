@@ -22,7 +22,7 @@ namespace Portfotolio.Site4.Controllers
             _authenticationProvider = authenticationProvider;
         }
 
-        [RememberActionUrl]
+        // [RememberActionUrl]
         public ActionResult Show()
         {
             ViewData[DataKeys.BreadCrumb] = "settings";

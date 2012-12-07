@@ -26,7 +26,7 @@ namespace Portfotolio.FlickrEngine
 
         public void Logout()
         {
-            _userSession.SetAuthenticationInfo(new AuthenticationInfo());
+            _userSession.RemoveAuthenticationInfo();
         }
 
         public AuthenticationInfo Authenticate(string oauthToken, string oauthTokenSecret, string verifier)

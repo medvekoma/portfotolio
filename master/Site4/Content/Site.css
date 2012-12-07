@@ -4,15 +4,15 @@ body
 	color: #696969;
     font-family: Trebuchet MS, sans-serif;
     font-size: small;
-    font-weight: bold;
     margin: 30px;
-    letter-spacing: 0.2em;
     line-height: normal;
+    letter-spacing: 0.1em;
 }
 
 h1 {
     font-size: 2em;
     margin: 10px 0;
+    letter-spacing: 0.2em;
 }
 
 h2 {

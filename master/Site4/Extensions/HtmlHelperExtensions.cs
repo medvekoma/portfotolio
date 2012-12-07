@@ -10,10 +10,7 @@ namespace Portfotolio.Site4.Extensions
     {
         public static string UserIdentifier(this HtmlHelper htmlHelper)
         {
-            var session = htmlHelper.ViewContext.HttpContext.Session;
-            if (session == null)
-                return null;
-            return session[DataKeys.UserIdentifier] as string;
+            return htmlHelper.ViewData[DataKeys.UserIdentifier] as string;
         }
 
         public static AuthenticationInfo AuthenticationInfo(this HtmlHelper htmlHelper)
