@@ -21,19 +21,21 @@ namespace Portfotolio.Site4.Controllers
         public ActionResult Show()
         {
             var startedOn = ControllerContext.HttpContext.Application[DataKeys.ApplicationStarted];
+            var sessionCount = ControllerContext.HttpContext.Application[DataKeys.SessionCount];
             var elementsInCache = _cacheProvider.GetCacheSize();
             var gcTotalMemory = GC.GetTotalMemory(false) / 1024;
             var currentProcess = Process.GetCurrentProcess();
             long workingSet = currentProcess.WorkingSet64 / 1024;
             long privateMemory = currentProcess.PrivateMemorySize64 / 1024;
             var model = new TestModel
-            {
-                StartedOn = startedOn,
-                ElementsInCache = elementsInCache,
-                GcTotalMemory = gcTotalMemory,
-                WorkingSet = workingSet,
-                PrivateMemory = privateMemory,
-            };
+                            {
+                                StartedOn = startedOn,
+                                ElementsInCache = elementsInCache,
+                                SessionCount = sessionCount,
+                                GcTotalMemory = gcTotalMemory,
+                                WorkingSet = workingSet,
+                                PrivateMemory = privateMemory,
+                            };
             return PartialView(model);
         }
 

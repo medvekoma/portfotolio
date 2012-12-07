@@ -40,8 +40,7 @@ namespace Portfotolio.Site4.Attributes
                     return;
                 }
 
-                var session = filterContext.Controller.ControllerContext.HttpContext.Session;
-                session[DataKeys.UserIdentifier] = userIdentifier;
+                filterContext.Controller.ViewData[DataKeys.UserIdentifier] = userIdentifier;
             }
 
             filterContext.Controller.ViewData[DataKeys.UserId] = user.UserId;

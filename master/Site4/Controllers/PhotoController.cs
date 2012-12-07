@@ -6,7 +6,7 @@ using Portfotolio.Site4.Attributes;
 
 namespace Portfotolio.Site4.Controllers
 {
-    [RememberActionUrl]
+    // [RememberActionUrl]
     public class PhotoController : Controller
     {
         private readonly IPhotoEngine _photoEngine;
@@ -50,7 +50,7 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
-        [HideFromSearchEngines(AllowRobots.Follow)]
+        [HideFromSearchEngines(AllowRobots.None)]
         // [BreadCrumb("subscription feed of {userName}")]
         public ActionResult Subscriptions(string id, int page = 0)
         {
@@ -64,7 +64,7 @@ namespace Portfotolio.Site4.Controllers
 
         [UserIdentification]
         // [BreadCrumb("albums of {userName}")]
-        [HideFromSearchEngines(AllowRobots.Follow)]
+        [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Albums(string id)
         {
             ViewData[DataKeys.BreadCrumb] = "albums of " + ViewData[DataKeys.UserName];
@@ -77,7 +77,7 @@ namespace Portfotolio.Site4.Controllers
 
         [UserIdentification]
         // [BreadCrumb("{albumTitle} by {userName}")]
-        [HideFromSearchEngines(AllowRobots.Follow)]
+        [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Album(string id, string secondaryId, int page = 0)
         {
             string albumId = secondaryId;
@@ -92,7 +92,7 @@ namespace Portfotolio.Site4.Controllers
 
         [UserIdentification]
         // [BreadCrumb("groups of {userName}")]
-        [HideFromSearchEngines(AllowRobots.Follow)]
+        [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Groups(string id)
         {
             ViewData[DataKeys.BreadCrumb] = "groups of " + ViewData[DataKeys.UserName];
@@ -104,7 +104,7 @@ namespace Portfotolio.Site4.Controllers
         }
 
         // [BreadCrumb("{groupName} group")]
-        [HideFromSearchEngines(AllowRobots.Follow)]
+        [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Group(string id, int page = 0)
         {
             var domainGroup = _photoEngine.GetGroup(id, page);

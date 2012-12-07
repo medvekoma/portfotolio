@@ -14,6 +14,11 @@ namespace Portfotolio.Domain.Persistency
             userSession.SetValue(DataKeys.AuthenticationInfo, authenticationInfo);
         }
 
+        public static void RemoveAuthenticationInfo(this IUserSession userSession)
+        {
+            userSession.SetValue(DataKeys.AuthenticationInfo, null);
+        }
+
         public static string[] GetRecommendedUserIds(this IUserSession userSession, string userId)
         {
             string key = DataKeys.RecommendedUserIds + userId;

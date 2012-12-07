@@ -6,12 +6,13 @@ namespace Portfotolio.Domain.Persistency
         public static string ActionUrl = "ActionUrl";
         public static string UserIdentifier = "UserIdentifier";
         public static string BreadCrumb = "BreadCrumb";
-        public static string ErrorMessage = "ErrorMessage";
+        // public static string ErrorMessage = "ErrorMessage";
         public static string UserId = "UserId";
         public static string UserName = "userName";
         public static string RecommendedUserIds = "RecommendedUserIds";
         public static string AllowRobots = "AllowRobots";
-        public static string OAuthTokenSecret = "TokenSecret";
+        // public static string OAuthTokenSecret = "TokenSecret";
         public static string ApplicationStarted = "ApplicationStarted";
+        public static string SessionCount = "SessionCount";
     }
 }
