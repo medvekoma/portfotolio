@@ -23,10 +23,10 @@ namespace Portfotolio.Site4.Controllers
             var startedOn = ControllerContext.HttpContext.Application[DataKeys.ApplicationStarted];
             var sessionCount = ControllerContext.HttpContext.Application[DataKeys.SessionCount];
             var elementsInCache = _cacheProvider.GetCacheSize();
-            var gcTotalMemory = GC.GetTotalMemory(false) / 1024;
+            var gcTotalMemory = GC.GetTotalMemory(false) >> 20;
             var currentProcess = Process.GetCurrentProcess();
-            long workingSet = currentProcess.WorkingSet64 / 1024;
-            long privateMemory = currentProcess.PrivateMemorySize64 / 1024;
+            long workingSet = currentProcess.WorkingSet64 >> 20;
+            long privateMemory = currentProcess.PrivateMemorySize64 >> 20;
             var model = new TestModel
                             {
                                 StartedOn = startedOn,
