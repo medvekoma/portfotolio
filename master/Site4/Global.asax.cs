@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -40,7 +41,7 @@ namespace Portfotolio.Site4
 
         protected void Application_End()
         {
-            _logger.Info("Application Ended.");
+            _logger.Info("Application Ended. ---> " + HostingEnvironment.ShutdownReason);
 
             if (_dependencyEngine != null)
             {

@@ -45,5 +45,15 @@ namespace Portfotolio.Site4.Controllers
             GC.Collect(2);
             return RedirectToAction("Show");
         }
+
+        public ActionResult Log(string id)
+        {
+            int offset;
+            if (!Int32.TryParse(id, out offset))
+                offset = 0;
+            var fileName = "~/logs/" + DateTime.UtcNow.AddDays(-offset).ToString("yyyy-MM-dd") + ".log";
+
+            return File(fileName, "text/plain");
+        }
     }
 }

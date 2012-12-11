@@ -9,7 +9,7 @@ namespace Portfotolio.Site4
         {
             routes.RouteExistingFiles = true;
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.IgnoreRoute("{*url}", new { url = @"^.+\.(css|js|ico|gif|htm|html)$" });
+            routes.IgnoreRoute("{*url}", new { url = @"^.+\.(css|js|ico|gif|htm|html|log)$" });
 
             routes.MapRoute(
                 name: "home",
