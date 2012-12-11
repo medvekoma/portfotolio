@@ -42,7 +42,7 @@ namespace Portfotolio.Site4.Controllers
 
             var authenticationInfo = _authenticationProvider.GetAuthenticationInfo();
             _authenticationProvider.Logout();
-            _logger.Info(string.Format(UserHasLoggedOutMessage, authenticationInfo.UserName));
+            _logger.Info(string.Format(UserHasLoggedOutMessage, authenticationInfo.UserAlias));
             return RedirectToLastPage();
         }
 

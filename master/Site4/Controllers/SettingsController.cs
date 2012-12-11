@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
+using Portfotolio.Services.Logging;
 using Portfotolio.Site.Services.Models;
 using Portfotolio.Site4.Attributes;
 
@@ -14,12 +15,14 @@ namespace Portfotolio.Site4.Controllers
         private readonly IOptoutUserService _optoutUserService;
         private readonly IOptoutUserConfiguratorService _optoutUserConfiguratorService;
         private readonly IAuthenticationProvider _authenticationProvider;
+        private readonly ILogger _logger;
 
-        public SettingsController(IOptoutUserService optoutUserService, IOptoutUserConfiguratorService optoutUserConfiguratorService, IAuthenticationProvider authenticationProvider)
+        public SettingsController(IOptoutUserService optoutUserService, IOptoutUserConfiguratorService optoutUserConfiguratorService, IAuthenticationProvider authenticationProvider, ILoggerFactory loggerFactory)
         {
             _optoutUserService = optoutUserService;
             _optoutUserConfiguratorService = optoutUserConfiguratorService;
             _authenticationProvider = authenticationProvider;
+            _logger = loggerFactory.GetLogger("Settings");
         }
 
         // [RememberActionUrl]
@@ -45,6 +48,9 @@ namespace Portfotolio.Site4.Controllers
                 _optoutUserConfiguratorService.AddOptoutUser(model.UserId);
             else
                 _optoutUserConfiguratorService.RemoveOptoutUser(model.UserId);
+
+            string message = string.Format("{0} is opted {1}.", model.UserAlias, isOptedOut ? "out" : "in");
+            _logger.Info(message);
 
             return RedirectToAction("Show");
         }
@@ -83,7 +89,7 @@ namespace Portfotolio.Site4.Controllers
             if (authenticationInfo.IsAuthenticated)
             {
                 model.IsAuthenticated = true;
-                model.UserName = authenticationInfo.UserName;
+                model.UserAlias = authenticationInfo.UserAlias;
                 model.UserId = authenticationInfo.UserId;
                 var optedOutUserIds = _optoutUserService.GetOptedOutUserIds();
                 model.IsOptedOut = optedOutUserIds.Contains(authenticationInfo.UserId);

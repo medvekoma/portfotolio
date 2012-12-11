@@ -11,6 +11,7 @@ $(document).ready(function () {
 Medvekoma.Portfotolio.InitializeLoading = function () {
     $('#nextPageLink').hide();
     $('#nextPageLoading').show();
+    Medvekoma.Portfotolio.ShowNextPageIfNeeded();
     Medvekoma.Portfotolio.SubscribeToScrollEvent();
 };
 
