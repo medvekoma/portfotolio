@@ -1,8 +1,6 @@
 using System;
 using FlickrNet;
-using Portfotolio.Domain;
 using Portfotolio.Domain.Exceptions;
-using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.FlickrEngine
 {
@@ -32,6 +30,7 @@ namespace Portfotolio.FlickrEngine
         GroupFullInfo GetGroupInfo(string groupId);
         
         PhotoCollection GetInterestingPhotos(int page, int pageSize);
+
         bool IsAcceptedUserName(string userName);
     }
 

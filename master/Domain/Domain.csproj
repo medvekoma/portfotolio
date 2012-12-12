@@ -59,6 +59,7 @@
     <Compile Include="DomainLicense.cs" />
     <Compile Include="DomainPhoto.cs" />
     <Compile Include="DomainPhotos.cs" />
+    <Compile Include="DomainPhotosExtensions.cs" />
     <Compile Include="DomainUser.cs" />
     <Compile Include="DomainUserPhotos.cs" />
     <Compile Include="Exceptions\AlbumNotFoundException.cs" />
