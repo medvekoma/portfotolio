@@ -29,6 +29,8 @@ namespace Portfotolio.Site4
             _logger.Info("Application Started.");
             HttpContext.Current.Application[DataKeys.ApplicationStarted] = DateTime.UtcNow;
 
+            ViewEngineConfig.Register();
+
             AreaRegistration.RegisterAllAreas();
 
             _dependencyEngine = DependencyEngineFactory.Create();

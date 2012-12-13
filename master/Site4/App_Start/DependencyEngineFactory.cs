@@ -19,11 +19,11 @@ namespace Portfotolio.Site4
         {
             IDependencyEngine dependencyEngine = new UnityDependencyEngine();
 
+            const DependencyLifeStyle applicationLifeStyle = DependencyLifeStyle.Singleton;
             const DependencyLifeStyle controllerLifeStyle = DependencyLifeStyle.Transient;
             const DependencyLifeStyle photoServiceLifeStyle = DependencyLifeStyle.Transient;
             const DependencyLifeStyle optOutServiceLifeStyle = DependencyLifeStyle.Transient;
             const DependencyLifeStyle authenticationServiceLifeStyle = DependencyLifeStyle.Transient;
-            const DependencyLifeStyle applicationLifeStyle = DependencyLifeStyle.Singleton;
 
             // application
             dependencyEngine.Register<IConfigurationProvider, AppSettingConfigurationProvider>(applicationLifeStyle);
