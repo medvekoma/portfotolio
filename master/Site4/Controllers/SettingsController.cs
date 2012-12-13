@@ -25,20 +25,25 @@ namespace Portfotolio.Site4.Controllers
             _logger = loggerFactory.GetLogger("Settings");
         }
 
-        // [RememberActionUrl]
+        // temporary action, can be deleted once it is not cached
         public ActionResult Show()
         {
-            ViewData[DataKeys.BreadCrumb] = "settings";
+            return RedirectToAction("optout");
+        }
+
+        public ActionResult OptOut()
+        {
+            ViewData[DataKeys.BreadCrumb] = "opt out";
 
             var model = GetModel();
             if (!model.IsAuthenticated)
-                return View("ShowUnauthenticated");
+                return View("OptOutInfo");
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Show(bool isOptedOut)
+        public ActionResult OptOut(bool isOptedOut)
         {
             var model = GetModel();
             if (!model.IsAuthenticated || model.IsOptedOut == isOptedOut)

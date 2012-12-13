@@ -123,7 +123,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DependencyEngineFactory.cs" />
     <Compile Include="Attributes\MasterHandleErrorAttribute.cs" />
-    <Compile Include="Attributes\RememberActionUrlAttribute.cs" />
     <Compile Include="Attributes\UserIdentificationAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -271,11 +270,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Test\Show.cshtml" />
-    <Content Include="Views\Settings\ShowUnauthenticated.cshtml" />
+    <Content Include="Views\Settings\OptOutInfo.cshtml" />
     <Content Include="Views\Settings\_ViewStart.cshtml" />
-    <Content Include="Views\Settings\OptOutChangeView.cshtml" />
-    <Content Include="Views\Settings\OutOutLoginView.cshtml" />
-    <Content Include="Views\Settings\Show.cshtml" />
+    <Content Include="Views\Settings\OptOut.cshtml" />
     <Content Include="Views\Shared\AuthenticationInfo.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>

@@ -47,29 +47,18 @@
             can also read the official Flickr FAQ about this <a href="http://www.flickr.com/help/website/#180"
                 title="FAQ">here</a> and <a href="http://www.flickr.com/help/website/#181" title="FAQ2">
                     here</a>. </li>
+        <li>You can opt out from flickr API searches by checking both the second and third checkbox
+            on your <a href="http://www.flickr.com/account/prefs/optout/?from=privacy">flickr privacy
+                page</a>. This will make your profile page unavailable on all sites based on
+            flickr API (including portfotolio). This is a recommended step if you are concerned
+            about your privacy, as it will hide you from most applications based on flickr API.
+            However, because of the specifics of flickr API, some of your pictures might still
+            appear in groups, and other people's favorite lists.</li>
     </ul>
     <h2>
-        Still, I don't want my photos here!</h2>
+        Still, I don't want any of my photos on this site!</h2>
     <ul>
-    No problem. Please choose from the options below:
-        <li><span class="highlight">Opt out from flickr API.</span> You can opt out from flickr
-            API searches by checking both the second and third checkbox on your <a href="http://www.flickr.com/account/prefs/optout/?from=privacy">
-                flickr privacy page</a>. This will make your profile page unavailable on all
-            sites based on flickr API (including portfotolio). This is a recommended step if
-            you are concerned about your privacy, as it will hide you from most applications
-            based on flickr API. However, because of the specifics of flickr API, some of your
-            pictures might still appear in groups, and other people's favorite lists.</li>
-        <li><span class="highlight">Self service (quickest).</span> You can hide yourself and
-            your pictures completely from this application on the
-            @Html.ActionLink("settings page", "show", "settings", null, new { rel = "nofollow" }).
-            In order to verify your identity, we will ask you to log in with your flickr account
-            and authorize portfotolio.net for read access. This process is safe, as it goes
-            through your flickr page, we don't even get your credentials. You can revoke the
-            permissions given at any time.</li>
-        <li><span class="highlight">Customer service.</span> If you don't want to log in with
-            your flickr account, and authorize portfotolio.net with read-only access, you can
-            <a href="http://www.flickr.com/mail/write/?to=27725019@N00">send us a flickr mail</a>
-            and we will add you to the opt-out list manually. We try to process these requests
-            as quickly as possible.</li>
+        <li>@Html.ActionLink("Please go to our opt-out page", "optout", "settings", null, new { rel = "nofollow" })
+            and follow the instructions.</li>
     </ul>
 </div>
