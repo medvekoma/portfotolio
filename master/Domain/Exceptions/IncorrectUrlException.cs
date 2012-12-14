@@ -6,7 +6,7 @@ namespace Portfotolio.Domain.Exceptions
     {
         public override string Message
         {
-            get { return "Incorrect request url"; }
+            get { return string.Empty; }
         }
     }
 }

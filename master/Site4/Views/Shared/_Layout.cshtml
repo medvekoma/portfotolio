@@ -18,12 +18,10 @@
                 <h1>
                     <a href="/">● port<span class="highlight">foto</span>lio ●</a>
                     @Html.Display(DataKeys.BreadCrumb)
+                    <a href="@Url.Action("about", "home")" title="what is this?"><img src="~/Content/help.png" alt="help" class="action-icon"/></a>
                 </h1>
                 <div id="menucontainer">
-                    <ul id="menu">
-                        @Html.Partial("UserMenu")
-                        <li><a class="highlight" href="@Url.Action("about", "home", new { id = UrlParameter.Optional })">What is this?</a></li>
-                    </ul>
+                    @Html.Partial("UserMenu")
                 </div>
                 <hr />
                 <div id="authenticationLink">

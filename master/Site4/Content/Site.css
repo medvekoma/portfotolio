@@ -193,5 +193,8 @@ input#SearchText
     overflow: hidden;
 }
 
-.title-text {
+.action-icon {
+    border: none!important;
+    height: 44px;
+    float: right;
 }

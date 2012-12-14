@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Portfotolio.Domain;
+using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Site.Services.Models;
 using Portfotolio.Site4.Attributes;
@@ -138,6 +139,11 @@ namespace Portfotolio.Site4.Controllers
             var photos = _photoEngine.GetRecommendations(userId, page);
 
             return PagingView(photos);
+        }
+
+        protected override void HandleUnknownAction(string actionName)
+        {
+            throw new IncorrectUrlException();
         }
 
         #region helpers

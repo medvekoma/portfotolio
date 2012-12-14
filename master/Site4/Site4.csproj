@@ -131,6 +131,7 @@
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Extensions\HttpExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +147,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\error.htm" />
+    <Content Include="Content\help.png" />
     <Content Include="Content\loading.gif" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\Site.css" />

@@ -4,6 +4,7 @@ using Portfotolio.Domain.Persistency;
 using Portfotolio.Services.Logging;
 using Portfotolio.Site.Services.Logging;
 using Portfotolio.Site.Services.Models;
+using Portfotolio.Site4.Extensions;
 
 namespace Portfotolio.Site4.Attributes
 {
@@ -33,6 +34,7 @@ namespace Portfotolio.Site4.Attributes
                                      ViewName = "Error",
                                  };
             filterContext.Result = viewResult;
+            filterContext.HttpContext.Response.SetHttpHeader(filterContext.Exception);
             filterContext.ExceptionHandled = true;
         }
     }
