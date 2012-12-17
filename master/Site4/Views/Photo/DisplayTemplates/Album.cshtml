@@ -4,7 +4,7 @@
     <div class="photoFrame">
         <div class="middleFrame">
             <div class="innerFrame">
-                <a href="@Url.ActionUserId("album", new {id = Html.UserIdentifier(), secondaryId = Model.PhotosetId})">
+                <a href="@Url.AlbumUrl(Html.UserIdentifier(), Model)">
                     <img class="photo" src="@Model.ImageUrl" title="@Model.Title" alt="@Model.Title" />
                     <div class="title">
                         @Model.Title

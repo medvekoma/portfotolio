@@ -13,6 +13,15 @@ namespace Portfotolio.Site4.Extensions
             return htmlHelper.ViewData[DataKeys.UserIdentifier] as string;
         }
 
+        public static MvcHtmlString AlbumUrl(this UrlHelper urlHelper, string userIdentifier, Album album)
+        {
+            if (string.IsNullOrEmpty(userIdentifier))
+                userIdentifier = album.AuthorId;
+
+            var url = urlHelper.ActionUserId("album", new {id = userIdentifier, secondaryId = album.PhotosetId});
+            return new MvcHtmlString(url);
+        }
+
         public static AuthenticationInfo AuthenticationInfo(this HtmlHelper htmlHelper)
         {
             var session = htmlHelper.ViewContext.HttpContext.Session;
