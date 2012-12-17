@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.Site4.Controllers
 {
@@ -6,6 +7,8 @@ namespace Portfotolio.Site4.Controllers
     {
         public ActionResult About()
         {
+            ViewData[DataKeys.BreadCrumb] = "about";
+
             return View();
         }
     }
