@@ -8,17 +8,17 @@ namespace Portfotolio.Site4.Extensions
 {
     public static class HtmlHelperExtensions
     {
-        public static string UserIdentifier(this HtmlHelper htmlHelper)
+        public static string UserAlias(this HtmlHelper htmlHelper)
         {
-            return htmlHelper.ViewData[DataKeys.UserIdentifier] as string;
+            return htmlHelper.ViewData[DataKeys.UserAlias] as string;
         }
 
-        public static MvcHtmlString AlbumUrl(this UrlHelper urlHelper, string userIdentifier, Album album)
+        public static MvcHtmlString AlbumUrl(this UrlHelper urlHelper, string userAlias, Album album)
         {
-            if (string.IsNullOrEmpty(userIdentifier))
-                userIdentifier = album.AuthorId;
+            if (string.IsNullOrEmpty(userAlias))
+                userAlias = album.AuthorId;
 
-            var url = urlHelper.ActionUserId("album", new {id = userIdentifier, secondaryId = album.PhotosetId});
+            var url = urlHelper.ActionUserId("album", new {id = userAlias, secondaryId = album.PhotosetId});
             return new MvcHtmlString(url);
         }
 

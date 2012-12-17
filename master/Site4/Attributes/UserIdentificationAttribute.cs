@@ -39,12 +39,10 @@ namespace Portfotolio.Site4.Attributes
                     filterContext.Result = new RedirectToRouteResult(null, filterContext.RouteData.Values, true);
                     return;
                 }
-
-                filterContext.Controller.ViewData[DataKeys.UserIdentifier] = userIdentifier;
             }
-
             filterContext.Controller.ViewData[DataKeys.UserId] = user.UserId;
             filterContext.Controller.ViewData[DataKeys.UserName] = user.UserName;
+            filterContext.Controller.ViewData[DataKeys.UserAlias] = user.UserAlias;
         }
     }
 }
