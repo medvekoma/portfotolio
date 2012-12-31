@@ -29,6 +29,8 @@ namespace SimplickrTests
             var result = _simplickrApi.GetPublicPhotos(request);
 
             Assert.AreEqual("ok", result.Stat);
+            Assert.AreEqual(30, result.Photos.PerPage);
+            Assert.AreEqual(1, result.Photos.Page);
         }
     }
 }

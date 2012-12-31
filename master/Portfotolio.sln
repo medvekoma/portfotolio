@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplickr", "Simplickr\Simplickr.csproj", "{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplickrTests", "TestProject1\SimplickrTests.csproj", "{F6DCA600-A73D-458C-9D45-961C19B531AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplickrTests", "SimplickrTests\SimplickrTests.csproj", "{F6DCA600-A73D-458C-9D45-961C19B531AC}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
