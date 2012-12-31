@@ -25,8 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc4Demo", "Mvc4Demo\Mvc4De
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54EBE69F-2DA9-4948-9327-9000BCD19F9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrWrapperTests", "FlickrWrapperTests\FlickrWrapperTests.csproj", "{1896F8F3-7DBC-41CB-B6EF-7A203822B5F8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{27ACD545-E654-475D-9C17-DA9E989D2D83}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
@@ -34,7 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrWrapper", "FlickrWrapper\FlickrWrapper.csproj", "{D80AD609-28C0-4CD9-852D-F380CC0EE553}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplickr", "Simplickr\Simplickr.csproj", "{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplickrTests", "TestProject1\SimplickrTests.csproj", "{F6DCA600-A73D-458C-9D45-961C19B531AC}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -88,21 +88,21 @@ Global
 		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1896F8F3-7DBC-41CB-B6EF-7A203822B5F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1896F8F3-7DBC-41CB-B6EF-7A203822B5F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1896F8F3-7DBC-41CB-B6EF-7A203822B5F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1896F8F3-7DBC-41CB-B6EF-7A203822B5F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D80AD609-28C0-4CD9-852D-F380CC0EE553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D80AD609-28C0-4CD9-852D-F380CC0EE553}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D80AD609-28C0-4CD9-852D-F380CC0EE553}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D80AD609-28C0-4CD9-852D-F380CC0EE553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6DCA600-A73D-458C-9D45-961C19B531AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6DCA600-A73D-458C-9D45-961C19B531AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6DCA600-A73D-458C-9D45-961C19B531AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DCA600-A73D-458C-9D45-961C19B531AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1896F8F3-7DBC-41CB-B6EF-7A203822B5F8} = {54EBE69F-2DA9-4948-9327-9000BCD19F9E}
 		{27ACD545-E654-475D-9C17-DA9E989D2D83} = {54EBE69F-2DA9-4948-9327-9000BCD19F9E}
+		{F6DCA600-A73D-458C-9D45-961C19B531AC} = {54EBE69F-2DA9-4948-9327-9000BCD19F9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
