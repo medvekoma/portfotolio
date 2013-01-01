@@ -44,20 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extras.cs" />
-    <Compile Include="GetPublicPhotosRequest.cs" />
-    <Compile Include="ISimplickrRequest.cs" />
+    <Compile Include="Parameters\Extras.cs" />
+    <Compile Include="FlickrApi.cs" />
+    <Compile Include="FlickrApiInvoker.cs" />
+    <Compile Include="FlickrRequest.cs" />
+    <Compile Include="FlickrRequestBuilder.cs" />
+    <Compile Include="HttpClient.cs" />
+    <Compile Include="Parameters\GetPhotosParameters.cs" />
+    <Compile Include="Parameters\IRequestParameters.cs" />
+    <Compile Include="Formatters\ISimplickrFormatter.cs" />
     <Compile Include="ParameterMap.cs" />
     <Compile Include="Response\FlickrPhotos.cs" />
     <Compile Include="Response\FlickrPhotosResponse.cs" />
-    <Compile Include="SafeSearch.cs" />
-    <Compile Include="SimplickrApi.cs" />
+    <Compile Include="Parameters\SafeSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimplickrFormatter.cs" />
+    <Compile Include="Formatters\SimplickrJsonFormatter.cs" />
+    <Compile Include="Response\FlickrResponseBase.cs" />
     <Compile Include="SimplickrInitializer.cs" />
-    <Compile Include="SimplickrInvoker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FlickrApi.People.cs">
+      <DependentUpon>FlickrApi.cs</DependentUpon>
+    </Compile>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

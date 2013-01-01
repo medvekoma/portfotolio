@@ -3,18 +3,15 @@ using System.Net;
 
 namespace Simplickr
 {
-    public interface ISimplickrInvoker
+    public interface IHttpClient
     {
-        string Invoke(ISimplickrRequest request);
+        string Get(string url);
     }
 
-    public class SimplickrInvoker : ISimplickrInvoker
+    public class HttpClient : IHttpClient
     {
-        public string Invoke(ISimplickrRequest request)
+        public string Get(string url)
         {
-            var queryString = request.ParameterMap.GetQueryString();
-            var url = "http://api.flickr.com/services/rest?" + queryString;
-
             using (var webClient = new WebClient())
             using (var stream = webClient.OpenRead(url))
             {

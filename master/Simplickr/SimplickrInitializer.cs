@@ -1,15 +1,17 @@
-﻿namespace Simplickr
+﻿using Simplickr.Parameters;
+
+namespace Simplickr
 {
     public interface ISimplickrInitializer
     {
-        void Initialize(ISimplickrRequest simplickrRequest);
+        void SetApiKey(IRequestParameters requestParameters);
     }
 
     public class SimplickrInitializer : ISimplickrInitializer
     {
-        public void Initialize(ISimplickrRequest simplickrRequest)
+        public void SetApiKey(IRequestParameters requestParameters)
         {
-            simplickrRequest.ParameterMap.Add("api_key", "1a44395543c1473fb19d39467fb4c827");
+            requestParameters.ParameterMap.Add("api_key", "1a44395543c1473fb19d39467fb4c827");
         }
     }
 }

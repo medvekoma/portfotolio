@@ -4,22 +4,14 @@ using System.Linq;
 
 namespace Simplickr
 {
-    public class ParameterMap
+    public class ParameterMap : Dictionary<string, string>
     {
-        private readonly IDictionary<string, string> _dictionary = new Dictionary<string, string>();
- 
         public ParameterMap Add<TValue>(string key, TValue value)
         {
             if (!Equals(value, default(TValue)))
-                _dictionary[key] = value.ToString();
+                this[key] = value.ToString();
 
             return this;
-        }
-
-        public string GetQueryString()
-        {
-            var items = _dictionary.Select(item => item.Key + '=' + item.Value).ToArray();
-            return string.Join("&", items);
         }
     }
 }

@@ -1,11 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace Simplickr.Response
+﻿namespace Simplickr.Response
 {
-    public class FlickrPhotosResponse
+    public class FlickrPhotosResponse : FlickrResponseBase
     {
         public FlickrPhotos Photos { get; set; }
-
-        public string Stat { get; set; }
     }
 }

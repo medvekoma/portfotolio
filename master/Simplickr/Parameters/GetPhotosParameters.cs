@@ -1,36 +1,38 @@
 ﻿using System.Globalization;
 
-namespace Simplickr
+namespace Simplickr.Parameters
 {
-    public class GetPublicPhotosRequest : ISimplickrRequest
+    public class GetPhotosParameters : IRequestParameters
     {
         public ParameterMap ParameterMap { get; private set; }
 
-        public GetPublicPhotosRequest(string userId)
+        public GetPhotosParameters(string userId)
         {
-            ParameterMap = new ParameterMap();
-            ParameterMap.Add("user_id", userId);
+            ParameterMap = new ParameterMap
+                {
+                    {"user_id", userId}
+                };
         }
 
-        public GetPublicPhotosRequest SafeSearch(SafeSearch safeSearch)
+        public GetPhotosParameters SafeSearch(SafeSearch safeSearch)
         {
             ParameterMap.Add("safe_search", safeSearch);
             return this;
         }
 
-        public GetPublicPhotosRequest Extras(Extras extras)
+        public GetPhotosParameters Extras(Extras extras)
         {
             ParameterMap.Add("extras", extras);
             return this;            
         }
 
-        public GetPublicPhotosRequest PerPage(int perPage)
+        public GetPhotosParameters PerPage(int perPage)
         {
             ParameterMap.Add("per_page", perPage.ToString(CultureInfo.InvariantCulture));
             return this;            
         }
 
-        public GetPublicPhotosRequest Page(int page)
+        public GetPhotosParameters Page(int page)
         {
             ParameterMap.Add("page", page.ToString(CultureInfo.InvariantCulture));
             return this;            

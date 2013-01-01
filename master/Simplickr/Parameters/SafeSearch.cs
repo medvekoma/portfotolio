@@ -1,4 +1,4 @@
-﻿namespace Simplickr
+﻿namespace Simplickr.Parameters
 {
     public class SafeSearch
     {

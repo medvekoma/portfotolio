@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
-namespace Simplickr
+namespace Simplickr.Parameters
 {
     public class Extras
     {

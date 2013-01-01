@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimplickrApiTest.cs" />
+    <Compile Include="FlickrApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Simplickr\Simplickr.csproj">
