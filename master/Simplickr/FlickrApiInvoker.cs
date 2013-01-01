@@ -1,4 +1,5 @@
-﻿using Simplickr.Formatters;
+﻿using System;
+using Simplickr.Formatters;
 using Simplickr.Parameters;
 
 namespace Simplickr
@@ -26,6 +27,9 @@ namespace Simplickr
             IFlickrRequest flickrRequest = _flickrRequestBuilder.Build(methodName, parameters);
             string url = flickrRequest.GetUrl();
             string response = _httpClient.Get(url);
+
+            Console.WriteLine(response);
+
             return _simplickrFormatter.Deserialize<TResponse>(response);
         }
     }

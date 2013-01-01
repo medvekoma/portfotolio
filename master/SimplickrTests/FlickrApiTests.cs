@@ -25,7 +25,7 @@ namespace SimplickrTests
         }
 
         [TestMethod]
-        public void GetPublicPhotosTest()
+        public void PeopleGetPublicPhotosTest()
         {
             var request = new GetPhotosParameters(userId: "27725019@N00")
                 .PerPage(30)
@@ -35,6 +35,20 @@ namespace SimplickrTests
             Assert.AreEqual("ok", result.Stat);
             Assert.AreEqual(30, result.Photos.PerPage);
             Assert.AreEqual(1, result.Photos.Page);
+        }
+
+
+        [TestMethod]
+        public void PeopleGetPhotosTestUnauthorized()
+        {
+            var request = new GetPhotosParameters(userId: "27725019@N00")
+                .PerPage(30)
+                .Extras(Extras.PathAlias | Extras.UrlS);
+            var result = _flickrApi.PeopleGetPhotos(request);
+
+            Assert.AreEqual("fail", result.Stat);
+            Assert.AreEqual(99, result.Code);
+            Assert.IsFalse(string.IsNullOrEmpty(result.Message));
         }
     }
 }
