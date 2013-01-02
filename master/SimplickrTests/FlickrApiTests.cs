@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Simplickr;
+using Simplickr.Configuration;
 using Simplickr.Formatters;
 using Simplickr.Parameters;
 
@@ -17,9 +18,9 @@ namespace SimplickrTests
         public FlickrApiTests()
         {
             ISimplickrFormatter simplickrFormatter = new SimplickrJsonFormatter();
-            ISimplickrInitializer simplickrInitializer = new SimplickrInitializer();
             IHttpClient httpClient = new HttpClient();
-            IFlickrRequestBuilder flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrInitializer);
+            ISimplickrConfigurationProvider simplickrConfigurationProvider = new SimplickrConfigurationProvider();
+            IFlickrRequestBuilder flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrConfigurationProvider);
             IFlickrApiInvoker flickrApiInvoker = new FlickrApiInvoker(flickrRequestBuilder, httpClient, simplickrFormatter);
             _flickrApi = new FlickrApi(flickrApiInvoker);
         }
@@ -49,6 +50,16 @@ namespace SimplickrTests
             Assert.AreEqual("fail", result.Stat);
             Assert.AreEqual(99, result.Code);
             Assert.IsFalse(string.IsNullOrEmpty(result.Message));
+        }
+
+        [TestMethod]
+        public void SimplickrConfigFromConfigFile()
+        {
+            var simplickrConfig = new SimplickrConfigurationProvider().GetConfig();
+
+            Assert.IsNotNull(simplickrConfig);
+            Assert.IsNotNull(simplickrConfig.ApiKey);
+            Assert.IsNotNull(simplickrConfig.Secret);
         }
     }
 }

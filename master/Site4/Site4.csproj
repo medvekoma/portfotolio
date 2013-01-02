@@ -212,6 +212,10 @@
       <Project>{BFCAA2BF-2CB2-4F41-A335-166B8E8573C8}</Project>
       <Name>Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Simplickr\Simplickr.csproj">
+      <Project>{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}</Project>
+      <Name>Simplickr</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Site.Services\Site.Services.csproj">
       <Project>{5E695CEC-8A79-47B6-A7AD-C719E48CB25E}</Project>
       <Name>Site.Services</Name>
