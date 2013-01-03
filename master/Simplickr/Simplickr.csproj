@@ -47,7 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\OAuthBase.cs" />
+    <Compile Include="Authentication\OAuthResponse.cs" />
+    <Compile Include="Authentication\OAuthResponseProcessor.cs" />
     <Compile Include="Authentication\OAuthService.cs" />
+    <Compile Include="Authentication\OAuthUrlService.cs" />
     <Compile Include="Configuration\SimplickrConfigurationProvider.cs" />
     <Compile Include="Configuration\SimplickrConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\SimplickrConfig.cs" />

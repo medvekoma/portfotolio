@@ -46,7 +46,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OAuthTests.cs" />
+    <Compile Include="OAuthServiceTests.cs" />
+    <Compile Include="OAuthUrlServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FlickrApiTests.cs" />
   </ItemGroup>

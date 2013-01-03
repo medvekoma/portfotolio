@@ -1,52 +1,30 @@
-﻿using System;
-using System.Text;
-using System.Web;
-using OAuth;
-using Simplickr.Configuration;
-
-namespace Simplickr.Authentication
+﻿namespace Simplickr.Authentication
 {
     public interface IOAuthService
     {
-        string GetRequestTokenUrl();
+        OAuthResponse GetRequestToken(string callbackUrl);
     }
 
     public class OAuthService : IOAuthService
     {
-        private readonly ISimplickrConfigurationProvider _simplickrConfigurationProvider;
+        private readonly IOAuthUrlService _oAuthUrlService;
+        private readonly IHttpClient _httpClient;
+        private readonly IOAuthResponseProcessor _oAuthResponseProcessor;
 
-        public OAuthService(ISimplickrConfigurationProvider simplickrConfigurationProvider)
+        public OAuthService(IOAuthUrlService oAuthUrlService, IHttpClient httpClient, IOAuthResponseProcessor oAuthResponseProcessor)
         {
-            _simplickrConfigurationProvider = simplickrConfigurationProvider;
+            _oAuthUrlService = oAuthUrlService;
+            _httpClient = httpClient;
+            _oAuthResponseProcessor = oAuthResponseProcessor;
         }
 
-        public string GetRequestTokenUrl()
+        public OAuthResponse GetRequestToken(string callbackUrl)
         {
-            const string requestTokenBaseUrl = "http://www.flickr.com/services/oauth/request_token";
-            var requestTokenBaseUri = new Uri(requestTokenBaseUrl);
-            var simplickrConfig = _simplickrConfigurationProvider.GetConfig();
-            string consumerKey = simplickrConfig.ApiKey;
-            string consumerSecret = simplickrConfig.Secret;
+            var requestTokenUrl = _oAuthUrlService.GetRequestTokenUrl(callbackUrl);
+            var response = _httpClient.Get(requestTokenUrl);
+            var oAuthResponse = _oAuthResponseProcessor.ProcessResponse(response);
 
-            var oAuthBase = new OAuthBase();
-            string nonce = oAuthBase.GenerateNonce();
-            string timeStamp = oAuthBase.GenerateTimeStamp();
-            string normalizedUrl;
-            string normalizedRequestParameters;
-            string signature = oAuthBase.GenerateSignature(requestTokenBaseUri,
-                consumerKey, consumerSecret,
-                string.Empty, string.Empty,
-                "GET", timeStamp, nonce,
-                OAuthBase.SignatureTypes.HMACSHA1,
-                out normalizedUrl, out normalizedRequestParameters);
-
-            signature = HttpUtility.UrlEncode(signature);
-
-            string requestTokenUrl = normalizedUrl
-                + "?" + normalizedRequestParameters
-                + "&oauth_signature=" + signature;
-
-            return requestTokenUrl;
+            return oAuthResponse;
         }
     }
 }
