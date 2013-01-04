@@ -52,10 +52,10 @@
     <Compile Include="Authentication\OAuthAccessToken.cs" />
     <Compile Include="Authentication\OAuthBase.cs" />
     <Compile Include="Authentication\OAuthRequestToken.cs" />
-    <Compile Include="Authentication\OAuthResponseProcessor.cs" />
     <Compile Include="Authentication\OAuthService.cs" />
     <Compile Include="Authentication\OAuthUrlProvider.cs" />
     <Compile Include="Authentication\OAuthUrlService.cs" />
+    <Compile Include="Authentication\QueryStringSerializer.cs" />
     <Compile Include="Configuration\SimplickrConfigurationProvider.cs" />
     <Compile Include="Configuration\SimplickrConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\SimplickrConfig.cs" />

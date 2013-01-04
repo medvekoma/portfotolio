@@ -285,6 +285,7 @@
     <Content Include="Views\Settings\OptOut.cshtml" />
     <Content Include="Views\Shared\AuthenticationInfo.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\OAuth\Callback.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

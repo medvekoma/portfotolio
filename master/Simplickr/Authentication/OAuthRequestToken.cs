@@ -2,9 +2,9 @@
 {
     public class OAuthRequestToken
     {
-        public string Problem { get; set; }
-        public bool CallbackConfirmed { get; set; }
-        public string Token { get; set; }
-        public string TokenSecret { get; set; }
+        public string OAuthProblem { get; set; }
+        public bool OAuthCallbackConfirmed { get; set; }
+        public string OAuthToken { get; set; }
+        public string OAuthTokenSecret { get; set; }
     }
 }

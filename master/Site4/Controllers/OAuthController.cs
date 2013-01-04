@@ -16,8 +16,7 @@ namespace Portfotolio.Site4.Controllers
         {
             _oAuthUrlService = new OAuthUrlService(new SimplickrConfigurationProvider());
             IHttpClient httpClient = new HttpClient();
-            IOAuthResponseProcessor oAuthResponseProcessor = new OAuthResponseProcessor();
-            _oAuthService = new OAuthService(_oAuthUrlService, httpClient, oAuthResponseProcessor);
+            _oAuthService = new OAuthService(_oAuthUrlService, httpClient, new QueryStringSerializer());
         }
 
         public ActionResult Authorize()
@@ -31,8 +30,8 @@ namespace Portfotolio.Site4.Controllers
             callbackUrl = applicationHome + callbackUrl;
             var requestToken = _oAuthService.GetRequestToken(callbackUrl);
 
-            var userAuthorizationUrl = _oAuthUrlService.GetUserAuthorizationUrl(requestToken.Token);
-            TempData["OAuthTokenSecret"] = requestToken.TokenSecret;
+            var userAuthorizationUrl = _oAuthUrlService.GetUserAuthorizationUrl(requestToken.OAuthToken);
+            TempData["OAuthTokenSecret"] = requestToken.OAuthTokenSecret;
 
             return Redirect(userAuthorizationUrl);
         }
@@ -40,8 +39,9 @@ namespace Portfotolio.Site4.Controllers
         public ActionResult Callback(string oauth_token, string oauth_verifier)
         {
             var tokenSecret = (string) TempData["OAuthTokenSecret"];
-            string accessToken = _oAuthService.GetAccessToken(oauth_token, tokenSecret, oauth_verifier);
-            return Content(accessToken);
+            var accessToken = _oAuthService.GetAccessToken(oauth_token, tokenSecret, oauth_verifier);
+
+            return View(accessToken);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace SimplickrTests
         public OAuthServiceTests()
         {
             _oAuthUrlService = new OAuthUrlService(new SimplickrConfigurationProvider());
-            _oAuthService = new OAuthService(_oAuthUrlService, new HttpClient(), new OAuthResponseProcessor());
+            _oAuthService = new OAuthService(_oAuthUrlService, new HttpClient(), new QueryStringSerializer());
 
             _callbackUrl = "http://portfotolio.local/-oauth/authorize";
         }
@@ -29,10 +29,10 @@ namespace SimplickrTests
         {
             var oAuthResponse = _oAuthService.GetRequestToken(_callbackUrl);
 
-            Assert.IsNull(oAuthResponse.Problem);
-            Assert.IsTrue(oAuthResponse.CallbackConfirmed);
+            Assert.IsNull(oAuthResponse.OAuthProblem);
+            Assert.IsTrue(oAuthResponse.OAuthCallbackConfirmed);
 
-            Console.WriteLine("token:  {0}\nsecret: {1}", oAuthResponse.Token, oAuthResponse.TokenSecret);
+            Console.WriteLine("token:  {0}\nsecret: {1}", oAuthResponse.OAuthToken, oAuthResponse.OAuthTokenSecret);
         }
 
         [TestMethod]
@@ -40,10 +40,10 @@ namespace SimplickrTests
         {
             string callbackUrl = _callbackUrl;
             var oAuthResponse = _oAuthService.GetRequestToken(callbackUrl);
-            var userAuthorizationUrl = _oAuthUrlService.GetUserAuthorizationUrl(oAuthResponse.Token);
+            var userAuthorizationUrl = _oAuthUrlService.GetUserAuthorizationUrl(oAuthResponse.OAuthToken);
 
             Console.WriteLine(userAuthorizationUrl);
-            Console.WriteLine(oAuthResponse.TokenSecret);
+            Console.WriteLine(oAuthResponse.OAuthTokenSecret);
         }
     }
 }
