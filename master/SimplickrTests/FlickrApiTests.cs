@@ -20,7 +20,8 @@ namespace SimplickrTests
             ISimplickrFormatter simplickrFormatter = new SimplickrJsonFormatter();
             IHttpClient httpClient = new HttpClient();
             ISimplickrConfigurationProvider simplickrConfigurationProvider = new SimplickrConfigurationProvider();
-            IFlickrRequestBuilder flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrConfigurationProvider);
+            IFlickrSignatureGenerator flickrSignatureGenerator = new FlickrSignatureGenerator(simplickrConfigurationProvider);
+            IFlickrRequestBuilder flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrConfigurationProvider, flickrSignatureGenerator);
             IFlickrApiInvoker flickrApiInvoker = new FlickrApiInvoker(flickrRequestBuilder, httpClient, simplickrFormatter);
             _flickrApi = new FlickrApi(flickrApiInvoker);
         }
@@ -30,7 +31,8 @@ namespace SimplickrTests
         {
             var request = new GetPhotosParameters(userId: "27725019@N00")
                 .PerPage(30)
-                .Extras(Extras.PathAlias | Extras.UrlS);
+                .Extras(Extras.PathAlias | Extras.UrlS)
+                ;
             var result = _flickrApi.PeopleGetPublicPhotos(request);
 
             Assert.AreEqual("ok", result.Stat);
@@ -38,13 +40,27 @@ namespace SimplickrTests
             Assert.AreEqual(1, result.Photos.Page);
         }
 
+        [TestMethod]
+        public void PeopleGetPublicPhotosSignedTest()
+        {
+            var request = new GetPhotosParameters(userId: "27725019@N00")
+                .PerPage(30)
+                .Extras(Extras.PathAlias | Extras.UrlS)
+                ;
+            var result = _flickrApi.PeopleGetPublicPhotos(request, true);
+
+            Assert.AreEqual("ok", result.Stat);
+            Assert.AreEqual(30, result.Photos.PerPage);
+            Assert.AreEqual(1, result.Photos.Page);
+        }
 
         [TestMethod]
         public void PeopleGetPhotosTestUnauthorized()
         {
             var request = new GetPhotosParameters(userId: "27725019@N00")
                 .PerPage(30)
-                .Extras(Extras.PathAlias | Extras.UrlS);
+                .Extras(Extras.PathAlias | Extras.UrlS)
+                ;
             var result = _flickrApi.PeopleGetPhotos(request);
 
             Assert.AreEqual("fail", result.Stat);

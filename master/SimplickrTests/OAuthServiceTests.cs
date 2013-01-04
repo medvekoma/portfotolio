@@ -13,14 +13,15 @@ namespace SimplickrTests
     public class OAuthServiceTests
     {
         private readonly IOAuthService _oAuthService;
+        private readonly IOAuthUrlService _oAuthUrlService;
         private readonly string _callbackUrl;
 
         public OAuthServiceTests()
         {
-            var oAuthUrlService = new OAuthUrlService(new SimplickrConfigurationProvider());
-            _oAuthService = new OAuthService(oAuthUrlService, new HttpClient(), new OAuthResponseProcessor());
+            _oAuthUrlService = new OAuthUrlService(new SimplickrConfigurationProvider());
+            _oAuthService = new OAuthService(_oAuthUrlService, new HttpClient(), new OAuthResponseProcessor());
 
-            _callbackUrl = "http://portfotolio.net/-account/authorize";
+            _callbackUrl = "http://portfotolio.local/-oauth/authorize";
         }
 
         [TestMethod]
@@ -32,6 +33,17 @@ namespace SimplickrTests
             Assert.IsTrue(oAuthResponse.CallbackConfirmed);
 
             Console.WriteLine("token:  {0}\nsecret: {1}", oAuthResponse.Token, oAuthResponse.TokenSecret);
+        }
+
+        [TestMethod]
+        public void ShouldGetUserAuthorizationUrl()
+        {
+            string callbackUrl = _callbackUrl;
+            var oAuthResponse = _oAuthService.GetRequestToken(callbackUrl);
+            var userAuthorizationUrl = _oAuthUrlService.GetUserAuthorizationUrl(oAuthResponse.Token);
+
+            Console.WriteLine(userAuthorizationUrl);
+            Console.WriteLine(oAuthResponse.TokenSecret);
         }
     }
 }

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FlickrNet">
+      <HintPath>..\FlickrEngine\bin\Debug\FlickrNet.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -46,14 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\OAuthAccessToken.cs" />
     <Compile Include="Authentication\OAuthBase.cs" />
-    <Compile Include="Authentication\OAuthResponse.cs" />
+    <Compile Include="Authentication\OAuthRequestToken.cs" />
     <Compile Include="Authentication\OAuthResponseProcessor.cs" />
     <Compile Include="Authentication\OAuthService.cs" />
+    <Compile Include="Authentication\OAuthUrlProvider.cs" />
     <Compile Include="Authentication\OAuthUrlService.cs" />
     <Compile Include="Configuration\SimplickrConfigurationProvider.cs" />
     <Compile Include="Configuration\SimplickrConfigurationSectionHandler.cs" />
     <Compile Include="Configuration\SimplickrConfig.cs" />
+    <Compile Include="EncodingUtility.cs" />
+    <Compile Include="FlickrSignatureGenerator.cs" />
     <Compile Include="Parameters\Extras.cs" />
     <Compile Include="FlickrApi.cs" />
     <Compile Include="FlickrApiInvoker.cs" />

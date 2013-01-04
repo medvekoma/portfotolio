@@ -4,17 +4,17 @@ namespace Simplickr.Authentication
 {
     public interface IOAuthResponseProcessor
     {
-        OAuthResponse ProcessResponse(string response);
+        OAuthRequestToken ProcessResponse(string response);
     }
 
     public class OAuthResponseProcessor : IOAuthResponseProcessor
     {
-        public OAuthResponse ProcessResponse(string response)
+        public OAuthRequestToken ProcessResponse(string response)
         {
             if (response == null)
                 throw new ArgumentNullException("response");
 
-            var oAuthResponse = new OAuthResponse();
+            var oAuthResponse = new OAuthRequestToken();
 
             var elements = response.Split('&');
             foreach (var element in elements)

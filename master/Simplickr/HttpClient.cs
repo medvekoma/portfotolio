@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
+using System.Web;
 
 namespace Simplickr
 {
@@ -12,8 +14,17 @@ namespace Simplickr
     {
         public string Get(string url)
         {
-            using (var webClient = new WebClient())
-            using (var stream = webClient.OpenRead(url))
+            WebResponse response;
+            var webRequest = WebRequest.Create(url);
+            try
+            {
+                response = webRequest.GetResponse();
+            }
+            catch (WebException e)
+            {
+                response = e.Response;
+            }
+            using (var stream = response.GetResponseStream())
             {
                 if (stream == null)
                     return null;

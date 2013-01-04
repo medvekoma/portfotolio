@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Simplickr
 {
-    public class ParameterMap : Dictionary<string, string>
+    public class ParameterMap : SortedDictionary<string, string>
     {
         public ParameterMap Add<TValue>(string key, TValue value)
         {

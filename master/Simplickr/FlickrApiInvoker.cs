@@ -6,7 +6,7 @@ namespace Simplickr
 {
     public interface IFlickrApiInvoker
     {
-        TResponse Invoke<TResponse>(string methodName, IRequestParameters parameters);
+        TResponse Invoke<TResponse>(string methodName, IRequestParameters parameters, bool sign = false);
     }
 
     public class FlickrApiInvoker : IFlickrApiInvoker
@@ -22,10 +22,12 @@ namespace Simplickr
             _simplickrFormatter = simplickrFormatter;
         }
 
-        public TResponse Invoke<TResponse>(string methodName, IRequestParameters parameters)
+        public TResponse Invoke<TResponse>(string methodName, IRequestParameters parameters, bool sign)
         {
-            IFlickrRequest flickrRequest = _flickrRequestBuilder.Build(methodName, parameters);
+            IFlickrRequest flickrRequest = _flickrRequestBuilder.Build(methodName, parameters, sign);
             string url = flickrRequest.GetUrl();
+
+            Console.WriteLine(url);
             string response = _httpClient.Get(url);
 
             Console.WriteLine(response);

@@ -2,7 +2,8 @@
 {
     public interface IOAuthService
     {
-        OAuthResponse GetRequestToken(string callbackUrl);
+        OAuthRequestToken GetRequestToken(string callbackUrl);
+        string GetAccessToken(string token, string tokenSecret, string verifier);
     }
 
     public class OAuthService : IOAuthService
@@ -18,13 +19,21 @@
             _oAuthResponseProcessor = oAuthResponseProcessor;
         }
 
-        public OAuthResponse GetRequestToken(string callbackUrl)
+        public OAuthRequestToken GetRequestToken(string callbackUrl)
         {
             var requestTokenUrl = _oAuthUrlService.GetRequestTokenUrl(callbackUrl);
             var response = _httpClient.Get(requestTokenUrl);
-            var oAuthResponse = _oAuthResponseProcessor.ProcessResponse(response);
+            var requestToken = _oAuthResponseProcessor.ProcessResponse(response);
 
-            return oAuthResponse;
+            return requestToken;
+        }
+
+        public string GetAccessToken(string token, string tokenSecret, string verifier)
+        {
+            string accessTokenUrl = _oAuthUrlService.GetAccessTokenUrl(token, tokenSecret, verifier);
+            string accessTokenString = _httpClient.Get(accessTokenUrl);
+            return accessTokenString;
+            // _oAuthResponseProcessor.GetAccessToken(accessTokenString);
         }
     }
 }

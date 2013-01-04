@@ -45,7 +45,7 @@ namespace Simplickr.Parameters
 
         public override string ToString()
         {
-            return string.Join(", ", _values);
+            return string.Join(",", _values);
         }
     }
 }

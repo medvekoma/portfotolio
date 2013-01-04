@@ -128,6 +128,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegacyController.cs" />
+    <Compile Include="Controllers\OAuthController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -237,7 +238,9 @@
     <Content Include="Views\Photo\DisplayTemplates\DomainPhoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="flickr.api.config" />
+    <Content Include="flickr.api.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="flickr.api.debug.config">
@@ -297,7 +300,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>4020</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

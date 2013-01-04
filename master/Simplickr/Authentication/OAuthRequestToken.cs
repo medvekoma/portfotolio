@@ -1,6 +1,6 @@
 ﻿namespace Simplickr.Authentication
 {
-    public class OAuthResponse
+    public class OAuthRequestToken
     {
         public string Problem { get; set; }
         public bool CallbackConfirmed { get; set; }
