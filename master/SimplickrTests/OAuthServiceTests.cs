@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Simplickr;
 using Simplickr.Authentication;
 using Simplickr.Configuration;
+using Simplickr.Formatters;
+using Simplickr.Parameters;
 
 namespace SimplickrTests
 {
@@ -15,6 +17,7 @@ namespace SimplickrTests
         private readonly IOAuthService _oAuthService;
         private readonly IOAuthUrlService _oAuthUrlService;
         private readonly string _callbackUrl;
+        private FlickrApi _flickrApi;
 
         public OAuthServiceTests()
         {
@@ -22,28 +25,37 @@ namespace SimplickrTests
             _oAuthService = new OAuthService(_oAuthUrlService, new HttpClient(), new QueryStringSerializer());
 
             _callbackUrl = "http://portfotolio.local/-oauth/authorize";
+
+            ISimplickrFormatter simplickrFormatter = new SimplickrJsonFormatter();
+            ISimplickrConfigurationProvider simplickrConfigurationProvider = new SimplickrConfigurationProvider();
+            IFlickrSignatureGenerator flickrSignatureGenerator = new FlickrSignatureGenerator(simplickrConfigurationProvider);
+            var flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrConfigurationProvider, flickrSignatureGenerator);
+            IHttpClient httpClient = new HttpClient();
+            _flickrApi = new FlickrApi(new FlickrApiInvoker(flickrRequestBuilder, httpClient, simplickrFormatter));
         }
 
         [TestMethod]
         public void ShouldGetRequestToken()
         {
-            var oAuthResponse = _oAuthService.GetRequestToken(_callbackUrl);
+            var requestToken = _oAuthService.GetRequestToken(_callbackUrl);
 
-            Assert.IsNull(oAuthResponse.OAuthProblem);
-            Assert.IsTrue(oAuthResponse.OAuthCallbackConfirmed);
+            Assert.IsNull(requestToken.OAuthProblem);
+            Assert.IsTrue(requestToken.OAuthCallbackConfirmed);
 
-            Console.WriteLine("token:  {0}\nsecret: {1}", oAuthResponse.OAuthToken, oAuthResponse.OAuthTokenSecret);
+            Console.WriteLine("token:  {0}\nsecret: {1}", requestToken.OAuthToken, requestToken.OAuthTokenSecret);
+
+            var checkTokenResponse = _flickrApi.OAuthCheckToken(new OAuthCheckTokenParameters(requestToken.OAuthToken));
         }
 
         [TestMethod]
         public void ShouldGetUserAuthorizationUrl()
         {
             string callbackUrl = _callbackUrl;
-            var oAuthResponse = _oAuthService.GetRequestToken(callbackUrl);
-            var userAuthorizationUrl = _oAuthUrlService.GetUserAuthorizationUrl(oAuthResponse.OAuthToken);
+            var requestToken = _oAuthService.GetRequestToken(callbackUrl);
+            var userAuthorizationUrl = _oAuthUrlService.GetUserAuthorizationUrl(requestToken.OAuthToken);
 
             Console.WriteLine(userAuthorizationUrl);
-            Console.WriteLine(oAuthResponse.OAuthTokenSecret);
+            Console.WriteLine(requestToken.OAuthTokenSecret);
         }
     }
 }

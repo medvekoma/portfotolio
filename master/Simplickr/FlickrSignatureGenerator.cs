@@ -24,11 +24,13 @@ namespace Simplickr
 
         public void AddSignature(IRequestParameters requestParameters)
         {
-            var simplickrConfig = _simplickrConfigurationProvider.GetConfig();
             var signatureBaseElements = requestParameters.ParameterMap
                              .Select(parameter => parameter.Key + parameter.Value)
                              .ToArray();
-            var signatureBase = simplickrConfig.Secret + string.Join("", signatureBaseElements);
+
+            var simplickrConfig = _simplickrConfigurationProvider.GetConfig();
+            var secret = simplickrConfig.Secret;
+            var signatureBase = secret + string.Join("", signatureBaseElements);
 
             var signature = MD5Hash(signatureBase);
 

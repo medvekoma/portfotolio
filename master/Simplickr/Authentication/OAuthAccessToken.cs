@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Simplickr.Authentication
+﻿namespace Simplickr.Authentication
 {
     public class OAuthAccessToken
     {

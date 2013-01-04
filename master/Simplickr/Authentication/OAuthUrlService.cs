@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Web;
-using OAuth;
-using Simplickr.Configuration;
+﻿using Simplickr.Configuration;
 
 namespace Simplickr.Authentication
 {

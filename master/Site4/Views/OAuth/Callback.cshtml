@@ -1,8 +1,20 @@
-﻿@model Simplickr.Authentication.OAuthAccessToken
+﻿@using Simplickr.Response
+@model Simplickr.Authentication.OAuthAccessToken
+<h2>Access Token</h2>
 <ul>
     <li>UserId: @Model.UserNsId</li>
     <li>UserName: @Model.UserName</li>
     <li>FullName: @Model.FullName</li>
     <li>Token: @Model.OAuthToken</li>
     <li>TokenSecret: @Model.OAuthTokenSecret</li>
+</ul>
+
+<h2>Check Token</h2>
+<ul>
+    @{
+        var oAuthCheckTokenResponse = (OAuthCheckTokenResponse) ViewBag.CheckTokenResponse;
+    }
+    <li>Status: @oAuthCheckTokenResponse.Stat</li>
+    <li>Code: @oAuthCheckTokenResponse.Code</li>
+    <li>Message: @oAuthCheckTokenResponse.Message</li>
 </ul>

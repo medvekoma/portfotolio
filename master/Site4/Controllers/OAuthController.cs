@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using Simplickr;
 using Simplickr.Authentication;
 using Simplickr.Configuration;
+using Simplickr.Formatters;
+using Simplickr.Parameters;
 
 namespace Portfotolio.Site4.Controllers
 {
@@ -11,12 +13,19 @@ namespace Portfotolio.Site4.Controllers
     {
         private readonly IOAuthService _oAuthService;
         private readonly IOAuthUrlService _oAuthUrlService;
+        private FlickrApi _flickrApi;
 
         public OAuthController()
         {
             _oAuthUrlService = new OAuthUrlService(new SimplickrConfigurationProvider());
             IHttpClient httpClient = new HttpClient();
             _oAuthService = new OAuthService(_oAuthUrlService, httpClient, new QueryStringSerializer());
+
+            ISimplickrFormatter simplickrFormatter = new SimplickrJsonFormatter();
+            ISimplickrConfigurationProvider simplickrConfigurationProvider = new SimplickrConfigurationProvider();
+            IFlickrSignatureGenerator flickrSignatureGenerator = new FlickrSignatureGenerator(simplickrConfigurationProvider);
+            var flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrConfigurationProvider, flickrSignatureGenerator);
+            _flickrApi = new FlickrApi(new FlickrApiInvoker(flickrRequestBuilder, httpClient, simplickrFormatter));
         }
 
         public ActionResult Authorize()
@@ -40,6 +49,9 @@ namespace Portfotolio.Site4.Controllers
         {
             var tokenSecret = (string) TempData["OAuthTokenSecret"];
             var accessToken = _oAuthService.GetAccessToken(oauth_token, tokenSecret, oauth_verifier);
+
+            var checkTokenResponse = _flickrApi.OAuthCheckToken(new OAuthCheckTokenParameters(oauth_token));
+            ViewBag.CheckTokenResponse = checkTokenResponse;
 
             return View(accessToken);
         }
