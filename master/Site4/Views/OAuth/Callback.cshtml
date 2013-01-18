@@ -1,20 +1,34 @@
 ﻿@using Simplickr.Response
-@model Simplickr.Authentication.OAuthAccessToken
+@model Portfotolio.Site4.Models.OAuthModel
 <h2>Access Token</h2>
 <ul>
-    <li>UserId: @Model.UserNsId</li>
-    <li>UserName: @Model.UserName</li>
-    <li>FullName: @Model.FullName</li>
-    <li>Token: @Model.OAuthToken</li>
-    <li>TokenSecret: @Model.OAuthTokenSecret</li>
+    <li>UserId: @Model.AccessToken.UserNsId</li>
+    <li>UserName: @Model.AccessToken.UserName</li>
+    <li>FullName: @Model.AccessToken.FullName</li>
+    <li>Token: @Model.AccessToken.OAuthToken</li>
+    <li>TokenSecret: @Model.AccessToken.OAuthTokenSecret</li>
+</ul>
+
+<h2>Photos</h2>
+<ul>
+    @if (Model.Photos.IsSuccessful())
+    {
+        foreach (var photo in Model.Photos.Photos.Photo)
+        {
+            <li>@photo.Title</li>
+        }
+    }
+    else
+    {
+        <li>Message: @Model.Photos.Message</li>
+        <li>Status: @Model.Photos.Stat</li>
+        <li>Code: @Model.Photos.Code</li>
+    }
 </ul>
 
 <h2>Check Token</h2>
 <ul>
-    @{
-        var oAuthCheckTokenResponse = (OAuthCheckTokenResponse) ViewBag.CheckTokenResponse;
-    }
-    <li>Status: @oAuthCheckTokenResponse.Stat</li>
-    <li>Code: @oAuthCheckTokenResponse.Code</li>
-    <li>Message: @oAuthCheckTokenResponse.Message</li>
+    <li>Status: @Model.CheckTokenResult.Stat</li>
+    <li>Code: @Model.CheckTokenResult.Code</li>
+    <li>Message: @Model.CheckTokenResult.Message</li>
 </ul>

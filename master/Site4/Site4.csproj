@@ -129,6 +129,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LegacyController.cs" />
     <Compile Include="Controllers\OAuthController.cs" />
+    <Compile Include="Models\OAuthModel.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -174,7 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

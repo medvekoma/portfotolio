@@ -2,39 +2,34 @@
 
 namespace Simplickr.Parameters
 {
-    public class GetPhotosParameters : IRequestParameters
+    public class GetPhotosParameters : RequestParametersBase<GetPhotosParameters>
     {
-        public ParameterMap ParameterMap { get; private set; }
-
         public GetPhotosParameters(string userId)
         {
-            ParameterMap = new ParameterMap
-                {
-                    {"user_id", userId}
-                };
+            ParameterMap.Set("user_id", userId);
         }
 
         public GetPhotosParameters SafeSearch(SafeSearch safeSearch)
         {
-            ParameterMap.Add("safe_search", safeSearch);
+            ParameterMap.Set("safe_search", safeSearch);
             return this;
         }
 
         public GetPhotosParameters Extras(Extras extras)
         {
-            ParameterMap.Add("extras", extras);
+            ParameterMap.Set("extras", extras);
             return this;            
         }
 
         public GetPhotosParameters PerPage(int perPage)
         {
-            ParameterMap.Add("per_page", perPage.ToString(CultureInfo.InvariantCulture));
+            ParameterMap.Set("per_page", perPage.ToString(CultureInfo.InvariantCulture));
             return this;            
         }
 
         public GetPhotosParameters Page(int page)
         {
-            ParameterMap.Add("page", page.ToString(CultureInfo.InvariantCulture));
+            ParameterMap.Set("page", page.ToString(CultureInfo.InvariantCulture));
             return this;            
         }
     }

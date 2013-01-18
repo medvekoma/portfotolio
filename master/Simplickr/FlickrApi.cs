@@ -5,7 +5,7 @@ namespace Simplickr
 {
     public interface IFlickrApi
     {
-        FlickrPhotosResponse PeopleGetPublicPhotos(GetPhotosParameters parameters, bool sign = false);
+        FlickrPhotosResponse PeopleGetPublicPhotos(GetPhotosParameters parameters);
         FlickrPhotosResponse PeopleGetPhotos(GetPhotosParameters parameters);
     }
 

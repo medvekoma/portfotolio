@@ -28,8 +28,7 @@ namespace SimplickrTests
 
             ISimplickrFormatter simplickrFormatter = new SimplickrJsonFormatter();
             ISimplickrConfigurationProvider simplickrConfigurationProvider = new SimplickrConfigurationProvider();
-            IFlickrSignatureGenerator flickrSignatureGenerator = new FlickrSignatureGenerator(simplickrConfigurationProvider);
-            var flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrConfigurationProvider, flickrSignatureGenerator);
+            var flickrRequestBuilder = new FlickrRequestUrlProvider(simplickrFormatter, simplickrConfigurationProvider);
             IHttpClient httpClient = new HttpClient();
             _flickrApi = new FlickrApi(new FlickrApiInvoker(flickrRequestBuilder, httpClient, simplickrFormatter));
         }

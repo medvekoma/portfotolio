@@ -20,9 +20,8 @@ namespace SimplickrTests
             ISimplickrFormatter simplickrFormatter = new SimplickrJsonFormatter();
             IHttpClient httpClient = new HttpClient();
             ISimplickrConfigurationProvider simplickrConfigurationProvider = new SimplickrConfigurationProvider();
-            IFlickrSignatureGenerator flickrSignatureGenerator = new FlickrSignatureGenerator(simplickrConfigurationProvider);
-            IFlickrRequestBuilder flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrConfigurationProvider, flickrSignatureGenerator);
-            IFlickrApiInvoker flickrApiInvoker = new FlickrApiInvoker(flickrRequestBuilder, httpClient, simplickrFormatter);
+            IFlickrRequestUrlProvider flickrRequestUrlProvider = new FlickrRequestUrlProvider(simplickrFormatter, simplickrConfigurationProvider);
+            IFlickrApiInvoker flickrApiInvoker = new FlickrApiInvoker(flickrRequestUrlProvider, httpClient, simplickrFormatter);
             _flickrApi = new FlickrApi(flickrApiInvoker);
         }
 
@@ -46,8 +45,9 @@ namespace SimplickrTests
             var request = new GetPhotosParameters(userId: "27725019@N00")
                 .PerPage(30)
                 .Extras(Extras.PathAlias | Extras.UrlS)
-                ;
-            var result = _flickrApi.PeopleGetPublicPhotos(request, true);
+                .Sign();
+
+            var result = _flickrApi.PeopleGetPublicPhotos(request);
 
             Assert.AreEqual("ok", result.Stat);
             Assert.AreEqual(30, result.Photos.PerPage);

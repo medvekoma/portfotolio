@@ -60,17 +60,19 @@
     <Compile Include="Configuration\SimplickrConfig.cs" />
     <Compile Include="EncodingUtility.cs" />
     <Compile Include="FlickrSignatureGenerator.cs" />
+    <Compile Include="IRequestModifier.cs" />
     <Compile Include="Parameters\Extras.cs" />
     <Compile Include="FlickrApi.cs" />
     <Compile Include="FlickrApiInvoker.cs" />
-    <Compile Include="FlickrRequest.cs" />
-    <Compile Include="FlickrRequestBuilder.cs" />
+    <Compile Include="FlickrRequestUrlProvider.cs" />
     <Compile Include="HttpClient.cs" />
     <Compile Include="Parameters\GetPhotosParameters.cs" />
     <Compile Include="Parameters\IRequestParameters.cs" />
     <Compile Include="Formatters\ISimplickrFormatter.cs" />
     <Compile Include="ParameterMap.cs" />
     <Compile Include="Parameters\OAuthCheckTokenParameters.cs" />
+    <Compile Include="Parameters\RequestModifierMode.cs" />
+    <Compile Include="Parameters\RequestParametersBase.cs" />
     <Compile Include="Response\FlickrPhotos.cs" />
     <Compile Include="Response\FlickrPhotosResponse.cs" />
     <Compile Include="Parameters\SafeSearch.cs" />
@@ -78,12 +80,15 @@
     <Compile Include="Formatters\SimplickrJsonFormatter.cs" />
     <Compile Include="Response\FlickrResponseBase.cs" />
     <Compile Include="Response\OAuthCheckTokenResponse.cs" />
+    <Compile Include="Response\ResponseExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FlickrApi.People.cs">
       <DependentUpon>FlickrApi.cs</DependentUpon>
     </Compile>
-    <Compile Include="FlickrApi.OAuth.cs" />
+    <Compile Include="FlickrApi.OAuth.cs">
+      <DependentUpon>FlickrApi.cs</DependentUpon>
+    </Compile>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

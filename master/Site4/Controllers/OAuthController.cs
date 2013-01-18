@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
+using Portfotolio.Site4.Models;
 using Simplickr;
 using Simplickr.Authentication;
 using Simplickr.Configuration;
@@ -13,7 +14,7 @@ namespace Portfotolio.Site4.Controllers
     {
         private readonly IOAuthService _oAuthService;
         private readonly IOAuthUrlService _oAuthUrlService;
-        private FlickrApi _flickrApi;
+        private readonly FlickrApi _flickrApi;
 
         public OAuthController()
         {
@@ -23,8 +24,7 @@ namespace Portfotolio.Site4.Controllers
 
             ISimplickrFormatter simplickrFormatter = new SimplickrJsonFormatter();
             ISimplickrConfigurationProvider simplickrConfigurationProvider = new SimplickrConfigurationProvider();
-            IFlickrSignatureGenerator flickrSignatureGenerator = new FlickrSignatureGenerator(simplickrConfigurationProvider);
-            var flickrRequestBuilder = new FlickrRequestBuilder(simplickrFormatter, simplickrConfigurationProvider, flickrSignatureGenerator);
+            var flickrRequestBuilder = new FlickrRequestUrlProvider(simplickrFormatter, simplickrConfigurationProvider);
             _flickrApi = new FlickrApi(new FlickrApiInvoker(flickrRequestBuilder, httpClient, simplickrFormatter));
         }
 
@@ -48,12 +48,26 @@ namespace Portfotolio.Site4.Controllers
         public ActionResult Callback(string oauth_token, string oauth_verifier)
         {
             var tokenSecret = (string) TempData["OAuthTokenSecret"];
+            Session["OAuthToken"] = oauth_token;
+
             var accessToken = _oAuthService.GetAccessToken(oauth_token, tokenSecret, oauth_verifier);
 
-            var checkTokenResponse = _flickrApi.OAuthCheckToken(new OAuthCheckTokenParameters(oauth_token));
-            ViewBag.CheckTokenResponse = checkTokenResponse;
+            var parameters = new OAuthCheckTokenParameters(oauth_token);
+            var checkTokenResult = _flickrApi.OAuthCheckToken(parameters);
+            ViewBag.CheckTokenResponse = checkTokenResult;
 
-            return View(accessToken);
+            var getPhotoParameters = new GetPhotosParameters(userId: "27725019@N00")
+                .PerPage(10);
+            var flickrPhotosResult = _flickrApi.PeopleGetPhotos(getPhotoParameters);
+
+            var oAuthModel = new OAuthModel
+                {
+                    AccessToken = accessToken, 
+                    CheckTokenResult = checkTokenResult,
+                    Photos = flickrPhotosResult,
+                };
+
+            return View(oAuthModel);
         }
     }
 }

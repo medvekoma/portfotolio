@@ -1,15 +1,10 @@
 ﻿namespace Simplickr.Parameters
 {
-    public class OAuthCheckTokenParameters : IRequestParameters
+    public class OAuthCheckTokenParameters : RequestParametersBase<OAuthCheckTokenParameters>
     {
-        public ParameterMap ParameterMap { get; private set; }
-
         public OAuthCheckTokenParameters(string token)
         {
-            ParameterMap = new ParameterMap
-                {
-                    {"oauth_token", token}
-                };
+            ParameterMap.Set("oauth_token", token);
         }
     }
 }

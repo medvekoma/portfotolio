@@ -6,30 +6,28 @@ namespace Simplickr
 {
     public interface IFlickrApiInvoker
     {
-        TResponse Invoke<TResponse>(string methodName, IRequestParameters parameters, bool sign = false);
+        TResponse Invoke<TResponse>(string methodName, IRequestParameters parameters);
     }
 
     public class FlickrApiInvoker : IFlickrApiInvoker
     {
-        private readonly IFlickrRequestBuilder _flickrRequestBuilder;
+        private readonly IFlickrRequestUrlProvider _flickrRequestUrlProvider;
         private readonly IHttpClient _httpClient;
         private readonly ISimplickrFormatter _simplickrFormatter;
 
-        public FlickrApiInvoker(IFlickrRequestBuilder flickrRequestBuilder, IHttpClient httpClient, ISimplickrFormatter simplickrFormatter)
+        public FlickrApiInvoker(IFlickrRequestUrlProvider flickrRequestUrlProvider, IHttpClient httpClient, ISimplickrFormatter simplickrFormatter)
         {
-            _flickrRequestBuilder = flickrRequestBuilder;
+            _flickrRequestUrlProvider = flickrRequestUrlProvider;
             _httpClient = httpClient;
             _simplickrFormatter = simplickrFormatter;
         }
 
-        public TResponse Invoke<TResponse>(string methodName, IRequestParameters parameters, bool sign)
+        public TResponse Invoke<TResponse>(string methodName, IRequestParameters parameters)
         {
-            IFlickrRequest flickrRequest = _flickrRequestBuilder.Build(methodName, parameters, sign);
-            string url = flickrRequest.GetUrl();
-
+            string url = _flickrRequestUrlProvider.GetUrl(methodName, parameters);
             Console.WriteLine(url);
-            string response = _httpClient.Get(url);
 
+            string response = _httpClient.Get(url);
             Console.WriteLine(response);
 
             return _simplickrFormatter.Deserialize<TResponse>(response);

@@ -1,4 +1,5 @@
-﻿using Simplickr.Parameters;
+﻿using Simplickr.Configuration;
+using Simplickr.Parameters;
 using Simplickr.Response;
 
 namespace Simplickr
@@ -7,7 +8,7 @@ namespace Simplickr
     {
         public OAuthCheckTokenResponse OAuthCheckToken(OAuthCheckTokenParameters parameters)
         {
-            return _flickrApiInvoker.Invoke<OAuthCheckTokenResponse>("flickr.auth.oauth.checkToken", parameters, true);
+            return _flickrApiInvoker.Invoke<OAuthCheckTokenResponse>("flickr.auth.oauth.checkToken", parameters);
         }
     }
 }

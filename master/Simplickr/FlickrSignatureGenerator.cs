@@ -10,7 +10,7 @@ namespace Simplickr
 {
     public interface IFlickrSignatureGenerator
     {
-        void AddSignature(IRequestParameters requestParameters);
+        void AddSignature(ParameterMap parameterMap);
     }
 
     public class FlickrSignatureGenerator : IFlickrSignatureGenerator
@@ -22,9 +22,9 @@ namespace Simplickr
             _simplickrConfigurationProvider = simplickrConfigurationProvider;
         }
 
-        public void AddSignature(IRequestParameters requestParameters)
+        public void AddSignature(ParameterMap parameterMap)
         {
-            var signatureBaseElements = requestParameters.ParameterMap
+            var signatureBaseElements = parameterMap
                              .Select(parameter => parameter.Key + parameter.Value)
                              .ToArray();
 
@@ -34,7 +34,7 @@ namespace Simplickr
 
             var signature = MD5Hash(signatureBase);
 
-            requestParameters.ParameterMap["api_sig"] = EncodingUtility.UrlEncode(signature);
+            parameterMap.Set("api_sig", EncodingUtility.UrlEncode(signature));
         }
 
         private static string MD5Hash(string data)

@@ -9,7 +9,7 @@ namespace Simplickr.Authentication
 {
     public class OAuthUrlProvider
     {
-        readonly IDictionary<string,string> _parameters = new SortedDictionary<string, string>();
+        private readonly ParameterMap _parameterMap = new ParameterMap();
         private string _normalizedUrl;
         private string _httpMethod = "GET";
         private string _consumerSecret;
@@ -33,19 +33,19 @@ namespace Simplickr.Authentication
 
         public OAuthUrlProvider Nonce()
         {
-            _parameters["oauth_nonce"] = GenerateNonce();
+            _parameterMap.Set("oauth_nonce", GenerateNonce());
             return this;
         }
 
         public OAuthUrlProvider Timestamp()
         {
-            _parameters["oauth_timestamp"] = GenerateTimestamp();
+            _parameterMap.Set("oauth_timestamp", GenerateTimestamp());
             return this;
         }
 
         public OAuthUrlProvider ConsumerKey(string consumerKey)
         {
-            _parameters["oauth_consumer_key"] = consumerKey;
+            _parameterMap.Set("oauth_consumer_key", consumerKey);
             return this;
         }
 
@@ -57,7 +57,7 @@ namespace Simplickr.Authentication
 
         public OAuthUrlProvider Token(string token)
         {
-            _parameters["oauth_token"] = token;
+            _parameterMap.Set("oauth_token", token);
             return this;
         }
 
@@ -69,25 +69,25 @@ namespace Simplickr.Authentication
 
         public OAuthUrlProvider Version(string version = "1.0")
         {
-            _parameters["oauth_version"] = version;
+            _parameterMap.Set("oauth_version", version);
             return this;
         }
 
         public OAuthUrlProvider SignatureMethod(string signatureMethod = "HMAC-SHA1")
         {
-            _parameters["oauth_signature_method"] = signatureMethod;
+            _parameterMap.Set("oauth_signature_method", signatureMethod);
             return this;
         }
 
         public OAuthUrlProvider Callback(string callback)
         {
-            _parameters["oauth_callback"] = EncodingUtility.UrlEncode(callback);
+            _parameterMap.Set("oauth_callback", EncodingUtility.UrlEncode(callback));
             return this;
         }
 
         public OAuthUrlProvider Verifier(string verifier)
         {
-            _parameters["oauth_verifier"] = verifier;
+            _parameterMap.Set("oauth_verifier", verifier);
             return this;
         }
 
@@ -122,7 +122,7 @@ namespace Simplickr.Authentication
 
         private string GetSignatureBase()
         {
-            var elements = _parameters
+            var elements = _parameterMap
                 .Select(parameter => parameter.Key + '=' + parameter.Value)
                 .ToArray();
             _normalizedParameters = string.Join("&", elements);
@@ -136,7 +136,7 @@ namespace Simplickr.Authentication
 
         private string GetSignature()
         {
-            if (_parameters["oauth_signature_method"] != "HMAC-SHA1")
+            if (_parameterMap.Get("oauth_signature_method") != "HMAC-SHA1")
                 throw new ArgumentException("SignatureMethod HMAC-SHA1 is mandatory");
 
             var tokenSecret = string.IsNullOrEmpty(_tokenSecret) ? "" : EncodingUtility.UrlEncode(_tokenSecret);
@@ -180,11 +180,11 @@ namespace Simplickr.Authentication
                         if (queryElement.IndexOf('=') > -1)
                         {
                             string[] keyValue = queryElement.Split('=');
-                            _parameters[keyValue[0]] = keyValue[1];
+                            _parameterMap.Set(keyValue[0], keyValue[1]);
                         }
                         else
                         {
-                            _parameters[queryElement] = string.Empty;
+                            _parameterMap.Set(queryElement, string.Empty);
                         }
                     }
                 }
