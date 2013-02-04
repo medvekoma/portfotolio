@@ -14,7 +14,7 @@ namespace Portfotolio.FlickrEngine
             var domainPhotos = photoCollection
                 .Select(photo => new DomainPhoto(
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
-                                     Convert(photo.License), photo.Title, photo.WebUrl,
+                                     Convert(photo.License), photo.Title, photo.WebUrl + "lightbox/",
                                      photo.SmallUrl, photo.MediumUrl, photo.LargeUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240))
                 .ToList();
             return new DomainPhotos(domainPhotos, photoCollection.Page, photoCollection.Pages);
