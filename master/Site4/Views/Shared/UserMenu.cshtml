@@ -1,18 +1,23 @@
 ﻿@using Portfotolio.Site4.Extensions
 @{
     var userAlias = Html.UserAlias();
+    var authenticationInfo = Html.AuthenticationInfo();
 }
 @if (userAlias != null)
 {
     <ul id="menu">
-        <li>@Html.ActionLinkUserId("Photos", "photos", "photo", new { id = userAlias }, new object())</li>
-        <li>@Html.ActionLinkUserId("Albums", "albums", "photo", new { id = userAlias }, new object())</li>
-        <li>|</li>
-        <li>@Html.ActionLinkUserId("Favorites", "favorites", "photo", new { id = userAlias }, new object())</li>
-        <li>@Html.ActionLinkUserId("Subscriptions", "subscriptions", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
-        <li>@Html.ActionLinkUserId("Recommendations", "recommendations", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
+        <li>@Html.ActionLinkUserId("Photos", "photos", "photo", new { id = userAlias }, null)</li>
+        <li>@Html.ActionLinkUserId("Albums", "albums", "photo", new { id = userAlias }, null)</li>
         <li>|</li>
         <li>@Html.ActionLinkUserId("Groups", "groups", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
-        <li>@Html.ActionLinkUserId("Contacts", "contacts", "photo", new { id = userAlias }, new object())</li>
+        <li>@Html.ActionLinkUserId("Favourites", "favorites", "photo", new { id = userAlias }, null)</li>
+        @if (authenticationInfo.UserAlias == userAlias)
+        {
+            <li>|</li>
+            <li>@Html.ActionLinkUserId("Subscriptions", "subscriptions", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
+            <li>@Html.ActionLinkUserId("Contacts", "contacts", "photo", new { id = userAlias }, null)</li>
+            <li>|</li>
+            <li>@Html.ActionLinkUserId("Recommendations", "recommendations", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
+        }
     </ul>
 }
