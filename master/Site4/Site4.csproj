@@ -153,14 +153,13 @@
     <Content Include="Content\loading.gif" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\SiteOriginal.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\portfotolio.google.analytics.js" />
-    <Content Include="Scripts\portfotolio.PagingView.js" />
+    <Content Include="Scripts\Paging\portfotolio.PagingView.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
