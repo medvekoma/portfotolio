@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
@@ -12,77 +11,69 @@ namespace Portfotolio.Site4.Controllers
     [HideFromSearchEngines(AllowRobots.None)]
     public class SettingsController : Controller
     {
-        private readonly IOptoutUserService _optoutUserService;
-        private readonly IOptoutUserConfiguratorService _optoutUserConfiguratorService;
+        private readonly IUserReaderService _userReaderService;
+        private readonly IUserWriterService _userWriterService;
         private readonly IAuthenticationProvider _authenticationProvider;
         private readonly ILogger _logger;
 
-        public SettingsController(IOptoutUserService optoutUserService, IOptoutUserConfiguratorService optoutUserConfiguratorService, IAuthenticationProvider authenticationProvider, ILoggerFactory loggerFactory)
+        public SettingsController(IUserReaderService userReaderService, IUserWriterService userWriterService, IAuthenticationProvider authenticationProvider, ILoggerFactory loggerFactory)
         {
-            _optoutUserService = optoutUserService;
-            _optoutUserConfiguratorService = optoutUserConfiguratorService;
+            _userReaderService = userReaderService;
+            _userWriterService = userWriterService;
             _authenticationProvider = authenticationProvider;
             _logger = loggerFactory.GetLogger("Settings");
         }
 
-        // temporary action, can be deleted once it is not cached
-        public ActionResult Show()
+        public ActionResult Author()
         {
-            return RedirectToAction("optout");
-        }
-
-        public ActionResult OptOut()
-        {
-            ViewData[DataKeys.BreadCrumb] = "opt out";
+            ViewData[DataKeys.BreadCrumb] = "user state";
 
             var model = GetModel();
             if (!model.IsAuthenticated)
-                return View("OptOutInfo");
+                return View("AuthorInfo");
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult OptOut(bool isOptedOut)
+        public ActionResult Author(UserState userState)
         {
             var model = GetModel();
-            if (!model.IsAuthenticated || model.IsOptedOut == isOptedOut)
+            if (!model.IsAuthenticated || model.UserState == userState)
                 return View(model);
 
-            if (isOptedOut)
-                _optoutUserConfiguratorService.AddOptoutUser(model.UserId);
-            else
-                _optoutUserConfiguratorService.RemoveOptoutUser(model.UserId);
+            _userWriterService.Configure(model.UserId, userState);
 
-            string message = string.Format("{0} is opted {1}.", model.UserAlias, isOptedOut ? "out" : "in");
+            string message = string.Format("UserState of '{0}' is {1}.", model.UserAlias, userState);
             _logger.Info(message);
 
-            return RedirectToAction("Show");
+            return RedirectToAction("author");
         }
 
         public ActionResult Get()
         {
-            string optedoutUsersFlat = GetOptedoutUsersFlat();
-
-            return Content(optedoutUsersFlat);
+            return View();
         }
 
-        public ActionResult Add(string id)
+        public ActionResult In(string id)
         {
-            _optoutUserConfiguratorService.AddOptoutUser(id);
+            _userWriterService.Configure(id, UserState.Optin);
 
-            string optedoutUsersFlat = GetOptedoutUsersFlat();
-
-            return Content(optedoutUsersFlat);
+            return RedirectToAction("Get");
         }
 
-        public ActionResult Remove(string id)
+        public ActionResult Out(string id)
         {
-            _optoutUserConfiguratorService.RemoveOptoutUser(id);
+            _userWriterService.Configure(id, UserState.Optout);
 
-            string optedoutUsersFlat = GetOptedoutUsersFlat();
+            return RedirectToAction("Get");
+        }
 
-            return Content(optedoutUsersFlat);
+        public ActionResult None(string id)
+        {
+            _userWriterService.Configure(id, UserState.None);
+
+            return RedirectToAction("Get");
         }
 
         #region helpers
@@ -96,16 +87,9 @@ namespace Portfotolio.Site4.Controllers
                 model.IsAuthenticated = true;
                 model.UserAlias = authenticationInfo.UserAlias;
                 model.UserId = authenticationInfo.UserId;
-                var optedOutUserIds = _optoutUserService.GetOptedOutUserIds();
-                model.IsOptedOut = optedOutUserIds.Contains(authenticationInfo.UserId);
+                model.UserState = _userReaderService.GetUserState(authenticationInfo.UserId);
             }
             return model;
-        }
-
-        private string GetOptedoutUsersFlat()
-        {
-            var optedOutUserIds = _optoutUserService.GetOptedOutUserIds() ?? new HashSet<string>();
-            return string.Join(",", optedOutUserIds);
         }
 
         #endregion

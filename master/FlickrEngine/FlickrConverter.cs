@@ -1,21 +1,50 @@
 ﻿using System.Linq;
 using FlickrNet;
 using Portfotolio.Domain;
+using Portfotolio.Domain.Configuration;
 
 namespace Portfotolio.FlickrEngine
 {
     public class FlickrConverter : IFlickrConverter
     {
+        private readonly IUserService _userService;
+
+        private static readonly LicenseType[] CreativeCommonsLicenses = new[]
+            {
+                LicenseType.AttributionCC,
+                LicenseType.AttributionNoDerivativesCC, 
+                LicenseType.AttributionNoncommercialCC, 
+                LicenseType.AttributionNoncommercialNoDerivativesCC, 
+                LicenseType.AttributionNoncommercialShareAlikeCC, 
+                LicenseType.AttributionShareAlikeCC, 
+            };
+
+        public FlickrConverter(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        private bool IsLicensed(Photo photo)
+        {
+            var userId = photo.UserId;
+            var optinUserIds = _userService.GetOptinUserIds();
+
+            return CreativeCommonsLicenses.Contains(photo.License) || optinUserIds.Contains(userId);
+        }
+
         public DomainPhotos Convert(PhotoCollection photoCollection)
         {
             if (photoCollection == null)
                 return null;
 
+
             var domainPhotos = photoCollection
                 .Select(photo => new DomainPhoto(
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
-                                     Convert(photo.License), photo.Title, photo.WebUrl + "lightbox/",
-                                     photo.SmallUrl, photo.MediumUrl, photo.LargeUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240))
+                                     photo.Title, photo.WebUrl + "lightbox/",
+                                     photo.SmallUrl, 
+                                     photo.SmallWidth ?? 240, photo.SmallHeight ?? 240,
+                                     IsLicensed(photo)))
                 .ToList();
             return new DomainPhotos(domainPhotos, photoCollection.Page, photoCollection.Pages);
         }
@@ -28,8 +57,9 @@ namespace Portfotolio.FlickrEngine
             var domainPhotos = photosetPhotos
                 .Select(photo => new DomainPhoto(
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
-                                     Convert(photo.License), photo.Title, photo.WebUrl,
-                                     photo.SmallUrl, photo.MediumUrl, photo.LargeUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240))
+                                     photo.Title, photo.WebUrl,
+                                     photo.SmallUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240,
+                                     IsLicensed(photo)))
                 .ToList();
             return new DomainPhotos(domainPhotos, photosetPhotos.Page, photosetPhotos.Pages);
         }

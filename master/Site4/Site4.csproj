@@ -148,6 +148,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\c.gif" />
     <Content Include="Content\error.htm" />
     <Content Include="Content\help.png" />
     <Content Include="Content\loading.gif" />
@@ -279,12 +280,13 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Test\Show.cshtml" />
-    <Content Include="Views\Settings\OptOutInfo.cshtml" />
+    <Content Include="Views\Settings\AuthorInfo.cshtml" />
     <Content Include="Views\Settings\_ViewStart.cshtml" />
-    <Content Include="Views\Settings\OptOut.cshtml" />
+    <Content Include="Views\Settings\Author.cshtml" />
     <Content Include="Views\Shared\AuthenticationInfo.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\OAuth\Callback.cshtml" />
+    <Content Include="Views\Settings\Get.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

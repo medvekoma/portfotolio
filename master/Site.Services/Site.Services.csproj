@@ -53,7 +53,7 @@
     <Compile Include="Models\HideFromSearchEngineCondition.cs" />
     <Compile Include="Models\OptOutModel.cs" />
     <Compile Include="Models\TestModel.cs" />
-    <Compile Include="OptoutUserStorePathProvider.cs" />
+    <Compile Include="UserStorePathProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

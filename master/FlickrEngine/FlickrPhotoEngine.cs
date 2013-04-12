@@ -14,21 +14,21 @@ namespace Portfotolio.FlickrEngine
         private readonly IFlickrConverter _flickrConverter;
         private readonly IConfigurationProvider _configurationProvider;
         private readonly IUserSession _userSession;
-        private readonly IOptoutUserService _optoutUserService;
+        private readonly IUserService _userService;
 
         public FlickrPhotoEngine(IFlickrPhotoProvider flickrPhotoProvider, IFlickrConverter flickrConverter,
-                                 IConfigurationProvider configurationProvider, IUserSession userSession, IOptoutUserService optoutUserService)
+                                 IConfigurationProvider configurationProvider, IUserSession userSession, IUserService userService)
         {
             _flickrPhotoProvider = flickrPhotoProvider;
             _flickrConverter = flickrConverter;
             _configurationProvider = configurationProvider;
             _userSession = userSession;
-            _optoutUserService = optoutUserService;
+            _userService = userService;
         }
 
         private DomainPhotos RemoveOptedOutUserPhotos(DomainPhotos domainPhotos)
         {
-            var optedOutUserIds = _optoutUserService.GetOptedOutUserIds();
+            var optedOutUserIds = _userService.GetOptoutUserIds();
             var filteredPhotos = domainPhotos.Photos
                 .Where(photo => !optedOutUserIds.Contains(photo.AuthorId))
                 .ToList();

@@ -10,14 +10,14 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
 
-        @Styles.Render(BundleTable.Bundles.ResolveBundleUrl("~/Content/css"))
-        @Scripts.Render(BundleTable.Bundles.ResolveBundleUrl("~/Scripts/js"))
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/Scripts/js")
     </head>
     <body>
         <header>
             <div class="content-wrapper">
                 <h1>
-                    <a href="/">● port<span class="highlight">foto</span>lio ●</a>
+                    <a href="/">● port<span class="highlight">foto</span>lio ● CC ●</a>
                     @Html.Display(DataKeys.BreadCrumb)
                     <a href="@Url.Action("about", "home")" title="what is this?"><img src="~/Content/help.png" alt="help" class="action-icon"/></a>
                 </h1>

@@ -47,16 +47,18 @@ namespace Portfotolio.Site4
             dependencyEngine.RegisterAndDecorate<IUserEngine, FlickrUserEngine, CachedUserEngine>(photoServiceLifeStyle);
 
             // opt-out checker
-            dependencyEngine.RegisterAndDecorate<IOptoutUserService, OptoutUserService, CachedOptoutUserService>(optOutServiceLifeStyle);
+            dependencyEngine.RegisterAndDecorate<IUserService, UserService, CachedUserService>(optOutServiceLifeStyle);
+            dependencyEngine.Register<IUserReaderService, UserReaderService>(optOutServiceLifeStyle);
 
             // legacy
             dependencyEngine.Register<LegacyController>(controllerLifeStyle);
 
             // opt-out
             dependencyEngine.Register<SettingsController>(controllerLifeStyle);
-            dependencyEngine.Register<IOptoutUserStorePathProvider, OptoutUserStorePathProvider>(optOutServiceLifeStyle);
-            dependencyEngine.Register<IOptoutUserStore, OptoutUserStore>(optOutServiceLifeStyle);
-            dependencyEngine.Register<IOptoutUserConfiguratorService, OptoutUserConfiguratorService>(optOutServiceLifeStyle);
+            dependencyEngine.Register<IUserStorePathProvider, UserStorePathProvider>(optOutServiceLifeStyle);
+            dependencyEngine.Register<IUserStore, UserStore>(optOutServiceLifeStyle);
+            dependencyEngine.Register<IUserStoreService, UserStoreService>(optOutServiceLifeStyle);
+            dependencyEngine.Register<IUserWriterService, UserWriterService>(optOutServiceLifeStyle);
 
             // test
             dependencyEngine.Register<TestController>(controllerLifeStyle);

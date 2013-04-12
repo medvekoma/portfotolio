@@ -160,12 +160,16 @@ input#SearchText
 	width: 50%;
 }
 
-.yes {
+.author-optin {
     color: green;
 }
 
-.no {
+.author-optout {
     color: red;
+}
+
+.author-none {
+    color: yellow;
 }
 
 .slide {

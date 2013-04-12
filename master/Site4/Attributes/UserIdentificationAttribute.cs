@@ -27,9 +27,9 @@ namespace Portfotolio.Site4.Attributes
                     throw new OptedOutUserException(userIdentifier);
                 }
 
-                var optoutUserService = DependencyResolver.Current.GetService<IOptoutUserService>();
+                var optoutUserService = DependencyResolver.Current.GetService<IUserService>();
 
-                var optedOutUserIds = optoutUserService.GetOptedOutUserIds();
+                var optedOutUserIds = optoutUserService.GetOptoutUserIds();
                 if (optedOutUserIds.Contains(user.UserId))
                     throw new OptedOutUserException(userIdentifier);
 

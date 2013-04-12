@@ -7,7 +7,7 @@ namespace Portfotolio.Domain
         public static DomainPhotos RemoveCopyrightedPhotos(this DomainPhotos domainPhotos)
         {
             var filteredPhotos = domainPhotos.Photos
-                                             .Where(photo => photo.DomainLicense == DomainLicense.CreativeCommons)
+                                             .Where(photo => photo.IsLicensed)
                                              .ToList();
 
             return new DomainPhotos(filteredPhotos, domainPhotos.Page, domainPhotos.Pages);

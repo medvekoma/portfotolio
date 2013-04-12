@@ -11,8 +11,17 @@ $(document).ready(function () {
 Medvekoma.Portfotolio.InitializeLoading = function () {
     $('#nextPageLink').hide();
     $('#nextPageLoading').show();
+    var requestedScrollPosition = $(window).scrollTop();
+    Medvekoma.Portfotolio.RestoreScrollPosition(requestedScrollPosition);
     Medvekoma.Portfotolio.ShowNextPageIfNeeded();
     Medvekoma.Portfotolio.SubscribeToScrollEvent();
+};
+
+Medvekoma.Portfotolio.RestoreScrollPosition = function (scrollPosition) {
+    while (scrollPosition > $(document).height()) {
+        Medvekoma.Portfotolio.ShowNextPage();
+    }
+    $(window).scrollTop(scrollPosition);
 };
 
 Medvekoma.Portfotolio.SubscribeToScrollEvent = function () {
