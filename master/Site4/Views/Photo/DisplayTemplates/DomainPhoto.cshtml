@@ -28,7 +28,7 @@
             <a class="photo-link" 
                 href="@Model.PageUrl" 
                 style="width: @(Model.SmallWidth)px; height: @(Model.SmallHeight)px;">
-                <a href="@Url.Action("author", "settings")" style="position: absolute; top: @(frameHeight-50)px; left: @(frameWidth-40)px; font-size: 40px; font-weight: bold" title="Copyrighted image. Click for change your settings.">&copy;</a>
+                <a href="@Url.Action("licensing", "settings")" class="copyright" style="top: @(frameHeight-50)px; left: @(frameWidth-40)px" title="Copyrighted image. Click for more information.">&copy;</a>
             </a>
         }
     </div>

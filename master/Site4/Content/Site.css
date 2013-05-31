@@ -160,15 +160,15 @@ input#SearchText
 	width: 50%;
 }
 
-.author-optin {
+.licensing-optin {
     color: green;
 }
 
-.author-optout {
+.licensing-optout {
     color: red;
 }
 
-.author-none {
+.licensing-default {
     color: yellow;
 }
 
@@ -197,8 +197,24 @@ input#SearchText
     overflow: hidden;
 }
 
-.action-icon {
+.header-icon {
     border: none!important;
     height: 44px;
     float: right;
+}
+
+.content-icon {
+    border: none!important;
+    height: 44px;
+}
+
+.standout {
+    font-weight: bold;
+}
+
+.copyright {
+    position: absolute; 
+    font-size: 40px;
+    font-weight: bold;
+    font-family: sans-serif;
 }

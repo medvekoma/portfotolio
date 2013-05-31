@@ -17,14 +17,16 @@
         <header>
             <div class="content-wrapper">
                 <h1>
-                    <a href="/">● port<span class="highlight">foto</span>lio ● CC ●</a>
+                    <a href="/">● port<span class="highlight">foto</span>lio ●</a>
                     @Html.Display(DataKeys.BreadCrumb)
-                    <a href="@Url.Action("about", "home")" title="what is this?"><img src="~/Content/help.png" alt="help" class="action-icon"/></a>
+                    <a href="@Url.Action("about", "home")" title="what is this?"><img src="~/Content/help.png" alt="help" class="header-icon"/></a>
+                    <a href="@Url.Action("licensing", "settings")" title="licensing"><img src="~/Content/cc.png" alt="licensing" class="header-icon"/></a>
                 </h1>
                 <div id="menucontainer">
                     @Html.Partial("UserMenu")
                 </div>
                 <hr />
+                @Html.Partial("LicensingInfo")
                 <div id="authenticationLink">
                     @Html.Partial("AuthenticationInfo")
                 </div>

@@ -2,15 +2,16 @@ namespace Portfotolio.Domain.Persistency
 {
     public static class DataKeys
     {
-        public static string AuthenticationInfo = "AuthenticationInfo";
-        public static string ActionUrl = "ActionUrl";
-        public static string BreadCrumb = "BreadCrumb";
-        public static string UserId = "UserId";
-        public static string UserName = "userName";
-        public static string UserAlias = "UserAlias";
-        public static string RecommendedUserIds = "RecommendedUserIds";
-        public static string AllowRobots = "AllowRobots";
-        public static string ApplicationStarted = "ApplicationStarted";
-        public static string SessionCount = "SessionCount";
+        public const string AuthenticationInfo = "AuthenticationInfo";
+        public const string ActionUrl = "ActionUrl";
+        public const string BreadCrumb = "BreadCrumb";
+        public const string UserId = "UserId";
+        public const string UserName = "userName";
+        public const string UserAlias = "UserAlias";
+        public const string RecommendedUserIds = "RecommendedUserIds";
+        public const string AllowRobots = "AllowRobots";
+        public const string ApplicationStarted = "ApplicationStarted";
+        public const string SessionCount = "SessionCount";
+        public const string DisplayLicensingInfoKey = "DisplayLicensingInfo";
     }
 }

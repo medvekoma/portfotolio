@@ -18,7 +18,7 @@
         {
             switch (userState)
             {
-                case UserState.None:
+                case UserState.Default:
                     _userStoreService.RemoveOptinUser(userId);
                     _userStoreService.RemoveOptoutUser(userId);
                     break;

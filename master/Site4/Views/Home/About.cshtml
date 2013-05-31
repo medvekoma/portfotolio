@@ -9,7 +9,8 @@
             viewer, aiming to help photographers showcase their portfolio and find inspiration
             in the works of other photographers.</li>
         <li>It also features a recommendation engine, which - based on what one marks as favorite
-            - suggests other photos of interest. One must be authenticated to access his/her recommendations. </li>
+            - suggests other photos of interest. One must be authenticated to access his/her
+            recommendations. </li>
         <li>The application is designed to increase the visibility of the original flickr site.
             Photos are only shown in their small size, and they all link back to the original
             flickr page of the photo, where users can contact the photographer, comment on photos,
@@ -20,9 +21,22 @@
             with any of your questions, comments or concerns. </li>
     </ul>
     <h2>
+        Licensing information</h2>
+    <div>
+        The site only displays the following types of images:
+    </div>
+    <ul>
+        <li>Images licensed with one of the creative commons licenses.</li>
+        <li>Copyrighted images on the explicit request of their author.</li>
+    </ul>
+    <div>
+        Go to our @Html.ActionLink("licensing page", "licensing", "settings") to control how
+        your images appear on this site.
+    </div>
+    <h2>
         Copyright information</h2>
     <ul>
-        <li>All images shown on this site are copyrighted by their respective owners. The image
+        <li>Images shown on this site might be copyrighted by their respective owners. The image
             owners can be contacted directly through their flickr page by clicking on any image.</li>
         <li>The site does not store images and personal data, and it does not reference any
             user or photo specifically. It is merely a viewer application: it reflects whatever
@@ -30,15 +44,14 @@
         <li>The site uses a technology called <a href="http://en.wikipedia.org/wiki/Inline_linking"
             title="inline linking">inline linking</a> to show the images stored on flickr's
             servers. According to international law, <a href="http://en.wikipedia.org/wiki/Inline_linking#Copyright_law_issues_that_inline_linking_raises"
-                title="copyright issues">this is not a copyright infringement</a>. Nevertheless,
-            we are ready to remove your pictures (see below how).</li>
+                title="copyright issues">this is not a copyright infringement</a>.
     </ul>
     <h2>
         Why can I see my photos here?</h2>
     <ul>
-        <li>If you have public photos on flickr, they can appear on this site. As an alternative
-            flickr viewer, it reflects whatever flickr provides it, changes on flickr are automatically
-            reflected on this site.</li>
+        <li>As described above, your public pictures can appear on this site if you license
+            them with one of the creative commons licenses, or you explicitly requested to display
+            your photos.</li>
         <li>The site uses the official flickr API for querying the pictures - just like hundreds
             of other third party applications do. This application is fully compliant with the
             terms of use of flickr API: all images link back to the original flickr page - so
@@ -53,11 +66,7 @@
             about your privacy, as it will hide you from most applications based on flickr API.
             However, because of the specifics of flickr API, some of your pictures might still
             appear in groups, and other people's favorite lists.</li>
-    </ul>
-    <h2>
-        Still, I don't want any of my photos on this site!</h2>
-    <ul>
-        <li>@Html.ActionLink("Please go to our opt-out page", "author", "settings", null, new { rel = "nofollow" })
-            and follow the instructions.</li>
+        <li>You can also go to our @Html.ActionLink("licensing page", "licensing", "settings")
+            to completely hide yourself from this site.</li>
     </ul>
 </div>

@@ -14,7 +14,7 @@ namespace Portfotolio.Site4
             routes.MapRoute(
                 name: "home",
                 url: "",
-                defaults: new { controller = "photo", action = "interestingness" }
+                defaults: new { controller = "photo", action = "promotion" }
                 );
 
             routes.MapRoute(

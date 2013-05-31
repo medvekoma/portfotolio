@@ -1,0 +1,100 @@
+﻿@using Portfotolio.Domain.Configuration
+@model Portfotolio.Site.Services.Models.ConfigurationModel
+<div id="licensing" class="standout">
+    <p></p>
+    <a href="http://creativecommons.org">
+        <img src="~/Content/cc.large.png" alt="creative commons" class="content-icon" />
+    </a>
+    <h2>
+        Licensing information</h2>
+    <div class="standout">
+        This site only displays:
+        <ul>
+            <li>images licensed with one of the <a href="https://secure.flickr.com/creativecommons/">creative
+                                                    commons licenses</a>, or</li>
+            <li>copyrighted images on the explicit request of their author.</li>
+        </ul>
+    </div>
+    <h2>
+        Your pictures</h2>
+    @switch (Model.UserState)
+    {
+        case UserState.None:
+            <div>
+                @Html.ActionLink("Log in", "login", "account") to control how your images appear on portfotolio.net. This process is <a href="http://www.flickr.com/help/website/#182">
+                                                                                                                                         controlled by flickr</a>, we only receive your user name and id. We won't get
+                access to your password, private pictures, or any other sensitive information. Once
+                you are authorized, you will be able to freely set the visibility of your pictures
+                on this site. You can revoke the permissions given on your <a href="http://www.flickr.com/account/sharing/">
+                                                                               flickr sharing page</a> after changing your settings, they will be kept.</div>
+            break;
+        case UserState.Optout:
+            <text> <span class="licensing-optout">None of your pictures are currently shown on this
+                       site.</span> Your landing page displays an error message, and your pictures
+                are filtered out from all streams.
+            </text>
+            break;
+        case UserState.Default:
+            <text> <span class="licensing-default">Only your Creative Commons licensed public photos
+                       are visible on this site</span>, depending on your flickr settings.
+            </text>
+            break;
+        case UserState.Optin:
+            <text> <span class="licensing-optin">All your public pictures are visible on this site</span>,
+                depending on your flickr settings.
+            </text>
+            break;
+    }
+    <p>
+    </p>
+    @using (Html.BeginForm())
+    {
+        if (Model.IsAuthenticated)
+        {
+            <h2>
+                Change your settings
+            </h2>
+        }
+        else
+        {
+            <h2>
+                You will be able to choose from the options below
+            </h2>
+        }
+        <label>
+            @if (Model.IsAuthenticated)
+            {
+                @Html.RadioButtonFor(model => model.UserState, UserState.Optout)
+            }
+            <span class='licensing-optout'>None of my pictures</span> should be visible on this
+            site, hide me completely!
+        </label>
+        <br />
+        <label>
+            @if (Model.IsAuthenticated)
+            {
+                @Html.RadioButtonFor(model => model.UserState, UserState.Default)
+            }
+            <span class="licensing-default">Creative Commons</span> licensed public photos are
+            allowed on this site, based on my flickr settings (default).
+        </label>
+        <br />
+        <label>
+            @if (Model.IsAuthenticated)
+            {
+                @Html.RadioButtonFor(model => model.UserState, UserState.Optin)
+            }
+            <span class="licensing-optin">All my public photos</span> can be displayed, based
+            on my flickr settings.
+        </label>
+        <p />
+        <p />
+        if (Model.IsAuthenticated)
+        {
+
+            <input type="submit" value="Save" />
+        }
+    }
+    <h2>Need support?</h2>
+    Feel free to <a href="http://www.flickr.com/mail/write/?to=27725019@N00">contact me</a> with any of your questions, comments or concerns.
+</div>

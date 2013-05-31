@@ -25,7 +25,7 @@
             var isOptin = optinUserIds.Contains(userId);
             return isOptin
                        ? UserState.Optin
-                       : UserState.None;
+                       : UserState.Default;
         }
     }
 }

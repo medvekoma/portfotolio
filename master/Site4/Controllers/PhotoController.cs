@@ -27,7 +27,20 @@ namespace Portfotolio.Site4.Controllers
             return PagingView(photos);
         }
 
+        [HideFromSearchEngines(AllowRobots.Follow)]
+        public ActionResult Promotion(int page = 0)
+        {
+            ViewData[DataKeys.BreadCrumb] = "explored on flickr";
+
+            var group = _photoEngine.GetGroup("26241990@N00", page);
+            ViewData["groupName"] = group.GroupName;
+            ViewData[DataKeys.BreadCrumb] = ViewData["groupName"] + " group";
+
+            return PagingView(group);
+        }
+
         [UserIdentification]
+        [DisplayLicensingInfo]
         public ActionResult Photos(string id, int page = 0)
         {
             ViewData[DataKeys.BreadCrumb] = ViewData[DataKeys.UserName];
@@ -79,6 +92,7 @@ namespace Portfotolio.Site4.Controllers
         [UserIdentification]
         // [BreadCrumb("{albumTitle} by {userName}")]
         [HideFromSearchEngines(AllowRobots.None)]
+        [DisplayLicensingInfo]
         public ActionResult Album(string id, string secondaryId, int page = 0)
         {
             string albumId = secondaryId;

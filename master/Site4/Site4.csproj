@@ -122,6 +122,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DependencyEngineFactory.cs" />
+    <Compile Include="Attributes\DisplayLicensingInfoAttribute.cs" />
     <Compile Include="Attributes\MasterHandleErrorAttribute.cs" />
     <Compile Include="Attributes\UserIdentificationAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -149,6 +150,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\c.gif" />
+    <Content Include="Content\cc.large.png" />
+    <Content Include="Content\cc.png" />
     <Content Include="Content\error.htm" />
     <Content Include="Content\help.png" />
     <Content Include="Content\loading.gif" />
@@ -282,11 +285,12 @@
     <Content Include="Views\Test\Show.cshtml" />
     <Content Include="Views\Settings\AuthorInfo.cshtml" />
     <Content Include="Views\Settings\_ViewStart.cshtml" />
-    <Content Include="Views\Settings\Author.cshtml" />
+    <Content Include="Views\Settings\Licensing.cshtml" />
     <Content Include="Views\Shared\AuthenticationInfo.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\OAuth\Callback.cshtml" />
     <Content Include="Views\Settings\Get.cshtml" />
+    <Content Include="Views\Shared\LicensingInfo.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

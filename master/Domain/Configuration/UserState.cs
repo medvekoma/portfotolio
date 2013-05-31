@@ -3,6 +3,7 @@
     public enum UserState
     {
         None = 0,
+        Default,
         Optin,
         Optout,
     }

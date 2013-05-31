@@ -24,19 +24,19 @@ namespace Portfotolio.Site4.Controllers
             _logger = loggerFactory.GetLogger("Settings");
         }
 
-        public ActionResult Author()
+        public ActionResult Licensing()
         {
-            ViewData[DataKeys.BreadCrumb] = "user state";
+            ViewData[DataKeys.BreadCrumb] = "licensing information";
 
             var model = GetModel();
-            if (!model.IsAuthenticated)
-                return View("AuthorInfo");
+            //if (!model.IsAuthenticated)
+            //    return View("AuthorInfo");
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Author(UserState userState)
+        public ActionResult Licensing(UserState userState)
         {
             var model = GetModel();
             if (!model.IsAuthenticated || model.UserState == userState)
@@ -47,7 +47,7 @@ namespace Portfotolio.Site4.Controllers
             string message = string.Format("UserState of '{0}' is {1}.", model.UserAlias, userState);
             _logger.Info(message);
 
-            return RedirectToAction("author");
+            return RedirectToAction("licensing");
         }
 
         public ActionResult Get()
@@ -69,15 +69,15 @@ namespace Portfotolio.Site4.Controllers
             return RedirectToAction("Get");
         }
 
-        public ActionResult None(string id)
+        public ActionResult Default(string id)
         {
-            _userWriterService.Configure(id, UserState.None);
+            _userWriterService.Configure(id, UserState.Default);
 
             return RedirectToAction("Get");
         }
 
         #region helpers
-        
+
         private ConfigurationModel GetModel()
         {
             var model = new ConfigurationModel();
