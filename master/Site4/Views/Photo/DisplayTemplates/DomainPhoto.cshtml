@@ -12,16 +12,15 @@
     int frameTop = (slideHeight - frameHeight) / 2;
     int titleTop = frameTop + frameHeight + 10;
     int titleHeight = slideHeight - titleTop;
-    string pictureUrl = Model.IsLicensed ? Model.SmallUrl : string.Empty;
 }
 
 <div class="slide">
     <div class="photo-frame" style="left: @(frameLeft)px; top: @(frameTop)px">
-        @if (Model.IsLicensed)
+        @if (Model.IsLicensed || Html.AuthenticationInfo().IsAuthenticated)
         {
             <a class="photo-link" 
                href="@Model.PageUrl" 
-               style="background-image: url('@pictureUrl'); width: @(Model.SmallWidth)px; height: @(Model.SmallHeight)px;" ></a>
+               style="background-image: url('@Model.SmallUrl'); width: @(Model.SmallWidth)px; height: @(Model.SmallHeight)px;" ></a>
         }
         else
         {
