@@ -1,0 +1,15 @@
+﻿@model Portfotolio.Site.Services.Models.OptOutModel
+
+@using(@Html.BeginForm("OptOut", "Settings"))
+{
+    @Html.DisplayFor(model => model.UserName)
+    @Html.HiddenFor(model => model.IsOptedOut)
+    if (Model.IsOptedOut)
+    {
+        <input type="submit" value="Opt in!"/>    
+    }
+    else
+    {
+        <input type="submit" value="Opt out!"/>
+    }
+}

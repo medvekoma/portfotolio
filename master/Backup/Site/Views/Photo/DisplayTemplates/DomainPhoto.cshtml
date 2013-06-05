@@ -1,0 +1,30 @@
+﻿@using Portfotolio.Domain
+@using Portfotolio.Site.Services.Helpers
+
+@model DomainPhoto
+@{
+    const int slideWidth = 330;  // if you change these values, change them in CSS .slide as well
+    const int slideHeight = 330; // if you change these values, change them in CSS .slide as well
+    const int borderWidth = 5;   // if you change these values, change them in CSS .photo-link as well
+    int frameWidth = Model.SmallWidth + 2 * borderWidth;
+    int frameHeight = Model.SmallHeight + 2 * borderWidth;
+    int frameLeft = (slideWidth - frameWidth) / 2;
+    int frameTop = (slideHeight - frameHeight) / 2;
+    int titleTop = frameTop + frameHeight + 10;
+    int titleHeight = slideHeight - titleTop;
+    string pictureUrl = Model.SmallUrl;
+}
+
+<div class="slide">
+    <div class="photo-frame" style="left: @(frameLeft)px; top: @(frameTop)px">
+        <a class="photo-link" 
+           href="@Model.PageUrl" 
+           style="background-image: url('@pictureUrl'); width: @(Model.SmallWidth)px; height: @(Model.SmallHeight)px;" ></a>
+    </div>
+    <div class="title-frame" style="top: @(titleTop)px; max-height: @(titleHeight)px">
+        @(Html.ActionLinkUserId(Model.AuthorName ?? Model.AuthorAlias, "photos", new { id = Model.AuthorAlias })):
+        <span class="title-text" title="@Model.Title">
+            @Model.Title
+        </span>
+    </div>
+</div>

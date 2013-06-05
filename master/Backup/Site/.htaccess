@@ -1,0 +1,2 @@
+RewriteEngine Off
+# RewriteRule ^(.*)/eurl.axd/[a-f0-9]{32}(.*)$ $1$2 [NC]

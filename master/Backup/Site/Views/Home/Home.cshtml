@@ -1,0 +1,18 @@
+﻿@using Portfotolio.Site.Models
+@using Portfotolio.Site.Services.Helpers
+
+@model HomeModel
+           
+@{
+    ViewBag.Title = "Home";
+}
+
+<div id="homeDiv">
+    @using(Html.BeginForm()){
+        @Html.EditorFor(model => model.SearchText)
+        <div>
+            @Html.RadioButtonForEnum(model => model.SearchSource)
+        </div>
+        <input type="submit" value="Search" />
+    }
+</div>

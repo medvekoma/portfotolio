@@ -1,0 +1,18 @@
+﻿@model Portfotolio.Domain.DomainPhotos
+@using Portfotolio.Site.Helpers
+
+@Html.DisplayFor(model => model.Photos)
+
+@if (Model.Page < Model.Pages)
+{
+<div id="nextPage" class="nextPage">
+    <div class="middleFrame">
+        <div class="innerFrame">
+            <a id="nextPageLink" href="@Url.NextPageAction(Model.Page + 1)" rel="nofollow">Next Page</a>
+            <div id="nextPageLoading" class="nextPageLoading">
+                <img src="../../../Content/loading.gif" alt="Loading..." />
+            </div>
+        </div>
+    </div>
+</div>
+}
