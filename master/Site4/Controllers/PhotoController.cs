@@ -7,7 +7,7 @@ using Portfotolio.Site4.Attributes;
 
 namespace Portfotolio.Site4.Controllers
 {
-    // [RememberActionUrl]
+    [RedirectToUserAlias, RejectOptedOutUsers]
     public class PhotoController : Controller
     {
         private readonly IPhotoEngine _photoEngine;

@@ -2,11 +2,12 @@
 
 namespace Portfotolio.Site.Services.Models
 {
-    public class ConfigurationModel
+    public class SettingsModel
     {
-        public bool IsAuthenticated { get; set; }
+        public bool IsInitialized { get; set; }
         public string UserAlias { get; set; }
         public string UserId { get; set; }
+        public string UserName { get; set; }
         public UserState UserState { get; set; }
     }
 }

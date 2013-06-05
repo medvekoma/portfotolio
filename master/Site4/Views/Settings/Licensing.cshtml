@@ -1,5 +1,5 @@
 ﻿@using Portfotolio.Domain.Configuration
-@model Portfotolio.Site.Services.Models.ConfigurationModel
+@model Portfotolio.Site.Services.Models.SettingsModel
 <div id="licensing" class="standout">
     <p>
     </p>
@@ -11,31 +11,35 @@
     <div class="standout">
         This site only displays:
         <ul>
-            <li>images with one of the <a href="https://secure.flickr.com/creativecommons/">
-                creative commons licenses</a>, or</li>
+            <li>images with one of the <a href="https://secure.flickr.com/creativecommons/">creative
+                commons licenses</a>, or</li>
             <li>copyrighted images on the explicit request of their author.</li>
         </ul>
     </div>
     <h2>
         Your pictures</h2>
+    @if (Model.IsInitialized)
+    {
+        <div>
+            Dear @Html.ActionLink(Model.UserName, "photos", "photo", new { id = Model.UserAlias }, null),</div>
+    }
     @switch (Model.UserState)
     {
         case UserState.None:
         <div>
-            If you don't see your pictures, that is probably because you don't fall in the two
-            categories above.
-            <br />
-            Unless you don't change the licensing of your photos, you will need to authorize
+            If you don't see your pictures, you probably don't fall in the two categories above.
+            If changing the licensing of your photos is not an option, you will need to authorize
             portfotolio to display your "all rights reserved" pictures.
             <br />
             To do so you will need to
-            <ul>
+            <ol style="list-style-type:decimal;margin-left: 3em">
                 <li>@Html.ActionLink("Log in", "login", "account") with your flickr account. This process
                     is <a href="http://www.flickr.com/help/website/#182">controlled by flickr</a>, we
                     only receive your user name and id. We won't get access to your password, private
                     pictures, or any other sensitive information.</li>
-                <li>Select the "All my public photos" option below (the green one) and press Save.</li>
-            </ul>
+                <li>Select the "All my public photos" option below (the green one).</li>
+                <li>Press Save.</li>
+            </ol>
         </div>
                break;
         case UserState.Optout:
@@ -46,7 +50,8 @@
                break;
         case UserState.Default:
         <text> <span class="licensing-default">Only your Creative Commons licensed public photos
-            are visible on this site</span>. Pictures shared as "all rights reserved" will only display a placeholder.
+            are visible on this site</span>. Pictures shared as "all rights reserved" will
+        only display a placeholder.
         </text>
                break;
         case UserState.Optin:
@@ -61,12 +66,13 @@
         <h2>
             Change your settings
         </h2>
-        if (!Model.IsAuthenticated)
+        if (!Model.IsInitialized)
         {
-            <p>Log in, and choose from the options below:</p>
+        <p>
+            Log in, and choose from the options below:</p>
         }
         <label>
-            @if (Model.IsAuthenticated)
+            @if (Model.IsInitialized)
             {
                 @Html.RadioButtonFor(model => model.UserState, UserState.Optout)
             }
@@ -75,7 +81,7 @@
         </label>
         <br />
         <label>
-            @if (Model.IsAuthenticated)
+            @if (Model.IsInitialized)
             {
                 @Html.RadioButtonFor(model => model.UserState, UserState.Default)
             }
@@ -84,7 +90,7 @@
         </label>
         <br />
         <label>
-            @if (Model.IsAuthenticated)
+            @if (Model.IsInitialized)
             {
                 @Html.RadioButtonFor(model => model.UserState, UserState.Optin)
             }
@@ -93,9 +99,9 @@
         </label>
         <p />
         <p />
-            if (Model.IsAuthenticated)
+        @Html.HiddenFor(model => model.UserId)
+            if (Model.IsInitialized)
             {
-
         <input type="submit" value="Save" />
             }
     }

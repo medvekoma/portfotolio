@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using Portfotolio.Domain;
-using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
 
@@ -20,26 +19,6 @@ namespace Portfotolio.Site4.Attributes
             var userEngine = DependencyResolver.Current.GetService<IUserEngine>();
             var user = userEngine.GetUser(userIdentifier);
 
-            if (!filterContext.HttpContext.Request.IsAjaxRequest())
-            {
-                if (!user.IsAcceptedUserName)
-                {
-                    throw new OptedOutUserException(userIdentifier);
-                }
-
-                var optoutUserService = DependencyResolver.Current.GetService<IUserService>();
-
-                var optedOutUserIds = optoutUserService.GetOptoutUserIds();
-                if (optedOutUserIds.Contains(user.UserId))
-                    throw new OptedOutUserException(userIdentifier);
-
-                if (userIdentifier != user.UserAlias)
-                {
-                    filterContext.RouteData.Values["id"] = user.UserAlias;
-                    filterContext.Result = new RedirectToRouteResult(null, filterContext.RouteData.Values, true);
-                    return;
-                }
-            }
             filterContext.Controller.ViewData[DataKeys.UserId] = user.UserId;
             filterContext.Controller.ViewData[DataKeys.UserName] = user.UserName;
             filterContext.Controller.ViewData[DataKeys.UserAlias] = user.UserAlias;

@@ -122,8 +122,11 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DependencyEngineFactory.cs" />
+    <Compile Include="Attributes\RedirectToUserAliasAttribute.cs" />
     <Compile Include="Attributes\DisplayLicensingInfoAttribute.cs" />
     <Compile Include="Attributes\MasterHandleErrorAttribute.cs" />
+    <Compile Include="Attributes\RejectOptedOutUsersAttribute.cs" />
+    <Compile Include="Attributes\AuthenticatedUserFilterAttribute.cs" />
     <Compile Include="Attributes\UserIdentificationAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -283,13 +286,11 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Test\Show.cshtml" />
-    <Content Include="Views\Settings\AuthorInfo.cshtml" />
     <Content Include="Views\Settings\_ViewStart.cshtml" />
     <Content Include="Views\Settings\Licensing.cshtml" />
     <Content Include="Views\Shared\AuthenticationInfo.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\OAuth\Callback.cshtml" />
-    <Content Include="Views\Settings\Get.cshtml" />
     <Content Include="Views\Shared\LicensingInfo.cshtml" />
   </ItemGroup>
   <PropertyGroup>

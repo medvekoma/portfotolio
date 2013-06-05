@@ -25,12 +25,17 @@ h2 {
 
 ul {
     list-style-type: square;
-    margin-left: 30px;
+    margin-left: 3em;
+}
+
+ol {
+    list-style-type:decimal;
+    margin-left: 3em;
 }
 
 li {
     display: list-item;
-    margin: 10px 0;
+    margin: 2px 0 5px 0;
 }
 
 p {

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Persistency;
@@ -24,14 +25,20 @@ namespace Portfotolio.Site4.Extensions
 
         public static AuthenticationInfo AuthenticationInfo(this HtmlHelper htmlHelper)
         {
-            var session = htmlHelper.ViewContext.HttpContext.Session;
+            var httpContextBase = htmlHelper.ViewContext.HttpContext;
+            return httpContextBase.AuthenticationInfo();
+        }
+
+        public static AuthenticationInfo AuthenticationInfo(this HttpContextBase httpContextBase)
+        {
+            var session = httpContextBase.Session;
             if (session == null)
                 return new AuthenticationInfo();
             var value = session[DataKeys.AuthenticationInfo];
             if (value == null)
                 return new AuthenticationInfo();
 
-            return (AuthenticationInfo) value;
+            return (AuthenticationInfo)value;
         }
 
         public static MvcHtmlString MetaRobots(this HtmlHelper htmlHelper)

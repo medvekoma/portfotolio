@@ -49,7 +49,7 @@
     <Compile Include="AspNetUserSession.cs" />
     <Compile Include="Logging\LoggingExtensions.cs" />
     <Compile Include="Models\AllowRobots.cs" />
-    <Compile Include="Models\ConfigurationModel.cs" />
+    <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\HideFromSearchEngineCondition.cs" />
     <Compile Include="Models\OptOutModel.cs" />
     <Compile Include="Models\TestModel.cs" />

@@ -3,6 +3,8 @@
     public interface IUserReaderService
     {
         UserState GetUserState(string userId);
+        int GetOptedOutUserCount();
+        int GetOptedInUserCount();
     }
 
     public class UserReaderService : IUserReaderService
@@ -26,6 +28,16 @@
             return isOptin
                        ? UserState.Optin
                        : UserState.Default;
+        }
+
+        public int GetOptedOutUserCount()
+        {
+            return _userService.GetOptoutUserIds().Count;
+        }
+
+        public int GetOptedInUserCount()
+        {
+            return _userService.GetOptinUserIds().Count;
         }
     }
 }

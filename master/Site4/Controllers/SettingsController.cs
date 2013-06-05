@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading;
+using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
@@ -28,9 +29,7 @@ namespace Portfotolio.Site4.Controllers
         {
             ViewData[DataKeys.BreadCrumb] = "licensing information";
 
-            var model = GetModel();
-            //if (!model.IsAuthenticated)
-            //    return View("AuthorInfo");
+            var model = GetSettingsModel();
 
             return View(model);
         }
@@ -38,8 +37,8 @@ namespace Portfotolio.Site4.Controllers
         [HttpPost]
         public ActionResult Licensing(UserState userState)
         {
-            var model = GetModel();
-            if (!model.IsAuthenticated || model.UserState == userState)
+            var model = GetSettingsModel();
+            if (!model.IsInitialized || model.UserState == userState)
                 return View(model);
 
             _userWriterService.Configure(model.UserId, userState);
@@ -50,46 +49,60 @@ namespace Portfotolio.Site4.Controllers
             return RedirectToAction("licensing");
         }
 
-        public ActionResult Get()
+        [UserIdentification]
+        [AuthenticatedUserFilter("medvekoma")]
+        public ActionResult External(string id)
         {
-            return View();
+            ViewData[DataKeys.BreadCrumb] = "external licensing information";
+
+            var model = GetExternalSettingsModel();
+
+            return View("licensing", model);
         }
 
-        public ActionResult In(string id)
+        [HttpPost]
+        [AuthenticatedUserFilter("medvekoma")]
+        public ActionResult External(string userId, UserState userState)
         {
-            _userWriterService.Configure(id, UserState.Optin);
+            _userWriterService.Configure(userId, userState);
 
-            return RedirectToAction("Get");
-        }
+            string message = string.Format("UserState of '{0}' is {1}.", userId, userState);
+            _logger.Info(message);
 
-        public ActionResult Out(string id)
-        {
-            _userWriterService.Configure(id, UserState.Optout);
-
-            return RedirectToAction("Get");
-        }
-
-        public ActionResult Default(string id)
-        {
-            _userWriterService.Configure(id, UserState.Default);
-
-            return RedirectToAction("Get");
+            return RedirectToAction("external");
         }
 
         #region helpers
 
-        private ConfigurationModel GetModel()
+        private SettingsModel GetSettingsModel()
         {
-            var model = new ConfigurationModel();
+            var model = new SettingsModel();
             var authenticationInfo = _authenticationProvider.GetAuthenticationInfo();
             if (authenticationInfo.IsAuthenticated)
             {
-                model.IsAuthenticated = true;
+                model.IsInitialized = true;
                 model.UserAlias = authenticationInfo.UserAlias;
                 model.UserId = authenticationInfo.UserId;
+                model.UserName = authenticationInfo.UserName;
                 model.UserState = _userReaderService.GetUserState(authenticationInfo.UserId);
             }
             return model;
+        }
+
+        private SettingsModel GetExternalSettingsModel()
+        {
+            var userId = ViewData[DataKeys.UserId] as string;
+            var userAlias = ViewData[DataKeys.UserAlias] as string;
+            var userName = ViewData[DataKeys.UserName] as string;
+            return new SettingsModel
+                {
+                    IsInitialized = true,
+                    UserId = userId,
+                    UserAlias = userAlias,
+                    UserName = userName,
+                    UserState = _userReaderService.GetUserState(userId)
+                };
+
         }
 
         #endregion
