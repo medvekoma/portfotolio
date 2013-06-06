@@ -1,15 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54EBE69F-2DA9-4948-9327-9000BCD19F9E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{27ACD545-E654-475D-9C17-DA9E989D2D83}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		Portfotolio.vsmdi = Portfotolio.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Site", "Site\Site.csproj", "{D54563AE-1861-451A-AA56-ABBAEF3D860E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}"
@@ -31,6 +22,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.Unity", "DependencyInjection.Unity\DependencyInjection.Unity.csproj", "{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc4Demo", "Mvc4Demo\Mvc4Demo.csproj", "{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54EBE69F-2DA9-4948-9327-9000BCD19F9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{27ACD545-E654-475D-9C17-DA9E989D2D83}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		Portfotolio.vsmdi = Portfotolio.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplickr", "Simplickr\Simplickr.csproj", "{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}"
 EndProject
