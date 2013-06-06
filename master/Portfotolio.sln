@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Site", "Site\Site.csproj", "{D54563AE-1861-451A-AA56-ABBAEF3D860E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrEngine", "FlickrEngine\FlickrEngine.csproj", "{F040632C-50F9-4120-B521-4890AB0756F8}"
@@ -20,8 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.WindsorCastle", "DependencyInjection.WindsorCastle\DependencyInjection.WindsorCastle.csproj", "{1689DAAE-E629-4A8D-B3BB-87C30F550F33}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.Unity", "DependencyInjection.Unity\DependencyInjection.Unity.csproj", "{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc4Demo", "Mvc4Demo\Mvc4Demo.csproj", "{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{54EBE69F-2DA9-4948-9327-9000BCD19F9E}"
 EndProject
@@ -45,9 +41,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D54563AE-1861-451A-AA56-ABBAEF3D860E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D54563AE-1861-451A-AA56-ABBAEF3D860E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D54563AE-1861-451A-AA56-ABBAEF3D860E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -84,10 +77,6 @@ Global
 		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE7902CB-F45C-4F8C-BF34-EADAFB2C5DCC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
