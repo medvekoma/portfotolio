@@ -130,7 +130,7 @@
     <Compile Include="Attributes\DisplayLicensingInfoAttribute.cs" />
     <Compile Include="Attributes\MasterHandleErrorAttribute.cs" />
     <Compile Include="Attributes\RejectOptedOutUsersAttribute.cs" />
-    <Compile Include="Attributes\AuthenticatedUserFilterAttribute.cs" />
+    <Compile Include="Attributes\AdministratorsOnlyAttribute.cs" />
     <Compile Include="Attributes\UserIdentificationAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -285,7 +285,9 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="appSettings.config" />
+    <Content Include="appSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -50,8 +50,8 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
-        [AuthenticatedUserFilter("medvekoma")]
-        public ActionResult External(string id)
+        [AdministratorsOnly]
+        public ActionResult Admin(string id)
         {
             ViewData[DataKeys.BreadCrumb] = "external licensing information";
 
@@ -61,15 +61,15 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [HttpPost]
-        [AuthenticatedUserFilter("medvekoma")]
-        public ActionResult External(string userId, UserState userState)
+        [AdministratorsOnly]
+        public ActionResult Admin(string userId, UserState userState)
         {
             _userWriterService.Configure(userId, userState);
 
             string message = string.Format("UserState of '{0}' is {1}.", userId, userState);
             _logger.Info(message);
 
-            return RedirectToAction("external");
+            return RedirectToAction("admin");
         }
 
         #region helpers

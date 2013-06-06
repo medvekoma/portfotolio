@@ -26,6 +26,12 @@ namespace Portfotolio.Site.Services
             return ConvertToBool(value);
         }
 
+        public string[] GetAdministratorAliases()
+        {
+            var value = ConfigurationManager.AppSettings["AdministratorAliases"];
+            return value.Split(',');
+        }
+
         private static int ConvertToInt(string stringValue, int defaultValue)
         {
             int intValue;
