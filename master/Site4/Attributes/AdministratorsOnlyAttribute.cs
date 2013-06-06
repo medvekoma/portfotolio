@@ -1,25 +1,24 @@
 ﻿using System.Security.Authentication;
 using System.Web.Mvc;
+using Portfotolio.Domain;
 using Portfotolio.Site4.Extensions;
+using System.Linq;
 
 namespace Portfotolio.Site4.Attributes
 {
-    public class AuthenticatedUserFilterAttribute : ActionFilterAttribute
+    public class AdministratorsOnlyAttribute : ActionFilterAttribute
     {
-        private readonly string _userAlias;
-
-        public AuthenticatedUserFilterAttribute(string userAlias)
-        {
-            _userAlias = userAlias;
-        }
-
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             base.OnActionExecuting(filterContext);
 
             var authenticationInfo = filterContext.HttpContext.AuthenticationInfo();
+            var authenticatedUserAlias = authenticationInfo.UserAlias;
 
-            if (!Equals(authenticationInfo.UserAlias, _userAlias))
+            var configurationProvider = DependencyResolver.Current.GetService<IConfigurationProvider>();
+            var administratorAliases = configurationProvider.GetAdministratorAliases();
+
+            if (!administratorAliases.Contains(authenticatedUserAlias))
                 throw new AuthenticationException();
         }
     }

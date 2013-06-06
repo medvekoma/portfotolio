@@ -5,5 +5,6 @@
         int GetPhotoPageSize();
         int GetContactsPageSize();
         bool GetIsOAuthEnabled();
+        string[] GetAdministratorAliases();
     }
 }

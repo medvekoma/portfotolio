@@ -16,6 +16,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -126,7 +130,7 @@
     <Compile Include="Attributes\DisplayLicensingInfoAttribute.cs" />
     <Compile Include="Attributes\MasterHandleErrorAttribute.cs" />
     <Compile Include="Attributes\RejectOptedOutUsersAttribute.cs" />
-    <Compile Include="Attributes\AuthenticatedUserFilterAttribute.cs" />
+    <Compile Include="Attributes\AdministratorsOnlyAttribute.cs" />
     <Compile Include="Attributes\UserIdentificationAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -281,7 +285,9 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="appSettings.config" />
+    <Content Include="appSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -292,6 +298,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\OAuth\Callback.cshtml" />
     <Content Include="Views\Shared\LicensingInfo.cshtml" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
