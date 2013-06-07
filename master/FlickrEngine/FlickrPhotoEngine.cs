@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FlickrNet;
 using Portfotolio.Domain;
@@ -210,6 +211,21 @@ namespace Portfotolio.FlickrEngine
             var photos = _flickrPhotoProvider.GetInterestingPhotos(page, pageSize);
             var domainPhotos = _flickrConverter.Convert(photos);
             return RemoveOptedOutUserPhotos(domainPhotos);
+        }
+
+        private static readonly string[] PromotedGroupIds = new[]
+            {
+                "986821@N21", "778206@N20", "75016977@N00", 
+                "1115578@N22", "884850@N25", "96366707@N00", 
+                "1102959@N22", "978551@N22",
+                // "1498626@N22"
+            };
+
+        public string GetPromotedGroupId()
+        {
+            var index = DateTime.UtcNow.DayOfYear % PromotedGroupIds.Length;
+
+            return PromotedGroupIds[index];
         }
     }
 }

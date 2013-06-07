@@ -27,25 +27,10 @@ namespace Portfotolio.Site4.Controllers
             return PagingView(photos);
         }
 
-        private static readonly string[] PromotedGroupIds = new[]
-            {
-                "986821@N21", "778206@N20", "75016977@N00", 
-                "1115578@N22", "884850@N25", "96366707@N00", 
-                "1102959@N22", "978551@N22",
-                // "1498626@N22"
-            }; 
-
-        private string GetPromotedGroupId()
-        {
-            var index = DateTime.UtcNow.DayOfYear % PromotedGroupIds.Length;
-
-            return PromotedGroupIds[index];
-        }
-
         [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Promotion(int page = 0)
         {
-            var groupId = GetPromotedGroupId();
+            var groupId = _photoEngine.GetPromotedGroupId();
             var group = _photoEngine.GetGroup(groupId, page);
             ViewData["groupName"] = group.GroupName;
             ViewData[DataKeys.BreadCrumb] = "Today's group: " + ViewData["groupName"];
