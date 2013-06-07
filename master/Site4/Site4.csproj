@@ -193,9 +193,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DependencyEngineFactory\DependencyInjectionEngineFactory.csproj">
+    <ProjectReference Include="..\DependencyEngineFactory\DependencyInjection.EngineFactory.csproj">
       <Project>{bf83c2a7-57a3-4d02-9300-d5b106b8e36a}</Project>
-      <Name>DependencyInjectionEngineFactory</Name>
+      <Name>DependencyInjection.EngineFactory</Name>
     </ProjectReference>
     <ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj">
       <Project>{DFF945D5-4524-4041-BC5D-CF37BABE73FB}</Project>

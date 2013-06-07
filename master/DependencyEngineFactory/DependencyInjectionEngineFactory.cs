@@ -1,9 +1,8 @@
-﻿using Portfotolio.DependencyInjection;
-using Portfotolio.DependencyInjection.Unity;
+﻿using Portfotolio.DependencyInjection.Unity;
 
-namespace DependencyInjectionEngineFactory
+namespace Portfotolio.DependencyInjection.EngineFactory
 {
-    public class DependencyInjectionEngineFactory : IDependencyInjectionEngineFactory
+    public class DependencyInjectionEngineFactory
     {
         public IDependencyEngine Create()
         {
