@@ -14,12 +14,6 @@ namespace Portfotolio.Site4
 {
     public static class DependencyEngineConfigurator
     {
-        public static IDependencyEngine Create()
-        {
-            IDependencyEngine dependencyEngine = (new DependencyInjection.EngineFactory.DependencyInjectionEngineFactory()).Create();
-            return dependencyEngine;
-        }
-
         public static IDependencyEngine Setup(IDependencyEngine dependencyEngine)
         {
             const DependencyLifeStyle applicationLifeStyle = DependencyLifeStyle.Singleton;
