@@ -125,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\DependencyEngineFactory.cs" />
+    <Compile Include="App_Start\DependencyEngineConfigurator.cs" />
     <Compile Include="Attributes\RedirectToUserAliasAttribute.cs" />
     <Compile Include="Attributes\DisplayLicensingInfoAttribute.cs" />
     <Compile Include="Attributes\MasterHandleErrorAttribute.cs" />
@@ -199,13 +199,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DependencyInjection.Unity\DependencyInjection.Unity.csproj">
-      <Project>{FC3B6AB0-AC42-403B-8CF5-932C8AE67355}</Project>
-      <Name>DependencyInjection.Unity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DependencyInjection.WindsorCastle\DependencyInjection.WindsorCastle.csproj">
-      <Project>{1689DAAE-E629-4A8D-B3BB-87C30F550F33}</Project>
-      <Name>DependencyInjection.WindsorCastle</Name>
+    <ProjectReference Include="..\DependencyEngineFactory\DependencyInjectionEngineFactory.csproj">
+      <Project>{bf83c2a7-57a3-4d02-9300-d5b106b8e36a}</Project>
+      <Name>DependencyInjectionEngineFactory</Name>
     </ProjectReference>
     <ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj">
       <Project>{DFF945D5-4524-4041-BC5D-CF37BABE73FB}</Project>

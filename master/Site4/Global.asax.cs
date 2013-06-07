@@ -33,7 +33,8 @@ namespace Portfotolio.Site4
 
             AreaRegistration.RegisterAllAreas();
 
-            _dependencyEngine = DependencyEngineFactory.Create();
+            _dependencyEngine = DependencyEngineConfigurator.Create();
+            DependencyEngineConfigurator.Setup(_dependencyEngine);
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
