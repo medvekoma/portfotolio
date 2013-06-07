@@ -5,9 +5,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using NLog;
 using Portfotolio.DependencyInjection;
 using Portfotolio.Domain.Persistency;
+using Portfotolio.Services.Logging;
 using Portfotolio.Site.Services.Logging;
 
 namespace Portfotolio.Site4
@@ -17,11 +17,11 @@ namespace Portfotolio.Site4
     public class MvcApplication : HttpApplication
     {
         private IDependencyEngine _dependencyEngine;
-        private readonly Logger _logger;
+        private readonly ILogger _logger;
 
         public MvcApplication()
         {
-            _logger = LogManager.GetLogger("Application");
+            _logger = new LoggerFactory().GetLogger("Application");
         }
 
         protected void Application_Start()
