@@ -32,7 +32,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplickr", "Simplickr\Simp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplickrTests", "SimplickrTests\SimplickrTests.csproj", "{F6DCA600-A73D-458C-9D45-961C19B531AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjectionEngineFactory", "DependencyEngineFactory\DependencyInjectionEngineFactory.csproj", "{BF83C2A7-57A3-4D02-9300-D5B106B8E36A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.EngineFactory", "DependencyEngineFactory\DependencyInjection.EngineFactory.csproj", "{BF83C2A7-57A3-4D02-9300-D5B106B8E36A}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

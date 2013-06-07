@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using NLog;
 using Portfotolio.DependencyInjection;
+using Portfotolio.DependencyInjection.EngineFactory;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Site.Services.Logging;
 
@@ -33,7 +34,7 @@ namespace Portfotolio.Site4
 
             AreaRegistration.RegisterAllAreas();
 
-            _dependencyEngine = DependencyEngineConfigurator.Create();
+            _dependencyEngine = new DependencyInjectionEngineFactory().Create();
             DependencyEngineConfigurator.Setup(_dependencyEngine);
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
