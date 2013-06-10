@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="NLog.Extended">
@@ -278,15 +279,9 @@
     <Content Include="Views\Photo\DisplayTemplates\ListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="appSettings.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Test\Show.cshtml" />
     <Content Include="Views\Settings\_ViewStart.cshtml" />
     <Content Include="Views\Settings\Licensing.cshtml" />
@@ -294,6 +289,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\OAuth\Callback.cshtml" />
     <Content Include="Views\Shared\LicensingInfo.cshtml" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
   </ItemGroup>
   <PropertyGroup>
