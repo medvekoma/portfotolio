@@ -6,5 +6,6 @@
         int GetContactsPageSize();
         bool GetIsOAuthEnabled();
         string[] GetAdministratorAliases();
+        string GetContactUsLink();
     }
 }

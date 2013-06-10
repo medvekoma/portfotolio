@@ -6,8 +6,7 @@
     <a href="http://creativecommons.org">
         <img src="~/Content/cc.large.png" alt="creative commons" class="content-icon" />
     </a>
-    <h2>
-        Licensing information</h2>
+    <h2>Licensing information</h2>
     <div class="standout">
         This site only displays:
         <ul>
@@ -16,12 +15,12 @@
             <li>copyrighted images on the explicit request of their author.</li>
         </ul>
     </div>
-    <h2>
-        Your pictures</h2>
+    <h2>Your pictures</h2>
     @if (Model.IsInitialized)
     {
         <div>
-            Dear @Html.ActionLink(Model.UserName, "photos", "photo", new { id = Model.UserAlias }, null),</div>
+            Dear @Html.ActionLink(Model.UserName, "photos", "photo", new { id = Model.UserAlias }, null),
+        </div>
     }
     @switch (Model.UserState)
     {
@@ -32,44 +31,45 @@
             portfotolio to display your "all rights reserved" pictures.
             <br />
             To do so you will need to
-            <ol style="list-style-type:decimal;margin-left: 3em">
-                <li>@Html.ActionLink("Log in", "login", "account") with your flickr account. This process
+            <ol style="list-style-type: decimal; margin-left: 3em">
+                <li>@Html.ActionLink("Log in", "login", "account") with your flickr account. (This process
                     is <a href="http://www.flickr.com/help/website/#182">controlled by flickr</a>, we
                     only receive your user name and id. We won't get access to your password, private
-                    pictures, or any other sensitive information.</li>
+                    pictures, or any other sensitive information.)</li>
                 <li>Select the "All my public photos" option below (the green one).</li>
                 <li>Press Save.</li>
             </ol>
+            This will not affect the permissions and copyright related to your pictures, it will only authorize portfotolio to display them.
         </div>
-               break;
+            break;
         case UserState.Optout:
         <text> <span class="licensing-optout">None of your pictures are currently shown on this
             site.</span> Your landing page displays an error message, and your pictures
         are filtered out from all streams.
         </text>
-               break;
+            break;
         case UserState.Default:
         <text> <span class="licensing-default">Only your Creative Commons licensed public photos
             are visible on this site</span>. Pictures shared as "all rights reserved" will
         only display a placeholder.
         </text>
-               break;
+            break;
         case UserState.Optin:
         <text> <span class="licensing-optin">All your public pictures are visible on this site</span>.
         </text>
-               break;
+            break;
     }
     <p>
     </p>
     @using (Html.BeginForm())
     {
-        <h2>
-            Change your settings
+        <h2>Change your settings
         </h2>
         if (!Model.IsInitialized)
         {
         <p>
-            Log in, and choose from the options below:</p>
+            After log in, you will be able to choose from the options below:
+        </p>
         }
         <label>
             @if (Model.IsInitialized)
@@ -105,8 +105,7 @@
         <input type="submit" value="Save" />
             }
     }
-    <h2>
-        Need support?</h2>
+    <h2>Need support?</h2>
     Feel free to <a href="http://www.flickr.com/mail/write/?to=27725019@N00">contact me</a>
     with any of your questions, comments or concerns.
 </div>

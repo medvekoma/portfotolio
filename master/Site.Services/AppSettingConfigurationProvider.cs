@@ -32,6 +32,11 @@ namespace Portfotolio.Site.Services
             return value.Split(',');
         }
 
+        public string GetContactUsLink()
+        {
+            return ConfigurationManager.AppSettings["ContactUsLink"];
+        }
+
         private static int ConvertToInt(string stringValue, int defaultValue)
         {
             int intValue;
