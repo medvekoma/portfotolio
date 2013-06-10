@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
@@ -7,7 +8,6 @@ using Portfotolio.Site4.Attributes;
 
 namespace Portfotolio.Site4.Controllers
 {
-    [RedirectToUserAlias, RejectOptedOutUsers]
     public class PhotoController : Controller
     {
         private readonly IPhotoEngine _photoEngine;
@@ -30,16 +30,16 @@ namespace Portfotolio.Site4.Controllers
         [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Promotion(int page = 0)
         {
-            ViewData[DataKeys.BreadCrumb] = "explored on flickr";
-
-            var group = _photoEngine.GetGroup("26241990@N00", page);
+            var groupId = _photoEngine.GetPromotedGroupId();
+            var group = _photoEngine.GetGroup(groupId, page);
             ViewData["groupName"] = group.GroupName;
-            ViewData[DataKeys.BreadCrumb] = ViewData["groupName"] + " group";
+            ViewData[DataKeys.BreadCrumb] = "Today's group: " + ViewData["groupName"];
 
             return PagingView(group);
         }
 
         [UserIdentification]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [DisplayLicensingInfo]
         public ActionResult Photos(string id, int page = 0)
         {
@@ -51,6 +51,7 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.Follow)]
         // [BreadCrumb("favourites of {userName}")]
         public ActionResult Favorites(string id, int page = 0)
@@ -64,8 +65,8 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.None)]
-        // [BreadCrumb("subscription feed of {userName}")]
         public ActionResult Subscriptions(string id, int page = 0)
         {
             ViewData[DataKeys.BreadCrumb] = "subscription feed of " + ViewData[DataKeys.UserName];
@@ -77,7 +78,7 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
-        // [BreadCrumb("albums of {userName}")]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Albums(string id)
         {
@@ -90,7 +91,7 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
-        // [BreadCrumb("{albumTitle} by {userName}")]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.None)]
         [DisplayLicensingInfo]
         public ActionResult Album(string id, string secondaryId, int page = 0)
@@ -106,7 +107,7 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
-        // [BreadCrumb("groups of {userName}")]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Groups(string id)
         {
@@ -118,7 +119,6 @@ namespace Portfotolio.Site4.Controllers
             return View(domainGroups);
         }
 
-        // [BreadCrumb("{groupName} group")]
         [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Group(string id, int page = 0)
         {
@@ -130,7 +130,7 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
-        // [BreadCrumb("contacts of {userName}")]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Contacts(string id, int page = 0)
         {
@@ -143,7 +143,7 @@ namespace Portfotolio.Site4.Controllers
         }
 
         [UserIdentification]
-        // [BreadCrumb("recommendations for {userName}")]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Recommendations(string id, int page = 0)
         {

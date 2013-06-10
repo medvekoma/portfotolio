@@ -7,8 +7,8 @@
     <ProjectGuid>{BF83C2A7-57A3-4D02-9300-D5B106B8E36A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DependencyInjectionEngineFactory</RootNamespace>
-    <AssemblyName>DependencyInjectionEngineFactory</AssemblyName>
+    <RootNamespace>Portfotolio.DependencyInjection.EngineFactory</RootNamespace>
+    <AssemblyName>Portfotolio.DependencyInjection.EngineFactory</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyInjectionEngineFactory.cs" />
-    <Compile Include="IDependencyInjectionEngineFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

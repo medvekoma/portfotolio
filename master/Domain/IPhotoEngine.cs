@@ -13,5 +13,6 @@ namespace Portfotolio.Domain
         ListItems GetContacts(string userId, int page);
         DomainPhotos GetRecommendations(string userId, int page);
         DomainPhotos GetInterestingPhotos(int page);
+        string GetPromotedGroupId();
     }
 }
