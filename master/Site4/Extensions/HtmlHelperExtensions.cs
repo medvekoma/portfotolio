@@ -41,6 +41,12 @@ namespace Portfotolio.Site4.Extensions
             return (AuthenticationInfo)value;
         }
 
+        public static ApplicationConfiguration GetApplicationConfiguration(this HtmlHelper htmlHelper)
+        {
+            var applicationConfigurationProvider = DependencyResolver.Current.GetService<IApplicationConfigurationProvider>();
+            return applicationConfigurationProvider.GetApplicationConfiguration();
+        }
+
         public static MvcHtmlString MetaRobots(this HtmlHelper htmlHelper)
         {
             object allowRobotsObject = htmlHelper.ViewData[DataKeys.AllowRobots];

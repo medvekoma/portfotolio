@@ -6,33 +6,44 @@ using Portfotolio.Domain;
 
 namespace Portfotolio.Site.Services
 {
-    public class AppSettingConfigurationProvider : IConfigurationProvider
+    public class ApplicationConfigurationProvider : IApplicationConfigurationProvider
     {
-        public int GetPhotoPageSize()
+        public ApplicationConfiguration GetApplicationConfiguration()
+        {
+            return new ApplicationConfiguration(
+                GetPhotoPageSize(),
+                GetContactsPageSize(),
+                GetIsOAuthEnabled(),
+                GetAdministratorAliases(),
+                GetContactUsLink()
+                );
+        }
+
+        private static int GetPhotoPageSize()
         {
             string photoPageSizeString = ConfigurationManager.AppSettings["PhotoPageSize"];
             return ConvertToInt(photoPageSizeString, 30);
         }
 
-        public int GetContactsPageSize()
+        private static int GetContactsPageSize()
         {
             string contactsPageSizeString = ConfigurationManager.AppSettings["ContactsPageSize"];
             return ConvertToInt(contactsPageSizeString, 100);
         }
 
-        public bool GetIsOAuthEnabled()
+        private static bool GetIsOAuthEnabled()
         {
             var value = ConfigurationManager.AppSettings["IsOAuthEnabled"];
             return ConvertToBool(value);
         }
 
-        public string[] GetAdministratorAliases()
+        private static string[] GetAdministratorAliases()
         {
             var value = ConfigurationManager.AppSettings["AdministratorAliases"];
             return value.Split(',');
         }
 
-        public string GetContactUsLink()
+        private static string GetContactUsLink()
         {
             return ConfigurationManager.AppSettings["ContactUsLink"];
         }
@@ -47,7 +58,7 @@ namespace Portfotolio.Site.Services
 
         private static bool ConvertToBool(string stringValue)
         {
-            var trueValues = new[] {"true", "1"};
+            var trueValues = new[] { "true", "1" };
             bool isTrue = trueValues.Any(item => item.Equals(stringValue, StringComparison.InvariantCultureIgnoreCase));
             return isTrue;
         }

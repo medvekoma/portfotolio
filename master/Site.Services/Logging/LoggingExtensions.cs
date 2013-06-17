@@ -18,18 +18,6 @@ namespace Portfotolio.Site.Services.Logging
             }
         }
 
-        //public static void LogException(this NLog.Logger logger, Exception exception)
-        //{
-        //    if (ShouldLogAsWarning(exception))
-        //    {
-        //        logger.WarnException(GetMessage(exception), exception);
-        //    }
-        //    else
-        //    {
-        //        logger.ErrorException(GetMessage(exception), exception);
-        //    }
-        //}
-
         private static string GetMessage(Exception exception)
         {
             return exception != null

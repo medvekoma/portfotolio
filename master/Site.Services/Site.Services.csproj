@@ -42,14 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppSettingConfigurationProvider.cs" />
+    <Compile Include="ApplicationConfigurationProvider.cs" />
     <Compile Include="AspNetUserSession.cs" />
+    <Compile Include="CachedApplicationConfigurationProvider.cs" />
     <Compile Include="Logging\LoggingExtensions.cs" />
     <Compile Include="Models\AllowRobots.cs" />
     <Compile Include="Models\SettingsModel.cs" />
     <Compile Include="Models\HideFromSearchEngineCondition.cs" />
     <Compile Include="Models\OptOutModel.cs" />
     <Compile Include="Models\TestModel.cs" />
+    <Compile Include="PortfotolioConfigurationSection.cs" />
     <Compile Include="UserStorePathProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +63,10 @@
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{BFCAA2BF-2CB2-4F41-A335-166B8E8573C8}</Project>
       <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{16eddb18-1ffa-46d4-9fe8-366f07f5a7fd}</Project>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
