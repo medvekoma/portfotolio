@@ -25,6 +25,13 @@ namespace Portfotolio.Site4
                 );
 
             routes.MapRoute(
+                name: "photowithpage",
+                url: "{id}/{page}",
+                defaults: new { controller = "photo", action = "photos"},
+                constraints: new { id = "^[^-].*$" }
+                );
+
+            routes.MapRoute(
                 name: "photo",
                 url: "{id}/{action}/{secondaryId}", 
                 defaults: new { controller = "photo", action = "photos", secondaryId = UrlParameter.Optional },
