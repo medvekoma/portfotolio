@@ -26,7 +26,7 @@ namespace Portfotolio.Site4
             dependencyEngine.Register<IConfigurationProvider, AppSettingConfigurationProvider>(applicationLifeStyle);
             dependencyEngine.Register<IUserSession, AspNetUserSession>(applicationLifeStyle);
             dependencyEngine.Register<ICacheProvider, CacheProvider>(applicationLifeStyle);
-            dependencyEngine.Register<ILoggerFactory, LoggerFactory>(applicationLifeStyle);
+            dependencyEngine.Register<ILoggerProvider, NLogLoggerProvider>(applicationLifeStyle);
 
             // home
             dependencyEngine.Register<HomeController>(controllerLifeStyle);

@@ -12,7 +12,7 @@ namespace Portfotolio.Site4.Attributes
     {
         public void OnException(ExceptionContext filterContext)
         {
-            var loggerFactory = DependencyResolver.Current.GetService<ILoggerFactory>();
+            var loggerFactory = DependencyResolver.Current.GetService<ILoggerProvider>();
             var logger = loggerFactory.GetLogger("MasterHandleError");
             logger.LogException(filterContext.Exception);
 
