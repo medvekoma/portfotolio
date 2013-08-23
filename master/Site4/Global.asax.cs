@@ -22,7 +22,9 @@ namespace Portfotolio.Site4
 
         public MvcApplication()
         {
-            _logger = new LoggerFactory().GetLogger("Application");
+            _dependencyEngine = new DependencyInjectionEngineFactory().Create();
+            DependencyEngineConfigurator.Setup(_dependencyEngine);
+            _logger = DependencyResolver.Current.GetService<ILoggerProvider>().GetLogger("Application");
         }
 
         protected void Application_Start()
@@ -33,9 +35,6 @@ namespace Portfotolio.Site4
             ViewEngineConfig.Register();
 
             AreaRegistration.RegisterAllAreas();
-
-            _dependencyEngine = new DependencyInjectionEngineFactory().Create();
-            DependencyEngineConfigurator.Setup(_dependencyEngine);
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

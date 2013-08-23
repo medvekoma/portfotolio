@@ -51,10 +51,9 @@
     <Compile Include="Caching\CacheNames.cs" />
     <Compile Include="Caching\CacheProvider.cs" />
     <Compile Include="Logging\ILogger.cs" />
-    <Compile Include="Logging\ILoggerFactory.cs" />
-    <Compile Include="Logging\LoggerFactory.cs" />
+    <Compile Include="Logging\ILoggerProvider.cs" />
     <Compile Include="Logging\NLogLogger.cs" />
-    <Compile Include="Logging\NLogLoggerFactory.cs" />
+    <Compile Include="Logging\NLogLoggerProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
