@@ -10,9 +10,9 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
 
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/Scripts/js")
-        @Scripts.Render("~/Scripts/jquery")
+        @Styles.Render("~/bundles/css")
+        @Scripts.Render("~/bundles/js")
+		@Scripts.Render("~/bundles/jquery")
         
     </head>
     <body>
@@ -64,7 +64,6 @@
                 document.getElementsByTagName("head")[0].appendChild(e);
             }
         </script> 
-
         @RenderSection("scripts", required: false)
     </body>
 </html>
