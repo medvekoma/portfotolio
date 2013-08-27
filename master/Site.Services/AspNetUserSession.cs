@@ -1,4 +1,6 @@
+using System.Security.Principal;
 using System.Web;
+using System.Web.Security;
 using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.Site.Services
