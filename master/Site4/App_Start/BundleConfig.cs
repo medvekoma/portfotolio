@@ -14,7 +14,7 @@ namespace Portfotolio.Site4
 
 #if CDN
 			bundles.UseCdn = true;
-			const string jqueryCdnPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.min.js";
+			const string jqueryCdnPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js";
 			bundles.Add(new ScriptBundle("~/bundles/jquery", jqueryCdnPath).Include("~/Scripts/jquery/jquery-{version}.js"));
 #else
 			bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery/jquery-{version}.js"));

@@ -186,12 +186,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.0.3.js" />
-    <Content Include="Scripts\jquery-2.0.3.min.js" />
-    <Content Include="Scripts\jquery\jquery-1.8.3-vsdoc.js" />
-    <Content Include="Scripts\jquery\jquery-1.8.3.js" />
-    <Content Include="Scripts\jquery\jquery-1.8.3.min.js" />
+    <None Include="Scripts\jquery\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\jquery\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery\jquery-2.0.3.min.js" />
     <Content Include="Scripts\portfotolio.google.analytics.js" />
     <Content Include="Scripts\Paging\portfotolio.PagingView.js" />
     <Content Include="Web.config">
@@ -205,7 +202,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="_App_Offline.htm" />
-    <Content Include="Scripts\jquery-2.0.3.min.map" />
+    <Content Include="Scripts\jquery\jquery-2.0.3.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
