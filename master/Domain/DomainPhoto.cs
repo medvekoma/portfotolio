@@ -2,7 +2,7 @@
 {
     public class DomainPhoto
     {
-        public string Id { get; private set; }
+        public string PhotoId { get; private set; }
         public string AuthorId { get; private set; }
         public string AuthorName { get; private set; }
         public string AuthorAlias { get; private set; }
@@ -13,9 +13,14 @@
         public int SmallHeight { get; private set; }
         public bool IsLicensed { get; private set; }
 
+        public DomainPhoto()
+        {
+            
+        }
+
         public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string smallUrl, int smallWidth, int smallHeight, bool isLicensed)
         {
-            Id = id;
+            PhotoId = id;
             AuthorId = authorId;
             AuthorName = authorName;
             AuthorAlias = authorAlias;
