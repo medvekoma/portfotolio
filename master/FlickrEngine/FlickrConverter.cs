@@ -17,7 +17,7 @@ namespace Portfotolio.FlickrEngine
                 return null;
 
 
-            var domainPhotos = photoCollection
+                    var domainPhotos = photoCollection
                 .Select(photo => Mapper.Map<DomainPhoto>(photo))
                 .ToList();
             return new DomainPhotos(domainPhotos, photoCollection.Page, photoCollection.Pages);
@@ -35,13 +35,15 @@ namespace Portfotolio.FlickrEngine
                                      photo.SmallUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240,
                                      photo.IsLicensed()))
                 .ToList();
+
+
             return new DomainPhotos(domainPhotos, photosetPhotos.Page, photosetPhotos.Pages);
         }
 
         public ListItems Convert(GroupInfoCollection groups)
         {
             var items = groups
-                .Select(group => new ListItem(group.GroupId, group.GroupName))
+                .Select(group => Mapper.Map<ListItem>(group))
                 .ToArray();
 
             return new ListItems(items, 1, 1);
@@ -50,10 +52,7 @@ namespace Portfotolio.FlickrEngine
         public ListItems Convert(ContactCollection contacts)
         {
             var items = contacts
-                .Select(contact => new ListItem(
-                                       string.IsNullOrEmpty(contact.PathAlias) ? contact.UserId : contact.PathAlias,
-                                       contact.UserName,
-                                       contact.BuddyIconUrl))
+                .Select(contact => Mapper.Map<ListItem>(contact))
                 .ToArray();
             return new ListItems(items, contacts.Page, contacts.Pages); 
         }

@@ -16,6 +16,16 @@ namespace Portfotolio.Site4
                   .ForMember(dest => dest.PageUrl, opt => opt.MapFrom(src => src.WebUrl + "lightbox/"))
                   .ForMember(dest => dest.SmallWidth, opt => opt.NullSubstitute(240))
                   .ForMember(dest => dest.IsLicensed, opt => opt.MapFrom(src => src.IsLicensed()));
+
+            Mapper.CreateMap<GroupInfo, ListItem>()
+                  .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.GroupId))
+                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.GroupName));
+
+            Mapper.CreateMap<Contact, ListItem>()
+                  .ForMember(dest => dest.Id, opt => opt.MapFrom(src => string.IsNullOrEmpty(src.PathAlias) ? src.UserId : src.PathAlias))
+                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.UserName))
+                  .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.BuddyIconUrl));
+
         }
     }
 }
