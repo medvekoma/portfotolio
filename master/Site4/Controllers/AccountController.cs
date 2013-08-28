@@ -11,12 +11,12 @@ namespace Portfotolio.Site4.Controllers
         private const string UserHasLoggedInMessage = "User '{0}' has logged in.";
 
         private readonly IAuthenticationProvider _authenticationProvider;
-        private readonly ILogger _logger;
+	    private readonly ILogger _logger;
 
         public AccountController(IAuthenticationProvider authenticationProvider, ILoggerFactory loggerFactory)
         {
             _authenticationProvider = authenticationProvider;
-            _logger = loggerFactory.GetLogger("Authentication");
+	        _logger = loggerFactory.GetLogger("Authentication");
         }
 
         public ActionResult Login()
@@ -43,6 +43,7 @@ namespace Portfotolio.Site4.Controllers
             var authenticationInfo = _authenticationProvider.GetAuthenticationInfo();
             _authenticationProvider.Logout();
             _logger.Info(string.Format(UserHasLoggedOutMessage, authenticationInfo.UserAlias));
+
             return RedirectToLastPage();
         }
 
@@ -52,7 +53,7 @@ namespace Portfotolio.Site4.Controllers
             if (authenticationInfo.IsAuthenticated)
             {
                 _logger.Info(string.Format(UserHasLoggedInMessage, authenticationInfo.UserAlias));
-            }
+			}
             return RedirectToLastPage();
         }
 

@@ -31,14 +31,10 @@ namespace Portfotolio.Site4.Extensions
 
         public static AuthenticationInfo AuthenticationInfo(this HttpContextBase httpContextBase)
         {
-            var session = httpContextBase.Session;
-            if (session == null)
-                return new AuthenticationInfo();
-            var value = session[DataKeys.AuthenticationInfo];
-            if (value == null)
-                return new AuthenticationInfo();
+	        var authenticationStorage = DependencyResolver.Current.GetService<IAuthenticationStorage>();
+	        var authenticationInfo = authenticationStorage.GetAuthenticationInfo();
 
-            return (AuthenticationInfo)value;
+            return authenticationInfo;
         }
 
         public static ApplicationConfiguration GetApplicationConfiguration(this HtmlHelper htmlHelper)

@@ -16,15 +16,19 @@ namespace Portfotolio.FlickrEngine
         private readonly IApplicationConfigurationProvider _applicationConfigurationProvider;
         private readonly IUserSession _userSession;
         private readonly IUserService _userService;
+	    private readonly IAuthenticationProvider _authenticationProvider;
 
-        public FlickrPhotoEngine(IFlickrPhotoProvider flickrPhotoProvider, IFlickrConverter flickrConverter,
-                                 IApplicationConfigurationProvider applicationConfigurationProvider, IUserSession userSession, IUserService userService)
+	    public FlickrPhotoEngine(IFlickrPhotoProvider flickrPhotoProvider, IFlickrConverter flickrConverter,
+            IApplicationConfigurationProvider applicationConfigurationProvider, 
+			IUserSession userSession, IUserService userService,
+			IAuthenticationProvider authenticationProvider)
         {
             _flickrPhotoProvider = flickrPhotoProvider;
             _flickrConverter = flickrConverter;
             _applicationConfigurationProvider = applicationConfigurationProvider;
             _userSession = userSession;
             _userService = userService;
+	        _authenticationProvider = authenticationProvider;
         }
 
         private DomainPhotos RemoveOptedOutUserPhotos(DomainPhotos domainPhotos)
@@ -39,12 +43,12 @@ namespace Portfotolio.FlickrEngine
 
         private bool IsAuthenticatedUser()
         {
-            return _userSession.GetAuthenticationInfo().IsAuthenticated;
+            return _authenticationProvider.GetAuthenticationInfo().IsAuthenticated;
         }
 
         private bool IsAuthenticatedUser(string userId)
         {
-            return IsAuthenticatedUser() && (_userSession.GetAuthenticationInfo().UserId == userId);
+			return IsAuthenticatedUser() && (_authenticationProvider.GetAuthenticationInfo().UserId == userId);
         }
 
         public DomainPhotos GetPhotosOf(string userId, int page)

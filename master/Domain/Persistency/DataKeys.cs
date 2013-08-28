@@ -2,7 +2,6 @@ namespace Portfotolio.Domain.Persistency
 {
     public static class DataKeys
     {
-        public const string AuthenticationInfo = "AuthenticationInfo";
         public const string ActionUrl = "ActionUrl";
         public const string BreadCrumb = "BreadCrumb";
         public const string UserId = "UserId";

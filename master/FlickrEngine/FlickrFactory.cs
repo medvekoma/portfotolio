@@ -10,16 +10,16 @@ namespace Portfotolio.FlickrEngine
 
     public class FlickrFactory : IFlickrFactory
     {
-        private readonly IUserSession _userSession;
+	    private readonly IAuthenticationStorage _authenticationStorage;
 
-        public FlickrFactory(IUserSession userSession)
+        public FlickrFactory(IAuthenticationStorage authenticationStorage)
         {
-            _userSession = userSession;
+	        _authenticationStorage = authenticationStorage;
         }
 
-        public Flickr GetFlickr()
-        {
-            var authenticationInfo = _userSession.GetAuthenticationInfo();
+	    public Flickr GetFlickr()
+	    {
+		    var authenticationInfo = _authenticationStorage.GetAuthenticationInfo();
             var flickr = new Flickr();
             if (authenticationInfo.IsAuthenticated)
                 flickr.AuthToken = authenticationInfo.Token;

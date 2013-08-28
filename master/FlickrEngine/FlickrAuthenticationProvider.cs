@@ -6,14 +6,14 @@ namespace Portfotolio.FlickrEngine
 {
     public class FlickrAuthenticationProvider : IAuthenticationProvider
     {
-        private readonly IUserSession _userSession;
+	    private readonly IAuthenticationStorage _authenticationStorage;
 
-        public FlickrAuthenticationProvider(IUserSession userSession)
+        public FlickrAuthenticationProvider(IAuthenticationStorage authenticationStorage)
         {
-            _userSession = userSession;
+	        _authenticationStorage = authenticationStorage;
         }
 
-        public string GetLoginUrl()
+	    public string GetLoginUrl()
         {
             string loginUrl = new Flickr().AuthCalcWebUrl(AuthLevel.Read);
             return loginUrl;
@@ -21,7 +21,7 @@ namespace Portfotolio.FlickrEngine
 
         public void Logout()
         {
-            _userSession.RemoveAuthenticationInfo();
+            _authenticationStorage.Clear();
         }
 
         public AuthenticationInfo Authenticate(object parameter)
@@ -29,14 +29,14 @@ namespace Portfotolio.FlickrEngine
             var frob = (string) parameter;
             Auth auth = new Flickr().AuthGetToken(frob);
             var authenticationInfo = auth.AsAuthenticationInfo();
-            _userSession.SetAuthenticationInfo(authenticationInfo);
+            _authenticationStorage.SetAuthenticationInfo(authenticationInfo);
             
             return authenticationInfo;
         }
 
         public AuthenticationInfo GetAuthenticationInfo()
         {
-            return _userSession.GetAuthenticationInfo();
+            return _authenticationStorage.GetAuthenticationInfo();
         }
     }
 }

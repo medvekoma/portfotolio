@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -45,6 +48,8 @@
     <Compile Include="ApplicationConfigurationProvider.cs" />
     <Compile Include="AspNetUserSession.cs" />
     <Compile Include="CachedApplicationConfigurationProvider.cs" />
+    <Compile Include="FormsAuthenticationStorage.cs" />
+    <Compile Include="HttpContextProvider.cs" />
     <Compile Include="Logging\LoggingExtensions.cs" />
     <Compile Include="Models\AllowRobots.cs" />
     <Compile Include="Models\SettingsModel.cs" />
@@ -68,6 +73,9 @@
       <Project>{16eddb18-1ffa-46d4-9fe8-366f07f5a7fd}</Project>
       <Name>Utility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
