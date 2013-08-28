@@ -13,18 +13,22 @@ namespace Portfotolio.FlickrEngine
     {
         private readonly IFlickrPhotoProvider _flickrPhotoProvider;
         private readonly IFlickrConverter _flickrConverter;
-        private readonly IConfigurationProvider _configurationProvider;
+        private readonly IApplicationConfigurationProvider _applicationConfigurationProvider;
         private readonly IUserSession _userSession;
         private readonly IUserService _userService;
+	    private readonly IAuthenticationProvider _authenticationProvider;
 
-        public FlickrPhotoEngine(IFlickrPhotoProvider flickrPhotoProvider, IFlickrConverter flickrConverter,
-                                 IConfigurationProvider configurationProvider, IUserSession userSession, IUserService userService)
+	    public FlickrPhotoEngine(IFlickrPhotoProvider flickrPhotoProvider, IFlickrConverter flickrConverter,
+            IApplicationConfigurationProvider applicationConfigurationProvider, 
+			IUserSession userSession, IUserService userService,
+			IAuthenticationProvider authenticationProvider)
         {
             _flickrPhotoProvider = flickrPhotoProvider;
             _flickrConverter = flickrConverter;
-            _configurationProvider = configurationProvider;
+            _applicationConfigurationProvider = applicationConfigurationProvider;
             _userSession = userSession;
             _userService = userService;
+	        _authenticationProvider = authenticationProvider;
         }
 
         private DomainPhotos RemoveOptedOutUserPhotos(DomainPhotos domainPhotos)
@@ -39,17 +43,17 @@ namespace Portfotolio.FlickrEngine
 
         private bool IsAuthenticatedUser()
         {
-            return _userSession.GetAuthenticationInfo().IsAuthenticated;
+            return _authenticationProvider.GetAuthenticationInfo().IsAuthenticated;
         }
 
         private bool IsAuthenticatedUser(string userId)
         {
-            return IsAuthenticatedUser() && (_userSession.GetAuthenticationInfo().UserId == userId);
+			return IsAuthenticatedUser() && (_authenticationProvider.GetAuthenticationInfo().UserId == userId);
         }
 
         public DomainPhotos GetPhotosOf(string userId, int page)
         {
-            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().PhotoPageSize;
 
             var photoCollection = IsAuthenticatedUser()
                 ? _flickrPhotoProvider.GetPhotosOf(userId, page, pageSize)
@@ -61,7 +65,7 @@ namespace Portfotolio.FlickrEngine
 
         public DomainPhotos GetFavoritesOf(string userId, int page)
         {
-            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().PhotoPageSize;
 
             var photoCollection = GetAuthenticationAwareFavoritesOf(userId, page, pageSize);
 
@@ -79,7 +83,7 @@ namespace Portfotolio.FlickrEngine
 
         public DomainPhotos GetSubscriptionsOf(string userId, int page)
         {
-            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().PhotoPageSize;
 
             var isUserAuthenticated = IsAuthenticatedUser(userId);
             var photoCollection = isUserAuthenticated
@@ -109,7 +113,7 @@ namespace Portfotolio.FlickrEngine
 
         public AlbumPhotos GetPhotosInAlbum(string albumId, int page)
         {
-            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().PhotoPageSize;
 
             var photosets = _flickrPhotoProvider.GetPhotosInAlbum(albumId, page, pageSize);
             var domainPhotos = _flickrConverter.Convert(photosets);
@@ -132,7 +136,7 @@ namespace Portfotolio.FlickrEngine
 
         public DomainGroup GetGroup(string groupId, int page)
         {
-            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().PhotoPageSize;
 
             var groupInfo = _flickrPhotoProvider.GetGroupInfo(groupId);
             var photos = _flickrPhotoProvider.GetPhotosInGroup(groupId, page, pageSize);
@@ -144,7 +148,7 @@ namespace Portfotolio.FlickrEngine
 
         public ListItems GetContacts(string userId, int page)
         {
-            var pageSize = _configurationProvider.GetContactsPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().ContactsPageSize;
 
             var contacts = _flickrPhotoProvider.GetContacts(userId, page, pageSize);
             var listElements = _flickrConverter.Convert(contacts);
@@ -154,7 +158,7 @@ namespace Portfotolio.FlickrEngine
 
         private string[] GetRecommendedUserIds(string userId)
         {
-            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().PhotoPageSize;
             var favoritePhotos = GetAuthenticationAwareFavoritesOf(userId, 1, pageSize);
             var recommendedUserIds = favoritePhotos
                 .Select(photo => photo.UserId)
@@ -194,7 +198,7 @@ namespace Portfotolio.FlickrEngine
             if (page > recommendedUserIds.Length)
                 return new DomainPhotos(new List<DomainPhoto>(), page, page);
 
-            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().PhotoPageSize;
             var photos = GetAuthenticationAwareFavoritesOf(recommendedUserIds[page - 1], 1, pageSize);
             var domainPhotos = _flickrConverter.Convert(photos).Photos
                 .Where(photo => photo.AuthorId != userId)
@@ -207,7 +211,7 @@ namespace Portfotolio.FlickrEngine
 
         public DomainPhotos GetInterestingPhotos(int page)
         {
-            var pageSize = _configurationProvider.GetPhotoPageSize();
+            var pageSize = _applicationConfigurationProvider.GetApplicationConfiguration().PhotoPageSize;
             var photos = _flickrPhotoProvider.GetInterestingPhotos(page, pageSize);
             var domainPhotos = _flickrConverter.Convert(photos);
             return RemoveOptedOutUserPhotos(domainPhotos);

@@ -15,8 +15,8 @@ namespace Portfotolio.Site4.Attributes
             var authenticationInfo = filterContext.HttpContext.AuthenticationInfo();
             var authenticatedUserAlias = authenticationInfo.UserAlias;
 
-            var configurationProvider = DependencyResolver.Current.GetService<IConfigurationProvider>();
-            var administratorAliases = configurationProvider.GetAdministratorAliases();
+            var configurationProvider = DependencyResolver.Current.GetService<IApplicationConfigurationProvider>();
+            var administratorAliases = configurationProvider.GetApplicationConfiguration().AdministratorAliases;
 
             if (!administratorAliases.Contains(authenticatedUserAlias))
                 throw new AuthenticationException();

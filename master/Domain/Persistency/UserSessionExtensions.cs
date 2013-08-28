@@ -4,21 +4,6 @@ namespace Portfotolio.Domain.Persistency
 {
     public static class UserSessionExtensions
     {
-        public static AuthenticationInfo GetAuthenticationInfo(this IUserSession userSession)
-        {
-            return userSession.GetValue<AuthenticationInfo>(DataKeys.AuthenticationInfo);
-        }
-
-        public static void SetAuthenticationInfo(this IUserSession userSession, AuthenticationInfo authenticationInfo)
-        {
-            userSession.SetValue(DataKeys.AuthenticationInfo, authenticationInfo);
-        }
-
-        public static void RemoveAuthenticationInfo(this IUserSession userSession)
-        {
-            userSession.SetValue(DataKeys.AuthenticationInfo, null);
-        }
-
         public static string[] GetRecommendedUserIds(this IUserSession userSession, string userId)
         {
             string key = DataKeys.RecommendedUserIds + userId;

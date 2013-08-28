@@ -1,4 +1,5 @@
 ﻿@using Portfotolio.Domain.Configuration
+@using Portfotolio.Site4.Extensions
 @model Portfotolio.Site.Services.Models.SettingsModel
 <div id="licensing" class="standout">
     <p>
@@ -106,6 +107,6 @@
             }
     }
     <h2>Need support?</h2>
-    Feel free to <a href="http://www.flickr.com/mail/write/?to=27725019@N00">contact me</a>
+    Feel free to <a href="@Html.Raw(Html.GetApplicationConfiguration().ContactUsLink)">contact me</a>
     with any of your questions, comments or concerns.
 </div>

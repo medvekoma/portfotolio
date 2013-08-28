@@ -70,8 +70,8 @@
     <Compile Include="Exceptions\NotEnoughPermissionsException.cs" />
     <Compile Include="Exceptions\OptedOutUserException.cs" />
     <Compile Include="Exceptions\PortfotolioException.cs" />
+    <Compile Include="IApplicationConfigurationProvider.cs" />
     <Compile Include="IAuthenticationProvider.cs" />
-    <Compile Include="IConfigurationProvider.cs" />
     <Compile Include="IOAuthProvider.cs" />
     <Compile Include="IPhotoEngine.cs" />
     <Compile Include="IApplicationUtility.cs" />
@@ -79,6 +79,7 @@
     <Compile Include="ListItem.cs" />
     <Compile Include="ListItems.cs" />
     <Compile Include="OAuthAuthorizationObject.cs" />
+    <Compile Include="Persistency\IAuthenticationStorage.cs" />
     <Compile Include="Persistency\IUserSession.cs" />
     <Compile Include="Persistency\UserSessionExtensions.cs" />
     <Compile Include="Persistency\DataKeys.cs" />

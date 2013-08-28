@@ -2,22 +2,38 @@
 @{
     var userAlias = Html.UserAlias();
     var authenticationInfo = Html.AuthenticationInfo();
+    var disabledMenuTitle = "This menu is only available on your own page.";
+    if (!authenticationInfo.IsAuthenticated)
+    {
+        disabledMenuTitle += " Sign in to see more";
+    }
 }
 @if (userAlias != null)
 {
-    <ul id="menu">
+    <ul class="menu">
         <li>@Html.ActionLinkUserId("Photos", "photos", "photo", new { id = userAlias }, null)</li>
         <li>@Html.ActionLinkUserId("Albums", "albums", "photo", new { id = userAlias }, null)</li>
         <li>|</li>
         <li>@Html.ActionLinkUserId("Groups", "groups", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
         <li>@Html.ActionLinkUserId("Favourites", "favorites", "photo", new { id = userAlias }, null)</li>
-        @if (authenticationInfo.UserAlias == userAlias)
-        {
-            <li>|</li>
-            <li>@Html.ActionLinkUserId("Subscriptions", "subscriptions", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
-            <li>@Html.ActionLinkUserId("Contacts", "contacts", "photo", new { id = userAlias }, null)</li>
-            <li>|</li>
-            <li>@Html.ActionLinkUserId("Recommendations", "recommendations", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
-        }
+        <li>|</li>
     </ul>
+    if (authenticationInfo.UserAlias != userAlias)
+    {
+    <ul class="menu disabledMenu" title="@disabledMenuTitle">
+        <li>Subscriptions</li>
+        <li>Contacts</li>
+        <li>|</li>
+        <li>Recommendations</li>
+    </ul>
+    }
+    else
+    {
+    <ul class="menu">
+        <li>@Html.ActionLinkUserId("Subscriptions", "subscriptions", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
+        <li>@Html.ActionLinkUserId("Contacts", "contacts", "photo", new { id = userAlias }, null)</li>
+        <li>|</li>
+        <li>@Html.ActionLinkUserId("Recommendations", "recommendations", "photo", new { id = userAlias }, new { rel = "nofollow" })</li>
+    </ul>
+    }
 }

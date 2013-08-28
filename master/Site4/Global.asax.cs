@@ -59,9 +59,10 @@ namespace Portfotolio.Site4
         protected void Application_Error()
         {
             var exception = Server.GetLastError();
-            _logger.LogException(exception);
+			Server.ClearError();
+			_logger.LogException(exception);
 
-            Server.Transfer("~/Content/error.htm");
+			Server.Transfer("~/Content/error.htm");
         }
 
         protected void Session_Start()
