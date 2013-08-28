@@ -18,15 +18,9 @@ namespace Portfotolio.Domain.Exceptions
             UserAlias = userAlias;
         }
 
-        private const string MessageFormat =
-            "Nothing to see here. '{0}' do not allow their photos to be viewed with third party applications.";
-        
         public override string Message
         {
-            get
-            {
-                return string.Format(MessageFormat, UserAlias);
-            }
+            get { return "Nothing to see here. Photos are hidden on their author's request."; }
         }
     }
 }
