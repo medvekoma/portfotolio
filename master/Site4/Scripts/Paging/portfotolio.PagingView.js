@@ -30,17 +30,16 @@ Medvekoma.Portfotolio.CalculateTargetScollPosition = function() {
             historicalScrollPosition = targetScrollPosition;
     }
 
-    if (historicalScrollPosition > targetScrollPosition)//use the original one when was requested coming back from Flickr for the first time
+    if (historicalScrollPosition > targetScrollPosition)//use the original one when was requested coming back from Flickr(subsequent partial page loads)
         targetScrollPosition = historicalScrollPosition;
 
     return targetScrollPosition;
 };
 
 Medvekoma.Portfotolio.RestoreScrollPosition = function (scrollPosition) {
-    if (scrollPosition > $(document).height()) {
-        //window.setTimeout(function() {
-            Medvekoma.Portfotolio.ShowNextPageIfNeeded();
-        //}, delay);
+    if (scrollPosition > $(document).height())
+    {
+        Medvekoma.Portfotolio.ShowNextPageIfNeeded();
         $(window).scrollTop(scrollPosition);
     }
 };
@@ -69,17 +68,22 @@ Medvekoma.Portfotolio.ShowNextPage = function () {
             success: function (result) {
                 nextPageDiv.html('').replaceWith(result);
                 Medvekoma.Portfotolio.InitializeLoading();
-                history.pushState(null, null, "?scroll=" + $(document).height());
-                window.addEventListener("popstate", function () {
-                    var urlParams = Medvekoma.Portfotolio.GetUrlParameters();
-                    Medvekoma.Portfotolio.RestoreScrollPosition(urlParams["scroll"]);
-                });
+                if (Medvekoma.Portfotolio.SupportsHistoryApi()) {
+                    history.pushState(null, null, "?scroll=" + $(document).height());
+                    $(window).on("popstate", function () {
+                        var urlParams = Medvekoma.Portfotolio.GetUrlParameters();
+                        Medvekoma.Portfotolio.RestoreScrollPosition(urlParams["scroll"]);
+                    });
+                }
             }
         };
         $.ajax(options);
     }
 };
 
+Medvekoma.Portfotolio.SupportsHistoryApi = function () {
+    return !!(window.history && history.pushState);
+};
 
 Medvekoma.Portfotolio.GetUrlParameters = function() {
     var match,
