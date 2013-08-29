@@ -21,17 +21,11 @@ Medvekoma.Portfotolio.InitializeLoading = function () {
 
 Medvekoma.Portfotolio.CalculateTargetScollPosition = function() {
 
-    var targetScrollPosition = $(window).scrollTop();//default case within the page
-
-    if (Medvekoma.Portfotolio.GetUrlParameters()["scroll"] > targetScrollPosition)//use the one from URL when coming back from Flickr(first partialpage load)
-    {
-        targetScrollPosition = parseInt(Medvekoma.Portfotolio.GetUrlParameters()["scroll"]);
-        if(historicalScrollPosition == 0)
-            historicalScrollPosition = targetScrollPosition;
+    var targetScrollPosition = $(window).scrollTop();
+    if (typeof(Storage) !== "undefined") {
+        if (sessionStorage.ScrollPosition != null && sessionStorage.ScrollPosition > targetScrollPosition) //back from 3rd pary page
+            targetScrollPosition = sessionStorage.ScrollPosition;
     }
-
-    if (historicalScrollPosition > targetScrollPosition)//use the original one when was requested coming back from Flickr(subsequent partial page loads)
-        targetScrollPosition = historicalScrollPosition;
 
     return targetScrollPosition;
 };
@@ -68,12 +62,10 @@ Medvekoma.Portfotolio.ShowNextPage = function () {
             success: function (result) {
                 nextPageDiv.html('').replaceWith(result);
                 Medvekoma.Portfotolio.InitializeLoading();
-                if (Medvekoma.Portfotolio.SupportsHistoryApi()) {
-                    history.pushState(null, null, "?scroll=" + $(document).height());
-                    $(window).on("popstate", function () {
-                        var urlParams = Medvekoma.Portfotolio.GetUrlParameters();
-                        Medvekoma.Portfotolio.RestoreScrollPosition(urlParams["scroll"]);
-                    });
+                debugger;
+                if (typeof(Storage) !== "undefined") {
+                    if (sessionStorage.ScrollPosition == null || sessionStorage.ScrollPosition < $(document).height())
+                        sessionStorage.ScrollPosition = $(document).height();
                 }
             }
         };
