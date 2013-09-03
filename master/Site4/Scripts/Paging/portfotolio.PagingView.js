@@ -23,8 +23,8 @@ Medvekoma.Portfotolio.CalculateTargetScollPosition = function() {
 
     var targetScrollPosition = $(window).scrollTop();
 
-    if ($.cookie('the_cookie') != null && $.cookie('the_cookie') > targetScrollPosition)
-        targetScrollPosition = $.cookie('the_cookie');
+    if ($.cookie('scroll_anchor') != null && $.cookie('scroll_anchor') > targetScrollPosition)
+        targetScrollPosition = $.cookie('scroll_anchor');
 
     return targetScrollPosition;
 };
@@ -62,8 +62,8 @@ Medvekoma.Portfotolio.ShowNextPage = function () {
                 nextPageDiv.html('').replaceWith(result);
                 Medvekoma.Portfotolio.InitializeLoading();
                 
-                if($.cookie('the_cookie') == null || $.cookie('the_cookie') < $(document).height())
-                    $.cookie('the_cookie', $(document).height());
+                if($.cookie('scroll_anchor') == null || $.cookie('scroll_anchor') < $(document).height())
+                    $.cookie('scroll_anchor', $(document).height());
             }
         };
         $.ajax(options);
