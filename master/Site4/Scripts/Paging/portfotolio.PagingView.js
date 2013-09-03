@@ -22,10 +22,9 @@ Medvekoma.Portfotolio.InitializeLoading = function () {
 Medvekoma.Portfotolio.CalculateTargetScollPosition = function() {
 
     var targetScrollPosition = $(window).scrollTop();
-    if (typeof(Storage) !== "undefined") {
-        if (sessionStorage.ScrollPosition != null && sessionStorage.ScrollPosition > targetScrollPosition) //back from 3rd pary page
-            targetScrollPosition = sessionStorage.ScrollPosition;
-    }
+
+    if ($.cookie('the_cookie') != null && $.cookie('the_cookie') > targetScrollPosition)
+        targetScrollPosition = $.cookie('the_cookie');
 
     return targetScrollPosition;
 };
@@ -62,30 +61,12 @@ Medvekoma.Portfotolio.ShowNextPage = function () {
             success: function (result) {
                 nextPageDiv.html('').replaceWith(result);
                 Medvekoma.Portfotolio.InitializeLoading();
-                debugger;
-                if (typeof(Storage) !== "undefined") {
-                    if (sessionStorage.ScrollPosition == null || sessionStorage.ScrollPosition < $(document).height())
-                        sessionStorage.ScrollPosition = $(document).height();
-                }
+                
+                if($.cookie('the_cookie') == null || $.cookie('the_cookie') < $(document).height())
+                    $.cookie('the_cookie', $(document).height());
             }
         };
         $.ajax(options);
     }
 };
 
-Medvekoma.Portfotolio.SupportsHistoryApi = function () {
-    return !!(window.history && history.pushState);
-};
-
-Medvekoma.Portfotolio.GetUrlParameters = function() {
-    var match,
-        pl = /\+/g, // Regex for replacing addition symbol with a space
-        search = /([^&=]+)=?([^&]*)/g,
-        decode = function(s) { return decodeURIComponent(s.replace(pl, " ")); },
-        query = window.location.search.substring(1);
-
-    var urlParams = {};
-    while (match = search.exec(query))
-        urlParams[decode(match[1])] = decode(match[2]);
-    return urlParams;
-};
