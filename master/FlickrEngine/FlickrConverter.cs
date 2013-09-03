@@ -32,7 +32,7 @@ namespace Portfotolio.FlickrEngine
                 .Select(photo => new DomainPhoto(
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
                                      photo.Title, photo.WebUrl,
-                                     photo.SmallUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240,
+                                     photo.Medium640Url, photo.Medium640Width ?? 640, photo.Medium640Width ?? 640,
                                      photo.IsLicensed()))
                 .ToList();
 

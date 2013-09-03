@@ -8,9 +8,9 @@
         public string AuthorAlias { get; private set; }
         public string Title { get; private set; }
         public string PageUrl { get; private set; }
-        public string SmallUrl { get; private set; }
-        public int SmallWidth { get; private set; }
-        public int SmallHeight { get; private set; }
+        public string Medium640Url { get; private set; }
+        public int Medium640Width { get; private set; }
+        public int Medium640Height { get; private set; }
         public bool IsLicensed { get; private set; }
 
         public DomainPhoto()
@@ -18,7 +18,7 @@
             
         }
 
-        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string smallUrl, int smallWidth, int smallHeight, bool isLicensed)
+        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string mediumUrl, int medium640Width, int medium640Height, bool isLicensed)
         {
             PhotoId = id;
             AuthorId = authorId;
@@ -26,9 +26,9 @@
             AuthorAlias = authorAlias;
             Title = title;
             PageUrl = pageUrl;
-            SmallUrl = smallUrl;
-            SmallWidth = smallWidth;
-            SmallHeight = smallHeight;
+            Medium640Url = mediumUrl;
+            Medium640Width = medium640Width;
+            Medium640Height = medium640Height;
             IsLicensed = isLicensed;
         }
     }

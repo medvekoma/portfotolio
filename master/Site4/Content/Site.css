@@ -255,8 +255,6 @@ input#SearchText
 {
     position: relative;
     float: left;
-    width: 350px;
-    height: 350px;
 }
 
 .photo-frame
@@ -269,7 +267,7 @@ input#SearchText
 {
     background: url('') no-repeat scroll center center transparent;
     display: block;
-    border: 5px solid white;
+    border: 3px solid white;
 }
 
 .title-frame
