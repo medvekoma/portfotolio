@@ -61,9 +61,10 @@ Medvekoma.Portfotolio.ShowNextPage = function () {
             success: function (result) {
                 nextPageDiv.html('').replaceWith(result);
                 Medvekoma.Portfotolio.InitializeLoading();
-                
-                if($.cookie('scroll_anchor') == null || $.cookie('scroll_anchor') < $(document).height())
-                    $.cookie('scroll_anchor', $(document).height());
+
+                if ($.cookie('scroll_anchor') == null || $.cookie('scroll_anchor') < $(document).height()) {
+                    $.cookie('scroll_anchor', $(document).height(), { path: window.location.pathname });
+                }
             }
         };
         $.ajax(options);

@@ -1,3 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //expire the scroll anchor cookie each time a new page is requested(except with the BACK button)
+    if (Request.Cookies["scroll_anchor"] != null)
+    {
+        HttpCookie myCookie = new HttpCookie("scroll_anchor", "0");
+        myCookie.Path = Request.Url.AbsolutePath;
+        Response.Cookies.Add(myCookie);
+    }
 }
