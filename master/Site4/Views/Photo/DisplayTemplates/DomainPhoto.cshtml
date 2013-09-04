@@ -3,35 +3,25 @@
 
 @model DomainPhoto
 @{
-
-
-    float ratio = (float)Model.Medium640Height / (float)Model.Medium640Width;
+    const float fixedHeight = 400;
+    var ratio = (float)Model.Medium640Height / (float)Model.Medium640Width;
+    var verticalShrinkRatio = fixedHeight/(float) Model.Medium640Height;
     if (ratio > 2 || ratio < 0.5) //exceptional ratio
     {
         return;
     }
-    bool isVertical = ratio > 1;
-    float alignedWidth = isVertical ? Model.Medium640Width/ratio : Model.Medium640Width;
-    float alignedHeight = 426;//isVertical ? Model.Medium640Height/ratio : Model.Medium640Height;
-    //if (TempData["PreviousPhotoHeight"] != null)
-    //{
-    //    if ((float)TempData["PreviousPhotoHeight"] < alignedHeight)
-    //    {
-    //        alignedHeight = (float)TempData["PreviousPhotoHeight"];
-    //    }
-    //}
-    //TempData["PreviousPhotoHeight"] = alignedHeight;
-    
+    var isVertical = ratio > 1;
+    var alignedWidth = isVertical ? Model.Medium640Width/ratio : Model.Medium640Width * verticalShrinkRatio;
 
 }
 
-<div class="slide" style="width: @(alignedWidth +6)px; height:@(alignedHeight+6)px">
+<div class="slide" style="width: @(alignedWidth +6)px; height:@(fixedHeight+6)px">
     <div class="photo-frame">
         @if (Model.IsLicensed || Html.AuthenticationInfo().IsAuthenticated)
         {
             <a class="photo-link" 
                href="@Model.PageUrl" 
-               style="background: url('@Model.Medium640Url'); background-size: @(alignedWidth)px @(alignedHeight)px; width: @(alignedWidth)px; height:@(alignedHeight)px" ></a>
+               style="background: url('@Model.Medium640Url'); background-size: @(alignedWidth)px @(fixedHeight)px; width: @(alignedWidth)px; height:@(fixedHeight)px" ></a>
         }
         else
         {
@@ -39,9 +29,9 @@
                 href="@Model.PageUrl" 
                 style="width: @(Model.Medium640Width)px; height: @(Model.Medium640Height)px;">
             </a>
-            <a href="@Url.Action("licensing", "settings")" class="copyright" style="top: @(alignedHeight-50)px; left: @(alignedWidth-40)px" title="Copyrighted image. Click for more information.">&copy;</a>
+            <a href="@Url.Action("licensing", "settings")" class="copyright" style="top: @(fixedHeight-50)px; left: @(alignedWidth-40)px" title="Copyrighted image. Click for more information.">&copy;</a>
         }
-        <div class="title-frame" style="top:@(alignedHeight-20)px; display: none">
+        <div class="title-frame" style="top:@(fixedHeight-20)px; display: none">
             @(Html.ActionLinkUserId(Model.AuthorName ?? Model.AuthorAlias, "photos", new { id = Model.AuthorAlias })):
             <span class="title-text" title="@Model.Title">
                 @Model.Title
