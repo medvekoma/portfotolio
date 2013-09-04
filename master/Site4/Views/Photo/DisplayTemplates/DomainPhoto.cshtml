@@ -12,15 +12,15 @@
     }
     bool isVertical = ratio > 1;
     float alignedWidth = isVertical ? Model.Medium640Width/ratio : Model.Medium640Width;
-    float alignedHeight = isVertical ? Model.Medium640Height/ratio : Model.Medium640Height;
-    if (TempData["PreviousPhotoHeight"] != null)
-    {
-        if ((float) TempData["PreviousPhotoHeight"] < alignedHeight)
-        {
-            alignedHeight = (float) TempData["PreviousPhotoHeight"];
-        }
-    }
-    TempData["PreviousPhotoHeight"] = alignedHeight;
+    float alignedHeight = 426;//isVertical ? Model.Medium640Height/ratio : Model.Medium640Height;
+    //if (TempData["PreviousPhotoHeight"] != null)
+    //{
+    //    if ((float)TempData["PreviousPhotoHeight"] < alignedHeight)
+    //    {
+    //        alignedHeight = (float)TempData["PreviousPhotoHeight"];
+    //    }
+    //}
+    //TempData["PreviousPhotoHeight"] = alignedHeight;
     
 
 }
@@ -31,7 +31,7 @@
         {
             <a class="photo-link" 
                href="@Model.PageUrl" 
-               style="background-image: url('@Model.Medium640Url'); width: @(alignedWidth)px; height:@(alignedHeight)px" ></a>
+               style="background: url('@Model.Medium640Url'); background-size: @(alignedWidth)px @(alignedHeight)px; width: @(alignedWidth)px; height:@(alignedHeight)px" ></a>
         }
         else
         {
