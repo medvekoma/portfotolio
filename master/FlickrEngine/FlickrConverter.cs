@@ -59,7 +59,7 @@ namespace Portfotolio.FlickrEngine
 
         public Album Convert(Photoset set)
         {
-            return new Album(set.OwnerId, set.PhotosetId, set.Title, set.PhotosetSmallUrl);
+            return new Album(set.OwnerId, set.PhotosetId, set.Title, set.PhotosetSmallUrl, set.NumberOfPhotos);
         }
 
         public Albums Convert(PhotosetCollection photosets)

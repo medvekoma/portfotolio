@@ -303,3 +303,8 @@ input#SearchText
     font-weight: bold;
     font-family: sans-serif;
 }
+
+.photoFrame .middleFrame .innerFrame .NumberOfPhotos 
+{
+    font-size: 10px;
+}
