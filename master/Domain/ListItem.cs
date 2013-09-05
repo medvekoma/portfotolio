@@ -8,6 +8,11 @@ namespace Portfotolio.Domain
         public string Name { get; private set; }
         public string ImageUrl { get; private set; }
 
+        public ListItem()
+        {
+            
+        }
+
         public ListItem(string id, string name, string imageUrl)
         {
             Id = id;
