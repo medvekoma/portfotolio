@@ -19,12 +19,13 @@ namespace Portfotolio.Site4
 
             Mapper.CreateMap<GroupInfo, ListItem>()
                   .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.GroupId))
-                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.GroupName));
+                  .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.GroupName))
+                  .ForMember(dest => dest.ItemUrl, opt => opt.MapFrom(src => src.GroupUrl));
 
             Mapper.CreateMap<Contact, ListItem>()
                   .ForMember(dest => dest.Id, opt => opt.MapFrom(src => string.IsNullOrEmpty(src.PathAlias) ? src.UserId : src.PathAlias))
                   .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.UserName))
-                  .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.BuddyIconUrl));
+                  .ForMember(dest => dest.ItemUrl, opt => opt.MapFrom(src => src.BuddyIconUrl));
 
         }
     }

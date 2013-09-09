@@ -6,7 +6,7 @@
 @foreach (var item in Model.Items)
 {
     <li>
-        <a href='@Url.ActionUserId("group", new {id = item.Id})' title='@item.Name'>@item.Name</a>
+        <a href='@item.ItemUrl' title='@item.Name'>@item.Name</a>
     </li>
 }
 </ul>
