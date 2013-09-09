@@ -11,24 +11,12 @@ namespace Portfotolio.Site4
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{*url}", new { url = @"^.+\.[a-zA-Z]{2,4}$" });
 
-            //routes.MapRoute(
-            //    name: "home",
-            //    url: "",
-            //    defaults: new { controller = "photo", action = "promotion" }
-            //    );
 
             routes.MapRoute(
                 name: "home",
                 url: "",
                 defaults: new { controller = "photo", action = "photos", id = "serkansozer" }
                 );
-
-            //routes.MapRoute(
-            //    name: "group",
-            //    url: "group/{id}",
-            //    defaults: new { controller = "photo", action = "group", id = UrlParameter.Optional },
-            //    constraints: new { id = "^[0-9].*$"}
-            //    );
 
             routes.MapRoute(
                 name: "photo",
@@ -37,12 +25,6 @@ namespace Portfotolio.Site4
                 constraints: new { id = "serkansozer" }
 
                 );
-
-            //routes.MapRoute(
-            //    name: "generic",
-            //    url: "-{controller}/{action}/{id}",
-            //    defaults: new { action = "show", id = UrlParameter.Optional }
-            //    );
 
             routes.MapRoute(
                 name: "catch-all",
