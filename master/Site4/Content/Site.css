@@ -276,6 +276,16 @@ input#SearchText
     text-align: center;
     width: 100%;
     overflow: hidden;
+    color: whitesmoke;
+}
+
+.exif-frame
+{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    color: white;
 }
 
 .header-icon

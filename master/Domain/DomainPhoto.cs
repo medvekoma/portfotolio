@@ -1,4 +1,7 @@
-﻿namespace Portfotolio.Domain
+﻿using System;
+using System.Collections.Generic;
+
+namespace Portfotolio.Domain
 {
     public class DomainPhoto
     {
@@ -12,13 +15,14 @@
         public int Medium640Width { get; private set; }
         public int Medium640Height { get; private set; }
         public bool IsLicensed { get; private set; }
+        public DateTime DateTaken { get; private set; } 
+        public int? Views { get; private set; }
+        public Dictionary<string, string> ExifData{get; set;}
 
         public DomainPhoto()
-        {
-            
-        }
+        {}
 
-        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string mediumUrl, int medium640Width, int medium640Height, bool isLicensed)
+        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string mediumUrl, int medium640Width, int medium640Height, bool isLicensed, DateTime dateTaken, int? views)
         {
             PhotoId = id;
             AuthorId = authorId;
@@ -30,6 +34,8 @@
             Medium640Width = medium640Width;
             Medium640Height = medium640Height;
             IsLicensed = isLicensed;
+            DateTaken = dateTaken;
+            Views = views;
         }
     }
 }

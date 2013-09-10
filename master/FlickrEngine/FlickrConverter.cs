@@ -1,27 +1,33 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FlickrNet;
 using Portfotolio.Domain;
-using Portfotolio.Domain.Configuration;
 using AutoMapper;
 
 namespace Portfotolio.FlickrEngine
 {
     public class FlickrConverter : IFlickrConverter
     {
-        public FlickrConverter(IUserService userService)
-        {}
+        private readonly IFlickrExifEngine _flickrExifEngine;
+
+        public FlickrConverter(FlickrExifEngine flickrExifEngine)
+        {
+            _flickrExifEngine = flickrExifEngine;
+        }
 
         public DomainPhotos Convert(PhotoCollection photoCollection)
         {
             if (photoCollection == null)
                 return null;
-
-
-                    var domainPhotos = photoCollection
-                .Select(photo => Mapper.Map<DomainPhoto>(photo))
+            
+                var domainPhotos = photoCollection
+                .Select(photo => _flickrExifEngine.ConvertPhotoToDomainPhotoWithExif(photo))
                 .ToList();
+
             return new DomainPhotos(domainPhotos, photoCollection.Page, photoCollection.Pages);
         }
+
 
         public DomainPhotos Convert(PhotosetPhotoCollection photosetPhotos)
         {
@@ -33,7 +39,7 @@ namespace Portfotolio.FlickrEngine
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
                                      photo.Title, photo.WebUrl,
                                      photo.Medium640Url, photo.Medium640Width ?? 640, photo.Medium640Width ?? 640,
-                                     photo.IsLicensed()))
+                                     photo.IsLicensed(), photo.DateTaken, photo.Views))
                 .ToList();
 
 

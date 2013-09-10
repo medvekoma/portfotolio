@@ -55,10 +55,12 @@
     <Compile Include="FlickrAuthenticationInfoExtensions.cs" />
     <Compile Include="FlickrAuthenticationProvider.cs" />
     <Compile Include="FlickrConverter.cs" />
+    <Compile Include="FlickrExifEngine.cs" />
     <Compile Include="FlickrFactory.cs" />
     <Compile Include="FlickrLicenseExtensions.cs" />
     <Compile Include="FlickrOAuthProvider.cs" />
     <Compile Include="FlickrPhotoEngine.cs" />
+    <Compile Include="FlickrStatisticsEngine.cs" />
     <Compile Include="FlickrUserEngine.cs" />
     <Compile Include="IFlickrConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

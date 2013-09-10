@@ -31,6 +31,8 @@ namespace Portfotolio.FlickrEngine
         
         PhotoCollection GetInterestingPhotos(int page, int pageSize);
 
+        ExifTagCollection GetExifDataOf(string photoId);
+
         bool IsAcceptedUserName(string userName);
     }
 
@@ -38,6 +40,8 @@ namespace Portfotolio.FlickrEngine
     {
         private readonly IFlickrFactory _flickrFactory;
         private const PhotoSearchExtras PhotoSearchExtrasWithPathAlias = PhotoSearchExtras.OwnerName | PhotoSearchExtras.PathAlias | PhotoSearchExtras.AllUrls | PhotoSearchExtras.License;
+ 
+
 
         public FlickrPhotoProvider(IFlickrFactory flickrFactory)
         {
@@ -148,6 +152,11 @@ namespace Portfotolio.FlickrEngine
                         throw;
                 }
             }
+        }
+
+        public ExifTagCollection GetExifDataOf(string photoId)
+        {
+            return _flickrFactory.GetFlickr().PhotosGetExif(photoId);
         }
 
         public PhotoCollection GetFavoritesOf(string userId, int page, int pageSize)
