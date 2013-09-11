@@ -142,7 +142,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickrFactory.GetFlickr().PeopleGetPublicPhotos(userId, page, pageSize, SafetyLevel.None, PhotoSearchExtrasWithPathAlias);
+                return _flickrFactory.GetFlickr().PeopleGetPublicPhotos(userId, page, pageSize, SafetyLevel.None, PhotoSearchExtras.All);
             }
             catch (FlickrApiException flickrApiException)
             {
