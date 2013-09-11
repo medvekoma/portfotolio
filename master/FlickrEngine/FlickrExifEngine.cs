@@ -10,7 +10,8 @@ namespace Portfotolio.FlickrEngine
     public interface IFlickrExifEngine
     {
         DomainPhoto ConvertPhotoToDomainPhotoWithExif(Photo photo);
-        Dictionary<String, String> ExtractExifData(string photoId);
+        IDictionary<String, String> ExtractBasicExifData(string photoId);
+        KeyValuePair<String, String> ExtractExifDataByLabel(ExifTagCollection exifData, string label);
     }
 
     public class FlickrExifEngine : IFlickrExifEngine
@@ -25,26 +26,29 @@ namespace Portfotolio.FlickrEngine
         public DomainPhoto ConvertPhotoToDomainPhotoWithExif(Photo photo)
         {
             var domainPhoto = Mapper.Map<DomainPhoto>(photo);
-            var exifData = ExtractExifData(domainPhoto.PhotoId);
+            var exifData = ExtractBasicExifData(domainPhoto.PhotoId);
             domainPhoto.ExifData = exifData;
             return domainPhoto;
         }
 
-        public Dictionary<String, String> ExtractExifData(string photoId)
+        public IDictionary<String, String> ExtractBasicExifData(string photoId)
         {
+            IDictionary<String, String> exifDic = new Dictionary<String, String>();
             var exifData = _flickrPhotoProvider.GetExifDataOf(photoId);
-            var exifDic = new Dictionary<String, String>();
-            AddExifDataToExifDictionaryByTag(exifDic, exifData, "Model");
-            AddExifDataToExifDictionaryByTag(exifDic, exifData, "Lens");
-            AddExifDataToExifDictionaryByTag(exifDic, exifData, "Exposure");
-            AddExifDataToExifDictionaryByTag(exifDic, exifData, "Aperture");
-            AddExifDataToExifDictionaryByTag(exifDic, exifData, "Focal Length");
+            exifDic.Add(ExtractExifDataByLabel(exifData, "Model"));
+            exifDic.Add(ExtractExifDataByLabel(exifData, "Lens"));
+            exifDic.Add(ExtractExifDataByLabel(exifData, "Exposure"));
+            exifDic.Add(ExtractExifDataByLabel(exifData, "Aperture"));
+            exifDic.Add(ExtractExifDataByLabel(exifData, "Focal Length"));
             return exifDic;
         }
 
-        private void AddExifDataToExifDictionaryByTag(Dictionary<String, String> dictionary, ExifTagCollection collection, string label)
+        public KeyValuePair<String, String> ExtractExifDataByLabel(ExifTagCollection exifData, string label)
         {
-            dictionary.Add(label, collection.Where(x => x.Label == label).Select(x => x.Raw).FirstOrDefault());
+            return new KeyValuePair<string, string>(label,
+                                                    exifData.Where(x => x.Label == label)
+                                                              .Select(x => x.Raw)
+                                                              .FirstOrDefault());
         }
     }
 }

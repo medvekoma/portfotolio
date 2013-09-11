@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
+using Portfotolio.FlickrEngine;
 using Portfotolio.Site.Services.Models;
 using Portfotolio.Site4.Attributes;
 
@@ -11,10 +12,12 @@ namespace Portfotolio.Site4.Controllers
     public class PhotoController : Controller
     {
         private readonly IPhotoEngine _photoEngine;
+        private readonly IFlickrStatisticsEngine _statisticsEngine;
 
-        public PhotoController(IPhotoEngine photoEngine)
+        public PhotoController(IPhotoEngine photoEngine, IFlickrStatisticsEngine statisticsEngine)
         {
             _photoEngine = photoEngine;
+            _statisticsEngine = statisticsEngine;
         }
 
         [HideFromSearchEngines(AllowRobots.Follow)]
@@ -75,6 +78,19 @@ namespace Portfotolio.Site4.Controllers
             var domainPhotos = _photoEngine.GetSubscriptionsOf(userId, page);
 
             return PagingView(domainPhotos);
+        }
+
+        [UserIdentification]
+        [RedirectToUserAlias, RejectOptedOutUsers]
+        [HideFromSearchEngines(AllowRobots.None)]
+        public ActionResult Statistics(string id)
+        {
+            ViewData[DataKeys.BreadCrumb] = "Statistics " + ViewData[DataKeys.UserName];
+
+            var userId = (string)ViewData[DataKeys.UserId];
+            var statistics = _statisticsEngine.GetStatisticsOf(userId);
+
+            return View(statistics);
         }
 
         [UserIdentification]

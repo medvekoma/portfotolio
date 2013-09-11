@@ -1,0 +1,15 @@
+﻿@model List<Portfotolio.Domain.Statistic>
+
+@foreach (var stat in Model)
+{
+    <h4>@stat.Name</h4>
+    <ul>
+       @foreach (var item in stat.Stats)
+        {
+            <li>
+                @item.Key <br/><span>   </span>@item.Value<span>X</span>
+            </li>
+        }
+    </ul>
+}
+

@@ -61,6 +61,7 @@ namespace Portfotolio.Site4
 
             //exif
             dependencyEngine.Register<IFlickrExifEngine, FlickrExifEngine>(photoServiceLifeStyle);
+            dependencyEngine.Register<IFlickrStatisticsEngine, FlickrStatisticsEngine>(photoServiceLifeStyle);
 
             // test
             dependencyEngine.Register<TestController>(controllerLifeStyle);

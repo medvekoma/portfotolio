@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using FlickrNet;
 using Portfotolio.Domain.Exceptions;
 
@@ -32,6 +34,8 @@ namespace Portfotolio.FlickrEngine
         PhotoCollection GetInterestingPhotos(int page, int pageSize);
 
         ExifTagCollection GetExifDataOf(string photoId);
+
+        IEnumerable<string> GetPublicPhotoIDsOf(string userId);
 
         bool IsAcceptedUserName(string userName);
     }
@@ -139,6 +143,29 @@ namespace Portfotolio.FlickrEngine
             try
             {
                 return _flickrFactory.GetFlickr().PeopleGetPublicPhotos(userId, page, pageSize, SafetyLevel.None, PhotoSearchExtrasWithPathAlias);
+            }
+            catch (FlickrApiException flickrApiException)
+            {
+                switch (flickrApiException.Code)
+                {
+                    case 1:
+                        throw new AuthorNotFoundException(userId, flickrApiException);
+                    case 105:
+                        throw new FlickrServiceUnavailableException(flickrApiException);
+                    default:
+                        throw;
+                }
+            }
+        }
+
+        public IEnumerable<string> GetPublicPhotoIDsOf(string userId)
+        {
+            try
+            {
+                var photos = _flickrFactory.GetFlickr().PeopleGetPublicPhotos(userId);
+                var IDs = (from photo in photos
+                                select photo.PhotoId).ToList();
+                return IDs;
             }
             catch (FlickrApiException flickrApiException)
             {
