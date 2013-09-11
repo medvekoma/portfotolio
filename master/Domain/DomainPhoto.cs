@@ -17,7 +17,7 @@ namespace Portfotolio.Domain
         public bool IsLicensed { get; private set; }
         public DateTime DateTaken { get; private set; } 
         public int? Views { get; private set; }
-        public IDictionary<string, string> ExifData{get; set;}
+        //public IDictionary<string, string> ExifData{get; set;}
 
         public DomainPhoto()
         {}

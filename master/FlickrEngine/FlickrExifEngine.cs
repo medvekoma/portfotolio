@@ -9,7 +9,7 @@ namespace Portfotolio.FlickrEngine
 {
     public interface IFlickrExifEngine
     {
-        DomainPhoto ConvertPhotoToDomainPhotoWithExif(Photo photo);
+        DomainPhoto ConvertPhotoToDomainPhoto(Photo photo);
         IDictionary<String, String> ExtractBasicExifData(string photoId);
         KeyValuePair<String, String> ExtractExifDataByLabel(ExifTagCollection exifData, string label);
     }
@@ -23,11 +23,11 @@ namespace Portfotolio.FlickrEngine
             _flickrPhotoProvider = flickrPhotoProvider;
         }
 
-        public DomainPhoto ConvertPhotoToDomainPhotoWithExif(Photo photo)
+        public DomainPhoto ConvertPhotoToDomainPhoto(Photo photo)
         {
             var domainPhoto = Mapper.Map<DomainPhoto>(photo);
-            var exifData = ExtractBasicExifData(domainPhoto.PhotoId);
-            domainPhoto.ExifData = exifData;
+            //var exifData = ExtractBasicExifData(domainPhoto.PhotoId);
+            //domainPhoto.ExifData = exifData;
             return domainPhoto;
         }
 
