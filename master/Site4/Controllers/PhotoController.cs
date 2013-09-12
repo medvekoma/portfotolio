@@ -96,22 +96,14 @@ namespace Portfotolio.Site4.Controllers
         [HideFromSearchEngines(AllowRobots.None)]
         public ActionResult Statistics(string id, string label)
         {
-            ViewData[DataKeys.BreadCrumb] = "Last 100 Photos - Statistics of " + ViewData[DataKeys.UserName];
-
-            return View();
-        }
-
-        [UserIdentification]
-        [RedirectToUserAlias, RejectOptedOutUsers]
-        [HideFromSearchEngines(AllowRobots.None)]
-        public ActionResult Statistic(string id, string label)
-        {
-            ViewData[DataKeys.BreadCrumb] = "Last 100 photos statistics of" + ViewData[DataKeys.UserName];
-
+            if (label == null)
+            {
+                ViewData[DataKeys.BreadCrumb] = "Last 100 Photos - Statistics of " + ViewData[DataKeys.UserName];
+                return View();
+            }
             var userId = (string)ViewData[DataKeys.UserId];
             var statistic = _statisticsEngine.GetStatisticsOf(userId, label);
-
-            return PartialView();
+            return PartialView("Statistic",statistic);
         }
 
         [UserIdentification]

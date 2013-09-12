@@ -26,21 +26,21 @@ namespace Portfotolio.FlickrEngine
         {
             IDictionary<String, String> exifDic = new Dictionary<String, String>();
             var exifData = _flickrPhotoProvider.GetExifDataOf(photoId);
-            exifDic.Add(ExtractExifDataByLabel(photoId, "Model", exifData));
-            exifDic.Add(ExtractExifDataByLabel(photoId, "Lens", exifData));
-            exifDic.Add(ExtractExifDataByLabel(photoId, "Exposure", exifData));
-            exifDic.Add(ExtractExifDataByLabel(photoId, "Aperture", exifData));
-            exifDic.Add(ExtractExifDataByLabel(photoId, "Focal Length", exifData));
+            exifDic.Add(ExtractExifDataByLabel("Model", exifData));
+            exifDic.Add(ExtractExifDataByLabel("Lens", exifData));
+            exifDic.Add(ExtractExifDataByLabel("Exposure", exifData));
+            exifDic.Add(ExtractExifDataByLabel("Aperture", exifData));
+            exifDic.Add(ExtractExifDataByLabel("Focal Length", exifData));
             return exifDic;
         }
 
         public KeyValuePair<String, String> ExtractExifDataByLabel(string photoId, string label)
         {
             var exifData = _flickrPhotoProvider.GetExifDataOf(photoId);
-            return ExtractExifDataByLabel(photoId, label, exifData);
+            return ExtractExifDataByLabel(label, exifData);
         }
 
-        private KeyValuePair<String, String> ExtractExifDataByLabel(string photoId, string label, ExifTagCollection exifData)
+        private KeyValuePair<String, String> ExtractExifDataByLabel(string label, ExifTagCollection exifData)
         {
             return new KeyValuePair<string, string>(label,
                                                     exifData.Where(x => x.Label == label)

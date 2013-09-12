@@ -23,11 +23,11 @@ namespace Portfotolio.FlickrEngine
         public Statistic GetStatisticsOf(string userId, string label)
         {
             var publicPhotoIDs = _flickrPhotoProvider.GetPublicPhotoIDsOf(userId);
-            var statistics = GetUsageStatisticsByLabel(publicPhotoIDs, label);
+            var statistics = CalculateUsageStatisticsByLabel(publicPhotoIDs, label);
             return statistics;
         }
 
-        private Statistic GetUsageStatisticsByLabel(IEnumerable<string> publicPhotoIDs, string label)
+        private Statistic CalculateUsageStatisticsByLabel(IEnumerable<string> publicPhotoIDs, string label)
         {
             var exifList = from id in publicPhotoIDs
                            select _flickrExifEngine.ExtractExifDataByLabel(id, label);
