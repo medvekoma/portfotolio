@@ -13,11 +13,13 @@ namespace Portfotolio.Site4.Controllers
     {
         private readonly IPhotoEngine _photoEngine;
         private readonly IFlickrStatisticsEngine _statisticsEngine;
+        private readonly IFlickrExifEngine _exifEngine;
 
-        public PhotoController(IPhotoEngine photoEngine, IFlickrStatisticsEngine statisticsEngine)
+        public PhotoController(IPhotoEngine photoEngine, IFlickrStatisticsEngine statisticsEngine, IFlickrExifEngine exifEngine)
         {
             _photoEngine = photoEngine;
             _statisticsEngine = statisticsEngine;
+            _exifEngine = exifEngine;
         }
 
         [HideFromSearchEngines(AllowRobots.Follow)]
@@ -51,6 +53,15 @@ namespace Portfotolio.Site4.Controllers
             var domainPhotos = _photoEngine.GetPhotosOf(userId, page);
 
             return PagingView(domainPhotos);
+        }
+
+        [RedirectToUserAlias, RejectOptedOutUsers]
+        [DisplayLicensingInfo]
+        public ActionResult BasicExifData(string photoId)
+        {
+            var exifDic = _exifEngine.ExtractBasicExifData(photoId);
+
+            return PartialView("ExifList", exifDic);
         }
 
         [UserIdentification]

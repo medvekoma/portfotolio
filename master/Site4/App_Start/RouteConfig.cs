@@ -23,7 +23,13 @@ namespace Portfotolio.Site4
                 url: "{id}/{action}/{secondaryId}", 
                 defaults: new { controller = "photo", action = "photos", secondaryId = UrlParameter.Optional },
                 constraints: new { id = "serkansozer" }
+                );
 
+            routes.MapRoute(
+                name: "exif",
+                url: "{action}/{photoid}",
+                defaults: new { controller = "photo", action = "BasicExifData", secondaryId = UrlParameter.Optional },
+                constraints: new { action = "BasicExifData" }
                 );
 
             routes.MapRoute(

@@ -226,6 +226,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="_App_Offline.htm" />
     <Content Include="Views\Photo\Statistics.cshtml" />
+    <Content Include="Views\Photo\ExifList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

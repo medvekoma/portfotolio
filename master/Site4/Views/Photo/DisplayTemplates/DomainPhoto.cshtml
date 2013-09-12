@@ -18,8 +18,9 @@
         @if (Model.IsLicensed || Html.AuthenticationInfo().IsAuthenticated)
         {
             <a class="photo-link" 
-               href="@Model.PageUrl" 
+               href="@Model.PageUrl"
                style="background: url('@Model.Medium640Url'); background-size: @(alignedWidth)px @(fixedHeight)px; width: @(alignedWidth)px; height:@(fixedHeight)px" ></a>
+            <input type="hidden" id="photoId" value="@Model.PhotoId">
         }
         else
         {
@@ -29,35 +30,42 @@
             </a>
             <a href="@Url.Action("licensing", "settings")" class="copyright" style="top: @(fixedHeight-50)px; left: @(alignedWidth-40)px" title="Copyrighted image. Click for more information.">&copy;</a>
         }
-        <div class="title-frame" style="top:@(fixedHeight-50)px; height: 0px; transition: height 1s 0.5s">
+        <div class="title-frame" style="top:0px; display: none">
             <span class="title-text" title="@Model.Title">
                 Title: @Model.Title <br/>
                 Views: @Model.Views <br/>
-                Date Taken: @Model.DateTaken
+                Date Taken: @Model.DateTaken<br/>
             </span>
+            <div class="exif-frame">...</div>
         </div>
-        
-@*        <div class="exif-frame" style="top:0px; height: 0px; transition: height 1s 0.5s">
-                @foreach (var exif in Model.ExifData)
-                {
-                    @Html.Raw(exif.Key)
-                    @Html.Raw(" : ")
-                    @Html.Raw(exif.Value)
-                    @Html.Raw("</br>")
-                }
-        </div>*@
     </div>
 </div>
 
 <script>
+    if (typeof Medvekoma == "undefined") Medvekoma = {};
+    if (typeof Medvekoma.Portfotolio == "undefined") Medvekoma.Portfotolio = {};
+    
+    Medvekoma.Portfotolio.ShowBasicExifData = function(photoId, div) {
+        if ($(".exif-frame", div).length != 0) {
+            if (photoId) {
+                var options = {
+                    url: '/basicExifData/' + photoId,
+                    context: document.body,
+                    success: function (result) {
+                        $(".exif-frame", div).replaceWith(result);
+                    }
+                };
+                $.ajax(options);
+            }
+        }
+    };
+    
     $(document).ready(function () {
         $(".photo-frame").hover(function () {
-            $(".title-frame", this).css("height", "50px");
-            $(".exif-frame", this).css("height", "150px");
+            $(".title-frame", this).show("slow");
+            Medvekoma.Portfotolio.ShowBasicExifData($('#photoId', this).attr('value'), this);
         }, function () {
-            $(".title-frame", this).css("height", "0px");
-            $(".exif-frame", this).css("height", "0px");
+            $(".title-frame", this).hide("slow");
         });
     });
-
 </script>
