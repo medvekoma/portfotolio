@@ -6,7 +6,7 @@ namespace Portfotolio.FlickrEngine
 {
     public interface IFlickrStatisticsEngine
     {
-        List<Statistic> GetStatisticsOf(string userId);
+        Statistic GetStatisticsOf(string userId, string label);
     }
 
     public class FlickrStatisticsEngine : IFlickrStatisticsEngine
@@ -20,25 +20,24 @@ namespace Portfotolio.FlickrEngine
             _flickrExifEngine = flickrExifEngine;
         }
 
-        public List<Statistic> GetStatisticsOf(string userId)
+        public Statistic GetStatisticsOf(string userId, string label)
         {
             var publicPhotoIDs = _flickrPhotoProvider.GetPublicPhotoIDsOf(userId);
-            var statistics = new List<Statistic> {GetUsageStatisticsByLabel(publicPhotoIDs, "Model")};
+            var statistics = GetUsageStatisticsByLabel(publicPhotoIDs, label);
             return statistics;
         }
 
         private Statistic GetUsageStatisticsByLabel(IEnumerable<string> publicPhotoIDs, string label)
         {
-            var exifList = (from id in publicPhotoIDs
-                           select _flickrExifEngine.ExtractExifDataByLabel(_flickrPhotoProvider.GetExifDataOf(id), label)).ToList();
-            var usageList = (from exif in exifList
-                             group exif by exif.Value
-                             into gr
-                             orderby gr.Count() descending 
-                             select new KeyValuePair<string, int>(gr.Key, gr.Count()));
-            var stats = usageList.ToList();
-            var statictic = new Statistic(label, stats);
-            return statictic;
+            var exifList = from id in publicPhotoIDs
+                           select _flickrExifEngine.ExtractExifDataByLabel(id, label);
+            var usageList = from exif in exifList
+                            group exif by exif.Value
+                            into gr
+                            orderby gr.Count() descending 
+                            select new KeyValuePair<string, int>(gr.Key, gr.Count());
+            var statistic = new Statistic(label, usageList.ToList());
+            return statistic;
         }
     }
 }

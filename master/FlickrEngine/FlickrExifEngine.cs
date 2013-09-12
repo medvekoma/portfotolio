@@ -9,9 +9,8 @@ namespace Portfotolio.FlickrEngine
 {
     public interface IFlickrExifEngine
     {
-        DomainPhoto ConvertPhotoToDomainPhoto(Photo photo);
         IDictionary<String, String> ExtractBasicExifData(string photoId);
-        KeyValuePair<String, String> ExtractExifDataByLabel(ExifTagCollection exifData, string label);
+        KeyValuePair<String, String> ExtractExifDataByLabel(string photoId, string label);
     }
 
     public class FlickrExifEngine : IFlickrExifEngine
@@ -23,27 +22,25 @@ namespace Portfotolio.FlickrEngine
             _flickrPhotoProvider = flickrPhotoProvider;
         }
 
-        public DomainPhoto ConvertPhotoToDomainPhoto(Photo photo)
-        {
-            var domainPhoto = Mapper.Map<DomainPhoto>(photo);
-            //var exifData = ExtractBasicExifData(domainPhoto.PhotoId);
-            //domainPhoto.ExifData = exifData;
-            return domainPhoto;
-        }
-
         public IDictionary<String, String> ExtractBasicExifData(string photoId)
         {
             IDictionary<String, String> exifDic = new Dictionary<String, String>();
             var exifData = _flickrPhotoProvider.GetExifDataOf(photoId);
-            exifDic.Add(ExtractExifDataByLabel(exifData, "Model"));
-            exifDic.Add(ExtractExifDataByLabel(exifData, "Lens"));
-            exifDic.Add(ExtractExifDataByLabel(exifData, "Exposure"));
-            exifDic.Add(ExtractExifDataByLabel(exifData, "Aperture"));
-            exifDic.Add(ExtractExifDataByLabel(exifData, "Focal Length"));
+            exifDic.Add(ExtractExifDataByLabel(photoId, "Model", exifData));
+            exifDic.Add(ExtractExifDataByLabel(photoId, "Lens", exifData));
+            exifDic.Add(ExtractExifDataByLabel(photoId, "Exposure", exifData));
+            exifDic.Add(ExtractExifDataByLabel(photoId, "Aperture", exifData));
+            exifDic.Add(ExtractExifDataByLabel(photoId, "Focal Length", exifData));
             return exifDic;
         }
 
-        public KeyValuePair<String, String> ExtractExifDataByLabel(ExifTagCollection exifData, string label)
+        public KeyValuePair<String, String> ExtractExifDataByLabel(string photoId, string label)
+        {
+            var exifData = _flickrPhotoProvider.GetExifDataOf(photoId);
+            return ExtractExifDataByLabel(photoId, label, exifData);
+        }
+
+        private KeyValuePair<String, String> ExtractExifDataByLabel(string photoId, string label, ExifTagCollection exifData)
         {
             return new KeyValuePair<string, string>(label,
                                                     exifData.Where(x => x.Label == label)

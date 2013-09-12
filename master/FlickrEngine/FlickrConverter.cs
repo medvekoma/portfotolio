@@ -22,7 +22,7 @@ namespace Portfotolio.FlickrEngine
                 return null;
             
                 var domainPhotos = photoCollection
-                .Select(photo => _flickrExifEngine.ConvertPhotoToDomainPhoto(photo))
+                .Select(photo => Mapper.Map<DomainPhoto>(photo))
                 .ToList();
 
             return new DomainPhotos(domainPhotos, photoCollection.Page, photoCollection.Pages);

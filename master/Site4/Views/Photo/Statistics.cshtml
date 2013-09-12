@@ -1,15 +1,7 @@
-﻿@model List<Portfotolio.Domain.Statistic>
-
-@foreach (var stat in Model)
-{
-    <h4>@stat.Name</h4>
-    <ul>
-       @foreach (var item in stat.Stats)
-        {
-            <li>
-                @item.Key <br/><span>   </span>@item.Value<span>X</span>
-            </li>
-        }
-    </ul>
-}
-
+﻿<nav>
+<a href="#" onclick="">Camera</a><br/>
+<a href="#" onclick="">Lens</a><br/>
+<a href="#" onclick="">Aperture</a><br/>
+<a href="#" onclick="">Exposure</a><br/>
+<a href="#" onclick="">Focal Length</a><br/>
+</nav>
