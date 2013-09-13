@@ -112,7 +112,6 @@ namespace Portfotolio.Site4.Controllers
             //                                      new KeyValuePair<string, int>("item2", 2)
             //                                  });
             return Json(statistic, JsonRequestBehavior.AllowGet);
-            //return PartialView("Statistic",statistic);
         }
 
         [UserIdentification]
