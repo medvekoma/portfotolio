@@ -18,14 +18,22 @@
     Medvekoma.Portfotolio.ShowStatisticsByLabel = function (label) {
         $("#stats").show("slow");
         $("#loading").show();
-        var options = {
+        $.ajax({
+            dataType: "json",
             url: $(location).attr('href') + "?label=" + label,
-            context: document.body,
-            success: function (result) {
+            success: function (jsonResult) {
                 $("#loading").hide();
-                $("#content").html(result);
+                var htmlResult = Medvekoma.Portfotolio.ConvertStatisticJsonToHtml(jsonResult);
+                $("#content").html(htmlResult);
             }
-        };
-        $.ajax(options);
+        });
+    };
+
+    Medvekoma.Portfotolio.ConvertStatisticJsonToHtml = function (statistic) {
+        var html = "<h1>" + statistic.Name + "</h1>";
+        for (var i = 0; i < statistic.Stats.length; i++) {
+            html += "<div><span>" + statistic.Stats[i].Key + "</span>" + " : " + "<span>" + statistic.Stats[i].Value + "X</span></div>";
+        }
+        return html;
     };
 </script>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Exceptions;
@@ -101,9 +102,17 @@ namespace Portfotolio.Site4.Controllers
                 ViewData[DataKeys.BreadCrumb] = "Last 100 Photos - Statistics of " + ViewData[DataKeys.UserName];
                 return View();
             }
+            
             var userId = (string)ViewData[DataKeys.UserId];
             var statistic = _statisticsEngine.GetStatisticsOf(userId, label);
-            return PartialView("Statistic",statistic);
+            //var statistic = new Statistic("test",
+            //                              new List<KeyValuePair<string, int>>
+            //                                  {
+            //                                      new KeyValuePair<string, int>("item1", 1),
+            //                                      new KeyValuePair<string, int>("item2", 2)
+            //                                  });
+            return Json(statistic, JsonRequestBehavior.AllowGet);
+            //return PartialView("Statistic",statistic);
         }
 
         [UserIdentification]
