@@ -32,7 +32,11 @@
     Medvekoma.Portfotolio.ConvertStatisticJsonToHtml = function (statistic) {
         var html = "<h1>" + statistic.Name + "</h1>";
         for (var i = 0; i < statistic.Stats.length; i++) {
-            html += "<div><span>" + statistic.Stats[i].Key + "</span>" + " : " + "<span>" + statistic.Stats[i].Value + "X</span></div>";
+            var key = statistic.Stats[i].Key;
+            if (key == null)
+                key = "Unknown";
+            var value = statistic.Stats[i].Value;
+            html += "<div><span>" + key + "</span>" + " : " + "<span>" + value + "X</span></div>";
         }
         return html;
     };
