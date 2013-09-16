@@ -95,6 +95,7 @@ namespace Portfotolio.Site4.Controllers
         [UserIdentification]
         [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.None)]
+        [OutputCache(Duration = 60, VaryByParam = "*")]
         public ActionResult Statistics(string id, string label)
         {
             if (label == null)

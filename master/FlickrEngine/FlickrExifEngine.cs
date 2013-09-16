@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using FlickrNet;
 using Portfotolio.Domain;
+using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.FlickrEngine
 {
@@ -15,11 +16,14 @@ namespace Portfotolio.FlickrEngine
 
     public class FlickrExifEngine : IFlickrExifEngine
     {
+        private const string ExifSessionKeyPrefix = "exif_";
         private readonly FlickrPhotoProvider _flickrPhotoProvider;
+        private readonly IUserSession _userSession;
 
-        public FlickrExifEngine(FlickrPhotoProvider flickrPhotoProvider)
+        public FlickrExifEngine(FlickrPhotoProvider flickrPhotoProvider, IUserSession userSession)
         {
             _flickrPhotoProvider = flickrPhotoProvider;
+            _userSession = userSession;
         }
 
         public IDictionary<String, String> ExtractBasicExifData(string photoId)
@@ -36,7 +40,12 @@ namespace Portfotolio.FlickrEngine
 
         public KeyValuePair<String, String> ExtractExifDataByLabel(string photoId, string label)
         {
-            var exifData = _flickrPhotoProvider.GetExifDataOf(photoId);
+            var exifData = _userSession.GetValue<ExifTagCollection>(ExifSessionKeyPrefix + photoId);
+            if (exifData == null)
+            {
+                exifData = _flickrPhotoProvider.GetExifDataOf(photoId);
+                _userSession.SetValue(ExifSessionKeyPrefix + photoId, exifData);
+            }
             return ExtractExifDataByLabel(label, exifData);
         }
 

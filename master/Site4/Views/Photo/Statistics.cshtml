@@ -1,10 +1,11 @@
-﻿<nav>
+﻿<div id="preload"><img id="preloading" alt="still loading..." src="~/Content/loading.gif"/> Please wait while calculate your statistics. This might take a minute or so. </div>
+<div id="navigation" style="display: none">
     <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Model')">Camera</a> | 
     <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Lens')">Lens</a> | 
     <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Exposure')">Exposure</a> |
     <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Aperture')">Aperture</a> |
     <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Focal Length')">Focal Length</a>
-</nav>
+</div>
 
 <div id="stats" style="display: none; height: 400px; border-width: 1px;">
     <img id="loading" alt="still loading..." src="~/Content/loading.gif"/>
@@ -14,6 +15,18 @@
 <script>
     if (typeof Medvekoma == "undefined") Medvekoma = {};
     if (typeof Medvekoma.Portfotolio == "undefined") Medvekoma.Portfotolio = {};
+
+    $(document).ready(function () {
+        $.ajax({
+            dataType: "json",
+            url: $(location).attr('href') + "?label=Model",
+            success: function () {
+                $("#preload").hide();
+                $("#navigation").show("slow");
+            }
+        });
+    });
+    
 
     Medvekoma.Portfotolio.ShowStatisticsByLabel = function (label) {
         $("#stats").show("slow");
