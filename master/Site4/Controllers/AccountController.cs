@@ -13,10 +13,10 @@ namespace Portfotolio.Site4.Controllers
         private readonly IAuthenticationProvider _authenticationProvider;
 	    private readonly ILogger _logger;
 
-        public AccountController(IAuthenticationProvider authenticationProvider, ILoggerProvider loggerProvider)
+        public AccountController(IAuthenticationProvider authenticationProvider, ILoggerFactory loggerFactory)
         {
             _authenticationProvider = authenticationProvider;
-            _logger = loggerProvider.GetLogger("Authentication");
+	        _logger = loggerFactory.GetLogger("Authentication");
         }
 
         public ActionResult Login()
