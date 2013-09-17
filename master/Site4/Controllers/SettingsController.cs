@@ -17,12 +17,12 @@ namespace Portfotolio.Site4.Controllers
         private readonly IAuthenticationProvider _authenticationProvider;
         private readonly ILogger _logger;
 
-        public SettingsController(IUserReaderService userReaderService, IUserWriterService userWriterService, IAuthenticationProvider authenticationProvider, ILoggerFactory loggerFactory)
+        public SettingsController(IUserReaderService userReaderService, IUserWriterService userWriterService, IAuthenticationProvider authenticationProvider, ILoggerProvider loggerProvider)
         {
             _userReaderService = userReaderService;
             _userWriterService = userWriterService;
             _authenticationProvider = authenticationProvider;
-            _logger = loggerFactory.GetLogger("Settings");
+            _logger = loggerProvider.GetLogger("Settings");
         }
 
         public ActionResult Licensing()
