@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Excolo-Slider</id>
+    <version>1.0.5</version>
+    <title>Excolo Slider</title>
+    <authors>Nikolaj Dam Larsen</authors>
+    <owners>Nikolaj Dam Larsen</owners>
+    <licenseUrl>https://github.com/Excolo/Excolo-Slider/blob/master/MIT-LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Excolo/Excolo-Slider</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A clean and simple jQuery slider/carousel plugin, supporting responsive design and touch navigation, etc.
+
+Visit the GitHub page for information about installation and configuration. 
+
+If you have questions, find bugs or have suggestions, feel free to post an issue on the GitHub project page, and I'll reply as soon as possible.</description>
+    <releaseNotes>1.0.5
+- Removed keyboard navigation
+
+1.0.4 
+- Added non-minimized file to NuGet package
+
+1.0.3 
+- Bug fixes
+- Cleaning up code
+
+1.0.0
+- All planned features done</releaseNotes>
+    <copyright>Nikolaj Dam Larsen</copyright>
+    <language />
+    <tags>jquery slider carousel responsive touch</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.9.1" />
+    </dependencies>
+  </metadata>
+</package>

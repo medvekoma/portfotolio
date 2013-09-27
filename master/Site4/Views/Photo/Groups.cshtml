@@ -2,11 +2,50 @@
 @using Portfotolio.Domain
 @using Portfotolio.Site4.Extensions
 
-<ul id="groups">
-@foreach (var item in Model.Items)
-{
-    <li>
-        <a href='@item.ItemUrl' title='@item.Name'>@item.Name</a>
-    </li>
-}
-</ul>
+<div id="content">
+    <div id="grouplist" style="float:left">
+        <ul id="groups">
+            @foreach (var item in Model.Items)
+            {
+                <li>
+                    <a href='@item.ItemUrl' title='@item.Name' onmouseover='Medvekoma.Portfotolio.SlidePreview("@item.Id")' onmouseout='$("#sliderContainer").hide("slow");'>@item.Name</a>
+                </li>
+        }
+        </ul>
+    </div>
+
+    <div id="sliderContainer" style="float:right;">
+        <div id="slider" style="height:400px; border:solid thin; border-color:whitesmoke; margin:100px; padding:50px"><p>Please hover the cursor on the group to preview...</p></div>
+        
+    </div>
+</div>
+<script>
+    if (typeof Medvekoma == "undefined") Medvekoma = {};
+    if (typeof Medvekoma.Portfotolio == "undefined") Medvekoma.Portfotolio = {};
+
+    $(document).ready(function () {
+    });
+
+    Medvekoma.Portfotolio.SlidePreview = function (groupId) {
+        $.ajax({
+            dataType: "json",
+            url: $(location).attr('href').substring(0, $(location).attr('href').indexOf('groups')) + "GroupWithPhotos?groupId=" + groupId,
+            success: function (jsonResult) {
+                var htmlResult = Medvekoma.Portfotolio.ConvertGroupPhotosJsonToHtml(jsonResult, groupId);
+                $("#sliderContainer").html(htmlResult);
+                $("#slider"+ groupId.substring(0,8)).excoloSlider();
+                $("#sliderContainer").show();
+            }
+        });
+        
+        Medvekoma.Portfotolio.ConvertGroupPhotosJsonToHtml = function (group, groupId) {
+            var html = '<div id="slider' + groupId.substring(0,8) + '">';
+            for (var i = 0; i < group.Photos.Photos.length; i++)
+            {
+                html += '<img src="' + group.Photos.Photos[i].Medium640Url + '"/>';
+            }
+            html += '</div>';
+            return html;
+        }
+    };
+</script>

@@ -203,13 +203,19 @@
     <Content Include="Content\cc.png" />
     <Content Include="Content\error.htm" />
     <Content Include="Content\help.png" />
+    <Content Include="Content\jquery.excoloSlider.css" />
     <Content Include="Content\loading.gif" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\next.png" />
+    <Content Include="Images\pagericon.png" />
+    <Content Include="Images\prev.png" />
     <Content Include="Scripts\jquery.cookie.js" />
     <None Include="Scripts\jquery\jquery-1.10.2-vsdoc.js" />
+    <Content Include="Scripts\jquery.excoloSlider.js" />
+    <Content Include="Scripts\jquery.excoloSlider.min.js" />
     <Content Include="Scripts\jquery\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery\jquery-1.10.2.min.js" />
     <Content Include="Scripts\portfotolio.google.analytics.js" />
@@ -335,6 +341,7 @@
     <Content Include="Views\Shared\LicensingInfo.cshtml" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>

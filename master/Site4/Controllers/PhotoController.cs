@@ -169,6 +169,16 @@ namespace Portfotolio.Site4.Controllers
 
         [UserIdentification]
         [RedirectToUserAlias, RejectOptedOutUsers]
+        [HideFromSearchEngines(AllowRobots.None)]
+        public ActionResult GroupWithPhotos(string id, string groupId)
+        {
+            var domainGroup = _photoEngine.GetGroup(groupId, 0);
+
+            return Json(domainGroup, JsonRequestBehavior.AllowGet);
+        }
+
+        [UserIdentification]
+        [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.Follow)]
         public ActionResult Contacts(string id, int page = 0)
         {
