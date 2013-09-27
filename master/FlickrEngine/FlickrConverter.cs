@@ -1,53 +1,33 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FlickrNet;
 using Portfotolio.Domain;
-using Portfotolio.Domain.Configuration;
+using AutoMapper;
 
 namespace Portfotolio.FlickrEngine
 {
     public class FlickrConverter : IFlickrConverter
     {
-        private readonly IUserService _userService;
+        private readonly IFlickrExifEngine _flickrExifEngine;
 
-        private static readonly LicenseType[] CreativeCommonsLicenses = new[]
-            {
-                LicenseType.AttributionCC,
-                LicenseType.AttributionNoDerivativesCC, 
-                LicenseType.AttributionNoncommercialCC, 
-                LicenseType.AttributionNoncommercialNoDerivativesCC, 
-                LicenseType.AttributionNoncommercialShareAlikeCC, 
-                LicenseType.AttributionShareAlikeCC, 
-            };
-
-        public FlickrConverter(IUserService userService)
+        public FlickrConverter(FlickrExifEngine flickrExifEngine)
         {
-            _userService = userService;
-        }
-
-        private bool IsLicensed(Photo photo)
-        {
-            var userId = photo.UserId;
-            var optinUserIds = _userService.GetOptinUserIds();
-
-            return CreativeCommonsLicenses.Contains(photo.License) || optinUserIds.Contains(userId);
+            _flickrExifEngine = flickrExifEngine;
         }
 
         public DomainPhotos Convert(PhotoCollection photoCollection)
         {
             if (photoCollection == null)
                 return null;
-
-
-            var domainPhotos = photoCollection
-                .Select(photo => new DomainPhoto(
-                                     photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
-                                     photo.Title, photo.WebUrl,
-                                     photo.SmallUrl, 
-                                     photo.SmallWidth ?? 240, photo.SmallHeight ?? 240,
-                                     IsLicensed(photo)))
+            
+                var domainPhotos = photoCollection
+                .Select(photo => Mapper.Map<DomainPhoto>(photo))
                 .ToList();
+
             return new DomainPhotos(domainPhotos, photoCollection.Page, photoCollection.Pages);
         }
+
 
         public DomainPhotos Convert(PhotosetPhotoCollection photosetPhotos)
         {
@@ -58,16 +38,18 @@ namespace Portfotolio.FlickrEngine
                 .Select(photo => new DomainPhoto(
                                      photo.PhotoId, photo.UserId, photo.OwnerName, string.IsNullOrEmpty(photo.PathAlias) ? photo.UserId : photo.PathAlias, 
                                      photo.Title, photo.WebUrl,
-                                     photo.SmallUrl, photo.SmallWidth ?? 240, photo.SmallHeight ?? 240,
-                                     IsLicensed(photo)))
+                                     photo.Medium640Url, photo.Medium640Width ?? 640, photo.Medium640Width ?? 640,
+                                     photo.IsLicensed(), photo.DateTaken, photo.Views))
                 .ToList();
+
+
             return new DomainPhotos(domainPhotos, photosetPhotos.Page, photosetPhotos.Pages);
         }
 
         public ListItems Convert(GroupInfoCollection groups)
         {
             var items = groups
-                .Select(group => new ListItem(group.GroupId, group.GroupName))
+                .Select(group => Mapper.Map<ListItem>(group))
                 .ToArray();
 
             return new ListItems(items, 1, 1);
@@ -76,17 +58,14 @@ namespace Portfotolio.FlickrEngine
         public ListItems Convert(ContactCollection contacts)
         {
             var items = contacts
-                .Select(contact => new ListItem(
-                                       string.IsNullOrEmpty(contact.PathAlias) ? contact.UserId : contact.PathAlias,
-                                       contact.UserName,
-                                       contact.BuddyIconUrl))
+                .Select(contact => Mapper.Map<ListItem>(contact))
                 .ToArray();
             return new ListItems(items, contacts.Page, contacts.Pages); 
         }
 
         public Album Convert(Photoset set)
         {
-            return new Album(set.OwnerId, set.PhotosetId, set.Title, set.PhotosetSmallUrl);
+            return new Album(set.OwnerId, set.PhotosetId, set.Title, set.PhotosetSmallUrl, set.NumberOfPhotos);
         }
 
         public Albums Convert(PhotosetCollection photosets)

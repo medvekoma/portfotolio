@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width" />
 
         @Styles.Render("~/bundles/css")
-        @Scripts.Render("~/bundles/js", "~/bundles/jquery")
+        @Scripts.Render("~/bundles/jquery","~/bundles/js")
         
     </head>
     <body>
@@ -35,7 +35,7 @@
         </header>
         <div id="body">
             @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
+            <section class="content-wrapper main-content clear-fix" style="position: relative;padding-left: 10px;">
                 @RenderBody()
             </section>
         </div>

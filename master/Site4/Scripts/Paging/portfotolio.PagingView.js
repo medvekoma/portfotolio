@@ -3,6 +3,7 @@ if (typeof Medvekoma.Portfotolio == "undefined") Medvekoma.Portfotolio = {};
 
 var delay = 100;        // page load delay in milliseconds
 var scrollMargin = 350; // bottom pixels before automatic paging
+var historicalScrollPosition = 0;
 
 $(document).ready(function () {
     Medvekoma.Portfotolio.InitializeLoading();
@@ -11,28 +12,44 @@ $(document).ready(function () {
 Medvekoma.Portfotolio.InitializeLoading = function () {
     $('#nextPageLink').hide();
     $('#nextPageLoading').show();
-    var requestedScrollPosition = $(window).scrollTop();
+    
+    var requestedScrollPosition = Medvekoma.Portfotolio.CalculateTargetScollPosition();
     Medvekoma.Portfotolio.RestoreScrollPosition(requestedScrollPosition);
     Medvekoma.Portfotolio.ShowNextPageIfNeeded();
     Medvekoma.Portfotolio.SubscribeToScrollEvent();
 };
 
+Medvekoma.Portfotolio.CalculateTargetScollPosition = function() {
+
+    var targetScrollPosition = $(window).scrollTop();
+
+    if ($.cookie('scroll_anchor') != null && $.cookie('scroll_anchor') > targetScrollPosition)
+        targetScrollPosition = $.cookie('scroll_anchor');
+
+    return targetScrollPosition;
+};
+
 Medvekoma.Portfotolio.RestoreScrollPosition = function (scrollPosition) {
-    while (scrollPosition > $(document).height()) {
-        Medvekoma.Portfotolio.ShowNextPage();
+    if (scrollPosition > $(window).scrollTop())
+    {
+        Medvekoma.Portfotolio.ShowNextPageIfNeeded();
+        $(window).scrollTop(scrollPosition);
     }
-    $(window).scrollTop(scrollPosition);
 };
 
 Medvekoma.Portfotolio.SubscribeToScrollEvent = function () {
     $(window).scroll(function () {
         Medvekoma.Portfotolio.ShowNextPageIfNeeded();
+        
+        if ($.cookie('scroll_anchor') == null || $.cookie('scroll_anchor') < $(document).height()) {
+            $.cookie('scroll_anchor', $(window).scrollTop(), { path: window.location.pathname });
+        };
     });
 };
 
 Medvekoma.Portfotolio.ShowNextPageIfNeeded = function () {
     var invisiblePixels = $(document).height() - $(window).scrollTop() - $(window).height();
-    if (invisiblePixels < scrollMargin) {
+    if (invisiblePixels < scrollMargin || Medvekoma.Portfotolio.CalculateTargetScollPosition() > $(document).height()){
         $(window).unbind('scroll');
         window.setTimeout(Medvekoma.Portfotolio.ShowNextPage, delay);
     }
@@ -48,8 +65,9 @@ Medvekoma.Portfotolio.ShowNextPage = function () {
             success: function (result) {
                 nextPageDiv.html('').replaceWith(result);
                 Medvekoma.Portfotolio.InitializeLoading();
-            }
+                }
         };
         $.ajax(options);
     }
 };
+

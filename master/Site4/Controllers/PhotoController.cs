@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Exceptions;
 using Portfotolio.Domain.Persistency;
+using Portfotolio.FlickrEngine;
 using Portfotolio.Site.Services.Models;
 using Portfotolio.Site4.Attributes;
 
@@ -11,10 +13,14 @@ namespace Portfotolio.Site4.Controllers
     public class PhotoController : Controller
     {
         private readonly IPhotoEngine _photoEngine;
+        private readonly IFlickrStatisticsEngine _statisticsEngine;
+        private readonly IFlickrExifEngine _exifEngine;
 
-        public PhotoController(IPhotoEngine photoEngine)
+        public PhotoController(IPhotoEngine photoEngine, IFlickrStatisticsEngine statisticsEngine, IFlickrExifEngine exifEngine)
         {
             _photoEngine = photoEngine;
+            _statisticsEngine = statisticsEngine;
+            _exifEngine = exifEngine;
         }
 
         [HideFromSearchEngines(AllowRobots.Follow)]
@@ -50,6 +56,15 @@ namespace Portfotolio.Site4.Controllers
             return PagingView(domainPhotos);
         }
 
+        [RedirectToUserAlias, RejectOptedOutUsers]
+        [DisplayLicensingInfo]
+        public ActionResult BasicExifData(string photoId)
+        {
+            var exifDic = _exifEngine.ExtractBasicExifData(photoId);
+
+            return PartialView("ExifList", exifDic);
+        }
+
         [UserIdentification]
         [RedirectToUserAlias, RejectOptedOutUsers]
         [HideFromSearchEngines(AllowRobots.Follow)]
@@ -75,6 +90,29 @@ namespace Portfotolio.Site4.Controllers
             var domainPhotos = _photoEngine.GetSubscriptionsOf(userId, page);
 
             return PagingView(domainPhotos);
+        }
+
+        [UserIdentification]
+        [RedirectToUserAlias, RejectOptedOutUsers]
+        [HideFromSearchEngines(AllowRobots.None)]
+        [OutputCache(Duration = 60, VaryByParam = "*")]
+        public ActionResult Statistics(string id, string label)
+        {
+            if (label == null)
+            {
+                ViewData[DataKeys.BreadCrumb] = "Last 100 Photos - Statistics of " + ViewData[DataKeys.UserName];
+                return View();
+            }
+            
+            var userId = (string)ViewData[DataKeys.UserId];
+            var statistic = _statisticsEngine.GetStatisticsOf(userId, label);
+            //var statistic = new Statistic("test",
+            //                              new List<KeyValuePair<string, int>>
+            //                                  {
+            //                                      new KeyValuePair<string, int>(String.Empty, 1),
+            //                                      new KeyValuePair<string, int>("item2", 2)
+            //                                  });
+            return Json(statistic, JsonRequestBehavior.AllowGet);
         }
 
         [UserIdentification]
@@ -127,6 +165,16 @@ namespace Portfotolio.Site4.Controllers
             ViewData[DataKeys.BreadCrumb] = ViewData["groupName"] + " group";
 
             return PagingView(domainGroup);
+        }
+
+        [UserIdentification]
+        [RedirectToUserAlias, RejectOptedOutUsers]
+        [HideFromSearchEngines(AllowRobots.None)]
+        public ActionResult GroupWithPhotos(string id, string groupId)
+        {
+            var domainGroup = _photoEngine.GetGroup(groupId, 0);
+
+            return Json(domainGroup, JsonRequestBehavior.AllowGet);
         }
 
         [UserIdentification]

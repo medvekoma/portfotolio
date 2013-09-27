@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using FlickrNet;
 using Portfotolio.Domain.Exceptions;
 
@@ -31,6 +33,10 @@ namespace Portfotolio.FlickrEngine
         
         PhotoCollection GetInterestingPhotos(int page, int pageSize);
 
+        ExifTagCollection GetExifDataOf(string photoId);
+
+        IEnumerable<string> GetPublicPhotoIDsOf(string userId);
+
         bool IsAcceptedUserName(string userName);
     }
 
@@ -38,6 +44,8 @@ namespace Portfotolio.FlickrEngine
     {
         private readonly IFlickrFactory _flickrFactory;
         private const PhotoSearchExtras PhotoSearchExtrasWithPathAlias = PhotoSearchExtras.OwnerName | PhotoSearchExtras.PathAlias | PhotoSearchExtras.AllUrls | PhotoSearchExtras.License;
+ 
+
 
         public FlickrPhotoProvider(IFlickrFactory flickrFactory)
         {
@@ -134,7 +142,7 @@ namespace Portfotolio.FlickrEngine
         {
             try
             {
-                return _flickrFactory.GetFlickr().PeopleGetPublicPhotos(userId, page, pageSize, SafetyLevel.None, PhotoSearchExtrasWithPathAlias);
+                return _flickrFactory.GetFlickr().PeopleGetPublicPhotos(userId, page, pageSize, SafetyLevel.None, PhotoSearchExtras.All);
             }
             catch (FlickrApiException flickrApiException)
             {
@@ -148,6 +156,34 @@ namespace Portfotolio.FlickrEngine
                         throw;
                 }
             }
+        }
+
+        public IEnumerable<string> GetPublicPhotoIDsOf(string userId)
+        {
+            try
+            {
+                var photos = _flickrFactory.GetFlickr().PeopleGetPublicPhotos(userId);
+                var IDs = (from photo in photos
+                                select photo.PhotoId).ToList();
+                return IDs;
+            }
+            catch (FlickrApiException flickrApiException)
+            {
+                switch (flickrApiException.Code)
+                {
+                    case 1:
+                        throw new AuthorNotFoundException(userId, flickrApiException);
+                    case 105:
+                        throw new FlickrServiceUnavailableException(flickrApiException);
+                    default:
+                        throw;
+                }
+            }
+        }
+
+        public ExifTagCollection GetExifDataOf(string photoId)
+        {
+            return _flickrFactory.GetFlickr().PhotosGetExif(photoId);
         }
 
         public PhotoCollection GetFavoritesOf(string userId, int page, int pageSize)

@@ -11,30 +11,25 @@ namespace Portfotolio.Site4
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{*url}", new { url = @"^.+\.[a-zA-Z]{2,4}$" });
 
+
             routes.MapRoute(
                 name: "home",
                 url: "",
-                defaults: new { controller = "photo", action = "promotion" }
-                );
-
-            routes.MapRoute(
-                name: "group",
-                url: "group/{id}",
-                defaults: new { controller = "photo", action = "group", id = UrlParameter.Optional },
-                constraints: new { id = "^[0-9].*$"}
+                defaults: new { controller = "photo", action = "photos", id = "serkansozer" }
                 );
 
             routes.MapRoute(
                 name: "photo",
                 url: "{id}/{action}/{secondaryId}", 
                 defaults: new { controller = "photo", action = "photos", secondaryId = UrlParameter.Optional },
-                constraints: new { id = "^[^-].*$" }
+                constraints: new { id = "serkansozer" }
                 );
 
             routes.MapRoute(
-                name: "generic",
-                url: "-{controller}/{action}/{id}",
-                defaults: new { action = "show", id = UrlParameter.Optional }
+                name: "exif",
+                url: "{action}/{photoid}",
+                defaults: new { controller = "photo", action = "BasicExifData", secondaryId = UrlParameter.Optional },
+                constraints: new { action = "BasicExifData" }
                 );
 
             routes.MapRoute(

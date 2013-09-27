@@ -3,38 +3,69 @@
 
 @model DomainPhoto
 @{
-    const int slideWidth = 350;  // if you change these values, change them in CSS .slide as well
-    const int slideHeight = 350; // if you change these values, change them in CSS .slide as well
-    const int borderWidth = 5;   // if you change these values, change them in CSS .photo-link as well
-    int frameWidth = Model.SmallWidth + 2 * borderWidth;
-    int frameHeight = Model.SmallHeight + 2 * borderWidth;
-    int frameLeft = (slideWidth - frameWidth) / 2;
-    int frameTop = (slideHeight - frameHeight) / 2;
-    int titleTop = frameTop + frameHeight + 10;
-    int titleHeight = slideHeight - titleTop;
+    const float fixedHeight = 400;
+    var verticalShrinkRatio = fixedHeight / (float)Model.Medium640Height;
+    var ratio = (float)Model.Medium640Height / (float)Model.Medium640Width;
+    if (ratio > 2 || ratio < 0.5) //exceptional ratio
+    {
+        return;
+    }
+    var alignedWidth = Model.Medium640Width * verticalShrinkRatio;
 }
 
-<div class="slide">
-    <div class="photo-frame" style="left: @(frameLeft)px; top: @(frameTop)px">
+<div class="slide" style="width: @(alignedWidth +6)px; height:@(fixedHeight+6)px">
+    <div class="photo-frame">
         @if (Model.IsLicensed || Html.AuthenticationInfo().IsAuthenticated)
         {
             <a class="photo-link" 
-               href="@Model.PageUrl" 
-               style="background-image: url('@Model.SmallUrl'); width: @(Model.SmallWidth)px; height: @(Model.SmallHeight)px;" ></a>
+               href="@Model.PageUrl"
+               style="background: url('@Model.Medium640Url'); background-size: @(alignedWidth)px @(fixedHeight)px; width: @(alignedWidth)px; height:@(fixedHeight)px" ></a>
+            <input type="hidden" id="photoId" value="@Model.PhotoId">
         }
         else
         {
             <a class="photo-link" 
                 href="@Model.PageUrl" 
-                style="width: @(Model.SmallWidth)px; height: @(Model.SmallHeight)px;">
+                style="width: @(Model.Medium640Width)px; height: @(Model.Medium640Height)px;">
             </a>
-            <a href="@Url.Action("licensing", "settings")" class="copyright" style="top: @(frameHeight-50)px; left: @(frameWidth-40)px" title="Copyrighted image. Click for more information.">&copy;</a>
+            <a href="@Url.Action("licensing", "settings")" class="copyright" style="top: @(fixedHeight-50)px; left: @(alignedWidth-40)px" title="Copyrighted image. Click for more information.">&copy;</a>
         }
-    </div>
-    <div class="title-frame" style="top: @(titleTop)px; max-height: @(titleHeight)px">
-        @(Html.ActionLinkUserId(Model.AuthorName ?? Model.AuthorAlias, "photos", new { id = Model.AuthorAlias })):
-        <span class="title-text" title="@Model.Title">
-            @Model.Title
-        </span>
+        <div class="title-frame" style="top:0px; display: none">
+            <span class="title-text" title="@Model.Title">
+                Title: @Model.Title <br/>
+                Views: @Model.Views <br/>
+                Date Taken: @Model.DateTaken<br/>
+            </span>
+            <div class="exif-frame">...</div>
+        </div>
     </div>
 </div>
+
+<script>
+    if (typeof Medvekoma == "undefined") Medvekoma = {};
+    if (typeof Medvekoma.Portfotolio == "undefined") Medvekoma.Portfotolio = {};
+    
+    Medvekoma.Portfotolio.ShowBasicExifData = function(photoId, div) {
+        if ($(".exif-frame", div).length != 0) {
+            if (photoId) {
+                var options = {
+                    url: '/basicExifData/' + photoId,
+                    context: document.body,
+                    success: function (result) {
+                        $(".exif-frame", div).replaceWith(result);
+                    }
+                };
+                $.ajax(options);
+            }
+        }
+    };
+    
+    $(document).ready(function () {
+        $(".photo-frame").hover(function () {
+            $(".title-frame", this).show("slow");
+            Medvekoma.Portfotolio.ShowBasicExifData($('#photoId', this).attr('value'), this);
+        }, function () {
+            $(".title-frame", this).hide("slow");
+        });
+    });
+</script>

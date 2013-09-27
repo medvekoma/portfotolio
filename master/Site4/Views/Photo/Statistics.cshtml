@@ -1,0 +1,56 @@
+﻿<div id="preload"><img id="preloading" alt="still loading..." src="~/Content/loading.gif"/> Please wait while calculate your statistics. This might take a minute or so. </div>
+<div id="navigation" style="display: none">
+    <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Model')">Camera</a> | 
+    <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Lens')">Lens</a> | 
+    <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Exposure')">Exposure</a> |
+    <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Aperture')">Aperture</a> |
+    <a href="javascript:void();" onclick="Medvekoma.Portfotolio.ShowStatisticsByLabel('Focal Length')">Focal Length</a>
+</div>
+
+<div id="stats" style="display: none; height: 400px; border-width: 1px;">
+    <img id="loading" alt="still loading..." src="~/Content/loading.gif"/>
+    <div id="content"></div>
+</div>
+
+<script>
+    if (typeof Medvekoma == "undefined") Medvekoma = {};
+    if (typeof Medvekoma.Portfotolio == "undefined") Medvekoma.Portfotolio = {};
+
+    $(document).ready(function () {
+        $.ajax({
+            dataType: "json",
+            url: $(location).attr('href') + "?label=Model",
+            success: function () {
+                $("#preload").hide();
+                $("#navigation").show("slow");
+            }
+        });
+    });
+    
+
+    Medvekoma.Portfotolio.ShowStatisticsByLabel = function (label) {
+        $("#stats").show("slow");
+        $("#loading").show();
+        $.ajax({
+            dataType: "json",
+            url: $(location).attr('href') + "?label=" + label,
+            success: function (jsonResult) {
+                $("#loading").hide();
+                var htmlResult = Medvekoma.Portfotolio.ConvertStatisticJsonToHtml(jsonResult);
+                $("#content").html(htmlResult);
+            }
+        });
+    };
+
+    Medvekoma.Portfotolio.ConvertStatisticJsonToHtml = function (statistic) {
+        var html = "<h1>" + statistic.Name + "</h1>";
+        for (var i = 0; i < statistic.Stats.length; i++) {
+            var key = statistic.Stats[i].Key;
+            if (key == null)
+                key = "Unknown";
+            var value = statistic.Stats[i].Value;
+            html += "<div><span>" + key + "</span>" + " : " + "<span>" + value + "X</span></div>";
+        }
+        return html;
+    };
+</script>

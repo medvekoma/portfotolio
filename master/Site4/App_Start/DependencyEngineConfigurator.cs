@@ -59,6 +59,10 @@ namespace Portfotolio.Site4
             dependencyEngine.Register<IUserStoreService, UserStoreService>(optOutServiceLifeStyle);
             dependencyEngine.Register<IUserWriterService, UserWriterService>(optOutServiceLifeStyle);
 
+            //exif
+            dependencyEngine.Register<IFlickrExifEngine, FlickrExifEngine>(photoServiceLifeStyle);
+            dependencyEngine.Register<IFlickrStatisticsEngine, FlickrStatisticsEngine>(photoServiceLifeStyle);
+
             // test
             dependencyEngine.Register<TestController>(controllerLifeStyle);
 

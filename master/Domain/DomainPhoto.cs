@@ -1,30 +1,41 @@
-﻿namespace Portfotolio.Domain
+﻿using System;
+using System.Collections.Generic;
+
+namespace Portfotolio.Domain
 {
     public class DomainPhoto
     {
-        public string Id { get; private set; }
+        public string PhotoId { get; private set; }
         public string AuthorId { get; private set; }
         public string AuthorName { get; private set; }
         public string AuthorAlias { get; private set; }
         public string Title { get; private set; }
         public string PageUrl { get; private set; }
-        public string SmallUrl { get; private set; }
-        public int SmallWidth { get; private set; }
-        public int SmallHeight { get; private set; }
+        public string Medium640Url { get; private set; }
+        public int Medium640Width { get; private set; }
+        public int Medium640Height { get; private set; }
         public bool IsLicensed { get; private set; }
+        public DateTime DateTaken { get; private set; } 
+        public int? Views { get; private set; }
+        //public IDictionary<string, string> ExifData{get; set;}
 
-        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string smallUrl, int smallWidth, int smallHeight, bool isLicensed)
+        public DomainPhoto()
+        {}
+
+        public DomainPhoto(string id, string authorId, string authorName, string authorAlias, string title, string pageUrl, string mediumUrl, int medium640Width, int medium640Height, bool isLicensed, DateTime dateTaken, int? views)
         {
-            Id = id;
+            PhotoId = id;
             AuthorId = authorId;
             AuthorName = authorName;
             AuthorAlias = authorAlias;
             Title = title;
             PageUrl = pageUrl;
-            SmallUrl = smallUrl;
-            SmallWidth = smallWidth;
-            SmallHeight = smallHeight;
+            Medium640Url = mediumUrl;
+            Medium640Width = medium640Width;
+            Medium640Height = medium640Height;
             IsLicensed = isLicensed;
+            DateTaken = dateTaken;
+            Views = views;
         }
     }
 }

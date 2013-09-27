@@ -41,6 +41,8 @@ namespace Portfotolio.Site4
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            AutoMapperConfig.ConfigureAutoMappings();
         }
 
         protected void Application_End()

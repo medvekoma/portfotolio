@@ -255,8 +255,6 @@ input#SearchText
 {
     position: relative;
     float: left;
-    width: 350px;
-    height: 350px;
 }
 
 .photo-frame
@@ -269,7 +267,7 @@ input#SearchText
 {
     background: url('') no-repeat scroll center center transparent;
     display: block;
-    border: 5px solid white;
+    border: 3px solid white;
 }
 
 .title-frame
@@ -278,6 +276,18 @@ input#SearchText
     text-align: center;
     width: 100%;
     overflow: hidden;
+    color: white;
+    background-color: black;
+    opacity: 0.6;
+    padding: 5px;
+}
+
+.exif-frame
+{
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    color: white;
 }
 
 .header-icon
@@ -304,4 +314,9 @@ input#SearchText
     font-size: 40px;
     font-weight: bold;
     font-family: sans-serif;
+}
+
+.photoFrame .middleFrame .innerFrame .NumberOfPhotos 
+{
+    font-size: 10px;
 }
