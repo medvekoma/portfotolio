@@ -1,0 +1,29 @@
+﻿@using Portfotolio.Site4.Extensions
+<br/>
+For example:
+<ul>
+	<li>Link to my page is: @UserLink("medvekoma")</li>
+	@if (Html.AuthenticationInfo().IsAuthenticated)
+	{
+		<li>Link to your page is: @UserLink(Html.AuthenticationInfo().UserAlias)</li>
+	}
+</ul>
+
+@functions
+{
+	public string GetUserUrl(string userAlias)
+	{
+		var protocol = Request.Url != null
+						   ? Request.Url.Scheme
+						   : "http";
+		var url = Url.Action("photos", "photo", new { id = userAlias }, protocol);
+		return url.Replace("%40", "@");
+	}
+}
+
+@helper UserLink(string userAlias)
+{
+	var url = GetUserUrl(userAlias);
+	<a href="@url" title="link">@Html.Raw(url)</a>
+}
+
