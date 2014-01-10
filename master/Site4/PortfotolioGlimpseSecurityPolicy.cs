@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Glimpse.AspNet.Extensions;
 using Glimpse.Core.Extensibility;
 using Portfotolio.Domain;
+using Portfotolio.Site4.Extensions;
 
 namespace Portfotolio.Site4
 {
@@ -16,9 +17,7 @@ namespace Portfotolio.Site4
 			if (!httpContext.User.Identity.IsAuthenticated)
 				return RuntimePolicy.Off;
 
-			var applicationConfigurationProvider = DependencyResolver.Current.GetService<IApplicationConfigurationProvider>();
-			var administratorAliases = applicationConfigurationProvider.GetApplicationConfiguration().AdministratorAliases;
-			if (!(administratorAliases.Contains(httpContext.User.Identity.Name)))
+			if (!httpContext.User.Identity.IsAdmin())
 				return RuntimePolicy.Off;
 
 			return RuntimePolicy.On;
