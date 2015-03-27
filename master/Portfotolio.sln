@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrEngine", "FlickrEngine\FlickrEngine.csproj", "{F040632C-50F9-4120-B521-4890AB0756F8}"
@@ -12,6 +14,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Site.Services", "Site.Services\Site.Services.csproj", "{5E695CEC-8A79-47B6-A7AD-C719E48CB25E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Site4", "Site4\Site4.csproj", "{3D9108BD-1337-4F2E-B7F2-F08972AB1C04}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A} = {B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "DependencyInjection\DependencyInjection.csproj", "{DFF945D5-4524-4041-BC5D-CF37BABE73FB}"
 EndProject
@@ -31,13 +36,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simplickr", "Simplickr\Simplickr.csproj", "{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplickrTests", "SimplickrTests\SimplickrTests.csproj", "{F6DCA600-A73D-458C-9D45-961C19B531AC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B78FE893-03B7-4F0F-B0E5-89C0D821AC6A} = {B78FE893-03B7-4F0F-B0E5-89C0D821AC6A}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.EngineFactory", "DependencyEngineFactory\DependencyInjection.EngineFactory.csproj", "{BF83C2A7-57A3-4D02-9300-D5B106B8E36A}"
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Portfotolio.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -101,5 +106,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Portfotolio.vsmdi
 	EndGlobalSection
 EndGlobal

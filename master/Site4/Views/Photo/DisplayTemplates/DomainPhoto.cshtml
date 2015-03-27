@@ -16,7 +16,7 @@
 
 <div class="slide">
     <div class="photo-frame" style="left: @(frameLeft)px; top: @(frameTop)px">
-        @if (Model.IsLicensed || Html.AuthenticationInfo().IsAdmin())
+        @if (Model.IsLicensed || Html.AuthenticationInfo().IsOmniViewer())
         {
             <a class="photo-link" 
                href="@Model.PageUrl" 

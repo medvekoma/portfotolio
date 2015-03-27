@@ -15,6 +15,7 @@ namespace Portfotolio.Site.Services
                 GetContactsPageSize(),
                 GetIsOAuthEnabled(),
                 GetAdministratorAliases(),
+                GetOmniViewerAliases(),
                 GetContactUsLink()
                 );
         }
@@ -40,6 +41,12 @@ namespace Portfotolio.Site.Services
         private static string[] GetAdministratorAliases()
         {
             var value = ConfigurationManager.AppSettings["AdministratorAliases"];
+            return value.Split(',');
+        }
+
+        private static string[] GetOmniViewerAliases()
+        {
+            var value = ConfigurationManager.AppSettings["OmniViewerAliases"];
             return value.Split(',');
         }
 
