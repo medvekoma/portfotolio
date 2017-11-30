@@ -12,3 +12,6 @@ flickr.api.release.config
 flickr.api.debug.config
 Site.Publish.xml
 Site4.Publish.xml
+packages
+.DS_Store
+

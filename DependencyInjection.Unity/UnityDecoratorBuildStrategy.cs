@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Practices.ObjectBuilder2;
-using Microsoft.Practices.Unity;
+using Unity.Builder.Strategy;
+using Unity.Builder;
+using Unity.Resolution;
 
 namespace Portfotolio.DependencyInjection.Unity
 {
@@ -30,13 +31,12 @@ namespace Portfotolio.DependencyInjection.Unity
 
             var stack = new Stack<Type>(_typeStacks[key.Type]);
             object value = null;
-            stack.ForEach(type =>
+            foreach(var type in stack)
             {
                 value = context.NewBuildUp(new NamedTypeBuildKey(type, key.Name));
                 var overrides = new DependencyOverride(key.Type, value);
                 context.AddResolverOverrides(overrides);
             }
-                );
 
             context.Existing = value;
             context.BuildComplete = true;

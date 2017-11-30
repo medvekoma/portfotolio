@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Practices.Unity;
+using Unity;
+using Unity.Lifetime;
 
 namespace Portfotolio.DependencyInjection.Unity
 {

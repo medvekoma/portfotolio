@@ -14,17 +14,17 @@ namespace Portfotolio.Services.Logging
 
         public void Info(string message, Exception exception = null)
         {
-            _logger.InfoException(message, exception);
+            _logger.Info(exception, message);
         }
 
         public void Error(string message, Exception exception = null)
         {
-            _logger.ErrorException(message, exception);
+            _logger.Error(exception, message);
         }
 
         public void Warning(string message, Exception exception = null)
         {
-            _logger.WarnException(message, exception);
+            _logger.Warn(exception, message);
         }
     }
 }

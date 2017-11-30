@@ -1,13 +1,31 @@
 ﻿<Properties StartupConfiguration="{3D9108BD-1337-4F2E-B7F2-F08972AB1C04}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Site4/Site4.csproj">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Site4/PortfotolioGlimpseSecurityPolicy.cs">
     <Files>
-      <File FileName="Site4/Models/OAuthModel.cs" Line="1" Column="1" />
-      <File FileName="Site4/Site4.csproj" Line="317" Column="12" />
+      <File FileName="DependencyInjection.Unity/UnityDecoratorBuildStrategy.cs" Line="33" Column="33" />
+      <File FileName="DependencyInjection.Unity/UnityDecoratorExtension.cs" Line="14" Column="45" />
+      <File FileName="DependencyInjection.Unity/UnityPerWebRequestLifetimeManager.cs" Line="4" Column="21" />
+      <File FileName="DependencyInjection.Unity/UnityDependencyEngine.cs" Line="4" Column="22" />
+      <File FileName="Site4/Global.asax" Line="1" Column="1" />
+      <File FileName="Site4/Global.asax.cs" Line="62" Column="1" />
+      <File FileName="Site4/Site4.csproj" Line="1" Column="1" />
+      <File FileName="Services/Logging/NLogLogger.cs" Line="19" Column="9" />
+      <File FileName="Site4/Web.config" Line="78" Column="28" />
+      <File FileName="Site4/Views/Web.config" Line="9" Column="20" />
+      <File FileName="Site4/NLog.config" Line="61" Column="1" />
+      <File FileName="Site.Services/Logging/LoggingExtensions.cs" Line="9" Column="77" />
+      <File FileName="Site4/flickr.api.debug.config" Line="2" Column="1" />
+      <File FileName="Site4/flickr.api.config" Line="2" Column="1" />
+      <File FileName="Site4/flickr.api.release.config" Line="1" Column="1" />
+      <File FileName="Utility/Extensions/BasicExtensions.cs" Line="1" Column="1" />
+      <File FileName="Site4/PortfotolioGlimpseSecurityPolicy.cs" Line="12" Column="48" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/attilaszucs/p2/portfotolio/Site4/Global.asax.cs" relfile="Site4/Global.asax.cs" line="57" column="18" />
+      <Breakpoint file="/Users/attilaszucs/p2/portfotolio/Site.Services/Logging/LoggingExtensions.cs" relfile="Site.Services/Logging/LoggingExtensions.cs" line="11" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
