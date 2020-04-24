@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Portfotolio.Domain.Configuration
 {
@@ -48,9 +49,8 @@ namespace Portfotolio.Domain.Configuration
 
         private static void WriteUserIds(IEnumerable<string> userIds, string fileName)
         {
-            var jsonSerializer = new JavaScriptSerializer();
             var userIdArray = userIds.ToArray();
-            var content = jsonSerializer.Serialize(userIdArray);
+            var content = JsonConvert.SerializeObject(userIdArray);
             using (var streamWriter = new StreamWriter(fileName))
             {
                 streamWriter.Write(content);
@@ -62,11 +62,10 @@ namespace Portfotolio.Domain.Configuration
             if (!File.Exists(fileName))
                 return null;
 
-            var jsonSerializer = new JavaScriptSerializer();
             using (var streamReader = new StreamReader(fileName))
             {
                 var content = streamReader.ReadToEnd();
-                var userIdArray = jsonSerializer.Deserialize<string[]>(content) ?? new string[0];
+                var userIdArray = JsonConvert.DeserializeObject<string[]>(content) ?? new string[0];
                 return new HashSet<string>(userIdArray);
             }
         }

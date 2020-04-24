@@ -7,7 +7,7 @@ namespace Portfotolio.Domain.Persistency
         public static string[] GetRecommendedUserIds(this IUserSession userSession, string userId)
         {
             string key = DataKeys.RecommendedUserIds + userId;
-            var value = userSession.GetValue<string>(key);
+            var value = userSession.GetValue(key);
             if (value == null)
                 return null;
             return value.Split(',');

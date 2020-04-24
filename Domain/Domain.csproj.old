@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ECD2D901-6FAD-4981-9E42-4DE03F99CA73}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Portfotolio.Domain</RootNamespace>
+    <AssemblyName>Portfotolio.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Album.cs" />
+    <Compile Include="AlbumPhotos.cs" />
+    <Compile Include="Albums.cs" />
+    <Compile Include="AuthenticationInfo.cs" />
+    <Compile Include="Configuration\CachedUserService.cs" />
+    <Compile Include="Configuration\IUserService.cs" />
+    <Compile Include="Configuration\IUserStorePathProvider.cs" />
+    <Compile Include="Configuration\UserState.cs" />
+    <Compile Include="Configuration\UserReaderService.cs" />
+    <Compile Include="Configuration\UserWriterService.cs" />
+    <Compile Include="Configuration\UserStoreService.cs" />
+    <Compile Include="Configuration\UserService.cs" />
+    <Compile Include="Configuration\UserStore.cs" />
+    <Compile Include="DomainGroup.cs" />
+    <Compile Include="DomainLicense.cs" />
+    <Compile Include="DomainPhoto.cs" />
+    <Compile Include="DomainPhotos.cs" />
+    <Compile Include="DomainPhotosExtensions.cs" />
+    <Compile Include="DomainUser.cs" />
+    <Compile Include="DomainUserPhotos.cs" />
+    <Compile Include="Exceptions\AlbumNotFoundException.cs" />
+    <Compile Include="Exceptions\AuthorNotFoundException.cs" />
+    <Compile Include="Exceptions\FlickrServiceUnavailableException.cs" />
+    <Compile Include="Exceptions\GroupNotFoundException.cs" />
+    <Compile Include="Exceptions\IncorrectUrlException.cs" />
+    <Compile Include="Exceptions\NotEnoughPermissionsException.cs" />
+    <Compile Include="Exceptions\OptedOutUserException.cs" />
+    <Compile Include="Exceptions\PortfotolioException.cs" />
+    <Compile Include="IApplicationConfigurationProvider.cs" />
+    <Compile Include="IAuthenticationProvider.cs" />
+    <Compile Include="IOAuthProvider.cs" />
+    <Compile Include="IPhotoEngine.cs" />
+    <Compile Include="IApplicationUtility.cs" />
+    <Compile Include="IUserEngine.cs" />
+    <Compile Include="ListItem.cs" />
+    <Compile Include="ListItems.cs" />
+    <Compile Include="OAuthAuthorizationObject.cs" />
+    <Compile Include="Persistency\IAuthenticationStorage.cs" />
+    <Compile Include="Persistency\IUserSession.cs" />
+    <Compile Include="Persistency\UserSessionExtensions.cs" />
+    <Compile Include="Persistency\DataKeys.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{BFCAA2BF-2CB2-4F41-A335-166B8E8573C8}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

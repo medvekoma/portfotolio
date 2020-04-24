@@ -1,28 +1,28 @@
 using System.Security.Principal;
 using System.Web;
-using System.Web.Security;
+using Microsoft.AspNetCore.Http;
 using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.Site.Services
 {
     public class AspNetUserSession : IUserSession
     {
-        public void SetValue(string key, object value)
+        private readonly HttpContext _httpContext;
+        public AspNetUserSession(IHttpContextAccessor httpContextAccessor)
         {
-            HttpContext.Current.Session[key] = value;
+            _httpContext = httpContextAccessor.HttpContext;
         }
 
-        public T GetValue<T>(string key) 
+        public void SetValue(string key, string value)
         {
-            var session = HttpContext.Current.Session;
-            if (session == null)
-                return default(T);
+            _httpContext.Session?.SetString(key, value);
+        }
 
-            object value = session[key];
-            if (value == null)
-                return default(T);
+        public string GetValue(string key) 
+        {
+            var session = _httpContext.Session;
 
-            return (T) value;
+            return session?.GetString(key);
         }
     }
 }
