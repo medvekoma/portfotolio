@@ -1,11 +1,12 @@
-﻿using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Portfotolio.Domain.Persistency;
 
 namespace Portfotolio.Site4.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
-        public ActionResult About()
+        [HttpGet]
+        public IActionResult About()
         {
             ViewData[DataKeys.BreadCrumb] = "about";
 

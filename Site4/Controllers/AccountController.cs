@@ -1,25 +1,25 @@
-﻿using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Persistency;
 using Portfotolio.Services.Logging;
 
 namespace Portfotolio.Site4.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ControllerBase
     {
         private const string UserHasLoggedOutMessage = "User '{0}' has logged out.";
         private const string UserHasLoggedInMessage = "User '{0}' has logged in.";
 
         private readonly IAuthenticationProvider _authenticationProvider;
-	    private readonly ILogger _logger;
+        private readonly ILogger _logger;
 
         public AccountController(IAuthenticationProvider authenticationProvider, ILoggerFactory loggerFactory)
         {
             _authenticationProvider = authenticationProvider;
-	        _logger = loggerFactory.GetLogger("Authentication");
+            _logger = loggerFactory.GetLogger("Authentication");
         }
 
-        public ActionResult Login()
+        public IActionResult Login()
         {
             RememberReferrerUrl();
 
@@ -29,14 +29,11 @@ namespace Portfotolio.Site4.Controllers
 
         private void RememberReferrerUrl()
         {
-            var urlReferrer = Request.UrlReferrer;
-            var url = urlReferrer != null
-                          ? urlReferrer.AbsoluteUri
-                          : null;
-            TempData[DataKeys.ActionUrl] = url;
+            var urlReferrer = Request.Headers["Referer"].ToString();
+            TempData[DataKeys.ActionUrl] = urlReferrer;
         }
 
-        public ActionResult Logout()
+        public IActionResult Logout()
         {
             RememberReferrerUrl();
 
@@ -47,17 +44,17 @@ namespace Portfotolio.Site4.Controllers
             return RedirectToLastPage();
         }
 
-        public ActionResult Authenticate(string frob)
+        public IActionResult Authenticate(string frob)
         {
             var authenticationInfo = _authenticationProvider.Authenticate(frob);
             if (authenticationInfo.IsAuthenticated)
             {
                 _logger.Info(string.Format(UserHasLoggedInMessage, authenticationInfo.UserAlias));
-			}
+            }
             return RedirectToLastPage();
         }
 
-        private ActionResult RedirectToLastPage()
+        private IActionResult RedirectToLastPage()
         {
             var actionUrl = TempData[DataKeys.ActionUrl] as string;
             if (!string.IsNullOrEmpty(actionUrl))

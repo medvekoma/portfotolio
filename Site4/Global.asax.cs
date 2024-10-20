@@ -1,89 +1,40 @@
-﻿using System;
-using System.Web;
-using System.Web.Hosting;
-using System.Web.Mvc;
-using System.Web.Optimization;
-using System.Web.Routing;
-using Portfotolio.DependencyInjection;
-using Portfotolio.DependencyInjection.EngineFactory;
-using Portfotolio.Domain.Persistency;
-using Portfotolio.Services.Logging;
-using Portfotolio.Site.Services.Logging;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Portfotolio.Site4;
 
-namespace Portfotolio.Site4
+public class Startup
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-    public class MvcApplication : HttpApplication
+    public void ConfigureServices(IServiceCollection services)
     {
-        private IDependencyEngine _dependencyEngine;
-        private readonly ILogger _logger;
+        DependencyEngineConfigurator.ConfigureServices(services);
+    }
 
-        public MvcApplication()
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+    {
+        if (env.IsDevelopment())
         {
-            _logger = new LoggerFactory().GetLogger("Application");
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
         }
 
-        protected void Application_Start()
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
         {
-            _logger.Info("Application Started.");
-            HttpContext.Current.Application[DataKeys.ApplicationStarted] = DateTime.UtcNow;
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+        });
 
-            ViewEngineConfig.Register();
-
-            AreaRegistration.RegisterAllAreas();
-
-            _dependencyEngine = new DependencyInjectionEngineFactory().Create();
-            DependencyEngineConfigurator.Setup(_dependencyEngine);
-
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-        }
-
-        protected void Application_End()
-        {
-            _logger.Info("Application Ended. ---> " + HostingEnvironment.ShutdownReason);
-
-            if (_dependencyEngine != null)
-            {
-                _dependencyEngine.Dispose();
-                _dependencyEngine = null;
-            }
-        }
-
-        protected void Application_Error()
-        {
-            var exception = Server.GetLastError();
-            Server.ClearError();
-            _logger.LogException(exception);
-
-            Server.Transfer("~/Content/error.htm");
-        }
-
-        protected void Session_Start()
-        {
-            var sessionCount = GetSessionCount();
-            Application[DataKeys.SessionCount] = sessionCount + 1;
-        }
-
-        protected void Session_End()
-        {
-            var sessionCount = GetSessionCount();
-            Application[DataKeys.SessionCount] = sessionCount - 1;
-        }
-
-        private int GetSessionCount()
-        {
-            var sessionValue = Application[DataKeys.SessionCount];
-            if (sessionValue == null)
-                return 0;
-            var sessionCountString = sessionValue.ToString();
-            int sessionCount;
-            if (!Int32.TryParse(sessionCountString, out sessionCount))
-                sessionCount = 0;
-
-            return sessionCount;
-        }
+        logger.LogInformation("Application Started.");
     }
 }

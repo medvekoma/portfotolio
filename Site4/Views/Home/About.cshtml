@@ -1,4 +1,4 @@
-﻿@using Portfotolio.Site4.Extensions
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewBag.Title = "About";
 }
@@ -17,7 +17,7 @@
             flickr page of the photo, where users can contact the photographer, comment on photos,
             etc.</li>
         <li>The site is developed as an <a href="https://github.com/medvekoma/portfotolio"
-            title="github">open source project</a> by @Html.ActionLink("medvekoma", "photos", "photo", new { id = "medvekoma" }, null).
+            title="github">open source project</a> by <a asp-action="photos" asp-controller="photo" asp-route-id="medvekoma">medvekoma</a>.
             Feel free to <a href="@Html.Raw(Html.GetApplicationConfiguration().ContactUsLink)">contact me</a>
             with any of your questions, comments or concerns. </li>
     </ul>
@@ -31,7 +31,7 @@
         <li>Copyrighted images on the explicit request of their author.</li>
     </ul>
     <div>
-        Go to our @Html.ActionLink("licensing page", "licensing", "settings") to control how
+        Go to our <a asp-action="licensing" asp-controller="settings">licensing page</a> to control how
         your images appear on this site.
     </div>
     <h2>
@@ -67,7 +67,7 @@
             about your privacy, as it will hide you from most applications based on flickr API.
             However, because of the specifics of flickr API, some of your pictures might still
             appear in groups, and other people's favorite lists.</li>
-        <li>You can also go to our @Html.ActionLink("licensing page", "licensing", "settings")
+        <li>You can also go to our <a asp-action="licensing" asp-controller="settings">licensing page</a>
             to completely hide yourself from this site.</li>
     </ul>
     <h2>Wanna see any flickr user's images on this page?</h2>
