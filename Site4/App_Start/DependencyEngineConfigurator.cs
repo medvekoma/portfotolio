@@ -1,5 +1,4 @@
-﻿using System.Web.Mvc;
-using Portfotolio.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Portfotolio.Domain;
 using Portfotolio.Domain.Configuration;
 using Portfotolio.Domain.Persistency;
@@ -8,64 +7,55 @@ using Portfotolio.Services.Caching;
 using Portfotolio.Services.Logging;
 using Portfotolio.Site.Services;
 using Portfotolio.Site4.Controllers;
-using Portfotolio.Site4.Mvc;
 
 namespace Portfotolio.Site4
 {
     public static class DependencyEngineConfigurator
     {
-        public static IDependencyEngine Setup(IDependencyEngine dependencyEngine)
+        public static void ConfigureServices(IServiceCollection services)
         {
-            const DependencyLifeStyle applicationLifeStyle = DependencyLifeStyle.Singleton;
-            const DependencyLifeStyle controllerLifeStyle = DependencyLifeStyle.Transient;
-            const DependencyLifeStyle photoServiceLifeStyle = DependencyLifeStyle.Transient;
-            const DependencyLifeStyle optOutServiceLifeStyle = DependencyLifeStyle.Transient;
-            const DependencyLifeStyle authenticationServiceLifeStyle = DependencyLifeStyle.Transient;
-
             // application
-            dependencyEngine.RegisterAndDecorate<IApplicationConfigurationProvider, ApplicationConfigurationProvider, CachedApplicationConfigurationProvider>(applicationLifeStyle);
-            dependencyEngine.Register<IUserSession, AspNetUserSession>(applicationLifeStyle);
-            dependencyEngine.Register<ICacheProvider, CacheProvider>(applicationLifeStyle);
-            dependencyEngine.Register<ILoggerFactory, LoggerFactory>(applicationLifeStyle);
-			dependencyEngine.Register<IHttpContextProvider, HttpContextProvider>(applicationLifeStyle);
-			dependencyEngine.Register<IAuthenticationStorage, FormsAuthenticationStorage>(applicationLifeStyle);
+            services.AddSingleton<IApplicationConfigurationProvider, ApplicationConfigurationProvider>();
+            services.Decorate<IApplicationConfigurationProvider, CachedApplicationConfigurationProvider>();
+            services.AddSingleton<IUserSession, AspNetUserSession>();
+            services.AddSingleton<ICacheProvider, CacheProvider>();
+            services.AddSingleton<ILoggerFactory, LoggerFactory>();
+            services.AddSingleton<IHttpContextProvider, HttpContextProvider>();
+            services.AddSingleton<IAuthenticationStorage, FormsAuthenticationStorage>();
 
             // home
-            dependencyEngine.Register<HomeController>(controllerLifeStyle);
+            services.AddTransient<HomeController>();
 
             // authentication
-            dependencyEngine.Register<AccountController>(controllerLifeStyle);
-            dependencyEngine.Register<IAuthenticationProvider, FlickrAuthenticationProvider>(authenticationServiceLifeStyle);
+            services.AddTransient<AccountController>();
+            services.AddTransient<IAuthenticationProvider, FlickrAuthenticationProvider>();
 
             // photo
-            dependencyEngine.Register<PhotoController>(controllerLifeStyle);
-            dependencyEngine.Register<IPhotoEngine, FlickrPhotoEngine>(photoServiceLifeStyle);
-            dependencyEngine.Register<IFlickrPhotoProvider, FlickrPhotoProvider>(photoServiceLifeStyle);
-            dependencyEngine.Register<IFlickrConverter, FlickrConverter>(photoServiceLifeStyle);
-            dependencyEngine.Register<IFlickrFactory, FlickrFactory>(photoServiceLifeStyle);
-            dependencyEngine.RegisterAndDecorate<IUserEngine, FlickrUserEngine, CachedUserEngine>(photoServiceLifeStyle);
+            services.AddTransient<PhotoController>();
+            services.AddTransient<IPhotoEngine, FlickrPhotoEngine>();
+            services.AddTransient<IFlickrPhotoProvider, FlickrPhotoProvider>();
+            services.AddTransient<IFlickrConverter, FlickrConverter>();
+            services.AddTransient<IFlickrFactory, FlickrFactory>();
+            services.AddTransient<IUserEngine, FlickrUserEngine>();
+            services.Decorate<IUserEngine, CachedUserEngine>();
 
             // opt-out checker
-            dependencyEngine.RegisterAndDecorate<IUserService, UserService, CachedUserService>(optOutServiceLifeStyle);
-            dependencyEngine.Register<IUserReaderService, UserReaderService>(optOutServiceLifeStyle);
+            services.AddTransient<IUserService, UserService>();
+            services.Decorate<IUserService, CachedUserService>();
+            services.AddTransient<IUserReaderService, UserReaderService>();
 
             // legacy
-            dependencyEngine.Register<LegacyController>(controllerLifeStyle);
+            services.AddTransient<LegacyController>();
 
             // opt-out
-            dependencyEngine.Register<SettingsController>(controllerLifeStyle);
-            dependencyEngine.Register<IUserStorePathProvider, UserStorePathProvider>(optOutServiceLifeStyle);
-            dependencyEngine.Register<IUserStore, UserStore>(optOutServiceLifeStyle);
-            dependencyEngine.Register<IUserStoreService, UserStoreService>(optOutServiceLifeStyle);
-            dependencyEngine.Register<IUserWriterService, UserWriterService>(optOutServiceLifeStyle);
+            services.AddTransient<SettingsController>();
+            services.AddTransient<IUserStorePathProvider, UserStorePathProvider>();
+            services.AddTransient<IUserStore, UserStore>();
+            services.AddTransient<IUserStoreService, UserStoreService>();
+            services.AddTransient<IUserWriterService, UserWriterService>();
 
             // test
-            dependencyEngine.Register<TestController>(controllerLifeStyle);
-
-            var dependencyResolver = new EnginedDependencyResolver(dependencyEngine);
-            DependencyResolver.SetResolver(dependencyResolver);
-
-            return dependencyEngine;
+            services.AddTransient<TestController>();
         }
     }
 }
